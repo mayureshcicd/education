@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">Object Oriented Approach : An Introduction</div>
+ <p>One of the most fundamental concept of OOPs is Abstraction. Abstraction is a powerful methodology to manage complex systems. 
+ <br>Abstraction is managed by well-defined objects and their hierarchical classification.
+ <br>java is an object oriented language because it provides the features to implement an object oriented model. 
+ <br>These features includes encapsulation, inheritance and polymorphism.
+ <br>OOPS is about developing an application around its data, i.e. objects which provides the access to their properties and the possible operations in their own way.
+ </p>
+ 
+  <div class="nolinkBHEAD">Polymorphism</div>
+ <p>
+ 	<ol>
+    <li>Polymorphism means to process objects differently based on their data type.</li>
+    <li>one method can be defined multiple times with different data types.</li>	
+	<li>Polymorphism could be static and dynamic both.</li>
+	<li>Overloading is static polymorphism while</li> 
+		<ol>
+			<li>Overloading in simple words means two methods having same method name but takes different input parameters. This called static because, <br>
+			which method to be invoked will be decided at the time of compilation</li>
+		</ol>
+	<li>overriding is dynamic polymorphism.</li>	
+	<ol>
+		<li>Overriding means a derived class is implementing a method of its super class.</li>
+	</ol>
+	</ol>		
+ </p>
+ <div class="nolinkBHEAD">Types of polymorphism</div>
+ <p>
+	There are two types of polymorphism in java- 
+	<ol>
+		<li>Runtime polymorhism( Dynamic polymorphism).</li>
+		<li>Compile time polymorphism (static polymorphism).</li>
+	</ol>
+ </p>
+ <div class="nolinkBHEAD">Runtime Polymorhism( or Dynamic polymorphism)</div>
+ <p>
+	Method overriding is a perfect example of  runtime polymorphism<br>
+	in method overriding both the classes(base class and child class) have same method, compile doesn’t figure out which method to call at compile-time. <br>
+	In this case JVM(java virtual machine) decides which method to call at runtime that’s why it is known as runtime or dynamic polymorphism.
+ </p>
+<div class="codeblock"><pre>
+Example : 
+Method overriding Example
+
+package edu.java.basic;
+public class X
+{
+    public void methodA() //Base class method
+    {
+        System.out.println ("hello, I'm methodA of class X");
+    }
+}
+
+public class Y extends X
+{
+    public void methodA() //Derived Class method
+    {
+        System.out.println ("hello, I'm methodA of class Y");
+    }
+}
+public class Z
+{
+   public static void main (String args []) {
+       X obj1 = new X(); // Reference and object X
+       X obj2 = new Y(); // X reference but Y object
+       obj1.methodA();
+       obj2.methodA();
+   }
+}
+<span class="success">Output: -
+hello, I'm methodA of class X 
+hello, I'm methodA of class Y</span> 
+</pre></div>
+
+<div class="nolinkBHEAD">Compile time Polymorhism( or Static polymorphism)</div>
+<p>
+	Method overloading is a perfect example of  runtime polymorphism<br>
+	class can have more than one methods with same name but with different number of arguments or different types of arguments or both.<br>
+	compiler is able to figure out the method call at compile-time so it known as compile time polymorphism.
+</p>
+
+<div class="codeblock"><pre>
+Example : 
+Method overloading Example
+
+package edu.java.basic;
+class X
+{
+   void methodA(int num)
+   {
+       System.out.println ("methodA:" + num);
+   }
+   void methodA(int num1, int num2)
+   {
+       System.out.println ("methodA:" + num1 + "," + num2);
+   }
+   double methodA(double num) {
+       System.out.println("methodA:" + num);
+       return num;
+   }
+}
+
+class Y
+{
+   public static void main (String args [])
+   {
+       X Obj = new X();
+       double result;
+       Obj.methodA(20);
+       Obj.methodA(20, 30);
+       result = Obj.methodA(5.5);
+       System.out.println("Answer is:" + result);
+   }
+}
+<span class="success">Output: -
+methodA:20
+methodA:20,30
+methodA:5.5
+Answer is:5.5</span> 
+</pre></div>
+
+ <div class="nolinkBHEAD">Inheritance</div>
+ <p>
+ 	<ol>
+	<li>Inheritance  provides reusalibity features. We can re use all public variable, methods of superclass within child class.<br> all super class members will inherited by child class.</li>
+    <li>Inheritance is the mechanism by which an object acquires the some/all properties of another object.</li>
+    <li>It supports the concept of hierarchical classification.</li>
+	<li>Java Swing and Awt classes represent best examples for inheritance.</li>
+	<li>In Inheritance child class extends the all public properties of Parent Class</li>
+	<li>The derived class inherits the states and behaviors from the base class. </li>
+	<li>The derived class is also called subclass and the base class is also known as super-class.</li>
+	<li>The derived class can add its own additional variables and methods. </li> 
+	<li>These additional variable and methods differentiates the derived class from the base class.</li>
+	<li>Inheritance is a compile-time mechanism. A super-class can have any number of subclasses. But a subclass can have only one superclass.</li>
+	<li>The superclass and subclass have <b>“is-a”</b> relationship between them. </li>
+	</ol>
+ </p>
+ <div class="codeblock"><pre>
+Example : 
+Inheritance Example
+
+package edu.java.basic;
+// A class to display the attributes of the vehicle
+public class Vehicle {
+   public String color;
+   private int speed;
+   private int size;
+   public int getSize() {
+      return size;
+   }
+   public int getSpeed() {
+      return speed;
+   }
+   public void setSize(int i) {
+      size = i;
+   }
+   public void setSpeed(int i) {
+      speed = i;
+   }
+}
+
+// A subclass which extends for vehicle
+public class Car extends Vehicle {
+   int CC;
+   int gears;
+   int color;
+   void attributescar() {
+       // Error due to access violation
+      // System.out.println("Speed of Car : " + speed); 
+      // Error due to access violation
+      //System.out.println("Size of Car : " + size); 
+   }
+}
+public class Test {
+   public static void main(String args[]) {
+     Car b1 = new Car();
+     // the subclass can inherit 'color' member of the superclass
+     b1.color = "Blue"; 
+     b1.setSpeed(200) ;
+     b1.setSize(22);
+     b1.CC = 1000;
+     b1.gears = 5;
+     // The subclass refers to the members of the superclass
+     System.out.println("Color of Car : " + b1.color);
+     System.out.println("Speed of Car : " + b1.getSpeed());
+     System.out.println("Size of Car : " + b1.getSize());
+     System.out.println("CC of Car : " + b1.CC);
+     System.out.println("No of gears of Car : " + b1.gears);
+  }
+}
+<span class="success">Output: -
+Color of Car : Blue
+Speed of Car : 200
+Size of Car : 22
+CC of Car : 1000
+No of gears of Car : 5</span> 
+<b>Note</b>
+<ol>
+<li>The derived class inherits all the members and methods that are declared as public or protected.</li>
+<li>If declared as private it can not be inherited by the derived classes.</li>
+<li>The private members can be accessed only in its own class.</li>
+<li>The private members can be accessed through getter/setter assessor </li>
+<li>The derived class cannot inherit a member of the base class if the derived class declares another member with the same name.</li>
+
+</ol>
+</pre></div>
+
+<div class="nolinkBHEAD">Usage of super Keyword in Inheritance</div>
+<p>
+
+<ol>
+    <li>super is used to refer immediate parent class instance variable.</li>
+    <li>super() is used to invoke immediate parent class constructor.</li>
+    <li>super is used to invoke immediate parent class method.</li>
+</ol>
+</p> 
+ 
+ 
+ <div class="codeblock"><pre>
+Example : 
+Inheritance & use of super method Example
+
+package edu.java.basic;
+
+class Boll {
+	private String color;
+	private int Size;
+	private String Uses;
+	private Double price;
+
+	public Boll(String color, int size, String uses, Double price) {
+		this.color = color;
+		this.price = price;
+		this.Size = size;
+		this.Uses = uses;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public int getSize() {
+		return Size;
+	}
+
+	public String getUses() {
+		return Uses;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	protected void parentProtectedClassMethod()
+	{
+		System.out.println("protected method of parent class (Boll)");
+	}
+	
+	public void publicparentClassMethod()
+	{
+		System.out.println("public method of parent class (Boll)");
+	}
+	public final void finalParentClassMethod()
+	{
+		System.out.println("final method of parent class (Boll)");
+	}
+	
+	public  void ParentClassMethod()
+	{
+		System.out.println("final method of parent class (Boll)");
+	}	
+	
+}
+//A subclass which extends for Boll
+class BollTypes extends Boll {
+	private String purpose;
+
+	// Parameterized Constructor
+	public BollTypes(String color, int size, String uses, Double price) {
+		super(color, size, uses, price); // calling base class (Boll) constructor
+
+	}
+
+	// Parameterized Constructor
+	public BollTypes(String color, int size, String uses, Double price, String purpose) {
+		super(color, size, uses, price); // calling base class (Boll) constructor
+		this.purpose = purpose;
+	}
+
+	public String getPurpose() {
+		return purpose;
+	}
+	public void baseClassName()
+	{		
+		super.parentProtectedClassMethod(); // using super keyword  accessing the base class protected method.
+		super.publicparentClassMethod(); // using super keyword  accessing the base class public method.
+	}
+	
+	// we can not override final method of base class
+	/*public void finalParentClassMethod() 
+	{
+		System.out.println("final method of parent class (Boll)");
+	}
+	*/	
+	
+	// we can   override public method of base class
+	public  void ParentClassMethod() 
+	{
+		System.out.println("Override method of parent class (Boll)");
+	}
+	
+}
+
+public class InheritanceDemo {
+
+	public static void main(String[] args) {
+		Boll plasticBoll = new BollTypes("Red", 2, "For Children", 50.20);
+		Boll cricketBoll = new BollTypes("white", 2, "To play Cricket", 200.20);
+		Boll footBoll = new BollTypes("Black & White", 2, "To play FootBoll", 100.20);
+		
+		System.out.println("The Boll is " + plasticBoll.getColor() + " Boll  and size is " + plasticBoll.getSize()
+				+ " and useful " + plasticBoll.getUses() + " and Price is " + plasticBoll.getPrice());
+		System.out.println("The Boll is " + cricketBoll.getColor() + " Boll  and size is " + cricketBoll.getSize()
+				+ " and useful " + cricketBoll.getUses() + " and Price is " + cricketBoll.getPrice());
+		System.out.println("The Boll is " + footBoll.getColor() + " Boll  and size is " + footBoll.getSize()
+				+ " and useful " + footBoll.getUses() + " and Price is " + footBoll.getPrice());
+
+		BollTypes generalBoll = new BollTypes("Red", 2, "For Children", 50.20, " for Enjoyment");
+
+		System.out.println("The Boll is " + generalBoll.getColor() + " Boll  and size is " + generalBoll.getSize()
+				+ " and useful " + generalBoll.getUses() + " and Price is " + generalBoll.getPrice()
+				+ " and The General purpose is " + generalBoll.getPurpose());
+		generalBoll.baseClassName();
+		generalBoll.ParentClassMethod();
+	}
+}
+
+ 
+<span class="success">Output: -
+The Boll is Red Boll  and size is 2 and useful For Children and Price is 50.2
+The Boll is white Boll  and size is 2 and useful To play Cricket and Price is 200.2
+The Boll is Black & White Boll  and size is 2 and useful To play FootBoll and Price is 100.2
+The Boll is Red Boll  and size is 2 and useful For Children and Price is 50.2 and The General purpose is  for Enjoyment
+protected method of parent class (Boll)
+public method of parent class (Boll)
+Override method of parent class (Boll)</span> 
+ 
+ <b>Note</b>
+<ol>
+<li>Using Final with class: We can also prevent inheritance by making a class final. </li>
+<li>When a class is declared as final, its methods also become final.</li>
+<li>An abstract class cannot be declared as final because an abstract class is incomplete and its subclasses need to provide the implementation.</li>
+<li>Using Final with methods: We can prevent a method from being overridden by using the keyword final.</li>
+
+</ol>
+</pre></div>
+ 
+ 
+  
+ 
+ <div class="nolinkBHEAD">Types of inheritance</div>
+ <ol>  
+	<li>Single Inheritance</li>
+    <li>multilevel inheritance</li>
+    <li>multiple inheritance</li>
+    <li>hybrid inheritance</li>
+    <li>hierarchical inheritance</li>
+</ol>
+ 
+ <div class="nolinkBHEAD">Single Inheritance</div>
+ <p> When a class extends another one class only then we  call it a single inheritance.</p>
+ 
+  <div class="codeblock"><pre>
+	Example : Single Inheritance example program in Java
+	
+	package edu.java.basic;
+	Class A
+	{
+	   public void methodA()
+	   {
+		 System.out.println("Base class method");
+	   }
+	}
+
+	Class B extends A // Single Inheritance
+	{
+	   public void methodB()
+	   {
+		 System.out.println("Child class method");
+	   }
+	   public static void main(String args[])
+	   {
+		 B obj = new B();
+		 obj.methodA(); //calling super class method
+		 obj.methodB(); //calling local method
+	  }
+	}
+ </pre></div>
+ <div class="nolinkBHEAD">multilevel Inheritance</div>
+ <p>
+ <div style="float:left">
+ <b>(A CLASS) &#8594; (B CLASS) &#8594; (C CLASS)</b></div><br><br>
+ <ol>
+ <li>A class is Parent/Base Class of B Class </li>
+ <li>B Class extends A Class, means B Class inherits all public and protected members of A Class</li> 
+ <li>B Class is Parent/Base Class of C Class</li>
+ <li>C Class extends B Class, means B Class inherits all public and protected members of B Class</li>
+ <li>C Class also automatically inherits all public and protected members of A Class.</li>
+ <li>because A Class is Grand parent of C Class.</li>
+ <li>This is called multilevel Inheritance in java</li>
+ </ol>
+ 
+ </p>
+ 
+  <div class="codeblock"><pre>
+	Example : multilevel Inheritance example program in Java
+	
+	package edu.java.basic;
+	class Car{
+		public Car()
+		{
+			System.out.println("Class Car");
+		}
+		public void vehicleType()
+		{
+			System.out.println("Vehicle Type: Car");
+		}
+	}
+	class Maruti extends Car{
+		public Maruti()
+		{
+			System.out.println("Class Maruti");
+		}
+		public void brand()
+		{
+			System.out.println("Brand: Maruti");
+		}
+		public void speed()
+		{
+			System.out.println("Max: 90Kmph");
+		}
+	}
+	public class Maruti800 extends Maruti{
+
+		 public Maruti800()
+		 {
+			 System.out.println("Maruti Model: 800");
+		 }
+		 public void speed()
+			{
+				System.out.println("Max: 80Kmph");
+			}
+		 public static void main(String args[])
+		 {
+			 Maruti800 obj=new Maruti800();
+			 obj.vehicleType();
+			 obj.brand();
+			 obj.speed();
+		 }
+	}
+	
+<span class="success">Output: -
+Class Car
+Class Maruti
+Maruti Model: 800
+Vehicle Type: Car
+Brand: Maruti
+Max: 80Kmph</span> 		
+ </pre></div>
+ 
+ <div class="nolinkBHEAD">multiple Inheritance</div>
+ <p>
+	java doesn’t support multiple inheritance.  We can achieve it by using interfaces in Java.
+ </p>
+ 
+ <div class="codeblock"><pre>
+	Example : multiple inheritance in Java using interfaces 
+	package edu.java.basic;
+	interface FirstInterface
+	{
+	   public void firstName();
+	}
+	interface SecondInterface
+	{
+	   public void lastName();
+	}
+	class MultipleInheritace  implements FirstInterface, SecondInterface
+	{
+	   public void firstName()
+	   {
+		   System.out.println(" First Name");
+	   }
+	   public void lastName()
+	   {
+		   System.out.println(" Last Name");
+	   }	   
+	}
+	public class MultipleInheritaceDemo{
+ 
+		 public static void main(String args[])
+		 {
+			 MultipleInheritace obj=new MultipleInheritace();
+			 obj.firstName();
+			 obj.lastName();
+			  
+		 }
+	}
+	
+<span class="success">Output: -
+First Name
+Last Name
+</span> 		
+ </pre></div> 
+ 
+  <div class="nolinkBHEAD">hybrid inheritance</div>
+ <p>
+ 
+ <ol>
+	 <li>Suppose there are mulitiple interfaces </li>
+	 <li><b>(interface A) , (interface B) , (interface C) </b></li>
+	 <li>B interface extends A interface </li>
+	 <li>C interface extends A interface </li>
+	 <li>D class implements  B,C interfaces </li>	 
+ </ol>
+ <b>Note: -</b><br>
+ by extending interfaces each other <b>hybrid inheritance</b> is possible in java.
+ </p>
+ 
+  <div class="codeblock"><pre>
+	Example : multiple inheritance in Java using interfaces 
+	
+	package edu.java.basic;
+	interface A
+	{
+		 public void methodA();
+	}
+	interface B extends A
+	{
+		 public void methodB();
+	}
+	interface C extends A
+	{
+		 public void methodC();
+	}
+	class D implements B, C{
+
+		@Override
+		public void methodA() {
+			System.out.println("MethodA");
+			
+		}
+
+		@Override
+		public void methodC() {
+			System.out.println("MethodC");
+			
+		}
+
+		@Override
+		public void methodB() {
+			System.out.println("MethodB");
+			
+		}
+
+	}
+
+	public class HybridInheritance {
+		public static void main(String[] args){
+			D obj1= new D();
+			obj1.methodA();
+			obj1.methodB();
+			obj1.methodC();
+		}
+	}
+
+
+	
+<span class="success">Output: -
+MethodA
+MethodB
+MethodC
+</span> 		
+ </pre></div> 
+ 
+ 
+ <div class="nolinkBHEAD">Hierarchical Inheritance</div>
+ <p>
+ <b>When a parent class is extened by number of child classes. it is called Hierarchical Inheritance.</b>
+ </p>
+  <div class="codeblock"><pre>
+	Example : multiple inheritance in Java using interfaces 
+	
+	package edu.java.basic;
+	class A1
+	{
+	  public void methodA()
+	  {
+		 System.out.println("method of class A");
+	  }
+	}
+	class B1 extends A1 // B1 class extends A1 class and inherits all properties of A1 Class
+	{
+	  public void methodB()
+	  {
+		 System.out.println("method of class B");
+	  }
+	}
+	class C1 extends A1 // C1 class extends A1 class and inherits all properties of A1 Class
+	{
+	 public void methodC()
+	 {
+	 System.out.println("method of class C");
+	 }
+	}
+	class D1 extends A1 // D1 class extends A1 class and inherits all properties of A1 Class
+	{
+	  public void methodD()
+	  {
+		 System.out.println("method of class D");
+	  }
+	}
+	public class HierarchicalInheritance {
+
+		public void methodB()
+		  {
+			 System.out.println("method of Main Class B");
+		  }
+		  public static void main(String args[])
+		  {
+			 B1 obj1 = new B1();
+			 C1 obj2 = new C1();
+			 D1 obj3 = new D1();
+			 obj1.methodA();
+			 obj2.methodA();
+			 obj3.methodA();     
+			 
+		  }
+	}
+	
+<span class="success">Output: -
+method of class A
+method of class A
+method of class A
+</span> 		
+ </pre></div> 
+ 
+ 
+ 
+  <div class="nolinkBHEAD">Encapsulation</div>
+  <p>Encapsulation is:
+	<ol>
+    <li>Binding the data with the code that manipulates it.</li>
+    <li>It keeps the data and the code safe from external interference</li>
+	<li>The idea of encapsulation is to keep classes separated and prevent them from having tightly coupled with each other.</li>
+	<li>A Best of encapsulation is the class of java.util.Hashtable. <br>
+	 User can store data in the form of key/value pair in a Hashtable and  can retrieve that data in the various ways. <br>
+	 But the actual implementation like, how and where this data is actually stored, is hidden from the user.</li>
+	</ol>
+ </p>
+ <span class="success">
+ <b>
+ <ul>
+ <li>The whole idea behind encapsulation is to hide the implementation details from users.</li>
+ <li>If a data member is private it means it can only be accessed within the same class.</li>
+ <li>No outside class can access private data member (variable) of other class.</li>
+ <li>Using public getter and setter methods we update and reads the private data fields</li>
+ <li>The outside class can access those private data fields via public methods.</li>
+ <li>The private fields and their implementation hidden for outside classes. </li>
+ <li>That’s why encapsulation is known as data hiding.</li>
+ </ul>
+ </b>
+ </span>
+   
+  <div class="codeblock"><pre>
+	Example : Encapsulation Demo
+	
+	package edu.java.basic;
+	class EncapsulationDemo{
+		private int ssn;
+		private String empName;
+		private int empAge;
+
+		//Getter and Setter methods
+		public int getEmpSSN(){
+			return ssn;
+		}
+
+		public String getEmpName(){
+			return empName;
+		}
+
+		public int getEmpAge(){
+			return empAge;
+		}
+
+		public void setEmpAge(int newValue){
+			empAge = newValue;
+		}
+
+		public void setEmpName(String newValue){
+			empName = newValue;
+		}
+
+		public void setEmpSSN(int newValue){
+			ssn = newValue;
+		}
+	}
+	public class EncapsTest{
+		public static void main(String args[]){
+         EncapsulationDemo obj = new EncapsulationDemo();
+         obj.setEmpName("Mario");
+         obj.setEmpAge(32);
+         obj.setEmpSSN(112233);
+         System.out.println("Employee Name: " + obj.getEmpName());
+         System.out.println("Employee SSN: " + obj.getEmpSSN());
+         System.out.println("Employee Age: " + obj.getEmpAge());
+    } 
+}
+	
+<span class="success">Output: -
+Employee Name: Mario
+Employee SSN: 112233
+Employee Age: 32
+</span> 		
+ </pre></div> 
+ 
+ <div class="nolinkBHEAD">Advantages of encapsulation</div>
+ <p>
+ <ol>
+	 <li>It improves maintainability and flexibility and re-usability</li>
+	 <li>an object is a black box.</li>
+	 <li>Objects encapsulate data and implementation details.</li>
+	 <li>An object exposes its behavior by means of public methods or functions.</li>
+ </ol>
+ </p>
+ 
+  <div class="nolinkBHEAD">Abstract Classes and Methods in Java</div>
+  <p>
+  <ol>
+	<li>A class that is declared using “abstract” keyword is known as abstract class.</li>
+	<li> If the class is having few abstract methods and few concrete methods: declare it as abstract class.</li>
+	<li> If the class is having only abstract methods: declare it as interface.</li>
+  </ol>
+   <span class="success">
+	<b>The class that extends the abstract class, have to implement all the abstract methods of abstract class, else they can be declared abstract in the class as well.</b><br>
+	Abstract class can have non-abstract method (concrete) as well.<br>	
+   </span>	
+  </p>
+  <div class="nolinkBHEAD">Abstract methods</div>
+  <p>
+  <ol>
+  <li>Abstract method has no body.</li>
+  <li>Always end the declaration with a semicolon(;).</li>
+  <li>It must be overridden. An abstract class must be extended and in a same way abstract method must be overridden.</li>
+  <li>Abstract method must be in a abstract class.</li>
+  <li>The class which is extending abstract class must override (or implement) all the abstract methods.</li>  
+  </ol>
+  </p>
+  
+ <div class="codeblock"><pre>
+	Example : Abstract class and method 
+	
+	abstract class Demo1{
+	   public void disp1(){
+		 System.out.println("Concrete method of abstract class");
+	   }
+	   abstract public void disp2();
+	}
+
+	class Demo2 extends Demo1{
+	   /* I have given the body to abstract method of Demo1 class
+	   It is must if you don't declare abstract method of super class
+	   compiler would throw an error*/  
+	   public void disp2()
+	   {
+		   System.out.println("I'm overriding abstract method");
+	   }
+	   public static void main(String args[]){
+		   Demo2 obj = new Demo2();
+		   obj.disp2();
+	   }
+	}
+	
+<span class="success">Output: - I'm overriding abstract method</span> 		
+ </pre></div>
+ <span class="success"><b>We can declare a Abstract method in interface also. </b> </span>
+ <div class="codeblock"><pre>
+	Example : Abstract class and method 
+	
+	//Interface
+	interface Multiply{
+	   //abstract methods
+	   public abstract int multiplyTwo(int n1, int n2);
+	   /* We need not to mention public and abstract
+		* as all the methods in interface are 
+		* public and abstract by default
+		*/
+	   int multiplyThree(int n1, int n2, int n3);
+
+	   /*Regular (or concrete) methods are not allowed 
+		* in an interface. 
+		*/
+	}
+
+	class AbstractDemo2 implements Multiply{
+	   public int multiplyTwo(int num1, int num2){
+		  return num1*num2;
+	   }
+	   public int multiplyThree(int num1, int num2, int num3){
+		  return num1*num2*num3;
+	   }
+	   public static void main(String args[]){
+		  AbstractDemo2 obj = new AbstractDemo2();
+		  System.out.println(obj.multiplyTwo(3, 7));
+		  System.out.println(obj.multiplyThree(1, 9, 0));
+	   }
+	}
+	
+<span class="success">Output: - 
+21
+0
+</span> 		
+ </pre></div> 
+  
+</div>
+</body>
+</html>

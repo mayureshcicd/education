@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<img src="img/Access_specifiers_VS_Access_Modifiers_in_java.png" width="800px"/>
+<div class="nolinkBHEAD">Access Modifiers</div>
+ <p>Access Modifiers is the way of specifying the accessibility of a class and its members. 
+ <br><b>Access Modifiers for Top-level Classes & Interfaces: </b>public, default, abstract, final.<br>
+ <b>Access Modifiers Types</b>: 
+ <ol> 
+    <li>public</li>
+	<li>private</li>
+    <li>protected</li>
+    <li>package/default</li>
+   
+
+ 
+ </ol>
+ <b>other Modifiers in Java.</b>: 
+ <ol>
+    <li>final</li>
+    <li>abstract</li>
+    <li>static</li>
+    <li>synchronized</li>
+    <li>native</li>
+	<li>strictFp</li>
+	<li>transient</li>    
+    <li>volatile</li>
+</ol>
+
+<table>
+<tbody>
+<tr>
+<th>Modifiers</th>
+<th>Applicable for Outer Class</th>
+<th>Applicable for Inner Class</th>
+<th>Applicable for Methods</th>
+<th>Applicable for Variables</th>
+<th>Applicable for Blocks</th>
+<th>Applicable for Outer Interface</th>
+<th>Applicable for Inner Interface</th>
+<th>Applicable for Outer Enum</th>
+<th>Applicable for Inner Enum</th>
+<th>Applicable for Constructors</th>
+</tr>
+<tr>
+<td>public</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+</tr>
+<tr>
+<td>private</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+</tr>
+<tr>
+<td>protected</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+</tr>
+<tr>
+<td>default</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+</tr>
+<tr>
+<td>final</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+</tr>
+<tr>
+<td>abstract</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+
+</tr>
+<tr>
+<td>static</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+</tr>
+<tr>
+<td>synchronized</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+</tr>
+<tr>
+<td>native</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+</tr>
+<tr>
+<td>strictFp</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+</tr>
+<tr>
+<td>transient</td> 
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+</tr>
+<tr>
+<td>volatile</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-txt">Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+<td class="center-redtxt">Not Allowed</td>
+</tr>
+</tbody>
+</table>
+<img src="img/access-modifier.png"/>
+<h3>Important Points</h3>
+<ol>
+<li>We can declare class inside the class :- <b>That is called inner class</b></li>
+<li>We can declare interface inside the class :- <b>The interface which is declared inside the class  is always static weather we are declaring or not..</b> </li>
+<li>We can declare interface inside the interface :- <b> The interface which is declared inside th interface is always (public & static) weather we are declaring or not..</b> </li>
+<li>We can declare class inside the interface :- <b> The class which is declared inside th interface is always (public & static) weather we are declaring or not..</b> </li>
+</ol>
+<img src="img/access-modifier-rule.png"/>
+
+
+<b>Access Modifiers are used at 2 access levels in Java. They are</b>
+<ol>
+    <li>Top-level for Classes & Interfaces</li>
+    <li>Member-level for Classes & Interfaces</li>
+</ol>
+ </p>
+ <div class="nolinkBHEAD">Access Modifiers for Top-level Classes & Interfaces</div>
+ <p>
+	<ul>
+	<li>
+    <b>Public: </b> If top level class or interface within a package is declared as Public, then it is accessible both inside and outside of the package.<br>	
+	</li>
+	<li>
+	<b>Default: </b>If no access modifier is specified in the declaration of the top level class or interface, then it is accessible only within package level. <br>
+		It is not accessible in other packages or sub packages.
+	</li>
+	</ul> 
+ </p>
+  <div class="nolinkBHEAD">Accessibility Modifiers for Members:</div>
+  <p>
+	<ul>
+		<li><b>public Members:</b> If members are declared as public inside a class then such members are accessible to the classes which are inside and outside of the package <br>where this class is visible. This is the least restrictive of all the accessibility modifiers.<br>
+		<b>public :-</b> All data members or Methods when created as public then it will be accessable in all java packages of program.<br>
+		<img src="img/public.jpg"/>
+		</li>
+		<li><b>protected Members:</b>If members are declared as protected then these are accessible to all classes in the package and to all subclasses of its class in any package where <br>this class is visible.
+		<b>protected :-</b> All data members or Methods when created as protected then it will be accessable in same java package where we created a class in program.<br>
+		<img src="img/protected.png"/>
+		</li>
+		<li><b>Default Members:</b>When no accessibility modifier is specified for the member then implicitly it is declared as Default. These are accessible only to the other classes in the <br>class’s package.<br>
+		<b>default :- </b>All data members or Methods when created without any access modifier then it will be accessable in same java package where we created a class in program.<br>
+		</li>
+		<li><b>private Members:</b>This is the most restrictive of all accessibility modifiers. These members are accessible only with in the same class. These are not accessible from any other class within a class’s package also.<br>
+		All data members or Methods when created as private then it will be accessable inside the class. For the classes and  interfaces can have private access modifiers. private access modifiers help us to encapsulate the data. <br>
+		</li>
+
+	</ul>
+  </p>
+ <div class="nolinkBHEAD">Static Members:</div>
+<p>
+	<ul>
+    <li>Static members are the members with Static keyword in their declarations.</li>
+    <li>Class variables are called as Static variables. These members belong to the class not to the object i.e. they are not instantiated when the class instance is created.</li>
+    <li>The values of these variables are not part of the object state.</li>
+    <li>The static variables are initialized to their default values (if explicit initialization is not specified) at the time of class loading.</li>
+    <li>The Static methods are called as class methods. A static method can directly access other static members in the class. It cannot access instance (non-static) members of the class. <br>But it can always use a reference of the class type to access its members both static and non-static.</li>
+	</ul>
+</p>
+
+
+<div class="nolinkBHEAD">Final Members:</div>
+<p>
+	<ul>
+    <li>Final variable is a constant; its value cannot be changed after its initialization.</li>
+    <li>This applies to instance, static and local variables including parameters that are declared as final.</li>
+    <li>A final variable of primitive data type cannot change its value once it has been initialized. A final variable of a reference type cannot change its reference value once it has been initialized, <br>but the state of the object it denotes can still be changed.</li>
+	<li> <img src="img/Final.jpg"/></li>
+	</ul>
+</p>
+
+<div class="nolinkBHEAD">Note:</div>
+<p>
+	<ul>
+    <li>Variables defined in Interfaces are implicitly Final.</li>
+    <li>Final variables must be initialized before it is used.</li>
+    <li>Final methods in a class are complete i.e. these methods has implementations and hence cannot be overridden in the subclasses.</li>
+	</ul>
+</p>
+
+<div class="nolinkBHEAD">Abstract Methods:</div>
+
+<p>
+If method has a keyword abstract in its declaration, then such method/function is called Abstract method. <br>
+Abstract methods does not have an implementation i.e. method body is not defined; only method prototype is specified in the class definition.<br><br>
+
+<b>Note:</b>
+    <ul>
+    <li>Only instance methods can be declared as abstract.</li>
+    <li>Since Static methods cannot be overridden declaring abstract static method would of no use.</li>
+	<li>A Final method cannot be abstract and vice versa.</li>
+    <li>Methods specified in an Interface are implicitly abstract.</li>
+	</ul>
+</p>
+<div class="nolinkBHEAD">Synchronized Methods:</div>
+
+<p>
+Multiple threads can be executing in a program and at times they might try to execute several methods on the same object simultaneously.<br>
+
+If there is a requirement that only one thread at a time should execute a method in the object, then such methods can be declared as Synchronized. <br>
+Their execution will be mutually exclusive among all threads. At any given time, at the most one thread will be executing a Synchronized method on an object.<br><br>
+
+<b>Note:</b> Synchronized methods are also applicable to Static methods of a class.
+</p>
+
+
+<div class="nolinkBHEAD">Transient Fields:</div>
+
+<p>
+Objects can be stored using serialization. Serialization transforms objects into an output format which is helpful for storing objects.<br>
+Objects can later be retrieved in the same state as when they were serialized, meaning that fields included in the serialization will have <br>
+the same values at the time of serialization. <b><u>Such objects are said to be Persistent.</u></b>
+<br>
+<br>
+The fields are declared with keyword Transient in their class declaration if its value should not be saved when objects of the class are written to persistent storage
+</p>
+
+
+
+<div class="nolinkBHEAD">Volatile Fields:</div>
+<p>
+During execution, complied code might cache the values of fields for efficiency reasons. And as multiple threads will access the same field, <br>
+caching is not allowed to cause inconsistencies when reading and writing the value in the field.<br><br>
+
+The Volatile modifier can be used to inform the compiler that it should not attempt to perform optimizations on the field <br>
+which could cause unpredicted results when the field is accessed by multiple threads.<br>
+</p>
+
+
+<div class="nolinkBHEAD">Nested Interfaces:</div>
+<p>
+Access modifiers can be used in Nested interfaces. An interface declared within another class or interface is called a Nested interface. <br>
+A top-level interface is the one which is not nested.<br><br>
+
+Only one type of nested interface is available in Java based on declarative context, Static member interface. <br>
+These are interfaces defined with keyword Static inside the top-level interface or class or in another Static member class or interface. <br>
+It can be instantiated like a normal top-level interface or class, no enclosing instance is required for this interface instantiation.
+</p>
+<div class="nolinkBHEAD">Nested Classes:</div>
+
+<p>
+Access modifiers are also used in Nested classes. A class declared within another class is called a Nested class. A top-level class is the one which is not nested.<br>
+
+<b>They are 2 categories of Nested classes based on the declarative context. They are</b>
+<ul>
+    <li>Static member classes</li>
+    <li>Inner classes</li>
+</ul>
+
+<b>Inner classes are defined in 3 different categories. They are</b>
+<ul>
+    <li>Non-static member classes</li>
+    <li>Local classes</li>
+    <li>Anonymous classes</li>
+	</ul>
+<br>
+
+<div class="nolinkBHEAD">Static member classes:</div>
+
+Classes which are defined with Static modifier inside the top-level class or other Static member class are called Static member classes. <br>
+It can be instantiated like a normal top-level class; no enclosing instance is required for this class instantiation.<br><br>
+
+All the 4 accessibility modifiers i.e. <b>Public, Protected, Package & Private </b> are applicable to Static member classes’ declaration.
+
+
+<div class="nolinkBHEAD">Non-Static member classes:</div>
+
+Classes which are defined without Static modifier inside another class are called non-static member classes. <br>
+An instance of a non-static member class always has an enclosing instance associated with it.<br><br>
+The accessibility modifiers i.e. Public, Protected, Package & Private, abstract, final are applicable to Non-Static member classes’ declaration.<br><br>
+
+<div class="nolinkBHEAD">Local classes:</div>
+
+
+These classes are defined in the context of a block as in a body of the method or normal local block, just as local variables defined in a method body or local block.<br>
+An instance of a local class has an enclosing instance associated with it, if it is declared in non-static context.<br><br>
+No accessibility modifiers are applicable for Local classes.<br><br>
+
+
+<div class="nolinkBHEAD">Anonymous classes:</div>
+
+These are defined as expressions and instantiated on the fly. An instance of anonymous class has an enclosing instance associated with it, <br>
+if it is declared in non-static context.<br><br>
+No accessibility modifiers are applicable for Anonymous classes.<br>
+
+<b>Note:</b> A Nested Class or Interface cannot have the same name as any of the enclosing classes or interfaces.
+</p>
+
+
+
+
+
+
+
+</div>
+</body>
+</html>

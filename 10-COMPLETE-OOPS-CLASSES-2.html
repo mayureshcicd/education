@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<img src="class-img/oops_1.png"/><br>
+<h3>What is packages in java</h3>
+<ul>
+<li>packages are collection of related classes. we need to import all created</li>
+<li>packages to access all classes.</li>
+</ul>
+
+<div class="nolinkBHEAD">What is Class</div>
+
+<p>
+<ul>
+<li>Object is the super class of all classes in java.</li>
+<li>Every class extends from object so class is also called an object.</li>
+<li>Class is user define data types or a blue print or template and it content are the data and the action that perform on data.</li>
+<li>Data is called properties or Attributes in class.</li>
+<li>Action works on data that is also called behaviour or methods.</li>
+<li>We can create the instance of class is called object.</li>
+<li>Inside each class, there are 2 main sections. <br>
+<b>First section</b> generally declares all variables, from integers to Strings to Booleans.<br>
+<b>Second part </b>is the functions, a class can't do anything without functions.</li>
+<li>Classes are blueprint of an object,  The an object's functions are limited to the functions defined in the corresponding Class.</li>
+<li>Objects are created based on the class type. objects serve various functions in a program.</li>
+<li>An object has access to all the valid function defined in it's class.</li>
+<li>An object have all the variables declared in the class.</li>
+<li>A Class is the blueprint of an object, while an object is the actual thing created from the class.</li>
+<li>All objects are defined as : = <b>ClassName objName=new ClassName();</b></li>
+<li>An object will be destroyed if it is no longer refrred to or used in the rest of the program.</li>
+<li>Classes can represent anything. Some obvious examples include Animals, Objects (as in, real life) and Made up things.</li>
+<li>Duck can be a class, Mouse can be a class, Computer can be a class, even Universe can be a class.</li>
+<li><b>Remember :-</b> Class is a blueprint representation of an object, not the object itself.</li>
+<li> 
+Class is collection of <b>State & Behaviour</b><br>
+<span class="success">state</span> means properties (class variables)<br>
+<span class="success">behaviour</span> means (class functions/methods)<br>
+</li>
+<li>
+<span class="success">What is object</span> Object is a instance of class and object has state and behaviour.<br>
+
+<span class="success">Creating an Object:</span><br>
+In Java, the new key word is used to create new objects. <br>
+There are three steps when creating an object from a class:<br>
+<ul>
+	<li><b>Declaration: </b>A variable declaration with a variable name with an object type.</li>
+	<li><b>Instantiation: </b>The 'new' key word is used to create the object.</li>
+	<li><b>Initialization: </b>The 'new' keyword is followed by a call to a constructor. This call initializes the new object.</li>
+	<li><b>Accessing Instance Variables and Methods:</b><br>Instance variables and methods are accessed via created objects.</li>
+<li>
+We can use <b><u>new operator </u></b>to create object of class.<br>
+We can use <b><u>newInstance </u></b>method to create object.<br>
+
+<b>newInstance method() :-</b> to create a object of class runtime/dynamically  by passing only class name.<br>
+we can't pass arguments to newInstance method(). then we use newInstance method to create object.<br>
+<div class="codeblock"><pre>
+
+Example:-
+public class Student{
+	public void show(){}
+}
+public class Teacher{
+	public void show(){}
+}
+public Class Test
+{
+	public void main(String[] args)
+	{
+		Object cls=Class.forName(args[0]).newInstance();	
+		System.out.println("Object created for "+o.getClass().getName());
+	}
+}
+<span class="success">
+Output: 
+javac test.java;
+java test Student;
+java test Teacher;
+</span>
+
+
+</pre></div>
+<b>newInstance method :-</b> in Java web based application varios servlet are available.<br>
+Web container / servlet container / servlet engine responsible to create the servlet object runtime.<br>
+whenever the request comes from browser then web container used newInstance() method internally to create the servlet object.<br>
+
+</li>
+</ul>
+
+</li><br><br><br> 
+<li>
+
+<b>Conclusion : -</b><br>
+<ol>
+	<li>Classes are blueprints of an object, not the object itself.</li>
+	<li>An object can do what the class is defined to do.</li>
+	<li>A class can be a representation of anything in real life.</li>
+	<li>Function are a group of code to accomplish a specific task.</li>
+</ol>
+ 
+<b>Example : -</b><br>
+<img src="class-img/classsyntax.jpg"/>
+</li>
+<li>
+<b>Instance Variables : -</b> Instance variables are variables within a class but outside any method. <br>
+These variables are initialized when the class is instantiated. <br>
+Instance variables can be accessed from inside any method, constructor or blocks of that particular class. <br>
+Instance variables have default values. <br>
+<h3>For numbers the default value is 0, for Booleans it is false and for object references it is null.</h3><br>
+<ol>
+	<li>Object of a class is called instance of the Class.</li>
+	<li>The properties of a class or data stored by an object is called instance variables.</li>
+	<li>Every object has it's own copy of instance variables.</li>
+	<li>Use a constructor to initialize them</li>
+	<li>If not initialized then instance variables are given default values by java.</li>
+	<li>Instance variable are live as long as the object is alive.</li>
+	<li>When objects are no longer used, they are destroyed by a special agent called Garbage Collector.</li>
+	<li><img src="class-img/instance-var1.jpg"/>
+	</li>
+</ol>
+<b>Class variables: -</b>Class variables are variables declared with in a class, outside any method, with the static keyword.<br>
+<b>Local variables: -</b>Variables defined inside methods, constructors or blocks are called local variables. <br>
+The variable will be declared and initialized within the method and the variable will be destroyed when the method has completed.<br>
+<img src="class-img/local-var.png"/><br>
+<img src="class-img/local-var1.png"/><br>
+<img src="class-img/local-var2.png"/><br>
+<img src="class-img/local-dif.jpg"/><br>
+
+<img src="class-img/explicit-param.png"/><br>
+<img src="class-img/implicit-param.png"/><br>
+<img src="class-img/implicit-param1.png"/><br>
+<img src="class-img/instance-var.png"/>
+
+</li>
+</ul><br>
+
+<h3>Constructors</h3>
+<ul>
+<li>Every class has a constructor. </li>
+<li>If we do not write a constructor for a class the Java compiler builds a default constructor for that class.</li>
+<li>By using new keyword with constructor we create the object. </li>
+<li>The main rule of constructors is that they should have the same name as the class.</li>
+<li>A class can have more than one constructor. Constructor can be (no arguments) or be (with arguments).</li>
+<li>
+<img src="class-img/constructor-0.png"/><br>
+<img src="class-img/constructor-1.png"/><br>
+<img src="class-img/constructor-2.png"/><br>
+</li>
+
+ 
+</ul> 
+
+ <h3>Polymorphism</h3>
+
+<ul>
+<li>Same reference object but multiple forms is the concept of polymorphism.</li>
+<li>One type of object has many form is called polymorphism.</li>
+<li>When all  different classes mapped with one object is called polymorphism.</li>
+<li>usages of parent reference to whole child object is called polymorphism.</li>
+<li>
+<div class="incodeblock">
+<pre>
+Polymorphism :-
+Polymorphism is an important Object oriented concept 
+
+and Polymorphism in Java has two types: 
+Compile time polymorphism (static binding) and Runtime polymorphism (dynamic binding)
+polymorphism allows you define one interface and have multiple implementations.
+It is a  feature that allows one interface to be used for a general class of  actions.
+The most common use of polymorphism in OOP occurs when a parent class reference is used 
+to refer to a child class object.
+Polymorphism in java is a concept by which we can perform a single action by different ways.
+
+An important example of polymorphism is how a parent class refers to a child class object.  
+In fact, any object that satisfies more than one IS-A relationship is polymorphic in nature.
+
+Polymorphism is an Oops concept which advice use of common interface instead of concrete 
+implementation while writing code.
+</pre>
+</div>
+</li>
+<li><img  src="class-img/poly-1.png"/></li>
+<li><img  src="class-img/poly-2.jpg"/></li>
+<li> <img src="class-img/polymorphism1.png" /></li>
+</ul>
+
+<div class="codeblock"><pre>
+For example :- Ball class  is a super class and that super class
+inherited by may classess.
+
+public abstract Class Ball
+{
+ public int size;
+ public String color;
+ public int getSize()
+ {
+	System.out.println(size);
+ }
+ public String getColor()
+ {
+	System.out.println(color);
+ }
+}
+
+public class RedBall extends Ball
+{
+	RedBall()
+	{
+		size=10;
+		color="Red";
+	}
+
+}
+public class GreenBall extends Ball
+{
+	GreenBall()
+	{
+		size=20;
+		color="Green";
+	}
+
+}
+public class BlackBall extends Ball
+{
+	BlackBall()
+	{
+		size=10;
+		color="Black";
+	}
+
+}
+
+public class TestPolymorphism{
+
+public static void main(String[] args)
+{
+	Ball redBall=new RedBall();
+	Ball greenBall=new GreenBall();
+	Ball blackBall=new BlackBall();
+	
+	Ball[] balls=new Ball[3];
+	
+	balls[0] = new RedBall();
+	balls[1] = new GreenBall();
+	balls[2] = new BlackBall();
+	
+}
+
+}
+
+<span class="success"></span>
+</pre></div>
+
+ <div class="nolinkBHEAD">Polymorphism</div>
+ <p>
+ 	<ol>
+    <li>Polymorphism means to process objects differently based on their data type.</li>
+    <li>one method can be defined multiple times with different data types.</li>	
+	<li>Polymorphism could be static and dynamic both.</li>
+	<li>Overloading is static polymorphism while</li> 
+		<ol>
+			<li>Overloading in simple words means two methods having same method name but takes different input parameters. This called static because, <br>
+			which method to be invoked will be decided at the time of compilation</li>
+		</ol>
+	<li>overriding is dynamic polymorphism.</li>	
+	<ol>
+		<li>Overriding means a derived class is implementing a method of its super class.</li>
+	</ol>
+	</ol>		
+ </p>
+ <div class="nolinkBHEAD">Types of polymorphism</div>
+ <p>
+	There are two types of polymorphism in java- 
+	<ol>
+		<li>Runtime polymorhism( Dynamic polymorphism).</li>
+		<li>Compile time polymorphism (static polymorphism).</li>
+	</ol>
+ </p>
+ <div class="nolinkBHEAD">Runtime Polymorhism( or Dynamic polymorphism)</div>
+ <p>
+	Method overriding is a perfect example of  runtime polymorphism<br>
+	in method overriding both the classes(base class and child class) have same method, compile doesn’t figure out which method to call at compile-time. <br>
+	In this case JVM(java virtual machine) decides which method to call at runtime that’s why it is known as runtime or dynamic polymorphism.
+ </p>
+<div class="codeblock"><pre>
+Example : 
+Method overriding Example
+
+package edu.java.basic;
+public class X
+{
+    public void methodA() //Base class method
+    {
+        System.out.println ("hello, I'm methodA of class X");
+    }
+}
+
+public class Y extends X
+{
+    public void methodA() //Derived Class method
+    {
+        System.out.println ("hello, I'm methodA of class Y");
+    }
+}
+public class Z
+{
+   public static void main (String args []) {
+       X obj1 = new X(); // Reference and object X
+       X obj2 = new Y(); // X reference but Y object
+       obj1.methodA();
+       obj2.methodA();
+   }
+}
+<span class="success">Output: -
+hello, I'm methodA of class X 
+hello, I'm methodA of class Y</span> 
+</pre></div>
+
+<div class="nolinkBHEAD">Compile time Polymorhism( or Static polymorphism)</div>
+<p>
+	Method overloading is a perfect example of  runtime polymorphism<br>
+	class can have more than one methods with same name but with different number of arguments or different types of arguments or both.<br>
+	compiler is able to figure out the method call at compile-time so it known as compile time polymorphism.
+</p>
+
+<div class="codeblock"><pre>
+Example : 
+Method overloading Example
+
+package edu.java.basic;
+class X
+{
+   void methodA(int num)
+   {
+       System.out.println ("methodA:" + num);
+   }
+   void methodA(int num1, int num2)
+   {
+       System.out.println ("methodA:" + num1 + "," + num2);
+   }
+   double methodA(double num) {
+       System.out.println("methodA:" + num);
+       return num;
+   }
+}
+
+class Y
+{
+   public static void main (String args [])
+   {
+       X Obj = new X();
+       double result;
+       Obj.methodA(20);
+       Obj.methodA(20, 30);
+       result = Obj.methodA(5.5);
+       System.out.println("Answer is:" + result);
+   }
+}
+<span class="success">Output: -
+methodA:20
+methodA:20,30
+methodA:5.5
+Answer is:5.5</span> 
+</pre></div><br>
+
+<h3>Mehod Overloading in Java</h3>
+<ul>
+<li>Method overloading also known as static polymorphisim.</li>
+<li>Method overloading also known as compile time polymorphisim.</li>
+<li>Method overloading also known as early binding</li>
+</ul>
+<b>Mehod Overloading : </b> means serveral methods with same name and different signatures or different parameters in the class.<br>
+<div class="codeblock"><pre>
+Example :
+int and double are signatures of following ( max ) function.
+Signature shows the return types.
+int max(int a,int b)
+{
+  if (a>b) 
+   {
+	return  a;
+   }
+   else
+   {
+	return  b;
+   }
+}
+
+int max(int a,int b,int c)
+{
+  int result=max(a,b);
+  if (result>c) 
+   {
+	return  result;
+   }
+   else
+   {
+	return c;
+	
+   }
+}
+
+double max(double a,double b)
+{
+  if (a>b) 
+   {
+	return  a;
+   }
+   else
+   {
+	return  b;
+   }
+}
+
+</pre></div><br>
+<img src="class-img/OverLoading_in_java.png"><br>
+
+<h3>Method Overriding</h3>
+<ul>
+<li>Method Overriding also known as run time polymorphisim.</li>
+<li>Method Overriding also known as dynamic polymorphisim.</li>
+<li>Method Overriding also known as late binding</li>
+</ul>
+<img src="class-img/Overriding_in_java.png"><br>
+<img src="class-img/method_overriding_in_java.png"><br>
+<img src="class-img/overloading_vs_overriding.png"><br>
+<img src="class-img/shadowing.jpg"/><br>
+<img src="class-img/dif_load_riding.png"><br>
+</p>
+
+<h3>Inheritance</h3>
+<div class="incodeblock">
+<pre>
+Inheritance in java :-
+
+Inheritance in java is a mechanism in which one object acquires all the properties and behaviors of parent object.
+
+The idea behind inheritance in java is that you can create new classes that are built upon existing classes. 
+When you inherit from an existing class, you can reuse methods and fields of parent class, and you can add new methods and fields also.
+Inheritance represents the IS-A relationship, also known as parent-child relationship.
+
+The extends keyword indicates that you are making a new class that derives from an existing class.
+In the terminology of Java, a class that is inherited is called a super class. The new class is called a subclass.
+
+The class which inherits the properties of other is known as subclass (derived class, child class) and 
+the class whose properties are inherited is known as superclass (base class, parent class).
+
+Inheritance allows a class to use the properties and methods of another class. 
+</pre>
+</div>
+<img src="class-img/inheritance-def.jpg" /><br>
+<img src="class-img/inheritance_in_java_0.png" /><br>
+<img src="class-img/inheritance_in_java_1.png" /><br>
+<img src="class-img/inheritance_in_java_2.png" /><br>
+<img src="class-img/inheritance_in_java_3.png" /><br>
+<img src="class-img/inheritance_in_java_4.png" /><br>
+ <p>
+ 	<ol>
+    <li>Inheritance is the mechanism by which an object acquires the some/all properties of another object.</li>
+    <li>It supports the concept of hierarchical classification.</li>
+	<li>Java Swing and Awt classes represent best examples for inheritance.</li>
+	<li>In Inheritance child class extends the all public properties of Parent Class</li>
+	<li>The derived class inherits the states and behaviors from the base class. </li>
+	<li>The derived class is also called subclass and the base class is also known as super-class.</li>
+	<li>The derived class can add its own additional variables and methods. </li> 
+	<li>These additional variable and methods differentiates the derived class from the base class.</li>
+	<li>Inheritance is a compile-time mechanism. A super-class can have any number of subclasses. But a subclass can have only one superclass.</li>
+	<li>The superclass and subclass have <b>“is-a”</b> relationship between them. </li>
+	<li>
+	<b>Inheritance :-</b> inheritance is the "is a releationship" , When you create a new class that is based on existing (super) class<br>
+	and inherite all public (properties, methods) from existing (super) class. extends is keyword which is used for inheritace.<br>
+	It is a relationship of object of superclass and also relationship of object of subclass</li>
+	
+	<li>
+	<ul>
+	
+	<li> 
+		<b>Inheritance : -</b>An important feature of object-oriented programs is inheritance—the ability to create classes that share the attributes and methods of existing classes.<br>
+	Inheritance is mainly used for code reusability. 
+	</li>
+	<li>
+		One of the advantages of Object-Oriented programming language is code reuse. <br>
+		There are two ways we can do code reuse either by implementation of inheritance (IS-A relationship), or object composition (HAS-A relationship).<br>
+	</li>
+<li>
+<b>IS-A Relationship: -</b>In object oriented programming, the concept of IS-A is a totally based on Inheritance, <br>
+which can be of two types Class Inheritance or Interface Inheritance. It is just like saying "A is a B type of thing". <br>
+For example, Apple is a Fruit, Car is a Vehicle etc. Inheritance is uni-directional. For example House is a Building. But Building is not a House.<br>
+It is key point to note that you can easily identify the IS-A relationship. Wherever you see an extends keyword or implements keyword in a class declaration, <br>
+then this class is said to have IS-A relationship.<br>
+</li>
+
+<li>
+<b>HAS-A Relationship: -</b>Composition(HAS-A) simply mean use of instance variables that are references to other objects. For example: Maruti has Engine, or House has Bathroom..
+<br><br>
+</li>
+<li>
+<b>Summary : -</b><br>
+    IS-A relationship based on Inheritance, which can be of two types Class Inheritance or Interface Inheritance.<br>
+    Has-a relationship is composition relationship which is productive way of code reuse.<br>
+<b>What is inheritance in java : - </b> Classes having common properties that classes called super class <br>
+and which classes uses that properties of superclass that classes called sub classes.<br>
+sub clasees inherits the common properties from super class (by using extends keyword ) that is called inheritance.<br>
+sub class can not access private variables and methods of a superclass. you can only inherit 1 class at a time,	<br><br>
+	
+</li>
+ <li><img src="class-img/what_is_inheritance_in_java.png"><br></li>
+
+
+
+	
+	</ul>
+	
+	</li>
+	
+	</ol>
+	
+	 
+<li>
+	<b>Inheritance : - </b>
+With the use of inheritance the information is made manageable in a hierarchical order.<br>
+The class which inherits the properties of other is known as subclass (derived class, child class) and <br>
+the class whose properties are inherited is known as superclass (base class, parent class).<br>
+<b>extends Keyword : - </b>
+extends is the keyword used to inherit the properties of a class. <br>
+<b>Note - </b>A subclass inherits all the members (fields, methods, and nested classes) from its superclass. <br>
+Constructors are not members, so they are not inherited by subclasses, but the constructor of the superclass can be invoked from the subclass.<br>
+<b>The super keyword : - </b>
+The super keyword is similar to this keyword following are the scenarios where the super keyword is used.<br>
+<ol>
+<li>It is used to differentiate the members of superclass from the members of subclass, if they have same names.</li>
+<li>It is used to invoke the superclass constructor from subclass.</li>
+</ol>
+
+</li>	
+
+<li>
+ <div class="codeblock"><pre>
+<b>Inheritance IS-A Relationship : - </b>
+
+•	IS-A is a way of saying : This object is a type of that object
+public class Animal{
+}
+
+public class Mammal extends Animal{
+}
+
+public class Reptile extends Animal{
+}
+
+public class Dog extends Mammal{
+}
+Now, based on the above example, In Object Oriented terms, the following are true -
+•	Animal is the superclass of Mammal class.
+•	Animal is the superclass of Reptile class.
+•	Mammal and Reptile are subclasses of Animal class.
+•	Dog is the subclass of both Mammal and Animal classes.
+Now, if we consider the IS-A relationship, we can say -
+•	Mammal IS-A Animal
+•	Reptile IS-A Animal
+•	Dog IS-A Mammal
+•	Hence : Dog IS-A Animal as well
+With use of the extends keyword the subclasses will be able to inherit all the properties of the superclass except for the private properties of the superclass.
+We can assure that Mammal is actually an Animal with the use of the instance operator.
+Since we have a good understanding of the extends keyword let us look into how the implements keyword is used to get the IS-A relationship.
+Generally, the implements keyword is used with classes to inherit the properties of an interface. Interfaces can never be extended by a class.
+Example
+public interface Animal {
+}
+
+public class Mammal implements Animal{
+}
+
+public class Dog extends Mammal{
+}
+Inheritance HAS-A relationship
+•	These relationships are mainly based on the usage. This determines whether a certain class HAS-A certain thing. 
+	This relationship helps to reduce duplication of code as well as bugs.
+public class Vehicle{}
+public class Speed{}
+
+public class Van extends Vehicle{
+	private Speed sp;
+} 
+This shows that class Van HAS-A Speed. By having a separate class for Speed, we do not have to put the entire code that belongs to speed inside the Van class., 
+which makes it possible to reuse the Speed class in multiple applications.
+</pre></div>
+
+</li>
+<li><img src="class-img/inheritance-concept.jpg"/></li>
+<li><img src="class-img/inherit-type.png"/></li>
+
+
+	</ul>
+ </p>
+ <div class="codeblock"><pre>
+Example : 
+Inheritance Example
+
+package edu.java.basic;
+// A class to display the attributes of the vehicle
+public class Vehicle {
+   public String color;
+   private int speed;
+   private int size;
+   public int getSize() {
+      return size;
+   }
+   public int getSpeed() {
+      return speed;
+   }
+   public void setSize(int i) {
+      size = i;
+   }
+   public void setSpeed(int i) {
+      speed = i;
+   }
+}
+
+// A subclass which extends for vehicle
+public class Car extends Vehicle {
+   int CC;
+   int gears;
+   int color;
+   void attributescar() {
+       // Error due to access violation
+      // System.out.println("Speed of Car : " + speed); 
+      // Error due to access violation
+      //System.out.println("Size of Car : " + size); 
+   }
+}
+public class Test {
+   public static void main(String args[]) {
+     Car b1 = new Car();
+     // the subclass can inherit 'color' member of the superclass
+     b1.color = "Blue"; 
+     b1.setSpeed(200) ;
+     b1.setSize(22);
+     b1.CC = 1000;
+     b1.gears = 5;
+     // The subclass refers to the members of the superclass
+     System.out.println("Color of Car : " + b1.color);
+     System.out.println("Speed of Car : " + b1.getSpeed());
+     System.out.println("Size of Car : " + b1.getSize());
+     System.out.println("CC of Car : " + b1.CC);
+     System.out.println("No of gears of Car : " + b1.gears);
+  }
+}
+<span class="success">Output: -
+Color of Car : Blue
+Speed of Car : 200
+Size of Car : 22
+CC of Car : 1000
+No of gears of Car : 5</span> 
+<b>Note</b>
+<ol>
+<li>The derived class inherits all the members and methods that are declared as public or protected.</li>
+<li>If declared as private it can not be inherited by the derived classes.</li>
+<li>The private members can be accessed only in its own class.</li>
+<li>The private members can be accessed through getter/setter assessor </li>
+<li>The derived class cannot inherit a member of the base class if the derived class declares another member with the same name.</li>
+
+</ol>
+</pre></div>
+
+<div class="nolinkBHEAD">Usage of super Keyword in Inheritance</div>
+<p>
+
+<ol>
+    <li>super is used to refer immediate parent class instance variable.</li>
+    <li>super() is used to invoke immediate parent class constructor.</li>
+    <li>super is used to invoke immediate parent class method.</li>
+</ol>
+</p> 
+ 
+ 
+ <div class="codeblock"><pre>
+Example : 
+Inheritance & use of super method Example
+
+package edu.java.basic;
+
+class Boll {
+	private String color;
+	private int Size;
+	private String Uses;
+	private Double price;
+
+	public Boll(String color, int size, String uses, Double price) {
+		this.color = color;
+		this.price = price;
+		this.Size = size;
+		this.Uses = uses;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public int getSize() {
+		return Size;
+	}
+
+	public String getUses() {
+		return Uses;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	protected void parentProtectedClassMethod()
+	{
+		System.out.println("protected method of parent class (Boll)");
+	}
+	
+	public void publicparentClassMethod()
+	{
+		System.out.println("public method of parent class (Boll)");
+	}
+	public final void finalParentClassMethod()
+	{
+		System.out.println("final method of parent class (Boll)");
+	}
+	
+	public  void ParentClassMethod()
+	{
+		System.out.println("final method of parent class (Boll)");
+	}	
+	
+}
+//A subclass which extends for Boll
+class BollTypes extends Boll {
+	private String purpose;
+
+	// Parameterized Constructor
+	public BollTypes(String color, int size, String uses, Double price) {
+		super(color, size, uses, price); // calling base class (Boll) constructor
+
+	}
+
+	// Parameterized Constructor
+	public BollTypes(String color, int size, String uses, Double price, String purpose) {
+		super(color, size, uses, price); // calling base class (Boll) constructor
+		this.purpose = purpose;
+	}
+
+	public String getPurpose() {
+		return purpose;
+	}
+	public void baseClassName()
+	{		
+		super.parentProtectedClassMethod(); // using super keyword  accessing the base class protected method.
+		super.publicparentClassMethod(); // using super keyword  accessing the base class public method.
+	}
+	
+	// we can not override final method of base class
+	/*public void finalParentClassMethod() 
+	{
+		System.out.println("final method of parent class (Boll)");
+	}
+	*/	
+	
+	// we can   override public method of base class
+	public  void ParentClassMethod() 
+	{
+		System.out.println("Override method of parent class (Boll)");
+	}
+	
+}
+
+public class InheritanceDemo {
+
+	public static void main(String[] args) {
+		Boll plasticBoll = new BollTypes("Red", 2, "For Children", 50.20);
+		Boll cricketBoll = new BollTypes("white", 2, "To play Cricket", 200.20);
+		Boll footBoll = new BollTypes("Black & White", 2, "To play FootBoll", 100.20);
+		
+		System.out.println("The Boll is " + plasticBoll.getColor() + " Boll  and size is " + plasticBoll.getSize()
+				+ " and useful " + plasticBoll.getUses() + " and Price is " + plasticBoll.getPrice());
+		System.out.println("The Boll is " + cricketBoll.getColor() + " Boll  and size is " + cricketBoll.getSize()
+				+ " and useful " + cricketBoll.getUses() + " and Price is " + cricketBoll.getPrice());
+		System.out.println("The Boll is " + footBoll.getColor() + " Boll  and size is " + footBoll.getSize()
+				+ " and useful " + footBoll.getUses() + " and Price is " + footBoll.getPrice());
+
+		BollTypes generalBoll = new BollTypes("Red", 2, "For Children", 50.20, " for Enjoyment");
+
+		System.out.println("The Boll is " + generalBoll.getColor() + " Boll  and size is " + generalBoll.getSize()
+				+ " and useful " + generalBoll.getUses() + " and Price is " + generalBoll.getPrice()
+				+ " and The General purpose is " + generalBoll.getPurpose());
+		generalBoll.baseClassName();
+		generalBoll.ParentClassMethod();
+	}
+}
+
+ 
+<span class="success">Output: -
+The Boll is Red Boll  and size is 2 and useful For Children and Price is 50.2
+The Boll is white Boll  and size is 2 and useful To play Cricket and Price is 200.2
+The Boll is Black & White Boll  and size is 2 and useful To play FootBoll and Price is 100.2
+The Boll is Red Boll  and size is 2 and useful For Children and Price is 50.2 and The General purpose is  for Enjoyment
+protected method of parent class (Boll)
+public method of parent class (Boll)
+Override method of parent class (Boll)</span> 
+ 
+ <b>Note</b>
+<ol>
+<li>Using Final with class: We can also prevent inheritance by making a class final. </li>
+<li>When a class is declared as final, its methods also become final.</li>
+<li>An abstract class cannot be declared as final because an abstract class is incomplete and its subclasses need to provide the implementation.</li>
+<li>Using Final with methods: We can prevent a method from being overridden by using the keyword final.</li>
+
+</ol>
+</pre></div>
+ 
+ 
+  
+ 
+ <div class="nolinkBHEAD">Types of inheritance</div>
+ <ol>  
+	<li>Single Inheritance</li>
+    <li>multilevel inheritance</li>
+    <li>multiple inheritance</li>
+    <li>hybrid inheritance</li>
+    <li>hierarchical inheritance</li>
+</ol>
+ 
+ <div class="nolinkBHEAD">Single Inheritance</div>
+ <p> When a class extends another one class only then we  call it a single inheritance.</p>
+ 
+  <div class="codeblock"><pre>
+	Example : Single Inheritance example program in Java
+	
+	package edu.java.basic;
+	Class A
+	{
+	   public void methodA()
+	   {
+		 System.out.println("Base class method");
+	   }
+	}
+
+	Class B extends A // Single Inheritance
+	{
+	   public void methodB()
+	   {
+		 System.out.println("Child class method");
+	   }
+	   public static void main(String args[])
+	   {
+		 B obj = new B();
+		 obj.methodA(); //calling super class method
+		 obj.methodB(); //calling local method
+	  }
+	}
+ </pre></div>
+ <div class="nolinkBHEAD">multilevel Inheritance</div>
+ <p>
+ <div style="float:left">
+ <b>(A CLASS) &#8594; (B CLASS) &#8594; (C CLASS)</b></div><br><br>
+ <ol>
+ <li>A class is Parent/Base Class of B Class </li>
+ <li>B Class extends A Class, means B Class inherits all public and protected members of A Class</li> 
+ <li>B Class is Parent/Base Class of C Class</li>
+ <li>C Class extends B Class, means B Class inherits all public and protected members of B Class</li>
+ <li>C Class also automatically inherits all public and protected members of A Class.</li>
+ <li>because A Class is Grand parent of C Class.</li>
+ <li>This is called multilevel Inheritance in java</li>
+ </ol>
+ 
+ </p>
+ 
+  <div class="codeblock"><pre>
+	Example : multilevel Inheritance example program in Java
+	
+	package edu.java.basic;
+	class Car{
+		public Car()
+		{
+			System.out.println("Class Car");
+		}
+		public void vehicleType()
+		{
+			System.out.println("Vehicle Type: Car");
+		}
+	}
+	class Maruti extends Car{
+		public Maruti()
+		{
+			System.out.println("Class Maruti");
+		}
+		public void brand()
+		{
+			System.out.println("Brand: Maruti");
+		}
+		public void speed()
+		{
+			System.out.println("Max: 90Kmph");
+		}
+	}
+	public class Maruti800 extends Maruti{
+
+		 public Maruti800()
+		 {
+			 System.out.println("Maruti Model: 800");
+		 }
+		 public void speed()
+			{
+				System.out.println("Max: 80Kmph");
+			}
+		 public static void main(String args[])
+		 {
+			 Maruti800 obj=new Maruti800();
+			 obj.vehicleType();
+			 obj.brand();
+			 obj.speed();
+		 }
+	}
+	
+<span class="success">Output: -
+Class Car
+Class Maruti
+Maruti Model: 800
+Vehicle Type: Car
+Brand: Maruti
+Max: 80Kmph</span> 		
+ </pre></div>
+ 
+ <div class="nolinkBHEAD">multiple Inheritance</div>
+ <p>
+	java doesn’t support multiple inheritance.  We can achieve it by using interfaces in Java.
+ </p>
+ 
+ <div class="codeblock"><pre>
+	Example : multiple inheritance in Java using interfaces 
+	package edu.java.basic;
+	interface FirstInterface
+	{
+	   public void firstName();
+	}
+	interface SecondInterface
+	{
+	   public void lastName();
+	}
+	class MultipleInheritace  implements FirstInterface, SecondInterface
+	{
+	   public void firstName()
+	   {
+		   System.out.println(" First Name");
+	   }
+	   public void lastName()
+	   {
+		   System.out.println(" Last Name");
+	   }	   
+	}
+	public class MultipleInheritaceDemo{
+ 
+		 public static void main(String args[])
+		 {
+			 MultipleInheritace obj=new MultipleInheritace();
+			 obj.firstName();
+			 obj.lastName();
+			  
+		 }
+	}
+	
+<span class="success">Output: -
+First Name
+Last Name
+</span> 		
+ </pre></div> 
+ 
+  <div class="nolinkBHEAD">hybrid inheritance</div>
+ <p>
+ 
+ <ol>
+	 <li>Suppose there are mulitiple interfaces </li>
+	 <li><b>(interface A) , (interface B) , (interface C) </b></li>
+	 <li>B interface extends A interface </li>
+	 <li>C interface extends A interface </li>
+	 <li>D class implements  B,C interfaces </li>	 
+ </ol>
+ <b>Note: -</b><br>
+ by extending interfaces each other <b>hybrid inheritance</b> is possible in java.
+ </p>
+ 
+  <div class="codeblock"><pre>
+	Example : multiple inheritance in Java using interfaces 
+	
+	package edu.java.basic;
+	interface A
+	{
+		 public void methodA();
+	}
+	interface B extends A
+	{
+		 public void methodB();
+	}
+	interface C extends A
+	{
+		 public void methodC();
+	}
+	class D implements B, C{
+
+		@Override
+		public void methodA() {
+			System.out.println("MethodA");
+			
+		}
+
+		@Override
+		public void methodC() {
+			System.out.println("MethodC");
+			
+		}
+
+		@Override
+		public void methodB() {
+			System.out.println("MethodB");
+			
+		}
+
+	}
+
+	public class HybridInheritance {
+		public static void main(String[] args){
+			D obj1= new D();
+			obj1.methodA();
+			obj1.methodB();
+			obj1.methodC();
+		}
+	}
+
+
+	
+<span class="success">Output: -
+MethodA
+MethodB
+MethodC
+</span> 		
+ </pre></div> 
+ 
+ 
+ <div class="nolinkBHEAD">Hierarchical Inheritance</div>
+ <p>
+ <b>When a parent class is extened by number of child classes. it is called Hierarchical Inheritance.</b>
+ </p>
+  <div class="codeblock"><pre>
+	Example : multiple inheritance in Java using interfaces 
+	
+	package edu.java.basic;
+	class A1
+	{
+	  public void methodA()
+	  {
+		 System.out.println("method of class A");
+	  }
+	}
+	class B1 extends A1 // B1 class extends A1 class and inherits all properties of A1 Class
+	{
+	  public void methodB()
+	  {
+		 System.out.println("method of class B");
+	  }
+	}
+	class C1 extends A1 // C1 class extends A1 class and inherits all properties of A1 Class
+	{
+	 public void methodC()
+	 {
+	 System.out.println("method of class C");
+	 }
+	}
+	class D1 extends A1 // D1 class extends A1 class and inherits all properties of A1 Class
+	{
+	  public void methodD()
+	  {
+		 System.out.println("method of class D");
+	  }
+	}
+	public class HierarchicalInheritance {
+
+		public void methodB()
+		  {
+			 System.out.println("method of Main Class B");
+		  }
+		  public static void main(String args[])
+		  {
+			 B1 obj1 = new B1();
+			 C1 obj2 = new C1();
+			 D1 obj3 = new D1();
+			 obj1.methodA();
+			 obj2.methodA();
+			 obj3.methodA();     
+			 
+		  }
+	}
+	
+<span class="success">Output: -
+method of class A
+method of class A
+method of class A
+</span> 		
+ </pre></div> 
+
+
+<h3>Mehod nesting in Java</h3>
+<b>Mehod nesting :- </b>means call a method in another method.<br>
+<div class="codeblock"><pre>
+Example : - 
+int max(int a,int b)
+{
+  if (a>b) 
+   {
+	return  a;
+   }
+   else
+   {
+	return  b;
+   }
+}
+
+void display()
+{
+ return  max(2,4);
+}
+ </pre></div> 
+
+<h3>this keyword </h3>
+<b>this keyword : -</b> this keyword can be used in the method to refer the current object. <br>
+<ul>
+<li>you can not use this keyword in static method</li>
+<li>you can call constructor within constructor using this keyword</li>
+</ul>
+<div class="codeblock"><pre>
+Example : -
+
+public class student
+{
+	String nme;
+	int age;
+	student(int age)
+	{
+	  this.age=age;
+	}
+	student (String nme,int age)
+	{
+	  this(age);
+	  this.nme=nme;
+	}
+
+}
+ </pre></div> 
+<img src="class-img/what_is_this_java_1.png" /><br>
+<img src="class-img/what_is_this_java_2.png" /><br>
+
+<h3>Encapsulation</h3>
+<img src="class-img/Encapsulation_1.png"/><br>
+<img src="class-img/encapul-1.jpg"/><br>
+
+<div class="nolinkBHEAD">Encapsulation</div>
+  <p>Encapsulation is:
+	<ol>
+    <li>Binding the data with the code that manipulates it.</li>
+    <li>It keeps the data and the code safe from external interference</li>
+	<li>The idea of encapsulation is to keep classes separated and prevent them from having tightly coupled with each other.</li>
+	<li>A Best of encapsulation is the class of java.util.Hashtable. <br>
+	 User can store data in the form of key/value pair in a Hashtable and  can retrieve that data in the various ways. <br>
+	 But the actual implementation like, how and where this data is actually stored, is hidden from the user.</li>
+	 <li>
+	 <div class="incodeblock">
+	 <pre>
+	 Encapsulation :- 
+
+	Wrapping data and methods within classes in combination with implementation 
+	hiding (through access control) is often called encapsulation. 
+
+	The whole idea behind encapsulation is to hide the implementation details from users. 
+	If a data member is private it means it can only be accessed within the same class. 
+	No outside class can access private data member (variable) of other class. 
+	However if we setup public getter and setter methods to update the private data fields 
+	then the outside class can access those private data fields via public methods. 
+	This way data can only be accessed by public methods thus making the private fields and 
+	their implementation hidden for outside classes. 
+
+	That’s why encapsulation is known as data hiding.
+	 </pre>
+	 </div>
+	 </li>
+	</ol>
+ </p>
+ <span class="success">
+ <b>
+ <ul>
+ <li>The whole idea behind encapsulation is to hide the implementation details from users.</li>
+ <li>If a data member is private it means it can only be accessed within the same class.</li>
+ <li>No outside class can access private data member (variable) of other class.</li>
+ <li>Using public getter and setter methods we update and reads the private data fields</li>
+ <li>The outside class can access those private data fields via public methods.</li>
+ <li>The private fields and their implementation hidden for outside classes. </li>
+ <li>That’s why encapsulation is known as data hiding.</li>
+ </ul>
+ </b>
+ </span>
+   
+  <div class="codeblock"><pre>
+	Example : Encapsulation Demo
+	
+	package edu.java.basic;
+	class EncapsulationDemo{
+		private int ssn;
+		private String empName;
+		private int empAge;
+
+		//Getter and Setter methods
+		public int getEmpSSN(){
+			return ssn;
+		}
+
+		public String getEmpName(){
+			return empName;
+		}
+
+		public int getEmpAge(){
+			return empAge;
+		}
+
+		public void setEmpAge(int newValue){
+			empAge = newValue;
+		}
+
+		public void setEmpName(String newValue){
+			empName = newValue;
+		}
+
+		public void setEmpSSN(int newValue){
+			ssn = newValue;
+		}
+	}
+	public class EncapsTest{
+		public static void main(String args[]){
+         EncapsulationDemo obj = new EncapsulationDemo();
+         obj.setEmpName("Mario");
+         obj.setEmpAge(32);
+         obj.setEmpSSN(112233);
+         System.out.println("Employee Name: " + obj.getEmpName());
+         System.out.println("Employee SSN: " + obj.getEmpSSN());
+         System.out.println("Employee Age: " + obj.getEmpAge());
+    } 
+}
+	
+<span class="success">Output: -
+Employee Name: Mario
+Employee SSN: 112233
+Employee Age: 32
+</span> 		
+ </pre></div> 
+ 
+ <div class="nolinkBHEAD">Advantages of encapsulation</div>
+ <p>
+ <ol>
+	 <li>It improves maintainability and flexibility and re-usability</li>
+	 <li>an object is a black box.</li>
+	 <li>Objects encapsulate data and implementation details.</li>
+	 <li>An object exposes its behavior by means of public methods or functions.</li>
+ </ol>
+ <img src="class-img/encap-bene.jpg"/>
+ </p>
+ 
+ 
+<h3>Abstract Class</h3>
+<div class="codeblock"><pre>
+Abstract classes allow us to define a set of standard protocols for programmers to implement in their code.
+We put the general concept in Abstract class.
+We can put method definition as well as can define the methods in Abstract class.
+Abstract classes are used for design patters and it gives guarantee that all subclasses will implement all abstract methods.
+
+The method which is only delcared  and not defined or  not implemented is called abstract method
+The class which has atleast one abstract method which is called abstract class.
+we can not create the object of Abstract class.
+Whenever the sub class extends the abstract class that time you need to define each and every methods which is
+abstract in abstract class.
+if you don't define the abstract methods in subclass that times this sub class will become abstract class.
+if you define the abstract methods  in subclass that times this sub class will become concreate class.
+Abstract class is a concept and it implements in subclass.
+<img src="class-img/abstract_class.png"/>
+<img src="class-img/abstract-method.jpg"/>
+</pre></div> <br>
+<div class="codeblock"><pre>
+interface :- it is a completely abstract class that defines a protocol for object interactions.
+1. you can only declared the methods in interface
+2. you can not defined or implements the methos in interface.
+3. we can not create the object of Interface.
+4. In interface, we can only define (static final ) variables.
+5. Interfaces can extend other interfaces.
+6. A class can implement any number of interfaces.
+7. interfaces allow us to define a set of standard protocols for programmers to implement in their code.
+8. We can put only method definition in interfaces.
+9. Interfaces are nothing but abstract class types. which can be implement in java class. interfaces are used for dynamic binding.
+ </pre></div>
+<img src="class-img/interfaces_in_java_1.png"/><br> 
+<img src="class-img/interfaces_in_java_2.png"/><br>
+<img src="class-img/interfaces_in_java_3.png"/><br>
+<img src="class-img/interfaces_in_java_4.png"/><br>
+<img src="class-img/interfaces_in_java_5.png"/><br>
+
+<img src="class-img/interfaces_in_java_8.png"/><br>
+<img src="class-img/interfaces_in_java_9.png" width="90%"/><br>
+</div>
+
+<div class="incodeblock">
+<pre>
+Abstraction :-
+
+Abstraction is the quality of dealing with ideas rather than events.
+
+In Java Abstraction is achieved using Abstract classes, and Interfaces.
+
+Abstraction is a process of hiding the implementation details from the user, 
+only the functionality will be provided to the user.
+
+Abstraction is a process of hiding the implementation details and showing only functionality to the user.
+
+Abstract class in Java
+
+A class that is declared as abstract is known as abstract class. 
+It needs to be extended and its method implemented. It cannot be instantiated. 
+If a class contain any abstract method then the class is declared as abstract class. 
+
+
+abstract method
+A method that is declared as abstract and does not have implementation is known as abstract method. 
+An abstract method in Java doesn't have the body , it's just a declaration.
+
+
+Abstraction in Java is achieved by  using interface and abstract class in Java. 
+An interface or abstract class is something which is not concrete , something which is incomplete. 
+In order to use interface or abstract class, we need to extend and implement an abstract method with concrete behavior.
+
+An abstract class is something which is incomplete and you can not create an instance of the abstract class. 
+If you want to use it you need to make it complete or concrete by extending it.
+</pre>
+
+</div>
+
+<h3>Nested Classes</h3>
+
+<div class="codeblock">
+<pre>
+Nested Classes
+In Java, just like methods, variables of a class too can have another class as its member. Writing a class within another is allowed in Java. 
+The class written within is called the nested class, and the class that holds the inner class is called the outer class.
+
+Syntax : -
+The syntax to write a nested class is given below. Here the class Outer_Demo is the outer class and the class Inner_Demo is the nested class.
+
+<div class="incodeblock">
+class Outer_Demo{
+   class Nested_Demo{   
+   }   
+}
+</div>
+Nested classes are divided into two types: 
+
+•	Non-static nested classes: These are the non-static members of a class. 
+•	Static nested classes: These are the static members of a class.
+
+
+
+
+<b>Anonymous Inner Class</b>
+
+An inner class declared without a class name is known as an anonymous inner class. In case of anonymous inner classes, we declare and instantiate 
+them at the same time. Generally they are used whenever you need to override the method of a class or an interface.
+
+<div class="incodeblock">
+abstract class AnonymousInner{
+   public abstract void mymethod();
+}
+
+public class Outer_class {
+   public static void main(String args[]){
+      AnonymousInner inner = new AnonymousInner(){
+         public void mymethod(){
+            System.out.println("This is an example of anonymous inner class");    	  
+         }	    
+      };
+      inner.mymethod();	
+   }
+}
+
+</div>
+
+Anonymous Inner Class as Argument
+Generally if a method accepts an object of an interface, an abstract class, or a concrete class, then we can implement the interface, 
+extend the abstract class, and pass the object to the method. If it is a class, then we can directly pass it to the method.
+
+<div class="incodeblock">
+//interface
+interface Message{
+   String greet();	
+}
+
+public class My_class {
+   //method which accepts the object of interface Message
+   public void displayMessage(Message m){
+      System.out.println(m.greet() +", This is an example of anonymous inner class as an argument");	   
+   }
+
+   public static void main(String args[]){
+      //Instantiating the class
+      My_class obj = new My_class();
+		
+      //Passing an anonymous inner class as an argument
+      obj.displayMessage(new Message(){
+         public String greet(){
+            return "Hello";  		   
+         }
+      });
+   }
+}
+</div>
+
+Static Nested Class
+A static inner class is a nested class which is a static member of the outer class. It can be accessed without instantiating the outer class, 
+using other static members. Just like static members, a static nested class does not have access to the instance variables and methods of the outer class.
+
+<div class="incodeblock">
+public class Outer{
+   static class Nested_Demo{
+      public void my_method(){
+         System.out.println("This is my nested class");
+      }
+   }
+   
+   public static void main(String args[]){
+      Outer.Nested_Demo nested = new Outer.Nested_Demo();	 
+      nested.my_method();
+   }
+   
+}
+</div>
+
+</pre>
+
+</div>
+
+<h3>What is Inner Class in Java</h3>
+<div class="codeblock"><pre>
+Any class which is not a top level or declared inside another class is known as nested class and out of those nested classes, 
+class which are declared non static are known as Inner class in Java. there are three kinds of Inner class in Java: 
+
+1.	Local inner class
+2.	Anonymous inner class 
+3.	Member inner class 
+
+Local inner class is declared inside a code block or method. Anonymous inner class is a class which doesn't have name to reference and initialized at 
+same place where it gets created. Member inner class is declared as non static member of outer class. 
+Now with Inner class first question comes in mind is when to use Inner class in Java, simple answer is any class which is only be used by its outer class, 
+should be a good candidate of making inner. One of the common example of Inner classes are Anonymous class which is used to implement 
+Thread or EventListeners like ActionListerner in Swing, where they only implement key methods like run() method of Thread class or actionPerformed(ActionEvent ae).
+
+<b>Here are some important properties of Inner classes in Java:</b>
+<ul>
+<li>In order to create instance of Inner class, an instance of outer class is required. Every instance of inner class is bounded to one instance of Outer class. </li>
+<li>Member inner class can be make private, protected or public. its just like any other member of class.</li>
+<li>Local inner class can not be private, protected or public because they exist only inside of local block or method. <br>You can only use final modifier with local inner class.</li>
+<li>Anonymous Inner class are common to implement Runnable or CommandListener where you just need to implement one method. <br>They are created and initialized at same line.</li>
+<li>You can access current instance of Outer class, inside inner class as Outer.this variable.</li>
+</ul>
+
+Example : -
+
+public class InnerClassTest {
+
+    public static void main(String args[]) {
+      
+        //creating local inner class inside method
+        class Local {
+            public void name() {
+                System.out.println("Example of Local class in Java");
+              
+            }
+        }
+      
+        //creating instance of local inner class
+        Local local = new Local();
+        local.name(); //calling method from local inner class
+      
+        //Creating anonymous inner class in java for implementing thread
+        Thread anonymous = new Thread(){
+            @Override
+            public void run(){
+                System.out.println("Anonymous class example in java");
+            }
+        };
+        anonymous.start();
+      
+        //example of creating instance of inner class
+        InnerClassTest test = new InnerClassTest();
+        InnerClassTest.Inner inner = test.new Inner();
+        inner.name(); //calling method of inner class
+
+    }
+  
+    /*
+     * Creating Inner class in Java
+     */
+    private class Inner{
+        public void name(){
+            System.out.println("Inner class example in java");
+        }
+    }
+}
+<span class="success">
+Output:
+Example of Local class in Java
+Inner class example in java
+Anonymous class example in java
+</span>
+
+
+<b>What is nested static class in Java</b>
+Nested static class is another class which is declared inside a class as member and made static. 
+Nested static class is also declared as member of outer class and can be make private, public or protected like any other member. 
+One of the main benefit of nested static class over inner class is that instance of nested static class is not attached to any enclosing instance of Outer class. 
+You also don't need any instance of Outer class to create instance of nested static class in Java. This makes nested static class very convenient to use and access. 
+
+<b>Nested Static Class Example in Java</b>
+
+Here is an example of nested static class in Java. 
+It look exactly similar to member inner classes but has quite a few significant difference with them, e.g. 
+you can access them inside main method because they are static. 
+In order to create instance of nested static class, you don’t need instance of enclosing class. 
+You can refer them with class name and you can also import them using static import feature of Java 5.
+
+
+<div class="incodeblock">
+public class NestedStaticExample {
+
+    public static void main(String args[]){
+  
+        StaticNested nested = new StaticNested();
+        nested.name();
+    }
+  
+    //static nested class in java
+    private static class StaticNested{
+        public void name(){
+            System.out.println("static nested class example in java");
+        }
+    }
+}
+</div>
+Though this is very trivial example of nested static class, it demonstrate some properties of nested static class. 
+Better example of nested static class can be implementing a custom Comparator e.g. OrderByAmount in How to sort Object in Java using Comparator.
+
+<h3>Difference between Inner class and nested static class in Java.</h3>
+
+Both static and non static nested class or Inner needs to declare inside enclosing class in Java and that’s why they are collectively known as nested classes  
+but they have couple of differences as shown below:
+
+
+1) First and most important difference between Inner class and nested static class is that Inner class require instance of outer class for 
+   initialization and they are always associated with instance of enclosing class. On the other hand nested static class is not associated 
+   with any instance of enclosing class.
+
+2) Another difference between Inner class and nested static class is that later uses static keyword in there class declaration, 
+   which means they are static member of class and can be accessed like any other static member of class.
+
+3) Nested static class can be imported using static import in Java.
+
+4) One last difference between Inner class and nested static class is that later is more convenient and should be preferred over 
+   Inner class while declaring member classes.
+
+ That's all on What is Inner class and nested static class in Java. We have seen local, anonymous and member inner classes and difference between 
+ Inner class and nested static class in Java. Worth noting is where to use nested static class or Inner class ? Joshua Bloch has suggested to prefer nested static 
+ class over Inner classes in his book Effective Java. Some time Interviewer ask you to write code to create instance of inner class which can be tricky if 
+ you haven't used them recently. Just remember that every inner class instance is associated with one outer class instance.
+ 
+
+
+Nested Class?
+A class within another class is called nested class.
+
+<h3>4 Different type of Nested classes </h3>
+<ul>
+<li>Inner class / member Inner class</li>
+<li>static nested class (not a inner class, its just a nested class)</li>
+<li>Local inner class</li>
+<li>Anonymous inner class</li>
+</ul>
+ 
+<h3> Inner class</h3>
+
+	1.1) An inner class is a nested class that is not explicitly or implicitly declared static.
+	1.2) Inner class is also known as member inner class. 
+	1.3) Inner class is considered as instance member variable of outer class.
+	1.4) Inner class has access to all other member variables of outer class. 
+		
+		Inner class can access -
+		•	instance member variable of outer class
+		•	instance methods of outer class
+		•	static member variable of outer class
+		•	static methods of outer class
+		•	Outer class reference 
+		•	Inner class reference
+		•	Inner class is instance specific/ object specific class. It has got access to this reference of outer class.
+			Hence, can access OuterClass instance variable and instance method using OuterClass reference this.
+
+	1.5) InnerClass can be declared private, protected, public.
+	1.6) strictfp modifier can also be used with InnerClass.
+	1.7) InnerClass can be abstract or final.
+	1.8) Inner classes cannot declare static initialization blocks
+	1.9) Inner classes cannot declare member interfaces.
+	1.10) Inner classes can declare instance initialization blocks
+	<div class="incodeblock">
+		class OuterClass{
+		   //Inner class
+		   class InnerClass {
+				  
+				  //Inner classes cannot not declare static initialization blocks
+				  static{} //compilation error
+				  
+				  //Inner classes cannot not declare member interfaces.
+				  interface I{} //compilation error
+
+				  //Inner classes can declare instance initialization blocks
+				  {}
+				  
+				  //Inner class constructor
+				  InnerClass() {}
+
+		   }
+		}
+	</div>
+	1.11) Inner classes cannot declare static members
+	1.12) Inner classes can declare constant variables
+	1.13) Inner classes can inherit static members that are not constant variables.
+
+<div class="incodeblock">
+class A{
+   
+   //Inner classes can inherit static members that are not constant variables
+   static int x = 1;
+}
+class OuterClass {
+   // Inner class
+   class InnerClass extends A{
+          
+          // Inner classes cannot not declare static members
+          static int i = 2; // compilation error
+          
+          //Inner classes can declare constant variables
+          static final int j = 3; // Fine
+   }
+}
+</div>
+	1.14) Inner classes can be declared in abstract class.
+	1.15) Inner classes can be declared in interface.
+ 
+
+
+Program for instantiating inner class and show what member variable of OuterClass can be accessed in inner class
+
+<div class="incodeblock">
+package com.ankit;
+class OuterClass{
+   int i=1; //instanceVariable
+   void m(){} //instanceMethod
+   static int staticI=1; //staticVariable
+   static void staticM(){} //staticMethod
+   
+   //Inner class
+   class InnerClass {
+         public void method() {
+                 System.out.println("In InnerClass's method");
+                 
+                 i=1; //OuterClass instanceVariable
+                 m(); //OuterClass instanceMethod
+                 
+                 staticI=1; //OuterClass staticVariable
+                 staticM(); //OuterClass staticMethod
+                 
+                 System.out.println("OuterClass reference="+OuterClass.this);
+                 System.out.println("InnerClass reference="+this);
+                 
+            OuterClass.this.i=2;//Accessing OuterClass instanceVariable using OuerClass reference
+            OuterClass.this.m();//Accessing OuterClass instanceMethod using OuterClass reference
+                 
+         }
+   } //End InnerClass
+}
+</div>
+<div class="incodeblock">
+public class InnerClassTest {
+   public static void main(String[] args) {
+       
+       //Creating instance of InnerClass
+       new OuterClass().new InnerClass().method();
+       
+   }
+       
+}
+/*OUTPUT
+In InnerClass's method
+OuterClass reference=com.ankit.OuterClass@1a4eb98b
+InnerClass reference=com.ankit.OuterClass$InnerClass@2677622b
+*/
+
+
+To create instance of  the InnerClass we must create instance of OuterClass first.
+
+When above program is compiled following .class files are formed 
+OuterClass.class > OuterClass
+OuterClass$InnerClass.class  >InnerClass
+InnerClassTest.class  >InnerClassTest (Main class)
+</div>
+
+2) Static nested class
+
+	2.1) Method of nested class can only be static if nested class is a static nested class.
+	2.2) Static nested class is considered as static member variable of outer class.
+	2.3) StaticNestedClass has access to all static member variables and static methods of OuterClass.
+	2.4) StaticNestedClass can be abstract or final.
+	2.5) StaticNestedClass can be private, protected, public.
+	2.6) strictfp modifier can also be used with StaticNestedClass.
+	2.7) Static nested classes can declare static initialization blocks
+	2.8) Static nested classes can declare member interfaces.
+	2.9) Static nested classes can declare static members
+	2.10) Static nested classes can declare constant variables
+	2.11) Static nested classes can inherit static members that are not constant variables.
+	2.12) Static nested classes can declare instance initialization blocks
+<div class="incodeblock">	
+class OuterClass {
+   // StaticNestedClass
+   static class StaticNestedClass {
+          // StaticNestedClass can declare static initialization blocks
+          static {
+          }
+          // StaticNestedClass can declare member interfaces.
+          interface I {
+          }
+          // StaticNestedClass can declare static members
+          static int i = 2;
+          // StaticNestedClass can declare constant variables
+          static final int j = 3;
+ 
+          //StaticNestedClass classes can declare instance initialization blocks
+          {}
+          
+          //StaticNestedClass constructor
+          StaticNestedClass() {}
+
+     }
+}
+</div>
+	2.13) Static nested classes cannot be declared in abstract class.
+	2.14) Static nested classes cannot be declared in interface.
+
+Program for accessing static nested class
+
+<div class="incodeblock">
+package com.ankit;
+class OuterClass{
+   static int staticI=1; //staticVariable
+   static void staticM(){} //staticMethod
+   
+   //static Nested class
+   static class StaticNestedClass {
+          public void method() {
+                 System.out.println("In StaticNestedClass's method");
+                 
+                 staticI=1; //OuterClass staticVariable
+                 staticM(); //OuterClass staticMethod
+                 
+                 //System.out.println("StaticNestedClass reference="+this); //allowed
+                 
+                 
+          }
+
+   }//End StaticNestedClass
+}
+
+public class NestedClassTest {
+   public static void main(String[] args) {
+       
+      //Accessing method of StaticNestedClass
+      new OuterClass  .    StaticNestedClass().method();
+       
+   }
+       
+}
+
+OUTPUT
+In StaticNestedClass's method
+
+</div>
+
+ 
+
+<b>Note : Static nested class is not a inner class, its just a nested class.</b>
+
+3) Local inner class
+	3.1) LocalInnerClass can be accessed inside method in which it has been created.
+	3.2) LocalInnerClass has access to all other member variables of OuterClass like InnerClass.
+	3.3) LocalInnerClass can be abstract or final.
+	3.4) LocalInnerClass can’t be static.
+	3.5) LocalInnerClass can’t be private, protected, public.
+	3.6) LocalInnerClass can be declared in Expressions, Statements, and Blocks.
+<div class="incodeblock">	
+class OuterClass{
+   //LocalInnerClass inside instance block
+   {
+          class A{}
+   }
+   
+   //LocalInnerClass inside static block
+   static{
+          class A{}
+   }
+   
+   void myMethod(){
+          //LocalInnerClass inside if statement
+          if(true){
+                 class A{}
+          }
+                 
+          //LocalInnerClass inside for loop statement
+          for(int i=0;i&lt;1;i++){
+                 class A{}
+          }
+   }
+  
+}
+</div>
+	3.7) strictfp modifier can be used with LocalInnerClass .
+	3.8) Local Inner class cannot access the non-final local variables but can access final local variables.
+
+Program for accessing local inner class
+
+<div class="incodeblock">
+package com.ankit;
+class OuterClass{
+   int i=1; //instanceVariable
+   static int staticI=1; //staticVariable
+   
+   
+   //Inside this method we'll declare local class.
+   void myMethod(){
+          //Local Inner class
+          class LocalInnerClass {
+                 public void method() {
+                       System.out.println("In LocalInnerClass's method");
+                       
+                       i=1; //OuterClass instanceVariable
+                       staticI=1; //OuterClass staticVariable
+                       
+                       System.out.println("OuterClass reference="+OuterClass.this);
+                       System.out.println("InnerClass reference="+this);
+                       
+                 }
+          } //End LocalInnerClass
+          
+          //Creating instance of LocalInnerClass
+          new LocalInnerClass().method();
+    
+   }
+  
+}
+ 
+public class InnerClassTest {
+   public static void main(String[] args) {
+       
+       //Creating instance of OuterClass
+       new OuterClass().myMethod();
+       
+   }
+       
+}
+OUTPUT
+In LocalInnerClass's method
+OuterClass reference=com.ankit.OuterClass@2677622b
+InnerClass reference=com.ankit.OuterClass$1LocalInnerClass@67ce08c7
+ 
+
+When above program is compiled following .class files are formed >  
+OuterClass.class > OuterClass
+OuterClass$1LocalInnerClass.class >LocalInnerClass
+InnerClassTest.class  >InnerClassTest (Main class)
+</div>
+
+4)  Anonymous Inner Class
+
+Meaning of Anonymous in english dictionary is unknown name. In java, AnonymousInnerClass means class with no name.
+
+
+Program 1 for creating and using AnonymousInnerClass - And understanding how AnonymousInnerClass extend class>
+
+<div class="incodeblock">
+class OuterClass
+{
+    void m()
+	{
+           System.out.println("m()");
+    }
+}
+ 
+public class InnerClassTest {
+   public static void main(String[] args) {
+          
+          //Anonymous inner class
+          OuterClass obj=new OuterClass(){
+                 
+                 //Override m() method of OuterClass
+                 void m(){ 
+                       System.out.println("overridden m()");
+                 }
+          };
+          
+          obj.m(); //calls overridden m()
+   }
+       
+}
+
+	OUTPUT
+	overridden m()
+ 
+
+What happened in above program was >
+AnonymousInnerClass was created which extends OuterClass, m() method of OuterClass was overridden in AnonymousInnerClass.
+Note :  AnonymousInnerClass extends OuterClass, without explicit use of extends keyword.
+
+When above program is compiled following .class files are formed 
+
+OuterClass.class > OuterClass
+InnerClassTest$1.class >AnonymousInnerClass
+InnerClassTest.class  >InnerClassTest (Main class)
+
+</div>
+
+Program 2 for understanding more about AnonymousInnerClass 
+
+<div class="incodeblock">
+class OuterClass{
+    void m(){
+           System.out.println("m()");
+    }
+}
+ 
+public class InnerClassTest {
+   public static void main(String[] args) {
+
+          //Anonymous inner class
+          new OuterClass(){
+                 
+          }.m();         
+   }
+       
+}
+
+OUTPUT
+	m()
+
+
+What happened in above program was 
+AnonymousInnerClass was created which extends OuterClass, m() method of OuterClass was inherited in AnonymousInnerClass.
+Note :  AnonymousInnerClass extends OuterClass, without explicit use of extends keyword.
+</div>
+
+
+Program 3 to understand how AnonymousInnerClass implement interface
+
+AnonymousInnerClass cannot implement more than one interface. Let’s create a program 
+
+<div class="incodeblock">
+interface MyInterface{
+   void m();
+}
+
+public class InnerClassTest {
+   public static void main(String[] args) {
+          
+          //Anonymous inner class
+          new MyInterface(){ //implementing interface
+                 public void m(){ //Provide implementation of MyInterface's m() method
+                       System.out.println("implementation of MyInterface's m() method");
+                 }
+          }.m();         
+   }
+       
+}
+/*OUTPUT
+implementation of MyInterface's m() method
+*/
+
+Note :  AnonymousInnerClass implements MyInterface, without explicit use of implements keyword.
+
+</div>
+
+
+Program 4 to understand how AnonymousInnerClass can implement more than 2 interfaces 
+
+Though, AnonymousInnerClass can implement more than one interface in following way 
+
+Let’s create MyInterface which will extend Runnable interface. Now, AnonymousInnerClass will implement 2 interfaces.
+
+<div class="incodeblock">
+interface MyInterface extends Runnable{
+   void m();
+}
+
+public class InnerClassTest {
+   public static void main(String[] args) {
+          
+          //Anonymous inner class
+          new MyInterface(){ //implementing interface
+                 @Override //Provide implementation of MyInterface's m() method
+                 public void m(){
+                       System.out.println("implementation of MyInterface's m() method");
+                 }
+                 @Override //Provide implementation of Runnable's run() method
+                 public void run() {
+                 }
+          }.m();         
+   }
+       
+}
+/*OUTPUT
+implementation of MyInterface's m() method
+*/
+
+</div>
+
+ </pre></div>
+ 
+ 
+ 
+</body>
+</html>

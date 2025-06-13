@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<center><span style="font-size:30px;color:red">RESTFUL WEBSERVICE USING JAX-RS API</span>
+<h3>JAX-RS API are useful for REST Web Serice to generate /post (XML/JSON) data. </h3></center>
+
+<h1>What is Web Services</h1>
+Web Services are services, that are exposed to the internet for programatic access. That are online API and you can called that API from your code.<br>
+There are two types of Web Services
+<ul>
+<li><b>REST FUL WEB API : - </b> REST ful API is type of WEB Service, that are modern and light weighted. REST means (Representational State Transfer).
+<h3>WEB SERVICE CHARACTERISTICS</h3>
+<ol>
+<li>They are web services and useful to exchange of data in JSON or XML format over HTTP</li>
+<li>Client sends HTTP request and Server returns back HTTP response in JSON or XML format.</li>
+<li>Web Service uses the <b>protocol</b></li>
+<li><b>What is Protocol : - </b> Client send the data (messages) to Server in a particular format (XML/JSON) and server gives a response in particular format (XML/JSON) that format called <b>protocol</b><br>
+Protocol is language standard for both(client & Server) side communication.</li>
+<li>Web Service uses the <b>Service definition</b></li>
+<li><b>What is Service Definition : - </b>It is definition about the service. that means you get the all information about web services, that how to use it. </li>
+<li>but there is no standard about Service definition.</li>
+<li>REST ful web services has no web service specification (RULE)</li>
+</ol>
+</li>
+
+<li>To understand REST, you must have knowledge of HTTP</li>
+<li><b>HTTP</b> HTTP stands for (Hyper Text Transfer Protocol). Protocol is language standard for both(client & Server) side communication. </li>
+<li>HTTP is the way to exchange the communication over the WEB.</li>
+<li>HyperText is useful to transfer/exchanges the protocol</li>
+<li>HyperText is  text, which contains links to other text. and the links called HyperLinks.</li>
+<li>HTTP Methods (GET,POST,PUT,DELETE) using that methods we can use REST Web Service.</li>
+<li>HTTP provides Meta Data (Status code, Headers)</li>
+<li>Every Response has Status code, Status code is a number , that indicates that response has successful or Error.
+	<ol>
+		<li>200  :-  Success</li>
+		<li>500  :-  Error</li>
+		<li>404  :-  Page not found</li>
+	</ol>
+</li>
+<li>header value contain the <b>Meta Data</b> </li>
+<li>Content Type is the part of Meta data , which provides the information about data format (XML/JSON)</li>
+<li>There are some standard content types
+<ol>
+	<li>text/XML</li>
+	<li>application/JSON</li>
+</ol>
+</li>
+<li>The WEB Service API could return multiple Content type (XML/JSON) as per the Client Demand. that is called <b>Content Negotiation</b></li>
+<li></li>
+</ul>
+
+
+<ul>
+<li><b>SOAP FUL WEB API : - </b>SOAP means (Simple Object Access Protocol) </li>
+<li>In a SOAP , the Service definition is (WSDL) it is document that gives information that what web services does..</li>
+<li>(WSDL) is a standard document of (SOAP) web services. you get the all information about web services, that how to use it.</li>
+<li>All SOAP web services, follows web service specification (RULE)</li>
+</ul>
+ 
+  
+<div class="codeblock"><pre>
+ RESTful Web Services
+
+REST stands for REpresentational State Transfer.
+REST is an architectural style not a protocol.
+
+Advantages of RESTful Web Services
+
+Fast: RESTful Web Services are fast because there is no strict specification like SOAP. It consumes less bandwidth and resource.
+Language and Platform independent: RESTful web services can be written in any programming language and executed in any platform.
+Can use SOAP: RESTful web services can use SOAP web services as the implementation.
+Permits different data format: RESTful web service permits different data format such as Plain Text, HTML, XML and JSON.
+
+RESTful Web Services are REST architecture based web services. 
+In REST Architecture everything is a resource. RESTful web services are light weight, 
+highly scalable and maintainable and are very commonly used to create APIs for web based applications.
+
+A web service is a collection of open protocols and standards used for exchanging data between applications or systems.
+
+HTTP Methods
+
+Following well known HTTP methods are commonly used in REST based architecture.
+
+    GET - Provides a read only access to a resource.
+
+    PUT - Used to create a new resource.
+
+    DELETE - Used to remove a resource.
+
+    POST - Used to update a existing resource or create a new resource.
+
+    OPTIONS - Used to get the supported operations on a resource
+
+    with Jersey Framework to create RESTful Web Services. Jersey framework implements JAX-RS 2.0 API,
+    which is standard specification to create RESTful web services.
+    Download the latest version of Jersey framework binaries from https://jersey.java.net/download.html.at c: colon.
+    
+    You will find all the Jersey libraries in the directories C:\jaxrs-ri-2.17\jaxrs-ri\lib and dependencies in 
+    C:\jaxrs-ri-2.17\jaxrs-ri\ext. Make sure you set your CLASSPATH variable on this directory properly otherwise
+    you will face problem while running your application.
+    
+    Add Required Libraries in REST Project in :\WEB-INF\lib folder.
+
+    1.	\jaxrs-ri-2.17\jaxrs-ri\api
+    2.	\jaxrs-ri-2.17\jaxrs-ri\ext
+    3.	\jaxrs-ri-2.17\jaxrs-ri\lib
+    
+    What is a Resource?
+    
+    REST architecture treats every content as a resource. These resources can be text files,
+    html pages, images, videos or dynamic business data. REST Server simply provides access to 
+    resources and REST client accesses and modifies the resources.
+    Here each resource is identified by URIs/ global IDs. REST uses various representations to 
+    represent a resource where text, 
+    JSON, XML. XML and JSON are the most popular representations of resources.
+    
+    RESTful Web Services - Messages
+    
+    RESTful web services make use of HTTP protocol as a medium of communication between client and server. 
+    A client sends a message in form of a HTTP Request and server responds in form of a HTTP Response. 
+    This technique is termed as Messaging. These messages contain message data and metadata.
+    
+    A HTTP Request has five major parts:
+
+    Verb- Indicate HTTP methods such as GET, POST, DELETE, PUT etc.
+    URI- Uniform Resource Identifier (URI) to identify the resource on server
+    HTTP Version- Indicate HTTP version, for example HTTP v1.1 .
+    Request Header- Contains metadata for the HTTP Request message as key-value pairs. 
+    				For example, client ( or browser) type, format supported by client, 
+    				format of message body, cache settings etc.
+    Request Body- Message content or Resource representation.
+    
+    
+    A HTTP Response has four major parts:
+
+    Status/Response Code- Indicate Server status for the requested resource. 
+    					  For example 404 means resource not found and 200 means response is ok.
+    HTTP Version- Indicate HTTP version, for example HTTP v1.1 .
+    Response Header- Contains metadata for the HTTP Response message as key-value pairs.
+					For example, content length, content type, response date, server type etc.
+    Response Body- Response message content or Resource representation
+    
+    
+    RESTful Web Services - Addressing
+    
+    Addressing refers to locating a resource or multiple resources lying on the server. 
+    It is analogous to locate a postal address of a person.
+	Each resource in REST architecture is identified by its URI, Uniform Resource Identifier.
+	
+	Example :- URI is http://localhost:8080/UserManagement/rest/UserService/users 
+	
+	RESTful Web Services - Methods
+	
+	
+    1.	GET operations are read only and are safe.
+    2.	PUT and DELETE operations are idempotent means their result will always same no matter how many times 
+    	these operations are invoked.
+    3.	PUT and POST operation are nearly same with the difference lying only in the result where PUT operation 
+    	is idempotent and POST operation can cause different result.
+    	
+    	
+	RESTful Web Services - Statelessness
+
+	As per REST architecture, a RESTful web service should not keep a client state on server. 
+	This restriction is called statelessness. It is responsibility of the client to pass its context to server 
+	and then server can store this context to process client's further request.
+	
+
+	Advantages of Statelessness
+
+    1.	Web services can treat each method request independently.
+    2.	Web services need not to maintain client's previous interactions. It simplifies application design.
+    3.	As HTTP is itself a statelessness protocol, RESTful Web services work seamlessly with HTTP protocol.
+    
+    Disadvantages of Statelessness
+
+    1.	Web services need to get extra information in each request and then interpret to get the client's state 
+    	in case client interactions are to be taken care of.
+    	
+	RESTful Web Services - Caching
+	
+	Caching refers to storing server response in client itself so that a client needs not to make server request
+	for same resource again and again. A server response should have information about how a caching is to be done 
+	so that a client caches response for a period of time or never caches the server response.
+	
+	Following are the headers which a server response can have in order to configure a client's caching:
+	
+	1	Date 			: -	Date and Time of the resource when it was created.
+	2	Last Modified 	: - Date and Time of the resource when it was last modified.
+	3	Cache-Control 	: - Primary header to control caching.
+	4	Expires 		: - Expiration date and time of caching
+	5	Age 			: -	Duration in seconds from when resource was fetched from the server.	    	
+    
+	    	
+	Cache-Control Header
+	
+	1	Public				: - Indicates that resource is cachable by any component.
+	2	Private				: - Indicates that resource is cachable by only client and server, 
+								no intermediary can cache the resource.
+	3	no-cache/no-store	: - Indicates that resource is not cachable
+	4	max-age				: - Indicates the caching is valid up to max-age in seconds. After this, 
+								client has to make another request.
+	5	must-revalidate		: -	Indication to server to revalidate resource if max-age has passed.
+	
+	RESTful Web Services - Security
+	
+	
+
+    Validation - Validate all inputs on the server. Protect your server against SQL or NoSQL injection attacks.
+
+    Session based authentication - Use session based authentication to authenticate a user whenever a request is made to a Web Service method.
+
+    No sensitive data in URL - Never use username, password or session token in URL , these values should be passed to Web Service via POST method.
+
+    Restriction on Method execution - Allow restricted use of methods like GET, POST, DELETE. GET method should not be able to delete data.
+
+    Validate Malformed XML/JSON - Check for well formed input passed to a web service method.
+
+    Throw generic Error Messages - A web service method should use HTTP error messages like 403 to show access forbidden etc.
+	
+	
+	HTTP Code: It gives response code.
+	
+	
+	200	: -	OK, shows success.
+	201	: -	CREATED, when a resource is successful created using POST or PUT request. 
+			Return link to newly created resource using location header.
+	204	: -	NO CONTENT, when response body is empty for example, a DELETE request.
+	304	: -	NOT MODIFIED, used to reduce network bandwidth usage in case of conditional GET requests. 
+			Response body should be empty. Headers should have date, location etc.
+	400	: -	BAD REQUEST, states that invalid input is provided e.g. validation error, missing data.
+	401	: -	UNAUTHORIZED, states that user is using invalid or wrong authentication token.
+	403	: -	FORBIDDEN, states that user is not having access to method being used for example, 
+			delete access without admin rights.
+	404	: -	NOT FOUND, states that method is not available.
+	409	: -	CONFLICT, states conflict situation while executing the method for example, adding duplicate entry.
+	500	: -	INTERNAL SERVER ERROR, states that server has thrown some exception while executing the method.
+	
+	
+	RESTful Web Services - Java (JAX-RS)
+	
+	JAX-RS stands for JAVA API for RESTful Web Services. JAX-RS is a JAVA based programming language API 
+	and specification to provide support for created RESTful Webservices.
+	
+	Following are the commonly used annotations to map a resource as a web service resource.
+	
+	
+	@Path			:	-	Relative path of the resource class/method.
+	@GET			:	-	HTTP GET request, used to fetch resource.
+	@PUT			:	-	HTTP PUT request, used to create resource.
+	@POST			:	-	HTTP POST request, used to create/update resource.
+	@DELETE			:	-	HTTP DELETE request, used to delete resource.
+	@HEAD			:	-	HTTP HEAD request, used to get status of method availability.
+	@Produces		:	-	States the HTTP Response generated by web service, for example APPLICATION/XML, 
+							TEXT/HTML, APPLICATION/JSON etc.
+	@Consumes		:	-	States the HTTP Request type, for example application/x-www-form-urlencoded 
+							to accept form data in HTTP body during POST request.
+	@SingleTon		:	-	It makes, the request Singleton. so for every request it will never referesh the request.
+	@PathParam		:	-	Binds the parameter passed to method to a value in path.
+	@QueryParam		:	-	Binds the parameter passed to method to a query parameter in path.
+	@MatrixParam	:	-	Binds the parameter passed to method to a HTTP matrix parameter in path.
+	@HeaderParam	:	-	Binds the parameter passed to method to a HTTP header.
+	@CookieParam	:	-	Binds the parameter passed to method to a Cookie.
+	@FormParam		:	-	Binds the parameter passed to method to a form value.
+	@DefaultValue	:	-	Assigns a default value to a parameter passed to method.
+	@Context		:	-	Context of the resource for example HTTPRequest as a context. 
+    
+
+
+</pre></div>
+
+<h1>HOW TO create JAX-RS WEB REST PROJECT</h1>
+<img src="img/jax-pro1.png"/><br>
+<img src="img/jax-pro2.png"/><br>
+<img src="img/jax-pro3.png"/><br>
+<img src="img/jax-pro4.png"/><br>
+<img src="img/jax-pro5.png"/><br>
+<img src="img/jax-web.png"/><br>
+
+<h1>How add new Resources in WEB REST PROJECT</h1>
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger;
+<span class="javaKeyword">import </span>javax.ws.rs.Path; 
+<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/messages</span>")
+<span class="javaKeyword">public</span> <span class="javaKeyword">class</span> MessageResource {
+
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Produces</span> ("<span class="javaVariable">MediaType.TEXT_PLAIN</span>")
+	<span class="javaKeyword">public</span> String  getMessage() {
+	
+		<span class="javaKeyword">return</span>  "Hello World";
+	}
+
+}
+
+</pre></div>
+
+<h1>How to Create Service, which returns XML Response</h1>
+
+<h3>First Create Model using <span class="javaKeyword">@XmlRootElement</span></h3>
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger.model;
+<span class="javaKeyword">import </span>javax.xml.bind.annotation.XmlRootElement;
+
+<span class="javaKeyword">@XmlRootElement</span>
+<span class="javaKeyword">import </span>java.util.Date;
+
+<span class="javaKeyword">public class </span> Message {
+
+	<span class="javaKeyword">private long </span>Id;
+	<span class="javaKeyword">private </span>String message;
+	<span class="javaKeyword">private </span>Date created;
+	<span class="javaKeyword">private </span>String author;
+
+	<span class="javaKeyword">public</span> Message() {
+		
+	}
+	
+	<span class="javaKeyword">public</span> Message(long id, String message, String author) {
+		<span class="javaKeyword">super()</span>;
+		<span class="javaKeyword">Id</span> = id;
+		<span class="javaKeyword">this</span>.message = message;
+		<span class="javaKeyword">this</span>.created = <span class="javaKeyword">new</span> Date();
+		<span class="javaKeyword">this</span>.author = author;
+	}
+	
+	
+	<span class="javaKeyword">public long </span>getId() {
+		<span class="javaKeyword">return </span>Id;
+	}
+	<span class="javaKeyword">public void </span>setId(long id) {
+		<span class="javaKeyword">Id </span>= id;
+	}
+	<span class="javaKeyword">public </span>String getMessage() {
+		<span class="javaKeyword">return</span> message;
+	}
+	<span class="javaKeyword">public void </span>setMessage(String message) {
+		<span class="javaKeyword">this</span>.message = message;
+	}
+	<span class="javaKeyword">public </span> Date getCreated() {
+		<span class="javaKeyword">return</span> created;
+	}
+	<span class="javaKeyword">public void </span>setCreated(Date created) {
+		<span class="javaKeyword">this</span>.created = created;
+	}
+	<span class="javaKeyword">public </span>String getAuthor() {
+		<span class="javaKeyword">return</span> author;
+	}
+	<span class="javaKeyword">public void </span>setAuthor(String author) {
+		<span class="javaKeyword">this</span>.author = author;
+	}
+	
+}
+
+</pre></div>
+
+<h3>Second Create Service</h3>
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger.service;
+
+<span class="javaKeyword">import </span>java.util.ArrayList;
+<span class="javaKeyword">import </span>java.util.List;
+
+<span class="javaKeyword">public class</span> MessageService {
+
+	<span class="javaKeyword">public </span> List&lt;Message&gt; getAllMessage()
+	{
+		Message m1=new Message(1L,"Hello Java","Mayuresh");
+		Message m2=new Message(2L,"Hello Java","Ashutosh");
+		List&lt;Message&gt; list=new ArrayList&lt;Message&gt;();
+		list.add(m1);
+		list.add(m2);
+		<span class="javaKeyword">return</span> list;
+	}
+}
+
+</pre></div>
+
+<h3>Create Message Resource</h3>
+
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger;
+<span class="javaKeyword">import </span>javax.ws.rs.Path; 
+<span class="javaKeyword">import </span>java.util.ArrayList;
+<span class="javaKeyword">import </span>java.util.List;
+
+<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/messages</span>")
+<span class="javaKeyword">public</span> <span class="javaKeyword">class</span> MessageResource {
+
+	MessageService <span class="javaVariable">messageService</span>= <span class="javaKeyword">new</span> MessageService();
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Produces</span> ("<span class="javaVariable">MediaType.APPLICATION_XML</span>")
+	<span class="javaKeyword">public</span> List&lt;Message&gt;  getMessage() {
+	
+		<span class="javaKeyword">return</span>  messageService.getAllMessage();
+	}
+
+}
+
+</pre></div>
+
+<h1>create Database Service layer in REST WEB</h1>
+
+
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger.model;
+<span class="javaKeyword">import </span>javax.xml.bind.annotation.XmlRootElement;
+
+<span class="javaKeyword">@XmlRootElement</span>
+<span class="javaKeyword">import </span>java.util.Date;
+
+<span class="javaKeyword">public class </span> Profile {
+
+	<span class="javaKeyword">private long </span>Id;
+	<span class="javaKeyword">private </span>String profileName;
+	<span class="javaKeyword">private </span>String firstName;
+	<span class="javaKeyword">private </span>String lastName;
+	<span class="javaKeyword">private </span>String fullName;
+	<span class="javaKeyword">private </span>Date created;
+	
+
+	<span class="javaKeyword">public</span> Profile() {
+		
+	}
+	
+	<span class="javaKeyword">public</span> Profile(long id, String profileName, String firstName) {
+		<span class="javaKeyword">super()</span>;
+		<span class="javaKeyword">Id</span> = id;
+		<span class="javaKeyword">this</span>.profileName = profileName;
+		<span class="javaKeyword">this</span>.created = <span class="javaKeyword">new</span> Date();
+		<span class="javaKeyword">this</span>.firstName = firstName;
+		<span class="javaKeyword">this</span>.lastName = lastName;
+	}
+	
+	
+	<span class="javaKeyword">public long </span>getId() {
+		<span class="javaKeyword">return </span>Id;
+	}
+	<span class="javaKeyword">public void </span>setId(long id) {
+		<span class="javaKeyword">Id </span>= id;
+	}
+	<span class="javaKeyword">public </span>String getProfileName() {
+		<span class="javaKeyword">return</span> profileName;
+	}
+	<span class="javaKeyword">public void </span>setProfileName(String profileName) {
+		<span class="javaKeyword">this</span>.profileName = profileName;
+	}
+	<span class="javaKeyword">public </span> Date getCreated() {
+		<span class="javaKeyword">return</span> created;
+	}
+	<span class="javaKeyword">public void </span>setCreated(Date created) {
+		<span class="javaKeyword">this</span>.created = created;
+	}
+	<span class="javaKeyword">public </span>String getFirstName() {
+		<span class="javaKeyword">return</span> firstName;
+	}
+	<span class="javaKeyword">public void </span>setFirstName(String firstName) {
+		<span class="javaKeyword">this</span>.firstName = firstName;
+	}
+	
+	<span class="javaKeyword">public </span>String getLastName() {
+		<span class="javaKeyword">return</span> lastName;
+	}
+	<span class="javaKeyword">public void </span>setLastName(String lastName) {
+		<span class="javaKeyword">this</span>.lastName = lastName;
+	}
+	
+	@XmlTransient
+	<span class="javaKeyword">public </span>String getFullName() {
+		<span class="javaKeyword">return</span> fullName;
+	}
+	<span class="javaKeyword">public void </span>setFullName(String fullName) {
+		<span class="javaKeyword">this</span>.fullName = fullName;
+	}	
+		
+ <div style="background:orange">
+ <h2>@XmlTransient</h2>
+ This <b>@XmlTransient</b> annotation useful , when you want to block , while generating (XML/JSON) Response.
+ Using <b>@XmlTransient</b> annotation , we can skip information, while generating (XML/JSON) Response.
+ 
+ We have set <b>@XmlTransient</b> annotation  for <b><ul>getFullName()</ul></b> method , so  while generating (XML/JSON) Response,
+ The <b><u><i>fullName</i></u></b> will be skippd.
+ 
+ </div>		
+		
+}
+
+</pre></div>
+
+
+<h3>Create Static Database Class</h3>
+
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger;
+<span class="javaKeyword">import </span>java.util.HashMap;
+<span class="javaKeyword">import </span>java.util.Map;
+
+
+<span class="javaKeyword">public</span> <span class="javaKeyword">class</span> DatabaseClass {
+
+
+	<span class="javaKeyword">public static </span> Map&lt;Long,Message&gt; messages= <span class="javaKeyword">new</span> HashMapMap&lt;Long,Message&gt;();
+	<span class="javaKeyword">public static </span> Map&lt;String,Profile&gt; profiles= <span class="javaKeyword">new</span> HashMapMap&lt;String,Profile&gt;();
+ 	
+	
+	<span class="javaKeyword">public static</span> Map&lt;Long,Message&gt;  getMessages() {
+	
+		<span class="javaKeyword">return</span>  messages;
+	}
+
+	<span class="javaKeyword">public static</span> Map&lt;String,Profile&gt;  getProfiles() {
+	
+		<span class="javaKeyword">return</span>  profiles;
+	}
+}
+
+</pre></div>
+
+
+<h3>Create Message Service</h3>
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger.service;
+
+<span class="javaKeyword">import </span>java.util.ArrayList;
+<span class="javaKeyword">import </span>java.util.List;
+
+<span class="javaKeyword">public class</span> MessageService {
+
+	<span class="javaKeyword">private </span> Map&lt;Long,Message&gt; messages= DatabaseClass.getMessages();
+
+	<span class="javaKeyword">private </span> Map&lt;String,Profile&gt; profiles= DatabaseClass.getProfiles();
+
+	<span class="javaKeyword">public </span> MessageService()
+	{		
+		messages.put(Ll, <span class="javaKeyword">new</span>Message(1,"Hello Java","Mayuresh")); 
+		messages.put(L2, <span class="javaKeyword">new</span>Message(2,"Hello Java","Ashutosh")); 
+		
+		 
+	}
+	
+
+	<span class="javaKeyword">public </span> List&lt;Message&gt; getAllMessage()
+	{
+		 
+		<span class="javaKeyword">return</span>new ArrayList&lt;message&gt;(messages.values());
+		 
+	}
+	<h1>Handling Exceptions</h1>
+	<br>
+	<img src="img/javax-Gexce.png"/><br>
+<img src="img/javax-exce.png"/>	<br>
+	<div style="background:khaki">
+	<span class="javaKeyword">public </span>Message getMessage(Long id) {
+		Message message= messages.get(id);
+		if (message== null)
+		{
+			throw new DataNotFoundException("Message with id "+ id + " not found");
+		}
+		<span class="javaKeyword">return</span> message;
+		
+	}
+	</div>
+	<span class="javaKeyword">public Message </span>addMessage(Message message) {
+		
+		message.setId(messages.size()+1);
+		messages.put(message.getId(),message);		
+		<span class="javaKeyword">return</span> message;
+	}
+	<span class="javaKeyword">public Message </span>updateMessage(Message message) {
+	
+	
+		<span class="javaKeyword">if(</span>message.getId()&gt;=0 ){
+			<span class="javaKeyword">return</span>  null;
+		}
+		
+		messages.put(message.getId(),message);		
+		<span class="javaKeyword">return</span> message;
+	}
+	 	 
+	
+	<span class="javaKeyword">public Message </span>removeMessage(ling id) {		
+		<span class="javaKeyword">return</span> messages.remove(id);
+	}	
+}
+
+</pre></div>
+<h3>Create Profile Service</h3>
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger.service;
+
+<span class="javaKeyword">import </span>java.util.ArrayList;
+<span class="javaKeyword">import </span>java.util.List;
+
+<span class="javaKeyword">public class</span> ProfileService {
+
+	
+
+	<span class="javaKeyword">private </span> Map&lt;String,Profile&gt; profiles= DatabaseClass.getProfiles();
+
+	<span class="javaKeyword">public </span> ProfileService()
+	{		
+		profiles.put("Mayuresh", <span class="javaKeyword">new</span>Profile(1L,"Mayuresh","Ratnaparkhi")); 
+		profiles.put("Ashutosh" <span class="javaKeyword">new</span>Profile(2L,"Ashutosh","Ratnaparkhi")); 		
+		 
+	}
+	
+
+	<span class="javaKeyword">public </span> List&lt;Profile&gt; getAllProfile()
+	{
+		 
+		<span class="javaKeyword">return</span>new ArrayList&lt;Profile&gt;(profiles.values());
+		 
+	}
+	
+	<span class="javaKeyword">public </span>Profile getProfile(Long id) {
+		<span class="javaKeyword">return</span> profiles.get(id);
+	}
+	<span class="javaKeyword">public Profile </span>addProfile(Profile profile) {
+		
+		profile.setId(profiles.size()+1);
+		profiles.put(profile.getProfileName(),profile);		
+		<span class="javaKeyword">return</span> profile;
+	}
+	<span class="javaKeyword">public Profile </span>updateProfile(Profile profile) {
+	
+	
+		<span class="javaKeyword">if(</span>profile.getProfileName().isEmpty() ){
+			<span class="javaKeyword">return</span>  null;
+		}
+		
+		profiles.put(profile.getProfileName(),profile);		
+		<span class="javaKeyword">return</span> profile;
+	}
+	 	 
+	
+	<span class="javaKeyword">public Profile </span>removeProfile(String profileName) {		
+		<span class="javaKeyword">return</span> profiles.remove(profileName);
+	}	
+}
+
+</pre></div>
+
+
+	<h1>How to use BeanParam in REST WEB API</h1>
+	
+	
+	<h3>First Create Pojo</h3>
+	
+	<div class="codeblock"><pre>	
+	<div style="background:khaki">
+	<span class="javaKeyword">import </span>javax.ws.rs.QueryParam; 
+	
+	<span class="javaKeyword">public class</span> MessageFilterBean {
+	
+		<span class="javaKeyword">private</span> @QueryParam("<span class="javaVariable">year</span>") <span class="javaKeyword">int</span> year;
+		<span class="javaKeyword">private</span> @QueryParam("<span class="javaVariable">start</span>") <span class="javaKeyword">int</span> start;
+		<span class="javaKeyword">private</span>  @QueryParam("<span class="javaVariable">size</span>") <span class="javaKeyword">int</span> size;
+		
+		
+		<span class="javaKeyword">public int </span>getYear() {
+			<span class="javaKeyword">return </span>year;
+		}
+		<span class="javaKeyword">public void </span>setYear(int year) {
+			<span class="javaKeyword">year </span>= year;
+		}
+		<span class="javaKeyword">public int </span>getStart() {
+			<span class="javaKeyword">return </span>start;
+		}
+		<span class="javaKeyword">public void </span>setStart(int start) {
+			<span class="javaKeyword">start </span>= start;
+		}	
+
+		<span class="javaKeyword">public int </span>getSize() {
+			<span class="javaKeyword">return </span>size;
+		}
+		<span class="javaKeyword">public void </span>setSize(int size) {
+			<span class="javaKeyword">size </span>= size;
+		}		
+	
+	}
+ 
+	</div>	
+</pre></div>
+
+<h1>Create Sub Resource and access it  from Parent Resource</h1> 
+
+<div class="codeblock"><pre>	
+	<div style="background:khaki">
+	
+	<span class="javaKeyword">import </span>javax.ws.rs.GET;
+	<span class="javaKeyword">import </span>javax.ws.rs.Path; 
+	<span class="javaKeyword">import </span>javax.ws.rs.PathParam; 
+	
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/</span>")
+	<span class="javaKeyword">@Consumes</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})	
+	<span class="javaKeyword">public class</span> ChildResource {
+	
+		<span class="javaKeyword">@GET</span>	
+		<span class="javaKeyword">public</span> String  getParentReference()
+		{
+		
+			<span class="javaKeyword">return</span>  " This is Child Resource ";
+		}	
+		
+		 
+		<span class="javaKeyword">@GET</span>
+		<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/commentId</span>")
+		<span class="javaKeyword">public</span> String  getParamsUsingParentReference(@PathParam("<span class="javaVariable">messageId</span>") <span class="javaKeyword">long</span> msgId,
+		@PathParam("<span class="javaVariable">commentId</span>") <span class="javaKeyword">long</span> commentId)
+		{
+		
+			<span class="javaKeyword">return</span>  " Message ID : "+msgId+ " Comment ID : "+commentId;
+		}		
+		
+
+	}
+ 
+	</div>	
+</pre></div>
+	
+<h3>Create Message Resource</h3>
+
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger;
+
+<span class="javaKeyword">import </span>javax.ws.rs.PUT; 
+<span class="javaKeyword">import </span>javax.ws.rs.POST; 
+<span class="javaKeyword">import </span>javax.ws.rs.DELETE; 
+<span class="javaKeyword">import </span>javax.ws.rs.GET; 
+<span class="javaKeyword">import </span>javax.ws.rs.PathParam; 
+<span class="javaKeyword">import </span>javax.ws.rs.QueryParam; 
+<span class="javaKeyword">import </span>javax.ws.rs.MatrixParam;
+<span class="javaKeyword">import </span>javax.ws.rs.HeaderParam; 
+<span class="javaKeyword">import </span>javax.ws.rs.CookieParam; 
+<span class="javaKeyword">import </span>javax.ws.rs.Produces; 
+<span class="javaKeyword">import </span>javax.ws.rs.Consumes; 
+<span class="javaKeyword">import </span>javax.ws.rs.core.MediaType; 
+<span class="javaKeyword">import </span>javax.ws.rs.core.Context; 
+<span class="javaKeyword">import </span>javax.ws.rs.core.UriInfo; 
+<span class="javaKeyword">import </span>javax.ws.rs.core.HttpHeaders;
+<span class="javaKeyword">import </span>javax.ws.rs.core.Response;
+<span class="javaKeyword">import </span>javax.ws.rs.Path; 
+<span class="javaKeyword">import </span>java.util.ArrayList;
+<span class="javaKeyword">import </span>java.util.List;
+
+<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/messages</span>")
+<span class="javaKeyword">public</span> <span class="javaKeyword">class</span> MessageResource {
+
+	MessageService <span class="javaVariable">messageService</span>= <span class="javaKeyword">new</span> MessageService();
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> List&lt;Message&gt;  getMessage(@QueryParam("<span class="javaVariable">year</span>") <span class="javaKeyword">int</span> year,
+		@QueryParam("<span class="javaVariable">start</span>") <span class="javaKeyword">int</span> start,
+		@QueryParam("<span class="javaVariable">size</span>") <span class="javaKeyword">int</span> size) 
+	{
+	
+		if (year>0)
+		{
+			<span class="javaKeyword">return</span>  messageService.getAllMessagesForYear(year); 
+		}
+		
+		if (start>=0 && size>=0)
+		{
+			<span class="javaKeyword">return</span>  messageService.getAllMessagesPaginaged(start,size); 
+		}		
+		<span class="javaKeyword">return</span>  messageService.getAllMessage();
+	}
+	
+ 	<div style="background:lightgreen">
+		<h2> Here Accessing Child Resource ( ChildResource class) From Parent ( MessageResource class) </h2>
+		<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/{messageId}/comments</span>")
+		<span class="javaKeyword">public</span> ChildResource  getChildResourceReference()
+		{
+		
+			<span class="javaKeyword">return</span> new ChildResource();
+		}
+	</div>	
+	<div style="background:khaki">
+	
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> List&lt;Message&gt;  getMessageUsingBeanParam(@BeanParam  MessageFilterBean bean) 
+	{
+		bean.getYear()
+		if (bean.getYear()>0)
+		{
+			<span class="javaKeyword">return</span>  messageService.getAllMessagesForYear(bean.getYear()); 
+		}
+		
+		if (bean.getStart()>=0 && bean.getSize()>=0)
+		{
+			<span class="javaKeyword">return</span>  messageService.getAllMessagesPaginaged(bean.getStart(),bean.getSize()); 
+		}		
+		<span class="javaKeyword">return</span>  messageService.getAllMessage();
+	}	
+	
+	</div>
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/{messageId}</span>")
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> Message  getMessage(@PathParam("<span class="javaVariable">messageId</span>") <span class="javaKeyword">long</span> id ) {
+	
+		<span class="javaKeyword">return</span>  messageService.getMessage(id);
+	}	
+
+	<span class="javaKeyword">@POST</span>
+	<span class="javaKeyword">@Consumes</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> Message addMessage(Message message) {
+	
+		<span class="javaKeyword">return</span>  messageService.addMessage(message);
+	}
+	
+	
+	 <div style="background:orange">
+	 <h2>How to send Status Code and Location Headers</h2>
+	 
+	<span class="javaKeyword">@POST</span>
+	<span class="javaKeyword">@Consumes</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> Response addMessage(Message message, @Context  UriInfo  uriInfo) {
+	
+		Message newMessage=messageService.addMessage(message);
+		
+		String newId= String.valueOf(newMessage.getId());
+		
+		URI uri=UriInfo.getAbsolutePathBuilder().path(newId).build();
+		
+		<span class="javaKeyword">return</span>  Response.created(uri)
+		.entity(newMessage)
+		.build();
+		
+		<hr>
+		<span class="javaKeyword">return</span>  Response.status(Status.CREATED)
+		.entity(newMessage)
+		.build();
+		
+		 
+	}	 
+	 </div>
+	
+	<span class="javaKeyword">@PUT</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/{messageId}</span>")
+	<span class="javaKeyword">@Consumes</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> Message updateMessage(@PathParam("<span class="javaVariable">messageId</span>") <span class="javaKeyword">long</span> id , Message message) {
+		message.setId(id);
+		<span class="javaKeyword">return</span>  messageService.updateMessage(message);
+	}
+
+
+	<span class="javaKeyword">@DELETE</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/{messageId}</span>")	
+	<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> void deleteMessage(@PathParam("<span class="javaVariable">messageId</span>") <span class="javaKeyword">long</span> id ) {
+		
+		messageService.removeMessage(id);
+	}	
+	<h1>How to use PARAM in REST WEB API</h1>
+	<div style="background:lightpink">
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/annotations</span>")
+	<span class="javaKeyword">@Produces</span> (<span class="javaVariable">MediaType.TEXT_PLAIN</span>")
+	<span class="javaKeyword">@Consumes</span> (<span class="javaVariable">MediaType.TEXT_PLAIN</span>")
+	<span class="javaKeyword">public</span> String  getParamsUsingAnnotations(@MatrixParam("<span class="javaVariable">param</span>") <span class="javaKeyword">String</span> matrixParam, 
+	@HeaderParam("<span class="javaVariable">customHeaderValue</span>") <span class="javaKeyword">String</span> headerParam,
+	@CookieParam("<span class="javaVariable">name</span>") <span class="javaKeyword">String</span> cookie )
+	{
+	
+		<span class="javaKeyword">return</span>  " Matrix Param : "+matrixParam +"  Custom Header "+headerParam+"  Cookie "+cookie;
+	}	
+	<h3>@HeaderParam</h3> <b>  It is useful read Custom Headers values  </b><br>
+<img src="img/jax-cust.png"/>
+	</div>
+	
+	
+	<h1>How to use Context in REST WEB API</h1>
+	<div style="background:khaki">
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/context</span>")
+	<span class="javaKeyword">@Produces</span> (<span class="javaVariable">MediaType.TEXT_PLAIN</span>")
+	<span class="javaKeyword">@Consumes</span> (<span class="javaVariable">MediaType.TEXT_PLAIN</span>")
+	<span class="javaKeyword">public</span> String  getParamsUsingContext(@Context  UriInfo  uriInfo, @Context HttpHeaders headers)
+	{
+	
+		<span class="javaKeyword">return</span>  " Absolute Path : "+uriInfo.getAbsolutePath().toString() + " Cookies "+headers.getCookies().toString();
+	}	
+	<h3>@Context UriInfo</h3> <b>  It is useful read all URL information.  </b><br>
+	<h3>@Context HttpHeaders</h3> <b>  It is useful read all URL information.  </b><br>
+ 
+	</div>	
+	
+		
+	
+ <hr>	
+	<h1>How to do PAGINATION AND FILTERING IN REST WEB API</h1>
+ <hr>
+	<div style="background:lightblue">
+	<span class="javaKeyword">public</span> List&lt;Message&gt;  getAllMessagesForYear(int year) 
+	{
+	
+		List&lt;Message&gt; messagesForYear=new ArrayList&lt;Message&gt;();
+		Calendar cal=Calendar.getInstance();
+		for (Message message : Messages.values())
+		{
+			cal.setTime(message.getCreated());
+			if (cal.get(calendar.YEAR)== year)
+			{
+				messagesForYear.add(message);
+			}
+			
+		}
+		<span class="javaKeyword">return</span>  messagesForYear;
+	}
+	
+	
+	<span class="javaKeyword">public</span> List&lt;Message&gt;  getAllMessagesPaginaged(int start,int size) 
+	{
+	
+		List&lt;Message&gt; list=new ArrayList&lt;Message&gt;();
+		 
+		 if (start+size > list.size()) 
+		 {
+			<span class="javaKeyword">return</span> new ArrayList&lt;Message&gt;();
+		 }
+		<span class="javaKeyword">return</span>  list.sublist(start,start+size);
+	}
+	</div>	
+<hr>	
+
+
+
+
+
+}
+
+</pre></div>
+
+
+
+
+<h3>Create Profile Resource</h3>
+
+<div class="codeblock"><pre>
+<span class="javaKeyword">package</span> org.chpl.messanger;
+<span class="javaKeyword">import </span>javax.ws.rs.PUT; 
+<span class="javaKeyword">import </span>javax.ws.rs.POST; 
+<span class="javaKeyword">import </span>javax.ws.rs.DELETE; 
+<span class="javaKeyword">import </span>javax.ws.rs.GET; 
+<span class="javaKeyword">import </span>javax.ws.rs.PathParam; 
+<span class="javaKeyword">import </span>javax.ws.rs.Produces; 
+<span class="javaKeyword">import </span>javax.ws.rs.Consumes; 
+<span class="javaKeyword">import </span>javax.ws.rs.core.MediaType; 
+
+<span class="javaKeyword">import </span>javax.ws.rs.Path; 
+<span class="javaKeyword">import </span>java.util.ArrayList;
+<span class="javaKeyword">import </span>java.util.List;
+
+<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/profiles</span>")
+<span class="javaKeyword">@Consumes</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+<span class="javaKeyword">@Produces</span> (value={"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+<span class="javaKeyword">public</span> <span class="javaKeyword">class</span> ProfileResource {
+
+	ProfileService <span class="javaVariable">profileService</span>= <span class="javaKeyword">new</span> ProfileService();
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Produces</span> ({"<span class="javaVariable">MediaType.APPLICATION_XML</span>","<span class="javaVariable">MediaType.APPLICATION_JSON</span>"})
+	<span class="javaKeyword">public</span> List&lt;Profile&gt;  getProfile() {
+	
+		<span class="javaKeyword">return</span>  profileService.getAllProfile();
+	}
+	
+	<span class="javaKeyword">@GET</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/{profileName}</span>")	
+	<span class="javaKeyword">public</span> Profile  getProfile(@PathParam("<span class="javaVariable">profileName</span>") <span class="javaKeyword">String</span> name ) {
+	
+		<span class="javaKeyword">return</span>  profileService.getProfile(name);
+	}	
+
+	<span class="javaKeyword">@POST</span>
+	<span class="javaKeyword">public</span> Profile addProfile(Profile profile) {
+	
+		<span class="javaKeyword">return</span>  profileService.addProfile(profile);
+	}
+	
+	<span class="javaKeyword">@PUT</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/{profileName}</span>")
+	<span class="javaKeyword">public</span> Message updateProfile(@PathParam("<span class="javaVariable">profileName</span>") <span class="javaKeyword">String</span> name , Profile profile) {
+		profile.setProfileName(name);
+		<span class="javaKeyword">return</span>  profileService.updateProfile(profile);
+	}
+
+
+	<span class="javaKeyword">@DELETE</span>
+	<span class="javaKeyword">@Path</span> ("<span class="javaVariable">/{profileName}</span>")
+	<span class="javaKeyword">public</span> void deleteProfile(@PathParam("<span class="javaVariable">profileName</span>") <span class="javaKeyword">String</span> name ) {
+		
+		profileService.removeProfile(name);
+	}	
+}
+
+</pre></div>
+<h1>How to create Hateos Links</h1>
+
+<img src="img/javax-hateos.png"/>
+<h1>HOW TO USE @BeanParam  and @FormParam in JAX-RS REST Web Service</h1>
+<img src="img/bean-param.png"/><br>
+<img src="img/beanp.png"/>
+
+<hr>
+<h1>HOW TO CONFIGURE JAX-RS APPLICATION WITHOUT XML</h1>
+<img src="img/fres.png"/>
+
+<h1>Life cyle of Resource</h1>
+<ul>
+<li>There are two types of resources
+<ol>
+	<li>Default : - It creates new instance for each request</li>
+	<li>Singleton :- It creates only one instance for each request</li>
+</ol>
+</li>
+<li>Every time, JAX-RS creates new instance for each request. and it never shares same instance. this the default behavior of resources in JAX-RS.</li>
+<li>using<b><i>@Singleton</i></b> annotation , we can create the only one instance of request</li>
+<li><b><i>@Singleton</i></b> annotation  comes form <b>javax.inject.Singleton</b> package</li>
+<li><img src="img/javax-singleton.png"/></li>
+</ul>
+
+<h1>Param annotaton and Member variable</h1>
+<img src="img/mem-var.png"/>
+
+<h1>Param converters : - It capture the string value and convert into specific (data type) format.</h1>
+<img src="img/param-conv.png"/>
+
+<h1>MessageBodyReaders and MessageBodyWriters</h1>
+<h2>MessageBody deals with the request body and response body.</h2>
+<h3>Whenever, You want to send Data object into (XML / JSON) format, then you use MessageBodyWriters</h3>
+<h3>Whenever, You accept Data object and converts into (XML / JSON) format, then you use MessageBodyReaders</h3>
+<img src="img/msg-body.png"/>
+
+<h1>Custom Media Types</h1>
+
+<img src="img/custom-media.png"/>
+
+<hr>
+
+<h1>How to create JAX RS Client</h1>
+<img src="img/jaxrs-client.png"/>
+
+<h1>Creating Invocations</h1>
+<h3>The idea behind Invocations is creat the request with all informations and called/execute it as per the requirement</h3>
+<img src="img/invocation.png"/>
+<h1>Handling Generic Types</h1>
+<img src="img/generic-jax-rs.png"/>
+<h1>Filters in JAX-RS </h1>
+<h3>Filter is actually manipulate the header Information or Meta data information</h3>
+<h3>Filter is concept of Cross cutting concept & Cross cutting logic. it is applicable for all common resources </h3>
+<h4>The idea behind Filter is to keep  global the commonly usable code seperated and apply it to each resources.</h4>
+There are two types of filter in JAX-RS
+<ul>
+<li><b>ContainerRequestFilter : - </b> ContainerRequestFilter executes before the request is served.</li>
+<li><b>ContainerResponseFilter : - </b> ContainerResponseFilter executes after the response is prepared and it about to send to the client.
+You can modify the response or add the data into response.</li>
+<li>Filters always executes for successful response and also for Error response</li>
+</ul>
+<img src="img/jaxrs-filters.png"/>
+
+<h1>Implementing REST API Authorization</h1>
+
+<img src="img/Authorization.png"/>
+
+<h1>Filters and Interceptors in JAX-RS</h1>
+<h3>Interceptors are similiar to Filter, but Interceptors is designed to manipulate the entites(input & output stream)</h3>
+<h3>Filter is actually manipulate the header Information or Meta data information</h3>
+<h3>Interceptors is actually manipulate the actual body of request or response.</h3>
+There are two types of Interceptors.
+<ul>
+<li>ReaderInterceptor</li>
+<li>WriterInterceptor</li>
+</ul>
+<img src="img/jax-rest.png" width="80%"/>
+</div>
+<h1>JAX-RS annotations</h1>
+ <table border="2" cellpadding="10" cellspacing="0" width="100%">
+<caption>
+<b></b>
+</caption>
+<thead>
+<tr>
+<th scope="col" align="left" valign="top">
+<p>Annotation&nbsp;</p>
+
+</th><th scope="col" align="left" valign="top">
+<p>Description&nbsp;</p>
+
+</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@Path</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@Path</b> annotation’s value is a relative
+URI path indicating where the Java class will be hosted: for example, <h3>/helloworld</h3>. You can also embed variables in the URIs to make a URI path template.
+For example, you could ask for the name of a user and pass it to the application
+as a variable in the URI:  <h3>/helloworld/{username}</h3>.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@GET</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@GET</b> annotation is a request method designator
+and corresponds to the similarly named HTTP method. The Java method annotated
+with this request method designator will process HTTP GET requests. The behavior
+of a resource is determined by the HTTP method to which the resource is responding.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@POST</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@POST</b> annotation is a request method designator
+and corresponds to the similarly named HTTP method. The Java method annotated
+with this request method designator will process HTTP POST requests. The behavior
+of a resource is determined by the HTTP method to which the resource is responding.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@PUT</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@PUT</b> annotation is a request method designator
+and corresponds to the similarly named HTTP method. The Java method annotated
+with this request method designator will process HTTP PUT requests. The behavior
+of a resource is determined by the HTTP method to which the resource is responding.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@DELETE</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@DELETE</b> annotation is a request method designator
+and corresponds to the similarly named HTTP method. The Java method annotated
+with this request method designator will process HTTP DELETE requests. The
+behavior of a resource is determined by the HTTP method to which the resource
+is responding.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@HEAD</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@HEAD</b> annotation is a request method designator
+and corresponds to the similarly named HTTP method. The Java method annotated
+with this request method designator will process HTTP HEAD requests. The behavior
+of a resource is determined by the HTTP method to which the resource is responding.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@PathParam</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@PathParam</b> annotation is a type of parameter
+that you can extract for use in your resource class. URI path parameters are
+extracted from the request URI, and the parameter names correspond to the
+URI path template variable names specified in the <b>@Path</b> class-level
+annotation.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@QueryParam</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@QueryParam</b> annotation is a type of parameter
+that you can extract for use in your resource class. Query parameters are
+extracted from the request URI query parameters.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@Consumes</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@Consumes</b> annotation is used to specify the
+MIME media types of representations a resource can consume that were sent
+by the client.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@Produces</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@Produces</b> annotation is used to specify the
+MIME media types of representations a resource can produce and send back to
+the client: for example, <h3>"text/plain"</h3>.</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="left" valign="top">
+<p>
+<h3>@Provider</h3>
+</p>
+
+</td><td align="left" valign="top">
+<p>The <b>@Provider</b> annotation is used for anything
+that is of interest to the JAX-RS runtime, such as <b>MessageBodyReader</b> and
+ <b>MessageBodyWriter</b>. For HTTP requests, the  <b>MessageBodyReader</b> is used to map an HTTP request entity body to method parameters.
+On the response side, a return value is mapped to an HTTP response entity
+body by using a <b>MessageBodyWriter</b>. If the application
+needs to supply additional metadata, such as HTTP headers or a different status
+code, a method can return a <b>Response</b> that wraps the
+entity and that can be built using <b>Response.ResponseBuilder</b>.</p>
+
+</td>
+</tr>
+
+</tbody>
+</table>
+<hr><hr>
+<center><span style="font-size:30px;color:red">SOAP WEB SERVICE API USING JAX-WS API</span>
+<h3>JAX-WS API are useful for SOAP Web Service to generate /post (XML) data. </h3></center>
+<ul>
+<li><b>SOAP FUL WEB API : - </b>SOAP means (Simple Object Access Protocol) </li>
+<li>In a SOAP , the Service definition is (WSDL) it is document that gives information that what web services does..</li>
+<li>(WSDL) is a standard document of (SOAP) web services. you get the all information about web services, that how to use it.</li>
+<li>All SOAP web services, follows web service specification (RULE)</li>
+</ul>
+
+
+We share the web service to clients, and clients can use the webservice by using any technology like (C++,.NET,java).
+that means  any technology can  understand written Webservice.<br>
+The format of SOAP webservice is (XML) and that format provides all required specification, which any technology can easily understand.<br>
+Webservice shares this XML format to client. that XML document actually called as (WSDL) Web Service Description Language.<br>
+When you create the web service, then you share the (WSDL) Document of that Web Service to the client.<br>They are some tools which generate (WSDL).
+(WSDL) is similiar as Interface. (WSDL) containt (arguments,methods, return type) , that is called operations/ Spericification . so client application comes to know
+what are the usages of that (arguments,methods, return type) and how to use it to access Web Service.
+<h3>HOW CLIENT USAGES SOAP WEB SERVICE</h3>
+<ul>
+<ol>Client Application call Web services</ol>
+<ol>The directory (UDDI) Universal Description Descovery and Integration  :- Using (UDDI), 	the Client knows, what web services to call. <br> 
+The directory (UDDI)  are like yellow pages or (Folder Structure) of WebService. It is registery, where anybody can use that web service, by preparing folder Query.<br>
+<b>Example : -</b> http://java.edu.webservice/customer :- (customer) is a yellow page (folder structure). 
+ 	</ol>
+<ol>
+<img src="img/wsdl.png"/>
+</ol>
+</ul>
+
+<hr>
+<h1>SOAP WEB SERVICES WITH SPRING</h1>
+<img src="img/spring-ws-SOAP.png"/>
+<img src="img/spring-soap-web.png"/>
+
+</body>
+</html>

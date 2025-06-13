@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+
+<div class="nolinkBHEAD">Servlet life cycle</div>
+ <p>  
+ 
+<ol>
+    <li>The <b>javax.servlet.Servlet</b> interface defines the life cycle methods of servlet such as init(), service() and destroy(). </li>
+    <li>The Web container invokes the init(), service() and destroy() methods of a servlet during its life cycle. </li> 
+</ol>
+
+<b>The sequence in which the Web container calls the life cycle methods of a servlet is:</b>
+<ul>
+	<li>The Web container loads the servlet class and creates one or more instances of the servlet class.</li>
+	<li>The Web container invokes init() method of the servlet instance during initialization of the servlet. <br>
+	The init() method is invoked only once in the servlet life cycle.</li>
+	<li>The Web container invokes the service() method to allow a servlet to process a client request.</li>
+	<li>The service() method processes the request and returns the response back to the Web container.</li>
+	<li>The servlet then waits to receive and process subsequent requests as explained in steps 3 and 4.</li>
+	<li>The Web container calls the destroy() method before removing the servlet instance from the service. <br>
+	The destroy() method is also invoked only once in a servlet life cycle.</li>
+	 
+</ul>
+
+<img src="img/Servlet-life-cycle-diagram2.png"/><br><br>
+<img src="img/servlet-life-cycle-0.jpg"/>
+ 
+	<ol>
+		<li><b>Loading Servlet Class :</b> A Servlet class is loaded when first request for the servlet is received by the Web Container.</li>
+		<li><b>Servlet instance creation :</b>After the Servlet class is loaded, Web Container creates the instance of it. Servlet instance is created only once in the life cycle.</li>
+		<li><b>Call to the init() method : </b>init() method is called by the Web Container on servlet instance to initialize the servlet.<br>
+			<b>Signature of init() method :</b>
+			<div class="codeblock"><pre>
+				public void init(ServletConfig config) throws ServletException
+			</pre></div>
+		</li> 
+				
+		<li><b>Call to the service() method : </b>The containers call the service() method each time the request for servlet is received. <br>
+		The service() method will then call the doGet() or doPost() methos based ont eh type of the HTTP request, as explained in previous lessons.<br>
+			<b>Signature of service() method :</b>
+			<div class="codeblock"><pre>
+				public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException
+			</pre></div>
+		</li>
+		<li><b>Call to destroy() method:</b> The Web Container call the destroy() method before removing servlet instance, giving it a chance for cleanup activity.<br>
+			<b>Signature of destroy() method :</b>
+			<div class="codeblock"><pre>
+				public void destroy();
+			</pre></div> 
+		</li>
+		
+	</ol>
+ 
+</p>
+<div class="nolinkBHEAD">The init() Method</div>
+ 
+<p>
+The init() method is called during initialization phase of the servlet life cycle. <br>
+The Web container first maps the requested URL to the corresponding servlet available in the Web container and then instantiates the servlet. <br>
+The Web container then creates an object of the ServletConfig interface, which contains the startup configuration information, <br>
+such as initialization parameters of the servlet. The Web container then calls the init() method of the servlet and passes the ServletConfig object to it.<br>
+The init() method throws a ServletException if the Web container cannot initialize the servlet resources. <br>
+The servlet initialization completes before any client requests are accepted.<br>
+
+<div class="codeblock"><pre>
+Example : The following code snippet shows the init() method:
+
+public class ServletLifeCycle extends HttpServlet
+{
+   static int count;
+   public void init(ServletConfig config) throws ServletException
+   {
+      count=0;
+   }
+}
+</pre></div>
+</p>
+<div class="nolinkBHEAD">The service() Method</div>
+ 
+<p>
+The service() method processes the client requests. <br>
+Each time the Web container receives a client request, it invokes the service() method. <br>
+The service() method is invoked only after the initialization of the servlet is complete. When the Web container calls the service() method, <br>
+it passes an object of the ServletRequest interface and an object of the ServletResponse interface. The ServletRequest object contains information <br>
+about the service request made by the client. The ServletResponse object contains the information returned by the servlet to the client.<br><br>
+The service() method throws ServletException exception when an exception occurs that interferes with the normal operation of the servlet. <br>
+The service() method throws IOException when an input or output exception occurs.<br><br>
+<div class="codeblock"><pre>
+Example : The following code snippet shows the service() method:
+
+public void service(ServletRequest req, ServletResponse res) 
+throws ServletException, IOException
+
+</pre></div>
+The service() method dispatches a client request to one of the request handler methods of the HttpServlet interface, such as the doGet(), doPost(), doHead() or doPut(). <br>
+The request handler methods accept the objects of the HttpServletRequest and HttpServletResponse as parameters from the service() method.<br><br>
+<img src="img/Servlet-life-cycle-1.png"/>
+</p>
+<div class="nolinkBHEAD">The doGet() Method</div>
+<p>
+The doGet() method processes client request, which is sent by the client, using the HTTP GET method. <br>
+GET is a type of HTTP request method that is commonly used to retrieve static resources. To handle client requests that are received using GET method, <br>
+we need to override the doGet() method in the servlet class. In the doGet() method, we can retrieve the client information of the HttpServletRequest object. <br>
+We can use the HttpServletResponse object to send the response back to the client.<br>
+<div class="codeblock"><pre>
+Example : The following code snippet shows the doGet() method:
+
+public void doGet(HttpServletRequest req, HttpServletResponse res) 
+throws ServletException, IOException
+
+</pre></div>
+</p>
+<div class="nolinkBHEAD">The doGet() Method</div>
+<p>
+The doPost() method handles requests in a servlet, which is sent by the client, using the HTTP POST method. For example, <br>
+if a client is entering registration data in an HTML form, the data can be sent using the POST method. <br>
+Unlike the GET method, the POST request sends the data as part of the HTTP request body. As a result, the data sent does not appear as a part of URL.<br><br>
+To handle requests in a servlet that is sent using the POST method, we need to override the doPost() method. <br>
+In the doPost() method, we can process the request and send the response back to the client. <br><br>
+<div class="codeblock"><pre>
+Example : The following code snippet shows the doPost() method:
+
+public void doPost(HttpServletRequest req, HttpServletResponse res) 
+throws ServletException, IOException
+
+</pre></div>
+</p>
+<div class="nolinkBHEAD">The doHead() Method</div>
+<p>
+The doHead() method handles requests sent using the HTTP HEAD method. Similar to the GET method, the HEAD method also sends requests to the server. <br>
+The only difference between the GET and the HEAD methods is that the HEAD method returns the header of the response, which contains entries, <br>
+such as Content-Type, Content-Length, and Last-Modified. The HEAD method is used to find whether a requested resource exists.<br>
+It is also used to obtain information about the resource, such as type of the resource. <br><br>
+
+<div class="codeblock"><pre>
+Example : The following code snippet shows the doHead() method:
+
+public void doHead(HttpServletRequest req, HttpServletResponse res) 
+throws ServletException, IOException
+
+</pre></div> 
+</p>
+
+<div class="nolinkBHEAD">The doPut() Method</div>
+<p>
+The doPut() method handles requests sent using the HTTP PUT method. The PUT method allows a client to store information on the server. <br><br>
+
+<div class="codeblock"><pre>
+Example : The following code snippet shows the doPut() method:
+
+public void doPut(HttpServletRequest req, HttpServletResponse res) 
+throws ServletException, IOException
+
+</pre></div> 
+
+</p>
+<div class="nolinkBHEAD">The destroy() Method</div>
+<p>
+The destroy() method marks the end of the life cycle of a servlet. The Web container calls the destroy() method before removing a servlet instance from the service. <br><br>
+<b>The Web container calls the destroy() method when</b><br><br>
+<ul>
+<li>The time period specified for the servlet has elapsed.</li>
+<li>The Web container needs to release servlet instances to conserve memory.</li>
+<li>The Web container is about to shut down.</li>
+</ul><br>
+In the destroy() method we can write the code to release the resources occupied by the servlet. <br>
+The destroy() method is also used to save any persistent information before the servlet instance is removed from the service.<br><br>
+<div class="codeblock"><pre>
+Example : The following code snippet shows the destroy() method:
+
+public void destroy();
+
+</pre></div> 
+
+</p>
+
+
+<div class="nolinkBHEAD">Example on Servlet Life Cycle in Java</div>
+
+<div class="codeblock"/><pre>
+<b>ServletLifeCycle.java</b><br><br>
+
+1.	package java4s;
+2.	 
+3.	import java.io.IOException;
+4.	import java.io.PrintWriter;
+5.	 
+6.	import javax.servlet.ServletConfig;
+7.	import javax.servlet.ServletException;
+8.	import javax.servlet.http.HttpServlet;
+9.	import javax.servlet.http.HttpServletRequest;
+10.	import javax.servlet.http.HttpServletResponse;
+11.	 
+12.	public class ServletLifeCycle extends HttpServlet
+13.	{
+14. 
+15.	public ServletLifeCycle()
+16.	{	
+17.		System.out.println("Am from default constructor");
+18.	}
+19. 
+20.<span class="highlite">	public void init(ServletConfig config) </span>
+21.	{
+22.		System.out.println("Am from Init method...!");
+23.	}
+24. 
+25.	<span class="highlite">public void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException</span>
+26.	{	
+27.		res.setContentType("text/html");
+28.		PrintWriter pw = res.getWriter();
+29.		pw.println("I am from doGet method");
+30.		pw.close();
+31.	}	
+32. 
+33.<span class="highlite">	public void destroy()</span>
+34.	{
+35.		System.out.println("Am from Destroy methods");
+36.	}
+37. 
+38.}
+</pre>
+</div>
+<div class="codeblock"/><pre>
+<b>web.xml</b><br><br>
+
+1.	&lt;web-app&gt;
+2.    &lt;servlet&gt;
+3.            &lt;servlet-name&gt;second&lt;/servlet-name&gt;
+4.            &lt;servlet-class&gt;java4s.ServletLifeCycle&lt;/servlet-class&gt;
+5.         &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+6.      &lt;/servlet&gt;
+7. 
+8.      &lt;servlet-mapping&gt;
+9.            &lt;servlet-name&gt;second&lt;/servlet-name&gt;
+10. <span class="highlite">           &lt;url-pattern&gt;/lifecycle1&lt;/url-pattern&gt; </span>
+11.      &lt;/servlet-mapping&gt;
+12.	&lt;/web-app&gt;
+</pre>
+</div>
+</div>
+
+<p>
+
+<b>Flow</b>
+<ol>
+    <li>When ever you hit the final URL <b>(http://localhost:8080/Servlet-Life-CycleExample/Servlet-Life-CycleExample), </b><br>
+	servlet container will first loads <b>web.xml</b> and check the value in <b>&lt;url-pattern&gt;</b> tag [ line number 10, we have given the pattern name as /lifecycle1 ]</li>
+	<li>Immediately it will check the value in <b>&lt;servlet-name&gt;</b> tag [line number 9, we have given second]
+    Now it will search for the same value second in <b>&lt;servlet-name&gt;</b> under <b>&lt;servlet&gt;</b> tag [that’s what we have in line number 3 ]</li>
+    <li>So value of <b>&lt;servlet-name&gt;</b> under <b>&lt;servlet-mapping&gt;</b> & <b>&lt;servlet&gt;</b> are same [in this case @ line numbers 9,3 ]</li>
+    <li>If so container will load java class given in <b>&lt;servlet-class&gt;</b> tag [line number 4, our class name is java4s.ServletLifeCycle ]</li>
+   <li> Finally servlet container came to ‘ServletLifeCycle‘ class, it will executes init() method first (only once) > then service() or doGet() or doPost() method [ in our case doGet() ]</li>
+    <li>Finally destroy() method will be executed before our object get garbage collected.</li>
+
+</ol>
+<h1>SERVLET FLOW OF EXECUTION</h1>
+<pre>
+
+for each web application servlet context object will be created.
+servlet context Object :- when we start the server
+containter will recognize the all web application
+container will deploy the web application in the server and will create the seprate
+object for each web application that object is called servlet context object.
+
+container will identify the web.xml file and will collect application level data from web.xml and will load it in 
+servlet context.
+container will pickup the class and will load it into operational memory , that is called servlet loading phase.
+after that container will create the object of that class for the servlet, this is called Servlet instantation phase in this phase 
+doGet or doPost methods will be called as per the cilent request type (GET/POST).
+after that container will start Servlet Instlaization phase in this  phase containere will create servlet config object and 
+it will be set as a parameter in inIt(servlet config sc) method then inIt() will be execute.
+</pre>
+<img src="img/life_of_servlet.png"/><br>
+<img src="img/Servlet_Execution.png"/><br>
+<img src="img/webServlet_parmater_with_annotation_and_xml.png"/>
+</p>
+</body>
+</html>

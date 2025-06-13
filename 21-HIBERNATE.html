@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">What is Proxy Objects and Eager and Lazy Fetch Types in Hibernate</div>
+ <p>Different between session.get() and session.load()<br>
+Actually, both functions are use to retrieve an object with different mechanism
+ <br>
+ <h2>session.get()</h2>
+<ul>
+<li>It always <strong>hit the database</strong> and return the real object, an object that represent the database row, not proxy.</li>
+<li>If no row found , it return <strong>null</strong>. </li>
+<li>get() method returns <strong>NULL </strong>, if object is not found in cache as well as in database.</li>
+<li>get() method is <strong>early loading</strong> <strong>e.</strong> when you call session.get(Class,identifier) method, it will hit the database immediately ,loads the entity object and returns the entity object.</li>
+<li>Use get() method if you are not sure that the object exists in database.</li>
+<li>It is equivalent to EntityManager.find() method of JPA.</li>
+<li>Since get() returns a fully initialized object, so it is fully available in any future detached state.</li>
+<li> <strong>get() method </strong>When get() method is called, it will directly hit the database, fetch the result and return. If no matching fields are found, it will gladly return null.</li>
+<li>
+<div class="codeblock"><pre>
+Example : 
+How to call get() method:
+
+public void fetchEmployeeUsingGet(){
+        
+        
+        Session session =SessionUtil.getsession();;
+        Employee employee=null;
+        session.getTransaction().begin();
+        
+        try{
+            
+            employee = (Employee)session.get(Employee.class, 2);
+            /*
+             * Put break point here and see console. You will be
+             * seeing select statement and employee object is
+             * initialized (see in variables window).
+             * At this time employee object is initialized with
+             * database data
+             *  
+             */
+            
+            System.out.println(employee.getEmpName());        
+            session.getTransaction().commit();    
+            
+        }catch(ObjectNotFoundException e){
+            e.printStackTrace();
+        }            
+        
+    }
+</pre></div>
+
+ 
+</li>
+</ul>
+ <h2>session.load()</h2>
+<ul>
+<li>It will always return a proxy object with the given identity value, even the identity value is not exists in database.</li>
+<li>However, when you try to initialize a proxy by retrieve it’s properties from database, it will hit the database with select statement. </li>
+<li> If no row is found, a ObjectNotFoundException will throw.</li>
+<li>load() method throws <strong>hibernate.ObjectNotFoundException </strong>(which is Un-checked exception) if object not found in cache as well as in database.</li>
+<li>load() method is <strong>lazy loading i.e. </strong>when you call session.load(Class,identifier) method, it will return <strong>Proxy object </strong>but not <strong>entity</strong></li>
+<li>Use load() method when you are sure that the object exists in database.</li>
+<li>load() method is equivalent to <strong>getReference()</strong> method of JPA.</li>
+<li>Since load() method returns proxy object, so it is not fully available in any future detached state. Detached state means Object is not associated with Session, but present in Database. So if you are not working with detached objects <strong>load() or getReference() </strong>methods can be use to have <strong>better performance</strong>.</li>
+<li>
+<div class="codeblock"><pre>
+Example : 
+How to call load() method:
+
+public void fetchEmployeeUsingLoad(){
+        
+        
+        Session session =SessionUtil.getsession();;
+        Employee employee=null;
+        session.getTransaction().begin();
+        
+        try{
+            
+            employee = (Employee)session.load(Employee.class, 2);
+            /*
+             * Put break point here and see console. You will not be
+             * seeing any select statement and employee object is not
+             * initialized (see in variables window).
+             * At this time employee is just a proxy object.
+             *  
+             */
+            
+            System.out.println(employee.getEmpName());
+        
+            /*
+             * Now Observe the console at this line,you can find the
+             * select statement and employee object is initialized
+             * (see in variables window.)
+             *
+             */
+            session.getTransaction().commit();    
+            
+        }catch(ObjectNotFoundException e){
+            e.printStackTrace();
+        }            
+        
+    }
+</pre></div>
+
+ 
+</li>
+</ul>
+
+ </p>
+  <h1>Proxy Objects and Eager and Lazy Fetch Types </h1>
+  
+  Sometimes you have two entities and there's a relationship between them. For example, you might have an entity called UserDetails and another entity called Address.<br>
+   The UserDetails entity might have some basic properties such as id, name, etc. as well as a property called listOfAddresses:
+<br>
+<div class="codeblock"><pre>
+ public class UserDetails {
+ private int userId;                          
+ private String name;
+ private Collection<Address> listOfAddresses = new ArrayList<Address>();
+
+ // setters and getters
+}
+</pre></div>
+
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">Now when you load a UserDetails from the database, JPA loads its id and
+name fields for you. But you have two options for <b style="mso-bidi-font-weight: normal;">listOfAddresses</b>: to load it together with the rest of the fields
+(i.e. eagerly) or to load it on-demand (i.e. lazily) when you call <b style="mso-bidi-font-weight: normal;">the UserDetails.getListOfAddresses</b>()
+method.</span>
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">When a UserDetails has many addresses it is not efficient to load all of
+its addresses with it when they are not needed. So in such like cases, you can
+declare that you want addresses to be loaded when they are actually needed.
+This is called lazy loading.</span></div>
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">
+
+</span><div class="MsoNormalCxSpMiddle" style="mso-add-space: auto; mso-margin-bottom-alt: auto;">
+<br></div>
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">
+
+</span><div class="MsoNormal">
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;"><b style="mso-bidi-font-weight: normal;"><u>Lazy
+Initialization:</u></b> Here you do not initialize entire object, you only
+initialize the first level variables (i.e. only first level of member variable
+of the object) then you only initialize the list only when you actually access
+it. FetchType LAZY - fetch when needed.</span></div>
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">
+
+</span><div class="MsoNormalCxSpMiddle" style="mso-add-space: auto; mso-margin-bottom-alt: auto;">
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;"><b style="mso-bidi-font-weight: normal;"><u>Eager Initialization</u></b>: when
+loading an obj that has a collection, hibernate loads collection elements ONLY
+when actually you ask for them; so this improves performance, among other
+advantages. It should be used only when there is requirement else we need to
+strict to only <b style="mso-bidi-font-weight: normal;">Lazy initialization</b>. FetchType
+EAGER fetch immediately.</span></div>
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">
+
+</span><div class="MsoNormalCxSpMiddle" style="mso-add-space: auto; mso-margin-bottom-alt: auto;">
+<br></div>
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">
+
+</span><div class="MsoNormalCxSpMiddle" style="mso-add-space: auto; mso-margin-bottom-alt: auto;">
+<span style="font-family: &quot;Trebuchet MS&quot;,sans-serif;">*Hibernate provides <b style="mso-bidi-font-weight: normal;">proxy</b> user
+class at back end to fetch the data from database.</span>
+
+<div>
+<pre>
+ <h2>HibernateTest.java</h2>
+package org.yash.hibernate;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.yash.dto.Address;
+import org.yash.dto.UserDetails;
+
+public class HibernateTest {
+
+      public static void main(String args[]){
+            UserDetails user = new UserDetails();
+            user.setUserName("First User");
+
+            UserDetails user2 = new UserDetails();
+            user2.setUserName("Second User");
+           
+            Address addr1 = new Address();
+            addr1.setCity("Bentonville");
+            addr1.setPincode("72712");
+            addr1.setState("Ar");
+            addr1.setStreet("2301 SE Saint Andrews");
+           
+            Address addr2 = new Address();
+            addr2.setCity("Rogers");
+            addr2.setPincode("72713");
+            addr2.setState("AR");
+            addr2.setStreet("2303 SE Saint Andrews");
+           
+            user.getListOfAddresses().add(addr1);
+            user.getListOfAddresses().add(addr2);
+           
+            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();         
+            Session session = sessionFactory.openSession();
+            /* It is used to save all the objects and to define single unit of work */
+            session.beginTransaction();
+           
+            session.save(user);
+            //session.save(user2);
+            session.getTransaction().commit();
+            session.close();
+           
+            user = null;
+           
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            user = (UserDetails) session.get(UserDetails.class, 1);
+            System.out.println("User name retrieved is "+user.getUserName());
+           
+            //System.out.println(user.getListOfAddresses().size());
+            session.close();
+            /*
+             * There is a possibility to use list of address after session close
+             * We need to add @ElementCollection(fetch=FetchType.EAGER) in UserDetails calss
+             * */      
+            System.out.println("Size: "+user.getListOfAddresses().size());
+
+      }
+}
+
+<h2>UserDetails.java</h2>
+package org.yash.dto;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
+@Entity
+@Table(name="USER_DETAILS")
+public class UserDetails {
+      /* @Id says "userId" is primary key */
+      @Id @GeneratedValue (strategy=GenerationType.AUTO)
+      private int userId;    
+      private String userName;
+      @ElementCollection(fetch=FetchType.EAGER)
+      @JoinTable(name="USER_ADDRESS",
+                     joinColumns=@JoinColumn(name="USER_ID")
+      )
+      private Collection&lt;Address&gt; listOfAddresses = new ArrayList&lt;Address&gt;();
+     
+      public int getUserId() {
+            return userId;
+      }
+      public void setUserId(int userId) {
+            this.userId = userId;
+      }
+      public String getUserName() {
+            return userName;
+      }
+      public void setUserName(String userName) {
+            this.userName = userName;
+      }
+      public void setListOfAddresses(Collection&lt;Address&gt; listOfAddresses) {
+            this.listOfAddresses = listOfAddresses;
+      }
+      public Collection&lt;Address&gt; getListOfAddresses() {
+            return listOfAddresses;
+      }
+}
+
+
+<h2>Address.java</h2>
+package org.yash.dto;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Address {
+      @Column(name="STREET_NAME")
+      private String street;
+      @Column(name="CITY_NAME")
+      private String city;
+      @Column(name="STATE_NAME")
+      private String state;
+      @Column(name="PIN_CODE")
+      private String pincode;
+     
+      public String getStreet() {
+            return street;
+      }
+      public void setStreet(String street) {
+            this.street = street;
+      }
+      public String getCity() {
+            return city;
+      }
+      public void setCity(String city) {
+            this.city = city;
+      }
+      public String getState() {
+            return state;
+      }
+      public void setState(String state) {
+            this.state = state;
+      }
+      public String getPincode() {
+            return pincode;
+      }
+      public void setPincode(String pincode) {
+            this.pincode = pincode;
+      }
+     
+}
+
+<h2>hibernate.cfg.xml</h2>
+&lt;?xml version='1.0' encoding='utf-8'?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"&gt;
+
+&lt;hibernate-configuration&gt;
+
+    &lt;session-factory&gt;
+
+        &lt;property name="connection.driver_class"&gt;
+            org.postgresql.Driver
+        &lt;/property&gt;
+        &lt;property name="connection.url"&gt;
+            jdbc:postgresql://localhost:5433/hibernatedb
+        &lt;/property&gt;
+        &lt;property name="connection.username"&gt;postgres&lt;/property&gt;
+        &lt;property name="connection.password"&gt;admin&lt;/property&gt;
+
+        &lt;!-- JDBC connection pool (use the built-in) --&gt;
+        &lt;property name="connection.pool_size"&gt;1&lt;/property&gt;
+
+        &lt;!-- SQL dialect --&gt;
+        &lt;property name="dialect"&gt;
+            org.hibernate.dialect.PostgreSQLDialect
+        &lt;/property&gt;
+
+        &lt;!-- Enable Hibernate's automatic session context management --&gt;
+        &lt;property name="current_session_context_class"&gt;thread&lt;/property&gt;
+       
+        &lt;!-- Echo all executed SQL to stdout --&gt;
+        &lt;property name="show_sql"&gt;true&lt;/property&gt;
+       
+        &lt;!-- Drop and re-create the database schema on startup --&gt;
+            &lt;property name="hbm2ddl.auto"&gt;create&lt;/property&gt; 
+&lt;!-- create / update --&gt;
+   
+          &lt;!-- Names the annotated entity class --&gt;
+          &lt;mapping class="org.yash.dto.UserDetails"/&gt;
+
+    &lt;/session-factory&gt;
+
+&lt;/hibernate-configuration&gt;
+</pre>
+</div>
+
+<div style="color: blue;">
+<b>1. Lazy Fetch Type: </b><span style="color: #20124d;">This the default fetch type of the hibernate 3. </span></div>
+Now when you load a User from the database, JPA loads its id,  name, and address fields for you. But you have two options for users:  to load it together with the rest of the fields (i.e. eagerly) or to  load it on-demand (i.e. lazily) when you call the user's  <b>getListOfAddresses()</b> method.<br>
+<br>
+<span style="color: blue;">Lazy/Select Fetch strategy:-</span> <span class="IL_AD" id="IL_AD2">Select</span> Fetch strategy is the lazy fetching  of <span class="IL_AD" id="IL_AD8">associations</span>. The purpose of Lazy strategy is memory optimization .  When I say memory optimization it means  it means it saves us from heap  error. This is what I think. So  we can say yes if we are loading too  objects in aseesion we should go for Lazy Fetch strategy but in terms of time performance it does not provide  any <span class="IL_AD" id="IL_AD12">Benefit</span>. <span class="IL_AD" id="IL_AD5">Agreed</span>? <br>
+<br>
+When a user has many addresses it is not efficient to load all  of its addresses with it when they are not needed. So in suchlike cases,  you can declare that you want addresses to be loaded when they are  actually needed. This is called lazy loading.
+
+</div>
+
+<b style="color: #20124d;">2. Eager Fetch Strategy:</b> In hibernate 2 this is default behavior of the to retrieving an object from the database.<br>
+<span style="color: blue;">Eager/Join  Fetch strategy:-</span> Join  Fetch strategy the eager  fetching of  associations.The purpose of  Join  Fetch strategy is optimization in  terms of time.I mean even associations are fetched right at the time of  fetching parent object. So in this case we don’t make database call  again and again . So this will be much faster.Agreed that this will bad  if we are fetching too many objects in a session because we can get java  heap error. 
+<h3><b>So now  can we say in the hibernate session where we are not  loading too many objects we should go for Eager fetch as it will be much  better in terms of time response(Any ways  memory will be reclaimed by  garbage collector once we close the session).</b></h3>
+
+<h1>Hibernate Proxy</h1>
+When you use session.get method that time, hibernate create the proxy class of same pojo class and (Proxy class is the sub class of POJO class) have same methods of POJO class<br>
+Every time proxy classes communicates with databases and fetches the data and set that data to POJO class. so we can reterive the values even session will be closed.
+for that we need set Fetch Type as Eager.
+
+<img src="img/hiber-proxy.png"/><br>
+<h1>One To One Relationship in Hibernate</h1>
+<img src="img/ont.png"/>
+
+<h1>One To Many Relationship in Hibernate</h1>
+<img src="img/onm.png"/>
+
+<h1>Many To One Relationship in Hibernate</h1>
+<img src="img/manytoone.png"/>
+
+<h1>Object States  in Hibernate</h1>
+<img src="img/hos.png"/>
+<h1>If the Object is changed , then Hibernate executes the Update Query</h1>
+<img src="img/upd_hiber.png"/>
+
+<h1>HQL  (Hibernate Query Language)</h1>
+<img src="img/Hbq.png"/>
+
+<h1>One To Many Relationship using mapped by annotation in Hibernate</h1>
+<img src="img/mapped.png"/>
+<h1>cascade annotatoin in Hibernate</h1>
+<img src="img/cascade.png"/>
+<h1>Understanding Parameter Binding and SQL Injection in Hibernate</h1>
+<img src="img/h-param.png"/>
+<h1> Named Queries in Hibernate</h1>
+<img src="img/n-param.png"/>
+<h1> Understanding Restrictions in Hibernate</h1>
+<img src="img/restruction.png"/>
+<h1>Projections and Query By  clause in Hibernate</h1>
+<img src="img/projection.png"/>
+
+<h1> Cacheing in Hibernate</h1>
+<img src="img/cacheing.png"/>
+</body>
+</html>

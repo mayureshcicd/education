@@ -1,0 +1,360 @@
+<p><div dir="ltr" style="text-align: left;" trbidi="on">
+<h2 style="margin: auto 0in; text-align: left;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;">1.<span style="font-size: small;"> What is Hibernate?&nbsp;</span></span></span></span></h2>
+<h2 style="margin: auto 0in; text-align: left;">
+<span style="font-family: Verdana,sans-serif;">
+</span><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;">Ans: <span style="font-weight: normal;">Hibernate is a powerful, high performance object/relational persistence and query service. This lets the users <span class="ilad">to develop</span> persistent classes following object-oriented principles such as association, inheritance, polymorphism, <span class="ilad">composition</span>, and collections. <br /><a name='more'></a></span></span></span></span></h2>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span class="que"><b><span style="font-variant: normal ! important;">2. What is ORM ?</span></b></span></span></span></span><br />
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>A</b><b>ns:</b> ORM stands for Object/Relational mapping. It is the programmed and translucent perseverance of objects in a Java <span class="ilad">application</span>
+  in to the tables of a relational database using the metadata that  
+describes the mapping between the objects and the database. It works by 
+ transforming the data from one representation to another.</span></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b>3. Why hibernate is advantageous over Entity Beans &amp; JDBC?&nbsp; <br />Ans:</b>
+ An entity bean always works under the EJB container, which allows 
+reusing of the object external to the container. An object can not be 
+detached in entity beans and in hibernate detached objects are 
+supported.<br />Hibernate is not database dependent where as JDBC is 
+database dependent. Query tuning is not needed for hibernate as JDBC is 
+needed. Data can be placed in multiple cache which is supported by 
+hibernate, whereas in JDBC the cache is to be implemented.&nbsp;</span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span></div>
+<h2 style="margin: auto 0in;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;">4. What are the different levels of ORM quality?&nbsp; </span></span></span></h2>
+<h2 style="margin: auto 0in;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;">Ans: <span style="font-weight: normal;">There
+ are four levels defined for ORMquality.
+ </span></span></span></span></h2>
+<ul style="text-align: left;">
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Pure relational</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Light object mapping</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Medium object mapping</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;">Full object mapping</span></span></span></li>
+</ul>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">5. How will you configure Hibernate?</span></b></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Ans:</b> The
+  configuration files hibernate.cfg.xml (or hibernate.properties) and  
+mapping files *.hbm.xml are used by the Configuration class to create  
+(i.e. configure and bootstrap hibernate) the SessionFactory, which in  
+turn creates the Session instances. Session instances are the primary  
+interface for the persistence service. <br />
+<br />
+" hibernate.cfg.xml  (alternatively can use hibernate.properties): These
+ two files are used  to configure the hibernate sevice (connection 
+driver class, connection  URL, connection username, connection password,
+ dialect etc). If both  files are present in the classpath then 
+hibernate.cfg.xml file overrides  the settings found in the 
+hibernate.properties file. <br />
+<br />
+" Mapping  files (*.hbm.xml): These files are used to map persistent 
+objects to a  relational database. It is the best practice to store each
+ object in an  individual mapping file (i.e mapping file per class) 
+because storing  large number of persistent classes into one mapping 
+file can be  difficult to manage and maintain. The naming convention is 
+to use the  same name as the persistent (POJO) class name. For example 
+Account.class  will have a mapping file named Account.hbm.xml. 
+Alternatively hibernate  annotations can be used as part of your 
+persistent class code instead  of the *.hbm.xml files.</span></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">6. What are derived properties? </span></b></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Ans</b>: The
+  properties that are not mapped to a column, but calculated at runtime 
+ by evaluation of an expression are called derived properties. The  
+expression can be defined using the formula attribute of the element. </span></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">7. Define HibernateTemplate? </span></b></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Ans</b>: <i>org.springframework.orm.hibernate.HibernateTemplate</i>
+  is a helper class which provides different methods for  
+querying/retrieving data from the database. It also converts checked  
+HibernateExceptions into unchecked DataAccessExceptions.</span></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">8. What are the benefits does HibernateTemplate provide? </span></b></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Ans:</b> The benefits of HibernateTemplate are : </span></span></span></span></div>
+<ul type="disc">
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">HibernateTemplate, a Spring Template class simplifies interactions with Hibernate Session. </span></span></span></span></li>
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Common functions are simplified to single method calls. </span></span></span></span></li>
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Sessions are automatically closed. </span></span></span></span></li>
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Exceptions are automatically caught and converted to runtime exceptions.</span></span></span></span></li>
+</ul>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">9. What is the difference between sorted and ordered collection in hibernate? </span></b></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Ans:</b> sorted collection vs. order collection</span><span style="font-variant: normal ! important;"> </span></span></span></span></div>
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border-color: windowtext; border-style: double; border-width: 1.5pt;"><tbody>
+<tr> <td style="background-color: transparent; border-color: windowtext; border-style: none; border-width: medium; padding: 4.5pt;"><div align="center" class="MsoNormal" style="margin: 0in 0in 0pt; text-align: center;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">sorted collection&nbsp;</span></b></span></span></span></div>
+</td> <td style="background-color: transparent; border-color: windowtext; border-style: none; border-width: medium; padding: 4.5pt;"><div align="center" class="MsoNormal" style="margin: 0in 0in 0pt; text-align: center;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">order collection&nbsp;</span></b></span></span></span></div>
+</td></tr>
+<tr> <td style="background-color: transparent; border-color: windowtext; border-style: none; border-width: medium; padding: 4.5pt; width: 50%;" width="50%"><div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">A
+  sorted collection is sorting a collection by utilizing the sorting  
+features provided by the Java collections framework. The sorting occurs 
+ in the memory of JVM which running Hibernate, after the data being read
+  from database using java comparator.&nbsp;</span></span></span></span></div>
+</td> <td style="background-color: transparent; border-color: windowtext; border-style: none; border-width: medium; padding: 4.5pt;"><div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Order collection is sorting a collection by specifying the order-by clause for sorting this collection when retrieval.&nbsp;</span></span></span></span></div>
+</td></tr>
+<tr> <td style="background-color: transparent; border-color: windowtext; border-style: none; border-width: medium; padding: 4.5pt;"><div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">If your collection is not large, it will be more efficient way to sort it.&nbsp;</span></span></span></span></div>
+</td> <td style="background-color: transparent; border-color: windowtext; border-style: none; border-width: medium; padding: 4.5pt;"><div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">If your collection is very large, it will be more efficient way to sort it .&nbsp;</span></span></span></span></div>
+</td></tr>
+</tbody></table>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"> </span></span></span><br />
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span></div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">10. What are the Collection types in Hibernate ?</span></b></span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">Ans:</span></b><span style="font-variant: normal ! important;">&nbsp;</span></span></span></span><br />
+<ul style="text-align: left;">
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Bag </span></span></span></span></li>
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Set </span></span></span></span></li>
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">List </span></span></span></span></li>
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Array </span></span></span></span></li>
+<li class="MsoNormal" style="margin: 0in 0in 0pt;"><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Map</span></span></span></span></li>
+</ul>
+</div>
+<div class="MsoNormal" style="margin: 0in 0in 0pt;">
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b><span style="font-variant: normal ! important;">11. What is Hibernate proxy? </span></b></span></span></span></div>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"> <span style="font-variant: normal ! important;"><b>Ans</b>: Mapping
+ of classes can be made into a proxy instead of a table. A proxy is 
+returned when actually a load is called on a session. The proxy contains
+ actual method to load the data. The proxy is created by default by 
+Hibernate, for mapping a class to a file. The code to invoke JDBC is 
+contained in this class.</span></span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>12. What is lazy fetching in hibernate ?&nbsp; </b><br /><b>Ans</b>:
+ Lazy fetching is associated with child objects loading for its parents.
+ While loading the parent, the selection of loading a child object is to
+ be specified / mentioned in the hbm.xml file. Hibernate does not load 
+the whole child objects by default. Lazy=true means not to load the 
+child objects.<br /><b><br />13. Explain the difference between transient and detached objects in hibernate ?</b></span></span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Ans: <i>T</i></b><i><b>ransient </b></i>objects
+ do not have association with the databases and session objects. They 
+are simple objects and not persisted to the database. Once the last 
+reference is lost, that means the object itself is lost. And of course ,
+ garbage collected. The commits and rollbacks will have no effects on 
+these objects. They can become into persistent objects through the save 
+method calls of Session object.<br /><br />The <i><b>detached </b></i>object
+ have corresponding entries in the database. These are persistent and 
+not connected to the Session object. These objects have the synchronized
+ data with the database when the session was closed. Since then, the 
+change may be done in the database which makes this object stale. The 
+detached object can be reattached after certain time to another object 
+in order to become persistent again. <br />&nbsp;</span></span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>14. What are the core interfaces of Hibernate framework ?</b> <br /><b>Ans:</b>&nbsp;</span></span></span></span><br />
+<ul style="text-align: left;">
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Session Interface:</b>
+ The basic interface for all hibernate applications. The instances are 
+light weighted and can be created and destroyed without expensive 
+process.</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>SessionFactory interface:</b>
+ The delivery of session objects to hibernate applications is done by 
+this interface. For the whole application, there will be generally one 
+SessionFactory and can be shared by all the application threads.</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Configuration Interface:</b>
+ Hibernate bootstrap action is configured by this interface. The 
+location specification is specified by specific mapping documents, is 
+done by the instance of this interface.</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Transaction Interface:</b>
+ This is an optional interface. This interface is used to abstract the 
+code from a transaction that is implemented such as a JDBC / JTA 
+transaction.</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Query and Criteria interface:</b> The queries from the user are allowed by this interface apart from controlling the flow of the query execution. </span></span></span></span></li>
+</ul>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>15. What are the different types of caches in Hibernate ?<br />Ans</b>:
+ Hibernate uses two different caches for objects: first-level cache and 
+second-level cache. First-level cache is associated with the Session 
+object, while second-level cache is associated with the SessionFactory 
+object. By default, Hibernate uses first-level cache on a 
+per-transaction basis. Hibernate uses this cache mainly to reduce the 
+number of SQL queries it needs to generate within a given transaction.<br /><br /><b>16. How does the hibernate second-level cache work ?<br />Ans</b>:
+ Hibernate always tries to first retrieve objects from the session and 
+if this fails it tries to retrieve them from the second-level cache. If 
+this fails again, the objects are directly loaded from the database. 
+Hibernate's static initialize() method, which populates a proxy object, 
+will attempt to hit the second-level cache before going to the database.
+ The Hibernate class provides static methods for manipulation of 
+proxies. <br /><br /><b>17. What is a query cache in Hibernate ?<br />Ans</b>:
+ The query cache is responsible for caching the results and to be more 
+precise the keys of the objects returned by queries. Let us have a look 
+how Hibernate uses the query cache to retrieve objects. In order to make
+ use of the query cache we have to modify the person loading example as 
+follows.<br /><br />Query query = session.createQuery("from Order as o where o.status=?");<br />query.setInt(0, "Active");<br />query.setCacheable(true); // the query is cacheable<br />List l = query.list();<br /><br /><b>18. What is callback interfaces in hibernate?<br />Ans</b>:
+ Callback interfaces of hibernate are useful in receiving event 
+notifications from objects. For example, when an object is loaded or 
+deleted, an event is generated and notification is sent using callback 
+interfaces.<br /><br /><b>19. What is the difference between and merge and update ?<br />Ans</b>:
+ Use update() if you are sure that the session does not contain an 
+already persistent instance with the same identifier, and merge() if you
+ want to merge your modifications at any time without consideration of 
+the state of the session.<br /><br /><b>20. What is the difference between and load() and get() ?<br />Ans</b>: <br /><b>Load() method:</b></span></span></span></span><br />
+<ul style="text-align: left;">
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Only use the load() method if you are sure that the object exists. </span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">load() method will throw an exception if the unique id is not found in the database. </span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">load() just returns a proxy by default and database won't be hit until the proxy is first invoked.</span></span></span></span></li>
+</ul>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>Get() method:</b></span></span></span></span><br />
+<ul style="text-align: left;">
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">If you are not sure that the object exists, then use one of the get()methods.</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">get() will hit the database immediately.</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">get() method will return null if the unique id is not found in the database. </span></span></span></span></li>
+</ul>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>21. What are the different caching strategies ?</b><br /><b>Ans</b>:
+ Read-only: This strategy is useful for data that is read frequently but
+ never updated. This is by far the simplest and best-performing cache 
+strategy.<br />Read/write: Read/write caches may be appropriate if your 
+data needs to be updated. They carry more overhead than read-only 
+caches. In non-JTA environments, each transaction should be completed 
+when Session.close() or Session.disconnect() is called.<br />Nonstrict 
+read/write: This strategy does not guarantee that two transactions won't
+ simultaneously modify the same data. Therefore, it may be most 
+appropriate for data that is read often but only occasionally modified.<br />Transactional: This is a fully transactional cache that may be used only in a JTA environment.<br /><br /><b>22. What are the different fetching strategy in Hibernate ?<br />Ans</b>: Hibernate3 defines the following fetching strategies:<br />Join fetching - Hibernate retrieves the associated instance or collection in the same SELECT, using an OUTER JOIN.<br />Select
+ fetching - a second SELECT is used to retrieve the associated entity or
+ collection. Unless you explicitly disable lazy fetching by specifying 
+lazy="false", this second select will only be executed when you actually
+ access the association.<br />Subselect fetching - a second SELECT is used
+ to retrieve the associated collections for all entities retrieved in a 
+previous query or fetch. Unless you explicitly disable lazy fetching by 
+specifying lazy="false", this second select will only be executed when 
+you actually access the association.Batch fetching - an optimization 
+strategy for select fetching - Hibernate retrieves a batch of entity 
+instances or collections in a single SELECT, by specifying a list of 
+primary keys or foreign keys.<br /><br /><b>23. What is version checking in Hibernate ?</b><br /><b>Ans:</b> version checking used in hibernate when more then one thread trying to access same data.<br />For example :<br />User
+ A edit the row of the TABLE for update ( In the User Interface changing
+ data This is user thinking time) and in the same time User B edit the 
+same record for update and click the update. Then User A click the 
+Update and update done. Chnage made by user B is gone. In hibernate you 
+can perevent slate object updatation using version checking.<br /><br />Check
+ the version of the row when you are upding the row. Get the version of 
+the row when you are fetching the row of the TABLE for update. On the 
+time of updation just fetch the version number and match with your 
+version number ( on the time of fetching). <br /><br /><b>24. Difference between getCurrentSession() and openSession() in Hibernate ?<br />Ans: </b><br /><b>getCurrentSession()</b>:<br />The
+ "current session" refers to a Hibernate Session bound by Hibernate 
+behind the scenes, to the transaction scope. A Session is opened when 
+getCurrentSession() is called for the first time and closed when the 
+transaction ends. <br /><b>openSession()</b>:<br />If you decide to use 
+manage the Session yourself the go for sf.openSession(), you have to 
+flush() and close() it. It does not flush and close() automatically.&nbsp;</span></span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><br /></span></span></span></span>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><b>25. What does session.refresh() do ?</b><br />Ans:
+ It is possible to re-load an object and all its collections at any 
+time, using the refresh() method. This is useful when database triggers 
+are used to initialize some of the properties of the object.<br /><br /><b>26. How to get JDBC connections in hibernate ?</b><br /><b>Ans</b>: User Session.connection() method to get JDBC Connection.<br /><br /><b>27. What&#8217;s the use of session.lock() in hibernate ?</b><br /><b>Ans</b>:
+ session.lock() method of session class is used to reattach an object 
+which has been detached earlier. This method of reattaching doesn&#8217;t 
+check for any data synchronization in database while reattaching the 
+object and hence may lead to lack of synchronization in data.<br /><br /><b>28. What is the difference between the session.update() method and the session.lock() method ? </b><br /><b>Ans</b>:
+ Both of these methods and saveOrUpdate() method are intended for 
+reattaching a detached object. The session.lock() method simply 
+reattaches the object to the session without checking or updating the 
+database on the assumption that the database in sync with the detached 
+object. It is the best practice to use either session.update(..) or 
+session.saveOrUpdate(). Use session.lock() only if you are absolutely 
+sure that the detached object is in sync with your detached object or if
+ it does not matter because you will be overwriting all the columns that
+ would have changed later on within the same transaction. <br /><br /><b>29. What is a SessionFactory?&nbsp;</b> <br /><b>Ans</b>:
+ The SessionFactory is the concept that is a single data store and 
+thread safe. Because of this feature, many threads can access this 
+concurrently and the sessions are requested, and also the cache that is 
+immutable of compiled mappings for a specific database. A SessionFactory
+ will be built only at the time of its startup. In order to access it in
+ the application code, it should be wrapped in singleton. This wrapping 
+makes the easy accessibility to it in an application code.<br /><br /><b>30. Explain about session interface?</b><br /><b>Ans</b>:
+ This represents hibernate session which perform the manipulation on the
+ database entities. Some of the activities performed by session 
+interface are as follows they are managing the persistence state, 
+fetching persisted ones and management of the transaction demarcation.</span></span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;"><br /><b>31. Explain about the dirty checking feature of Hibernate?</b><br /><b>Ans</b>:
+ Dirty checking feature of the Hibernate allows users or developers to 
+avoid time consuming data base write actions. This feature makes 
+necessary updations and changes to the fields which require a change, 
+remaining fields are left unchanged or untouched.<br /><br /><b>32. Explain the steps involved in creating database applications with Java using Hibernate?</b><br /><b>Ans</b>:
+ Creating Database applications with Java is made simpler with 
+Hibernate. First Plain old java object needs to be written, XML mapping 
+file should be created which shows relationship between database and 
+class attributes. Hibernate APIs can be used to store persistent 
+objects.<br /><br /><b>33.Explain about hibernate.cfg.xml?</b><br /><b>Ans</b>:
+ Hibernate can be configured with two types of files out of which 
+hibernate.cfg.xmlis widely used and popular feature. Hibernate consults 
+hibernate.cfg.xml file for its operating properties such as database 
+dialect, connection string and mapping files. These files are searched 
+on class path.<br /><br /><b>34. Explain about mapping description file?</b><br /><b>Ans</b>:
+ Mapping description file is the second file which Hibernate uses to 
+configure its functions. This mapping file has an extension *.hbm which 
+instructs mapping between Java class and database tables. The usage of 
+mapping description file rests entirely upon the business entity.<br /><br /><b>35. Explain about transaction file?</b><br /><b>Ans</b>:
+ Transactions denote a work file which can save changes made or revert 
+back the changes. A transaction can be started by 
+session.beginTransaction() and it uses JDBC connection, CORBA or JTA. 
+When this session starts several transactions may occur.<br /><br /><b>36. Explain about mapping files in Hibernate?</b><br /><b>Ans</b>:
+ Mapping files forms the core of any database mapping tools. These files
+ contain field to field mapping, usually this mapping occurs between 
+classes and attributes. After mapping files they can be persist to the 
+database. Tags can be used to indicate the presence of a primary key.<br /><br /><b>37. What is the effect when a transient mapped object is passed onto a Sessions save?</b><br /><b>Ans</b>:
+ When a session.save( ) is passed to a transient mapped object it makes 
+the method to become more persistent. Garbage collection and termination
+ of the Java virtual machine stays as long as it is deleted explicitly. 
+It may head back to its transient state.<br /><br /><b>38. Explain about version field?</b><br /><b>Ans</b>:
+ Application level data integrity constants are important if you are 
+making changes to offline information which is again backed by database.
+ Higher level locking or versioning protocol is required to support 
+them. Version field usage comes at this stage but the design and 
+implementation process is left to the developer.<br /><br /><b>39. Explain State some advantages of hibernate?</b><br /><b>Ans</b>: Some of the advantages which a developer can get from Hibernate are as follows:<br />Mapping of one POJO table to one table is not required in hibernate.<br />It
+ supports inheritance relationships and is generally a fast tool. 
+Portability is necessary the greater benefit from hibernate. POJOs can 
+be used in other applications where they are applicable.<br /><br /><b>40 Explain about addClass function?</b><br /><b>Ans</b>:
+ This function translates a Java class name into file name. This 
+translated file name is then loaded as an input stream from the Java 
+class loader. This addclass function is important if you want efficient 
+usage of classes in your code.<br /><br /><b>41. Explain about addjar() and addDirectory() methods?</b><br /><b>Ans</b>:
+ These methods are the most convenient to use in hibernate. These 
+methods allow you to load all your Hibernate documents at a time. These 
+methods simplify code configuration, refactoring, layout, etc. These 
+functions help you to add your hibernate mapping to Hibernate 
+initialization files.<br /><br /><b>42. Explain about the id field?</b><br /><b>Ans</b>:
+ This id field corresponds to the surrogate key which is generated by 
+the database. These fields are handled by the id field. Name attribute 
+is used to specify the names of the field and it should correspond to 
+the method name of getid. This also should correspond to long type and 
+the values should be stored I the database in the long column.<br /><br /><b>43. What are the most common methods of Hibernate configuration ?</b><br /><b>Ans</b>:The most common methods of Hibernate configuration are:</span></span></span></span><br />
+<ul style="text-align: left;">
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">Programmatic configuration</span></span></span></span></li>
+<li><span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><span style="font-variant: normal ! important;">XML configuration (hibernate.cfg.xml) </span></span></span></span></li>
+</ul>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b>44. Define cascade and inverse option in one-many mapping ?</b><br /><b>Ans</b>: <br />cascade &#8211; enable operations to cascade to child entities.<br />cascade=&#8221;all|none|save-update|delete|all-delete-orphan&#8221;<br />inverse &#8211; mark this collection as the &#8220;inverse&#8221; end of a bidirectional association.<br /><br /><b>45. Explain Criteria API ?</b><br /><b>Ans</b>:
+ Criteria is a simplified API for retrieving entities by composing 
+Criterion objects. This is a very convenient approach for functionality 
+like &#8220;search&#8221; screens where there is a variable number of conditions to 
+be placed upon the result set.<br />Example :<br />List employees = session.createCriteria(Employee.class)<br />.add(Restrictions.like(&#8220;name&#8221;, &#8220;a%&#8221;) )<br />.add(Restrictions.like(&#8220;address&#8221;, &#8220;Boston&#8221;))<br />.addOrder(Order.asc(&#8220;name&#8221;) )<br />.list();<br /><br /><b>46. How can a whole class be mapped as immutable ?</b><br /><b>Ans</b>:
+ Mark the class as mutable=&#8221;false&#8221; (Default is true),. This specifies 
+that instances of the class are (not) mutable. Immutable classes, may 
+not be updated or deleted by the application.<br /><br /><b>47. What&nbsp; is hibernate tuning ?</b><br /><b>Ans</b>:
+ The key to obtain better performance in any hibernate application is to
+ employ SQL Optimization, session management, and Data caching.<br /><br /><b>48. What is HQL ?</b><br /><b>Ans</b>:
+ HQL stands for Hibernate Query Language. Hibernate allows the user to 
+express queries in its own portable SQL extension and this is called as 
+HQL. It also allows the user to express in native SQL.</span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b>49. How to Execute Stored procedure in Hibernate ?</b><br /><b>Ans</b>: <br />&lt;sql-query name="selectAllEmployees_SP" callable="true"&gt;<br />&lt;return alias="emp" class="employee"&gt;<br />&lt;return-property name="empid" column="EMP_ID"/&gt;<br />&lt;return-property name="name" column="EMP_NAME"/&gt;<br />&lt;return-property name="address" column="EMP_ADDRESS"/&gt;<br />{ ? = call selectAllEmployees() }<br />&lt;/return&gt;<br />&lt;/sql-query&gt;<br /><br /><b>Code</b>:<br />SQLQuery sq = (SQLQuery) session.getNamedQuery("selectAllEmployees_SP");<br />List results = sq.list();&nbsp;</span></span></span><br />
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><br /></span></span></span>
+<span style="font-size: small;"><span style="font-family: Verdana,sans-serif;"><span style="color: #134f5c;"><b>50. What is a meant by light object mapping?<br />Ans:</b>
+ The entities are represented as classes that are mapped manually to the
+ relational tables. The code is hidden from the business logic using 
+specific design patterns. This approach is successful for applications 
+with a less number of entities, or applications with common, 
+metadata-driven data models.</span></span></span></div>

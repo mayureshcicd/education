@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">Nested or Inner interfaces in Java</div>
+
+<p>An interface which is declared inside another interface or class is called nested interface. They are also known as inner interface. Since nested interface cannot be accessed directly, the main purpose of using them is to resolve the namespace by grouping related interfaces (or related interface and class) together.  This way, we can only call the nested interface by using outer class or outer interface name followed by dot( . ), followed by the interface name.</p>
+<p> Note:
+
+<ol>
+    <li>Nested interfaces are static by default. You don’t have to mark them static explicitly as it would be redundant.</li>
+    <li>Nested interfaces declared inside class can take any access modifier, however nested interface declared inside interface is public implicitly.</li>
+   
+</ol>
+</p>
+ 
+
+
+<div class="codeblock"><pre>
+Example 1: Nested interface declared inside another interface
+ package edu.java.basic;
+
+interface MyInterfaceA{  
+    void display();  
+    interface MyInterfaceB{  
+        void myMethod();  
+    }  
+}   
+ class NestedClass  implements MyInterfaceA.MyInterfaceB{
+
+	@Override
+	public void myMethod() {
+		System.out.println("Nested interface method");
+		
+	}}   
+class NestedInterfaceDemo2  {
+    
+     public static void main(String args[]){  
+    	 NestedClass  obj=new NestedClass();  
+        obj.myMethod();  
+     }  
+}
+
+
+<span class="success">Output: Nested interface method</span>
+</pre></div>
+ 
+
+<div class="codeblock"><pre>
+Example 2: Nested interface declared inside a class
+ package edu.java.basic;
+
+package edu.java.basic;
+
+class MyClass{  
+    interface MyInterfaceB{  
+        void myMethod();  
+    }
+}  
+ class NestedClass implements MyClass.MyInterfaceB{
+
+	@Override
+	public void myMethod() {
+		System.out.println("Nested interface method");
+		
+	}}   
+class NestedInterfaceDemo2  {
+    
+     public static void main(String args[]){  
+        MyClass.MyInterfaceB obj=new NestedClass();  
+        obj.myMethod();  
+     }  
+}
+
+
+<span class="success">Output: Nested interface method</span>
+</pre></div>
+<center><h3>An empty interface is known as <span class="error">tag or marker interface.</span> For example Serializable, EventListener, Remote(java.rmi.Remote) are tag interfaces.</h3></center>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<h3>Short &amp; Quick introduction to REST</h3>
+<p><b>REST</b> 
+stands for Representational State Transfer. It’s an is an architectural style which can be used to design web services, 
+that can be consumed from a variety of clients. The core idea is that, rather than using complex mechanisms such as CORBA, RPC or SOAP to connect between machines, 
+simple HTTP is used to make calls among them.</p>
+
+<p>In Rest based design, resources are being manipulated using a common set of verbs. </p>
+<ul>
+<li>To Create a resource : HTTP POST should be used</li>
+<li>To Retrieve a resource : HTTP GET should be used</li>
+<li>To Update a resource : HTTP PUT should be used</li>
+<li>To Delete a resource : HTTP DELETE should be used</li>
+</ul>
+<p>
+That means, you as a REST service developer or Client, should comply to above criteria, in order to be REST complained.
+
+Often Rest based Web services return JSON or XML as response, although it is not limited to these types only. 
+Clients can specify (using HTTP Accept header) the resource type they are interested in, and server may return the resource , 
+specifying Content-Type of the resource it is serving.
+</p>
+
+<p><strong>Detailed Explanation :</strong></p>
+<p><strong>@RestController</strong> : First of all, we are using Spring 4's new @RestController annotation. This annotation eliminates the need of annotating each method with @ResponseBody. Under the hood, @RestController is itself annotated with @ResponseBody, and can be considered as combination of @Controller and @ResponseBody.</p>
+<p><strong>@RequestBody</strong> : If a method parameter is annotated with @RequestBody, Spring will bind the incoming HTTP request body(for the URL mentioned in @RequestMapping for that method) to that parameter. While doing that, Spring will [behind the scenes] use <b>HTTP Message converters</b> to convert the HTTP request body into domain object [deserialize request body to domain object], based on ACCEPT or Content-Type header present in request.</p>
+<p><strong>@ResponseBody</strong> : If a method is annotated with @ResponseBody, Spring will bind the return value to outgoing HTTP response body. While doing that, Spring will [behind the scenes] use <b>HTTP Message converters</b> to convert the return value to HTTP response body [serialize the object to response body], based on Content-Type present in request HTTP header. As already mentioned, in Spring 4, you may stop using this annotation.</p>
+<p><strong>ResponseEntity</strong>  is a real deal. It represents the entire HTTP response. Good thing about it is that you can control anything that goes into it. You can specify status code, headers, and body. It comes with several constructors to carry the information you want to sent in HTTP Response.</p>
+<p><strong>@PathVariable</strong> This annotation indicates that a method parameter should be bound to a URI template variable [the one in '{}'].</p>
+<p>Basically, @RestController , @RequestBody, ResponseEntity &amp; @PathVariable are all you need to know to implement a REST API in Spring 4. Additionally, spring provides several support classes to help you implement something customized.</p>
+<p><strong>MediaType :</strong> With @RequestMapping annotation, you can additionally, specify the MediaType to be produced or consumed (using <strong>produces</strong> or <strong>consumes</strong> attributes) by that particular controller method, to further narrow down the mapping.</p>
+<p><strong><br>
+

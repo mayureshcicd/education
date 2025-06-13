@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<h3>The process of saving the state of object to the file, This process is called Serialization. But Strictly speaking it is<br>
+The process of converting an object from <b><u>"Java supported form"</u></b> to  <b><u> "File supported form" or "Network supported form" </u></b>this conversion process is called Serialization.<br>
+<u>In Serialization we saves the data permantantly for future purpose. But while saving data there may be chance of sensitive/secure Data Information.</u><br>
+In Serialization, If you don't want to save the secured/Sensitive data Information (for security purpose) then such type of variables must be declared with <b>transient Modifier</b>.<br>
+The Serialization concept is applicable only for Object and not for Class.
+</h3>
+<h3>The process of reading the state of an object from the file ("File supported form" or "Network supported form") is called de-serialization. But Strictly speaking it is<br>
+The process of converting object from <b><u> "File supported form" or "Network supported form" </u></b> To <b><u>"Java supported form"</u></b>.   this conversion process is called de-serialization.
+</h3>
+<h1>How we can implementing the Serialization.</h1>
+<ul>
+<li>Create "File output Stream"</li>
+<li>Crearte "Object output Stream"</li>
+<li>"Object output Stram " take the Object data and convert into binary data and "File output Stream" write the Binary data by using (writeObject() Method ) in to file. Then extension of file is (.ser)</li>
+</ul>
+
+<h1>How we can implementing the De-Serialization.</h1>
+<ul>
+<li>If you want read the Binary data from File then "File output Stream" is required</li>
+<li>"File output Stream" reads the Binary data and "Object output Stream" reads  data by using(readObject() Method ) and creates the object.</li>
+</ul>
+ 
+ 
+<div class="nolinkBHEAD">What is serialization</div>
+ <p>serialization is converting an object to stream of bytes.</p>
+ 
+ <div class="nolinkBHEAD">What is de-serialization</div>
+ <p> de-serialization is rebuilding the object from stream of bytes.</p>
+ <p>Java Serialiation API provides the features to perform seralization & de-serialization. 
+ A class must implement <b><u>java.io.Serializable</u></b> interface to be eligible for serialization.
+ class implements Serializable interface which means it can be serialized. All the fields of this class 
+ can be written to a file after being converted to stream of bytes, <b><u>except those fields that are declared transient.</u></b> 
+ </p>
+ <img src="img/serialization.png"/>
+ <img src="img/de-serialization.png"/>
+ 
+ <div class="codeblock"><pre>
+Example :  
+
+package edu.java.basic;
+
+import java.io.Serializable;
+
+public class Student implements Serializable{
+ 
+	private static final long serialVersionUID = 7173498740102156356L;
+	private int stuRollNum;
+	private int stuAge;
+	private String stuName;
+	private transient String stuAddress;
+	private transient int stuHeight;
+
+	public Student(int roll, int age, String name,String address, int height) 
+	{
+		this.stuRollNum = roll;
+		this.stuAge = age;
+		this.stuName = name;
+		this.stuAddress = address;
+		this.stuHeight = height;
+	}
+
+	public int getStuRollNum() {
+		return stuRollNum;
+	}
+	public void setStuRollNum(int stuRollNum) {
+		this.stuRollNum = stuRollNum;
+	}
+	public int getStuAge() {
+		return stuAge;
+	}
+	public void setStuAge(int stuAge) {
+		this.stuAge = stuAge;
+	}
+	public String getStuName() {
+		return stuName;
+	}
+	public void setStuName(String stuName) {
+		this.stuName = stuName;
+	}
+	public String getStuAddress() {
+		return stuAddress;
+	}
+	public void setStuAddress(String stuAddress) {
+		this.stuAddress = stuAddress;
+	}
+	public int getStuHeight() {
+		return stuHeight;
+	}
+	public void setStuHeight(int stuHeight) {
+		this.stuHeight = stuHeight;
+	}
+}
+
+
+ 
+</pre></div>
+
+<div class="nolinkBHEAD">Serialization of Object</div>
+<p>This class is writing an object of Student class to the Student.ser file. We are using FileOutputStream and ObjectOutputStream to write the object to File.</p>
+<p>
+<b>Note :- </b>
+Note: As per the best practices of Java Serialization, the file name should have <b><u>.ser extension.</u></b>
+</p>
+
+<div class="codeblock"><pre>
+Example : Serialzation example
+package edu.java.basic;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+public class SendClass
+{
+  public static void main(String args[])
+  {
+    Student obj = new Student(101, 25, "Chaitanya", "Agra", 6);
+    try{ 
+      FileOutputStream fos = new FileOutputStream("Student.ser"); 
+      ObjectOutputStream oos = new ObjectOutputStream(fos);
+      oos.writeObject(obj);
+      oos.close();
+      fos.close();
+      System.out.println("Serialzation Done!!");
+   }catch(IOException ioe){
+      System.out.println(ioe);
+    }
+  }
+}
+
+
+<span class="success">Output: Serialzation Done!!</span>
+ 
+</pre></div>
+
+<div class="nolinkBHEAD">De-serialization of Object</div>
+
+<p>This class would rebuilt the object of Student class after reading the stream of bytes from the file. Observe the output of this class, student address and student height fields are having null & 0 values consecutively. This is because these fields were declared transient in the Student class.</p>
+
+
+<div class="codeblock"><pre>
+Example : De-serialization example
+package edu.java.basic;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.IOException;
+public class AcceptClass {
+
+ public static void main(String args[])
+ {
+    Student o=null;
+    try{
+      FileInputStream fis = new FileInputStream("Student.ser");
+      ObjectInputStream ois = new ObjectInputStream(fis);
+      o = (Student)ois.readObject();
+      ois.close();
+      fis.close();
+    }
+    catch(IOException ioe)
+    {
+       ioe.printStackTrace();
+       return;
+    }catch(ClassNotFoundException cnfe)
+     {
+       System.out.println("Student Class is not found.");
+       cnfe.printStackTrace();
+       return;
+     }
+    System.out.println("Student Name:"+o.getStuName());
+    System.out.println("Student Age:"+o.getStuAge());
+    System.out.println("Student Roll No:"+o.getStuRollNum());
+    System.out.println("Student Address:"+o.getStuAddress());
+    System.out.println("Student Height:"+o.getStuHeight());
+ }
+}
+
+
+<span class="success">
+Student Name:Chaitanya
+Student Age:25
+Student Roll No:101
+Student Address:null
+Student Height:0
+</span>
+ 
+</pre></div>
+
+ 
+<h1>Serializable Interface</h1>
+<ul>
+<li>Serializable Interface are present in <b>java.io.Serializable</b> Package</li>
+<li>Serializable Interface  does not contain any methods, so it is also called <b>Marked Interface</b></li>
+</ul>
+
+ <img src="img/seri-exam.png"/>
+ <img src="img/transient.png"/>
+ <h1>What is the role/use of <b>Transient</b> in Serializable</h1>
+ <ul>
+ <li><b>Transient</b> is Modifier and it is applicable only for variables.and not applicable for (methods & classes)</li>
+ <li><u>In Serialization we saves the data permantantly for future purpose. But while saving data there may be chance of sensitive/secure Data Information.</u><br>
+	In Serialization, If you don't want to save the secured/Sensitive data Information (for security purpose) then such type of variables must be declared with <b>transient Modifier</b>.</li>
+ <li>At the time of Serialization, JVM will check all the Transient variable and if found then JVM will ignore value of that transient variable and will save default value in the file. </li>
+ <li>Transient means not to serialize.</li>
+  </ul>
+  <ul>
+ <li><h3>If we declare a <b>static</b> variable as Transient</h3>
+ <ol>
+	<li><b>static</b> variables means <u>Class Level</u>Data.</li>
+	<li><b>static</b> variables are not part of Class Object. so it never saves in file while Serialization</li>
+	<li>The Serialization concept is applicable only for Object and not for Class.</li>
+	<li>There is no use to declare static variable as transient </li>
+	<li><img src="img/trans-static.png"/></li>
+ </ol>
+ 
+ </li>
+  </ul>
+  
+  <ul>
+ <li><h3>If we declare a <b>final</b> variable as Transient</h3>
+ <ol>
+ <li><b>Final</b> variables means <b>constant</b> variables</li>
+ <li><b>Final</b> variables never going to change.</li>
+ <li>At a compile time Every final variable will be replaced by value</li>
+ <li>At a runtime , final variable not will be in variable form.</li>
+ <li>There is no use to declare final variable as transient </li>
+ <li><img src="img/trans-final.png"/></li>
+ </ol>
+  </li>
+ </ul>
+ <h1> What is Object Graph in Serialization.</h1>
+ <ul>
+ <li>Whenever we serialize of Class object, the set of all objects, which are reachable from class object will be seriazable automatically.This group of object is nothing but Object Graph in Serialization.</li>
+ <li><img src="img/object-graph.png"/></li>
+ </ul>
+ <img src="img/obhect_graph.png"/>
+ <h1>Customized Serialization</h1>
+ <p>
+ In the normal/default Serialization, every thing take care by JVM. some time we may not satisfy with normal/default serialization, then we can go for customized serialization.
+ <h3>What is the need of Customized Serialization</h3>
+ </p>
+ <img src="img/custom-ser.png"/>
+ <img src="img/implement-custom.png"/>
+ <img src="img/cust-ser-1.png"/>
+ <ul>
+ <li><h3>What is the need of customized Serialization</h3> To recover loss of information because of transient variable.</li>
+ </ul>
+ <img src="img/cust-ser-2.png"/>
+ 
+ <h1>Serialization with Respect to Inheritance</h1>
+ <ul>
+ <li>
+ <h3><b>CASE 1 : -</b>in inheritance , Parent class implements serialization but child class not implements serialization.</h3>
+	 <ul>
+		<li>seralizable nature in inheritance is from parent class to child class</li>
+		<li>If the Parent class implements serialization then by default automatically child class implements serialization.</li>		
+	 </ul>
+ </li>
+ <li>
+  <h3><b>CASE 2 : -</b>in inheritance ,  Parent class not implements serialization but child class implements serialization.</h3>
+ 	<ul>
+		<li>To serialize child class object Parent class need not to be seralizable, even though  parent class doesn't implement Serialization, happlily we can serialize the child class.</li>
+		<li>To serialize the child class object Parent class need not to be seralizable</li>
+		<li>At the time of Serialization, JVM will check is any instance varible inheriting from non-seralizable parent class, then JVM ignores the orignal/updated values. and set the default values.</li>
+		<li>At the time of De-Serialization,JVM will check is any parent class is non-seralizable or not. if any parent class is non-seralizable then JVM will execute instance control flow in every non-seralizable parent class and shares it's instance variable's values to the current object.</li>
+		<li><h3>What is instance control flow</h3> 
+		<ol>
+			<li>it is identification of instance members</li>
+			<li>it is a execution of instance variable assignments and instance blocks</li>
+			<li>it is a execution of constructor, that means JVM will always called <u>no argument constructor</u> from non-seralizable parent class, so every non-seralizable parent class have <u>no argument constructor</u>. If <u>no argument constructor</u> nont found in non-seralizable parent class then
+			we will get runtime exeception <span class="error">InvalidClassException</span>
+			</li>
+		</ol>	
+		</li>
+			
+	</ul>
+ </li>
+ </ul>
+ 
+ <img src="img/ser-inhe.png" />
+ <h1>SOME IMPORTANT ABOUT SERIALIZATION</h1>
+ <ul>
+ <li><h3>In Serialization, Every thing take care by JVM and programmers does not have any control</h3></li>
+ <li><h3>In Serialization, always save all object in file and it is not possible to save selected part/properties/variables of the object. so it create impacts on performance.</h3></li>
+ <li>If you want to save toal properties of object in file , then you go for Serialization</li>
+ <li>seralizable interface does not have any method , so it is called Marker interface </li>
+ <li><h1>To overcome this problem , we go for Externalization concept.</h1></li>
+ <li>Externalizable interface is child interface of seralizable interface</li>
+ <li><h3> What is the advantage of EXternalization</h3></li>
+ <li>In Externalization, Every thing take care by programmer and JVM does not have any control</li>
+ <li>In Externalization, We can save total properties/variable or selected  part/properties/variables of the object in file. so it increase the performance.</li>
+ <li>If you want to save selected properties of object in file , then you go for Externalization</li>
+ <li>To provide Externalization in java , <b><u>we should implement Externalizable interface</u></b></li>
+ <li>In Externalization, at the time of De-Serialization, a JVM will create a seperate (properties/variables) which are not taken while Serialization.</li>
+ <li> JVM will always called <u>no argument constructor</u> from Externalizable implemented class, so every Externalizable implemented class have <u>no argument constructor</u>. If <u>no argument constructor</u> nont found in Externalizable implemented class then
+we will get runtime exeception <span class="error">InvalidClassException</span></li>
+ <li>Externalizable interface have two methods
+	<ol>
+		<li><h3>writeExternal(ObjectOutput out) throws IoException</h3>
+			<ol>
+				<li><b>writeExternal</b> will be executed automatically at the time of Serialization</li>
+				<li>In <b>writeExternal</b> method , we write the code to save required properties/variables in the file.</li>
+			</ol>
+		
+		</li>
+		<li><h3>readExternal(ObjectInput in) throws IoException, ClassNotFoundException</h3>
+		
+			<ol>
+				<li><b>readExternal</b> will be executed automatically at the time of De-Serialization</li>
+				<li>In <b>readExternal</b> method , we wrie the code to read required properties/variables from the file and assign it to current object.</li>
+			</ol>		
+		</li>
+	</ol>
+ </li>
+ </ul>
+ <h1>seralizable and Externalizable interfaces are introduced in java 1.1 version</h1>
+ <img src="img/Externalization.png"/>
+ <img src="img/exter-1.png"/>
+ <h1>SerialVersionUID in Serialization</h1>
+ <ul>
+ <li>In Serialization and  De-Serialization , sender and receiver need not be same,locaction may be different, persons may be different, operating systems may be difference.</li>
+ <li>While Serialization  Sender side JVM will create the Unique Id and at the time of De-Serialization , Receiver side JVM will check that Unique Id in it's Local class, if (Sender side Unique ID an Receiver side Unique ID) both are matched then De-Serialization process will be completed. if Both Unique ID mis-matched then
+we will get runtime exeception <span class="error">InvalidClassException</span> at Receiver side.  </li>
+<li>This Unique ID saved in object is nothing but SerialVersionUID. </li>
+<li><h3>Every object, at the time of Serialization Sender side JVM will save one Unique ID.This Unique ID is nothing but SerialVersionUID. Receiver side JVM will use this Unique ID to verify the Object is correct or not. </h3></li>
+ </ul>
+ <h1>Problems of depending on default SerialVersionUID generated by JVM.</h1>
+ <ul>
+ <li>If we are depending on default SerialVersionUID generated by JVM, then Both (Sender and Receiver) should use same JVM versions, same .class file versions. and there may be chance of performance problem because internally JVM use complex alogirithm to generate SerialVersionUID.</li>
+ <li>To overcome this problem. we have to generate SerialVersionUID.</li>
+ </ul>
+ <img src="img/ser-ext.png"/>
+ <img src="img/ser-uid.png"/>
+</div>
+</body>
+</html>

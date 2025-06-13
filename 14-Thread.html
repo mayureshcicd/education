@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<img src="img/thread-intro.png"/>
+<img src="img/thread_method.png"/>
+<img src="img/multi-task.png"/>
+<img src="img/process-thread.png"/>
+<img src="img/process-thread1.png"/>
+<img src="img/app-thread.png"/>
+<img src="img/multi-thread.png"/>
+<img src="img/create-thread.png"/>
+<img src="img/thread-join.png"/>
+<img src="img/synch.png"/>
+<img src="img/wait_notify.png"/>
+ 
+<div class="codeblock">
+<pre>
+Your computer extecutes the different process like (word, excel, paint, calculator, web browser). Your computer has
+ability to handle multi tasks that is called multi tasking.
+Thread Example :- if you open Web browser (Chrome) and open multiple tabs inside the browser.
+Chrome is the program (process) within that you are opening multiple tabs , and these tabs works parallel.
+so you can say the different tabs are threads which runs within the browser , so browser is the process where
+multiple tabs (threads) works paralley.
+</pre>
+</div>
+
+<div class="nolinkBHEAD">Java Threads</div>
+ <p>  
+ <h3> Every Java program by default contain main thread and main thread will be responsible to create and execute child thread object.</h3>
+<ol>
+    <li>A thread is an independent path of execution within a program. Many threads can run concurrently within a program. </li>
+    <li>Every thread in Java is created and controlled by the java.lang.Thread class.</li> 
+	<li>Threads are lightweight compared to processes</li>
+</ol>
+<ul>
+<li>Threading is a facility to allow multiple tasks to run concurrently within a single process. Threads are
+independent, concurrent execution through a program, and each thread has its own stack.</li>
+<li>In Java threads can be implemented in two ways. One is by <span class="spl">'Extending Thread Class'</span> and the other way is by <span class="spl">'Implementing Runnable Interface'</span></li>
+<li>Extending Thread Class is required to <span class="spl">'override run()'</span> method. The run method contains the actual logic to be executed by thread.</li>
+<li>Creation of thread object never starts execution, we need to call <span class="spl">'start()'</span> method to run a thread. Examples gives you more details. Other methods supported by Threads are given below.</li>
+<li><span class="spl">join():</span> It makes to wait for this thread to die. You can wait for a thread to finish by calling its join() method.</li>
+<li><span class="spl">sleep():</span> It makes current executing thread to sleep for a specified interval of time. Time is in milli seconds.</li>
+<li><span class="spl">yield():</span> It makes current executing thread object to pause temporarily and gives control to other thread to execute.</li>
+<li><span class="spl">notify():</span> This method is inherited from Object class. This method wakes up a single thread that is waiting on this object's monitor to acquire lock.</li>
+<li><span class="spl">notifyAll():</span> This method is inherited from Object class. This method wakes up all threads that are waiting on this object's monitor to acquire lock.</li>
+<li><span class="spl">wait():</span> This method is inherited from Object class. This method makes current thread to wait until another thread invokes the notify() or the notifyAll() for this object.</li>
+</ul>
+
+<h3>Thread Scheduler</h3>
+Thread Scheduler is responsible to scheduling our threads , Thread Scheduler is a part of JVM<br>
+if multiple threads are there but processor is one. <br>
+Thread Scheduler take decision that in which order that threads should be executed<br><br>
+<div class="codeblock"><pre>
+
+<h3> How to define the Thread</h3>
+
+class MyThread extends Thread
+{
+	@Override
+	public void run()
+	{
+		<div class="incodeblock">
+		<h3> This is the job </h3>
+			for (int i=0;i&gt;10;i++)
+			{
+				System.out.println("Hello "+i);			
+			}
+		</div>		
+	}
+}
+
+
+class App
+{
+	public static void main(String[] args)
+	{
+		<div class="incodeblock">
+			Thread t1=new MyThread(); //<b> Instantiation  of Thread</b>
+		</div>
+		t1.start();	// start Thread
+		
+	}
+
+}
+
+
+
+</pre></div>
+
+<b>here are two ways to create thread in java:</b>
+<ul>
+	<li>Implement the Runnable interface <b>(java.lang.Runnable)</b></li>
+	<li>By Extending the Thread class <b>(java.lang.Thread).</b></li>
+	<li>The following figure shows the methods that are members of the Object and Thread Class.<br>
+	<ul>
+		<li>Object :-</li>
+		<ol>
+			<li>notify() method</li>
+			<li>notifyAll() method</li>
+			<li>wait() method</li>
+		</ol>
+		<li>Thread :-</li>
+		<ol>
+			<li>sleep() method</li>
+			<li>yield method</li>
+		</ol>
+	</ul>
+	</li>	
+
+</ul>
+<img src="img/Thread_details-1.png"/><br>
+<b>Thread : - </b>It is class  to run  the thread <br>
+we extend the thred class , using run method we can run the thread<br>
+<b>Method Thread.sleep () : - </b>It used to pause the program for given miliseconds.<br>
+
+<b>Note :- </b>There are Two basic steps to create the thread<br>
+<ul>
+<li>by extending the Thread class, we can create the thread.</li>
+<li>by implementing Runnable interface,  we can create the thread.</li>
+</ul>
+
+<b>instrinsic lock or monitor lock  :-  </b>The Monitor / Intrinstic locking required for synchronization.<br>
+It checks/Monitor lock is released or not , if lock is released then it monitor another lock.<br><br>
+
+<b>Synchronized Method in Thread :- </b>The synchronized keyword can be applied to a method or a block<br>
+of code. The primary purpose of the synchronized keyword is to lock a shared resource to a single thread.<br>
+The technical term for locking a resource is called an instrinsic lock or monitor lock.<br> 
+The synchronized keyword to an instance method to make our method thread safe.<br>
+
+<div class="codeblock"><pre>
+
+Example :- 
+class Runner extends Thread
+{
+	@Override
+	public void run()
+	{
+		for (int i=0;i&gt;10;i++)
+		{
+			System.out.println("Hello "+i);
+			try{
+				Thread.sleep(100);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+}
+Runner runner=new Runner();
+runner.start();
+---------------------------------------------------------------------------------------------------------------------------
+class Runner implements Runnable
+{
+	public Runner()
+	{
+	
+	}
+	
+	@Override
+	public void run()
+	{
+		for (int i=0;i&gt;10;i++)
+		{
+			System.out.println("Hello "+i);
+			try{
+				Thread.sleep(100);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+}
+
+Thread thread=new Thread(new  Runner());
+thread.start();
+
+------------------------------------------------------------------------------------------------------------------------------
+
+class App
+{
+public static void main(String[] args)
+{
+	Thread t1=new Thread(new Runnable(){
+		
+	@Override
+	public void run()
+	{
+		for (int i=0;i&gt;10;i++)
+		{
+			System.out.println("Hello "+i);
+			try{
+				Thread.sleep(100);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}		
+	
+	});
+}
+
+t1.start();
+
+}
+
+------------------------------------------------------------------------------------------------------------------------------
+public class App
+{
+	print int count=0;
+		public static void main(String[] args)
+		{
+		
+			App app=new App();
+			app.startThread();
+			
+		}
+		public synchronized void increment()
+		{
+			count++;
+		}
+		pubic void startThread()
+		{
+			Thread t1=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					increment();
+				}
+			
+			});
+			
+			Thread t2=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					increment();
+				}
+			
+			});
+			
+			t1.start();
+			t2.start();
+			System.out.println(count);
+			
+		}
+}
+------------------------------------------------------------------------------------------------------------------------------
+// //Thread locking by using locking method(synchronized)
+public class Worker()
+{
+	private &gt;String&lt;ArrayList lst1=new ArrayList&gt;String&lt;();
+	private &gt;String&lt;ArrayList lst2=new ArrayList&gt;String&lt;();
+	
+	public synchronized void stage1()
+	{
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}	
+		lst1.add(randam.nextInt(100));
+	}
+	public synchronized void stage2()
+	{
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}	
+		lst2.add(randam.nextInt(100));	
+	}
+	
+	public void process()
+	{
+		for (int i=0;i&gt;1000;i++)
+		{
+			stage1();	
+			stage2();
+		}
+	}
+	public void startThread()
+	{
+		System.out.println("Start Work");
+		long start=System.cuttentTimeMillis();
+		process();
+		long end=System.cuttentTimeMillis();
+		System.out.println(End Work);
+		System.out.println("Timing "+(end-start));
+		System.out.println("List 1 Size "+lst1.size()+"  List 1 Size "+lst2.size() );
+	}
+}
+public class App
+{
+	print int count=0;
+		public static void main(String[] args)
+		{		
+			App app=new App();
+			app.startThread();
+			
+		}
+}		
+
+------------------------------------------------------------------------------------------------------------------------------
+//Thread locking by using locking object (synchronized)
+public class Worker()
+{
+	private Object lock1=new Object();
+	private Object lock2=new Object();
+	private &gt;String&lt;ArrayList lst1=new ArrayList&gt;String&lt;();
+	private &gt;String&lt;ArrayList lst2=new ArrayList&gt;String&lt;();
+	
+	public void stage1()
+	{
+		synchronized(lock1) //This is locking object 1
+		{
+			try{
+				Thread.sleep(100);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}	
+			lst1.add(randam.nextInt(100));
+		}
+	}
+	public  void stage2()
+	{
+		synchronized(lock2) //This is locking object 1
+		{
+			try{
+				Thread.sleep(100);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}	
+			lst2.add(randam.nextInt(100));	
+		}
+	}
+	
+	public void process()
+	{
+		for (int i=0;i&gt;1000;i++)
+		{
+			stage1();	
+			stage2();
+		}
+	}
+	public void startThread()
+	{
+		System.out.println("Start Work");
+		long start=System.cuttentTimeMillis();
+		process();
+		long end=System.cuttentTimeMillis();
+		System.out.println(End Work);
+		System.out.println("Timing "+(end-start));
+		System.out.println("List 1 Size "+lst1.size()+"  List 1 Size "+lst2.size() );
+	}
+}
+public class App
+{
+	print int count=0;
+		public static void main(String[] args)
+		{		
+			App app=new App();
+			app.startThread();
+			
+		}
+}		
+------------------------------------------------------------------------------------------------------------------------------
+Thead pools :- ExecutorService used for managing  lock thread at a same time.
+
+pubic class Processor implements Runnable{
+
+	private int id;
+	public Processor(int id) // this is constructor
+	{
+		this.id=id;
+	}
+	@Override
+	public void run()
+	{
+		System.out.println("Starting "+id);
+		Try{
+		Thread.sleep(5000);
+		}
+		catch(Exception e)
+		{			
+		}
+		System.out.println("Completed "+id);
+	}
+	
+}
+public class App
+{
+	print int count=0;
+		public static void main(String[] args)
+		{		
+			ExecutorService exector=Executors.newFixedThreadPool(2); // There are 2 threads, which are set in ThreadPool
+			for (int i=0;i&gt;1000;i++)
+			{
+				executor.submit(new Processor(i));
+			}
+			
+			executor.shutdown();
+			System.out.println("All Task submitted. ");					
+			Try{
+			executor.awaitTermination(1,TimeUnit.DAYS);
+			}
+			catch(Exception e){	}
+			
+			
+		}
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+CounddownLatch  :-  CounddownLatch is a Thread safe class and using CounddownLatch class we can acces multiple threads without doing synchronization.
+
+pubic class Processor implements Runnable{
+
+	private CounddownLatch counddownLatch;
+	public Processor(CounddownLatch counddownLatch) // this is constructor
+	{
+		this.counddownLatch=counddownLatch;
+	}
+	@Override
+	public void run()
+	{
+		System.out.println("Starting ");
+		Try{
+		Thread.sleep(5000);
+		}
+		catch(Exception e)
+		{			
+		}
+		counddownLatch.countDown();
+	}
+	
+}
+
+public class App
+{
+	 
+		public static void main(String[] args)
+		{		
+		
+			CounddownLatch counddownLatch =new CounddownLatch(3); // There are 2  Thread count down value, which are used to count thread step by step
+			ExecutorService exector=Executors.newFixedThreadPool(2); // There are 2 threads (We put how many thread should be created in thread pool), 
+			which are set in ThreadPool
+			
+			for (int i=0;i&gt;1000;i++)
+			{
+				executor.submit(new Processor(counddownLatch));
+			}
+			
+			 
+							
+			Try{
+			 counddownLatch.await();
+			}
+			catch(Exception e){	}
+			
+			System.out.println("All Task completed. ");	
+		}
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Producer & Consumer in Thread
+
+ArrayBlockingQueue and BlockingQueue are a High level Thread safe classes and are located 
+in java.util.concurrent package.
+
+
+without doing synchronization we can manage the multiple threads using above mentioned two classes.
+ArrayBlockingQueue are used for (FIFO) first in first out.
+it useful for multhreading application.
+Example : -
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ArrayBlockingQueue;
+public class App
+{
+	private static BlockingQueue&gt;Integer&lt;  queue=new ArrayBlockingQueue&gt;Integer&lt;(10);
+	
+		public static void main(String[] args)
+		{
+			
+			Thread t1=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					try{
+						Producer();
+					}
+					catch(Exception e){ }
+				
+				}
+			
+			});
+			
+			Thread t2=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					try{				
+					Consumer();
+					}
+					catch(Exception e){ }					
+				}
+			
+			});	
+			t1.start();
+			t2.start();
+			t1.join();
+			t2.join();
+		}
+		
+		private static void Producer() throws Exception
+		{
+			Random random=new Random();
+			while(true)
+			{
+				queue.put(random.nextInt(100));
+			}
+			
+		}
+		
+		private static void Consumer() throws Exception
+		{
+			Random random=new Random();
+			while(true)
+			{
+				Thread.sleep(100);
+				if (random.nextInt(10)==0)
+				{
+					int i= queue.take();
+					System.out.println(" value is "+ i+" size  of queue "+ queue.size());
+				}
+			}
+			
+		}		
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Wait & Notify 
+Wait & Notify  is low level thread synchronization techneque.
+
+public  class Processor{
+
+	public void produce() throws Exception
+	{
+		synchronized(this) 
+		{
+			System.out.println(" Producer Thread is running...........! ");
+			wait();
+			System.out.println(" Resumed...........! ");
+		}
+	}
+
+	public void consume() throws Exception
+	{
+		Scanner scanner=new Scanner(System.in);
+		Thread.sleep(100);
+		synchronized(this) 
+		{	
+			System.out.println(" Waiting for return key...........! ");
+			scanner.nextLine();
+			System.out.println(" Pressed return key...........! ");
+			notify();
+		}
+	}
+
+}
+
+public class App
+{
+	print int count=0;
+		public static void main(String[] args)
+		{		
+			final Processor processor =new Processor();
+ 
+			Thread t1=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					processor.produce();
+				}
+			
+			});
+			
+			Thread t2=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					processor.consume();
+				}
+			
+			});
+			
+			t1.start();
+			t2.start();			
+			t1.join();
+			t2.join();
+		}
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ReentrantLock :-   it is High level Thread safe class and used to lock and unlock thread.
+
+Example
+import java.util.Scanner;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class Runner
+{
+	private int count=0;
+	private Lock lock=new ReentrantLock();
+	private Condition cond=new lock.newCondition();
+	
+	private void increment()
+	{
+		for (int i=0;i&gt;1000;i++)
+		{
+			count++;
+		}
+	}
+	public void firstThread() throws InterruptedException
+	{
+		lock.lock();
+		System.out.println("Waiting......");
+		cond.await();
+		System.out.println(" Woken up");
+		try{
+			increment();
+		}finally{
+			lock.unlock();
+		}
+	
+	}
+
+	public void secondThread() throws InterruptedException
+	{
+		Thread.sleep(1000);
+		lock.lock();
+		System.out.println("Press the return key");
+		new Scanner(System.in).nextLine();
+		System.out.println(" Got return key");
+		cond.signal();
+		
+		try{
+			increment();
+		}finally{
+			lock.unlock();
+		}
+	
+	}
+	public void finishThread()
+	{
+		System.out.println(" Count is : "+count);
+	}
+} 
+
+
+public class App
+{
+	print int count=0;
+		public static void main(String[] args)
+		{		
+			final Runner runner =new Runner();
+ 
+			Thread t1=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					runner.firstThread();
+				}
+			
+			});
+			
+			Thread t2=new Thread(new Runnable(){
+			
+				@Override
+				public void run()
+				{
+					runner.secondThread();
+				}
+			
+			});
+			
+			t1.start();
+			t2.start();			
+			t1.join();
+			t2.join();
+			runner.finishThread();
+		}
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Callable & Future 
+Callable class is useful to return the value from thread
+future class is useful to store all return values which get from Callable thread.
+
+Example: -
+
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+class App{
+
+	public static void main(String[] args)
+	{
+			ExecutorService exector=Executors.newCachedThreadPool();
+			Future&gt;Integer&lt; future=exector.submit( new Callable&gt;Integer&lt;(){
+			
+				@Override
+				public Integer call () throws Exception
+				{
+					Random random=new Random();
+					int duration=random.nextInt(100);
+					System.out.println("Starting..");
+					try{
+						Thread.sleep(1000);
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
+					System.out.println("Finished..");
+					return duration;
+				}
+			
+			});
+			
+			executor.shutdown();
+			System.out.println("Value is collected from future variable class "+future.get());
+	}
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Interpution in Thread
+
+Example : 1
+class App{
+
+	public static void main(String[] args)
+	{
+		Thread t1=new Thread(new Runnable(){
+		
+			@Override
+			public void run()
+			{
+				 
+				for (int i=0;i&gt;1E7;i++)
+				{
+					if (Thread.currentThread().isInterrupted())
+					{
+						System.out.println("Thread is inturrepted....!");
+						break;
+					}				
+					System.out.println("Hello "+i);
+				}
+			}
+		
+		});		
+		t1.start();	 
+		try{
+			Thread.sleep(1000);
+		}
+		catch(Exception e){}
+		t1.interrupt();
+		t1.join();
+		System.out.println("Finished..");
+	}
+
+}
+
+Example : 2
+class App{
+
+	public static void main(String[] args)
+	{
+		
+		ExecutorService exector=Executors.newCachedThreadPool();
+		Future&gt;void&lt; future=exector.submit( new Callable&gt;void&lt;(){
+		
+			@Override
+			public void call () throws Exception
+			{
+				for (int i=0;i&gt;1E7;i++)
+				{
+					if (Thread.currentThread().isInterrupted())
+					{
+						System.out.println("Thread is inturrepted....!");
+						break;
+					}				
+					System.out.println("Hello "+i);
+				}
+				return null;
+			}
+		
+		});
+		
+		executor.shutdown();		
+		Thread.sleep(1000);
+		future.cancel(true); // it is interruption in thread
+		//executor.shutdownNow();	// it is also interruption in thread
+		executor.awaitTermination(1,TimeUnit.DAYS);
+		 
+		System.out.println("Finished..");
+	}
+
+}
+</pre></div>
+</p>
+
+<h3>Advantage of Multi threading</h3>
+Wherever the independant  jobs are there , for every independent job creates a seperate thread. That thread
+will be responsible to do that independant  job.<br>
+Multiple jobs, Multiple threads, Multiple flows of execution, so the performance of the system will improved.<br>
+We always makes processor busy and reduce response time, so the performance of the system will be improved.<br><br>
+
+<h3>Multi Tasking</h3>
+
+doing serveral task / executing serveral task sybaltencily is called Multi-Tasking.<br>
+<b>Example : - </b>if you are writing java code in editor<br>
+same time  you are listening  music, same time you are downloading files from internet.<br>
+These acitivites called Multi-Tasking.<br><br>
+
+There are 2 Categories<br> 
+<b>1. Process based  Multi-Tasking :- </b>executing serveral task sybaltencily where each task is seperate independent process is called <br>
+Process based MultiTasking. These Multi Tasking Process is based  on Opereting System level <br><br>
+
+<b>Example : - </b>if you are writing java code in editor same time  you are listening  music, same time you are downloading files from internet.<br>
+These acitivites called Multi-Tasking.<br>
+For every process seperate address space is there.<br><br><br>
+
+
+<b>2. Thread Based Multi-Tasking (Programatic Level)</b><br>
+<b>Example :- </b>I have single program of 10, thousand lines . It takes 10 hours to execute a program line by line .<br>
+if the all lines of program is independent then , we will create two parts of that progam and will execute<br>
+two parts of program sybaltencily that is called Thread based multi-tasking.<br><br>
+
+Executing serveral independent task sybaltencily where each task is a seperate independent part of same program <br>
+is called Thread based multi tasking and the each independent task is called thread.<br>
+All threads will work in same address space , so it save CPU Memory and program execution time.<br><br>
+
+Suppose i have one program and in this program four independent parts are there. If i execute all these four part<br>
+one by one so, it will take long time to execute the programs. <br>
+so we will execute all four parts of this program sybaltencily. that is called multi threading.<br>
+and each independent part of this program is called thread. as well as each flow (part) of execution is called thread.<br>
+thread is flow of execution. Every thread executes their given jobs.<br>
+ <img src="img/multi-tasking.png"/><br>
+ 
+ 
+ 
+ <h3>Process</h3>
+ 
+Each process provides the resources needed to execute a program. A process has a virtual address space, executable code, <br>
+open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, <br>
+minimum and maximum working set sizes, and at least one thread of execution. Each process is started with a single thread, <br>
+often called the primary thread, but can create additional threads from any of its threads.<br><br>
+
+<h3>Thread</h3>
+A thread is the entity within a process that can be scheduled for execution. <br>
+All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers,<br>
+a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread <br>
+context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block,<br>
+and a user stack in the address space of the thread's process. Threads can also have their own security context, which can be used for impersonating clients.<br>
+
+<h3>Thread and Process</h3>
+Both processes and threads are independent sequences of execution. The typical difference is that threads (of the same process) run in a shared memory space,<br>
+ while processes run in separate memory spaces.<br><br>
+
+
+<h3>Process:</h3>
+<ul>
+<li>An executing instance of a program is called a process.</li>
+<li>Some operating systems use the term ‘task‘ to refer to a program that is being executed.</li>
+<li>A process is always stored in the main memory also termed as the primary memory or random access memory.</li>
+<li>Therefore, a process is termed as an active entity. It disappears if the machine is rebooted.</li>
+<li>Several process may be associated with a same program.</li>
+<li>On a multiprocessor system, multiple processes can be executed in parallel.</li>
+<li>On a uni-processor system, though true parallelism is not achieved, a process scheduling algorithm is applied and the processor is scheduled to execute each process one at a time yielding an illusion of concurrency.</li>
+<li><b>Example: </b>Executing multiple instances of the ‘Calculator’ program. Each of the instances are termed as a process.</li>
+</ul>
+<h3>Thread:</h3>
+<ul>
+<li>A thread is a subset of the process.</li>
+<li>It is termed as a ‘lightweight process’, since it is similar to a real process but executes within the context of a process and shares the same resources allotted to the process by the kernel.</li>
+<li>Usually, a process has only one thread of control – one set of machine instructions executing at a time.</li>
+<li>A process may also be made up of multiple threads of execution that execute instructions concurrently.</li>
+<li>Multiple threads of control can exploit the true parallelism possible on multiprocessor systems.</li>
+<li>On a uni-processor system, a thread scheduling algorithm is applied and the processor is scheduled to run each thread one at a time.</li>
+<li>All the threads running within a process share the same address space, file descriptors, stack and other process related attributes.</li>
+<li>Since the threads of a process share the same memory, synchronizing the access to the shared data withing the process gains unprecedented importance.</li>
+<li><b>The major difference between threads and processes is:</b><br>
+<ul>
+<li>Threads share the address space of the process that created it; processes have their own address space.</li>
+<li>Threads have direct access to the data segment of its process; processes have their own copy of the data segment of the parent process.</li>
+<li>Threads can directly communicate with other threads of its process; processes must use interprocess communication to communicate with sibling processes.</li>
+<li>Threads have almost no overhead; processes have considerable overhead.</li>
+<li>New threads are easily created; new processes require duplication of the parent process.</li>
+<li>Threads can exercise considerable control over threads of the same process; processes can only exercise control over child processes.</li>
+<li>Changes to the main thread (cancellation, priority change, etc.) may affect the behavior of the other threads of the process; changes to the parent process does not affect child processes.</li>
+</ul>
+</li>
+</ul>
+</body>
+</html>

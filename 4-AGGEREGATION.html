@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">What is Aggregation in java</div>
+ <p>Aggregation is also a relationship between two classes like association. its a directional association, which means it is strictly a one way association. 
+ <b>It represents a Has-A relationship.</b></p>
+  
+<div class="codeblock"><pre>
+Example : 
+For example consider two classes Student class and Address class. 
+each student must have an address so the relationship between student and address is a Has-A relationship. 
+----------------------------------------------------------------------------------------------------------------
+package edu.java.basic;
+ 
+class Address
+{
+   int streetNum;
+   String city;
+   String state;
+   String country;
+   Address(int street, String c, String st, String coun)
+   {
+       this.streetNum=street;
+       this.city =c;
+       this.state = st;
+       this.country = coun;
+   }
+}
+class StudentClass
+{
+   int rollNum;
+   String studentName;
+  //Student Has-A Address (Has-a relationship between student and address)
+   Address studentAddr; //Aggergation of Address class , It represents a Has-A relationship
+   
+   StudentClass(int roll, String name, Address addr){
+       this.rollNum=roll;
+       this.studentName=name;
+       this.studentAddr = addr;
+   }
+}
+public class AggregationDemo {
+   public static void main(String args[]){
+       Address ad = new Address(55, "Agra", "UP", "India");
+       StudentClass obj = new StudentClass(123, "Chaitanya", ad);
+       System.out.println(obj.rollNum);
+       System.out.println(obj.studentName);
+       System.out.println(obj.studentAddr.streetNum);
+       System.out.println(obj.studentAddr.city);
+       System.out.println(obj.studentAddr.state);
+       System.out.println(obj.studentAddr.country);
+   }
+}
+
+ 
+</pre></div>
+
+<div class="nolinkBHEAD">Why we need Aggregation?</div>
+<p> <b>To maintain code re-usability.</b>We use Aggergation.<br>
+Example : -
+<ol>
+<li>Suppose there are two other classes <b>College</b> <b>and Staff</b></li>
+<li>We can use the reference of Address class as Address of <b>College</b> <b>and Staff</b> classes.</li>
+<li>Hence we can improve code re-usability by using Aggregation relationship.</li>
+</ol>
+<b>
+Student Has-A Address (Has-a relationship between student and address)<br>
+College Has-A Address (Has-a relationship between college and address)<br>
+Staff Has-A Address (Has-a relationship between staff and address)<br>
+</b>
+
+</p>
+ 
+ 
+
+ 
+
+
+
+</div>
+</body>
+</html>

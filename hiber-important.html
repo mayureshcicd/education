@@ -1,0 +1,247 @@
+<h3>What is Hibernate proxy?</h3><br>
+		
+
+			<br>	
+				
+			<font size="2">By default Hibernate creates a proxy for each of the class you map in mapping file. This class contain the code to invoke JDBC. This class is created by hibernate using CGLIB.
+<br>
+<br>Proxies are created dynamically by subclassing your object at runtime. The subclass has all the methods of the parent, and when any of the methods are accessed, the proxy loads up the real object from the DB and calls the method for you. Very nice in simple cases with no object hierarchy. Typecasting and instanceof work perfectly on the proxy in this case since it is a direct subclass. </font>
+
+<p>
+	<strong>In hibernate proxies are placeholder that are gernerated at runtime. Whenever hibernate returns an instance of any entity class, it checks weither it returns a proxy object to avoid the database hit.</strong></p>
+<p>
+	&nbsp;<strong>In hibernate proxies are triggers the loading of real object when it just accessed at very first time.</strong></p>
+<p>
+	&nbsp;<strong>When we use session.load(…….)&nbsp; to get the resultset of any entity with the help of identifier an by calling the property other than identifier, the proxy is initialized.</strong></p>
+<p>
+	&nbsp;<strong>Like</strong></p>
+<p>
+	&nbsp;<strong>MyItem myitem=(MyItem)session.load(MyItem.class,new Integer(123));\</strong></p>
+<p>
+	&nbsp;<strong>myitem.getId();</strong></p>
+<p>
+	<strong>myitem.getDesc(); // Initialize the proxy</strong></p>
+<p>
+	&nbsp;<strong>Note – This is not true if we map the identifier property with direct field access. </strong><strong>Hibernate&nbsp;&nbsp;&nbsp; than&nbsp;&nbsp;&nbsp;&nbsp; does not know that the getId() method exits. If we call it , the proxy has&nbsp;&nbsp;&nbsp;&nbsp; to initialized. </strong></p>
+
+
+
+<h2>Different between session.get() and session.load()</h2><p>Actually, both functions are use to retrieve an object with different mechanism, of course.</p><div class="ads-in-post hide_if_width_less_800"><script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <ins class="adsbygoogle hide_if_width_less_800" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2836379775501347" data-ad-slot="7391621200" data-ad-region="mkyongregion"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><h2>1. session.load()</h2><ul><li>It will always return a “<strong>proxy</strong>” (Hibernate term) without hitting the database. In Hibernate, proxy is an object with the given identifier value, its properties are not initialized yet, it just look like a temporary fake object.</li><li>If no row found , it will throws an <strong>ObjectNotFoundException</strong>.</li></ul><div class="ads-in-post hide_if_width_less_800"><script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <ins class="adsbygoogle hide_if_width_less_800" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2836379775501347" data-ad-slot="3642936086" data-ad-region="mkyongregion"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><h2>2. session.get()</h2><ul><li>It always <strong>hit the database</strong> and return the real object, an object that represent the database row, not proxy.</li><li>If no row found , it return <strong>null</strong>.</li></ul><h2>It’s about performance</h2><p>Hibernate create anything for some reasons, when you do the association, it’s normal to obtain retrieve an object (persistent instance) from database and assign it as a reference to another object, just to maintain the relationship. Let’s go through some examples to understand in what situation you should use <strong>session.load()</strong>.</p><h2>1. session.get()</h2><p>For example, in a Stock application , Stock and StockTransactions should have a “one-to-many” relationship, when you want to save a stock transaction, it’s common to declared something like below</p><pre class=" language-java"><code class=" language-java">Stock stock <span class="token operator">=</span> <span class="token punctuation">(</span>Stock<span class="token punctuation">)</span>session<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>Stock<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           StockTransaction stockTransactions <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StockTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//set stockTransactions detail</span>
+           stockTransactions<span class="token punctuation">.</span><span class="token function">setStock</span><span class="token punctuation">(</span>stock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           session<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>stockTransactions<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h2>Output</h2><pre class=" language-bash"><code class=" language-bash">Hibernate:
+    <span class="token keyword">select</span> <span class="token punctuation">..</span>. from mkyong.stock stock0_
+    where stock0_.STOCK_ID<span class="token operator">=</span>?
+Hibernate:
+    insert into mkyong.stock_transaction <span class="token punctuation">(</span><span class="token punctuation">..</span>.<span class="token punctuation">)</span>
+    values <span class="token punctuation">(</span>?, ?, ?, ?, ?, ?<span class="token punctuation">)</span></code></pre><p>In session.get(), Hibernate will hit the database to retrieve the Stock object and put it as a reference to StockTransaction. However, this save process is extremely high demand, there may be thousand or million transactions per hour, do you think is this necessary to hit the database to retrieve the Stock object everything save a stock transaction record? After all you just need the Stock’s Id as a reference to StockTransaction.</p><h2>2. session.load()</h2><p>In above scenario, <strong>session.load()</strong> will be your good solution, let’s see the example,</p><pre class=" language-java"><code class=" language-java">Stock stock <span class="token operator">=</span> <span class="token punctuation">(</span>Stock<span class="token punctuation">)</span>session<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>Stock<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           StockTransaction stockTransactions <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StockTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//set stockTransactions detail</span>
+           stockTransactions<span class="token punctuation">.</span><span class="token function">setStock</span><span class="token punctuation">(</span>stock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           session<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>stockTransactions<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h2>Output</h2><pre class=" language-bash"><code class=" language-bash">Hibernate:
+    insert into mkyong.stock_transaction <span class="token punctuation">(</span><span class="token punctuation">..</span>.<span class="token punctuation">)</span>
+    values <span class="token punctuation">(</span>?, ?, ?, ?, ?, ?<span class="token punctuation">)</span></code></pre><p>In session.load(), Hibernate will not hit the database (no select statement in output) to retrieve the Stock object, it will return a Stock proxy object – a fake object with given identify value. In this scenario, a proxy object is enough for to save a stock transaction record.</p><h2>Exception</h2><p>In exception case, see the examples</p><h2>session.load()</h2><pre class=" language-java"><code class=" language-java">Stock stock <span class="token operator">=</span> <span class="token punctuation">(</span>Stock<span class="token punctuation">)</span>session<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>Stock<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//proxy</span>
+
+ <span class="token comment" spellcheck="true">//initialize proxy, no row for id 100, throw ObjectNotFoundException</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>stock<span class="token punctuation">.</span><span class="token function">getStockCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>It will always return a proxy object with the given identity value, even the identity value is not exists in database. However, when you try to initialize a proxy by retrieve it’s properties from database, it will hit the database with select statement. If no row is found, a <strong>ObjectNotFoundException </strong>will throw.</p><pre class=" language-bash"><code class=" language-bash">org.hibernate.ObjectNotFoundException: No row with the given identifier exists:
+<span class="token punctuation">[</span>com.mkyong.common.Stock<span class="token comment" spellcheck="true">#100]</span></code></pre><h2>session.get()</h2><pre class=" language-java"><code class=" language-java"><span class="token comment" spellcheck="true">//return null if not found</span>
+Stock stock <span class="token operator">=</span> <span class="token punctuation">(</span>Stock<span class="token punctuation">)</span>session<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>Stock<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>stock<span class="token punctuation">.</span><span class="token function">getStockCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//java.lang.NullPointerException</span></code></pre><p>It will always return null , if the identity value is not found in database.</p><h2>Conclusion</h2><p>There are no always correct solution, you have to understand the differential in between, and decide which method is best fix in your application.</p>
+
+
+
+
+<h2>When Lazy Loading is Needed : Sample Problem</h2><p>Consider one of common Internet web application: the online store. 
+The store maintains a catalog of products. At the crudest level, this can be modeled as a catalog entity managing a series of product entities. 
+In a large store, there may be tens of thousands of products grouped into various overlapping categories.</p><p>When a customer visits the store, 
+the catalog must be loaded from the database. We probably don’t want the implementation to load every single one of the entities representing the tens of thousands of 
+products to be loaded into memory. For a sufficiently large retailer, this might not even be possible, given the amount of physical memory available on the machine. 
+Even if this were possible, it would probably cripple the performance of the site. Instead, we want only the catalog to load, possibly with the categories as well. 
+Only when the user drills down into the categories should a subset of the products in that category be loaded from the database.</p>
+<p>To manage this problem, Hibernate provides a facility called <strong>lazy loading</strong>. When enabled, an entity’s associated entities will be loaded only when 
+they are directly requested.</p>
+<div class="hide_if_width_less_than_800"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2827350136257294" data-ad-slot="3942048560" 
+data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><h2>How Lazy Loading Solve the Problem</h2>
+<p>Now when we have understood the problem, let’s understand how lazy loading actually helps in real life. If we consider to solve the problem discussed above then 
+we would be accessing a category (or catalog) in below manner:</p><div><div id="highlighter_791660" class="syntaxhighlighter  java">
+<table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2"></div><div class="line number2 index1 alt1"></div>
+</td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java comments">//Following code loads only a single category from the 
+database:</code></div><div class="line number2 index1 alt1"><code class="java plain">Category category = (Category)session.get(Category.</code><code class="java keyword">
+class</code><code class="java plain">,</code><code class="java keyword">new</code> <code class="java plain">Integer(</code><code class="java value">42</code>
+<code class="java plain">));</code></div></div></td></tr></tbody></table></div></div><p>However, <strong>if all products of this category are accessed, and lazy loading is 
+in effect, the products are pulled from the database as needed</strong>. For instance, in the following snippet, the associated product objects will be loaded since it is 
+explicitly referenced in second line.</p><div><div id="highlighter_758817" class="syntaxhighlighter  java">
+<table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2"></div><div class="line number2 index1 alt1"></div>
+<div class="line number3 index2 alt2"></div><div class="line number4 index3 alt1"></div></td><td class="code">
+<div class="container"><div class="line number1 index0 alt2"><code class="java comments">//Following code loads only a single category from the database</code></div>
+<div class="line number2 index1 alt1"><code class="java plain">Category category = (Category)session.get(Category.</code><code class="java keyword">class</code>
+<code class="java plain">,</code><code class="java keyword">new</code> <code class="java plain">Integer(</code><code class="java value">42</code><code class="java plain">));</code>
+</div><div class="line number3 index2 alt2"><code class="java comments">//This code will fetch all products for category 42 from database 'NOW'</code></div>
+<div class="line number4 index3 alt1"><code class="java plain">Set&lt;Product&gt; products = category.getProducts();</code></div></div></td></tr></tbody></table>
+</div></div><p>This solve our problem of loading the products only when they are needed.</p><div class="hide_if_width_less_than_800">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2827350136257294" data-ad-slot="1082653768" data-ad-format="auto"></ins> 
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><h2>How to Enable Lazy Loading in Hibernate</h2>
+<p>Before moving further, it is important to recap the default behavior of lazy loading in case of using hibernate mappings vs annotations.</p>
+<div class="noticeboxesde bluenoticebox">The default behavior is to load ‘property values eagerly’ and to load ‘collections lazily’. Contrary to what you might remember 
+if you have used plain Hibernate 2 (mapping files) before, where all references (including collections) are loaded eagerly by default.<p></p>
+<p>Also note that <code>@OneToMany</code> and <code>@ManyToMany</code> associations are defaulted to LAZY loading; and <code>@OneToOne</code> and <code>@ManyToOne</code> 
+are defaulted to EAGER loading. This is important to remember to avoid any pitfall in future.</p></div>
+<p>To enable lazy loading explicitly you must use <code>"fetch = FetchType.LAZY"</code> on a association which you want to lazy load when you are using hibernate annotations.</p>
+<p>An example usage will look like this:</p><div><div id="highlighter_597871" class="syntaxhighlighter  java"><table cellspacing="0" cellpadding="0" border="0"><tbody><tr>
+<td class="gutter"><div class="line number1 index0 alt2"></div><div class="line number2 index1 alt1"></div></td><td class="code">
+<div class="container"><div class="line number1 index0 alt2"><code class="java color1">@OneToMany</code><code class="java plain">
+( mappedBy = </code><code class="java string">"category"</code><code class="java plain">, fetch = FetchType.LAZY )</code></div>
+<div class="line number2 index1 alt1"><code class="java keyword">private</code> <code class="java plain">Set&lt;ProductEntity&gt; products; </code></div></div></td></tr></tbody></table></div></div><p>Another attribute parallel to <code>"FetchType.LAZY"</code> is <code>"FetchType.EAGER"</code> which is just opposite to LAZY i.e. it will load association entity as well when owner entity is fetched first time.</p><h2>How Lazy Loading Works in Hibernate</h2><p>The simplest way that Hibernate can apply lazy load behavior upon your entities and associations is <strong>by providing a proxy implementation</strong> of them. Hibernate intercepts calls to the entity by substituting a proxy for it derived from the entity’s class. Where the requested information is missing, it will be loaded from the database before control is ceded to the parent entity’s implementation.</p><p>Please note that when the association is represented as a collection class, then a wrapper (essentially a proxy for the collection, rather than for the entities that it contains) is created and substituted for the original collection. When you access this collection proxy then what you get inside returned proxy collection are not proxy entities; rather they are actual entities. You need not to put much pressure on understanding this concept because on runtime it hardly matters.</p><h2>Effect of Lazy Loading on Detached Entities</h2><p>As we know that hibernate can only access the database via a session, So If an entity is detached from the session and when we try to access an association (via a proxy or collection wrapper) that has not yet been loaded, <strong>Hibernate throws a <code>LazyInitializationException</code></strong>.</p><p>The cure is to ensure either that the entity is made persistent again by attaching it to a session or that all of the fields that will be required are accessed (so they are loaded into entity) before the entity is detached from the session.</p><p>That’s all for this simple, yet very important concept in Hibernate. Please drop a comment if something is not clear OR you want to discuss anything.</p>
+
+
+
+<h1>Hibernate Query Language</h1>
+
+<b>Hibernate Query Language</b> (<b>HQL</b>) is an object-oriented query language, similar to SQL, but instead of operating on tables and columns, <b>HQL</b> works with persistent objects and their properties. <b>HQL</b> queries are translated by <b>Hibernate</b> into conventional SQL queries which in turns perform action on database.
+
+<br>
+Hibernate Query Language (HQL) is same as SQL (Structured Query Language) but it doesn't depends on the table of the database. Instead of table name, we use class name in HQL. So it is database independent query language.<br>
+
+<h3 class="h3">Advantage of HQL</h3>
+<p>There are many advantages of HQL. They are as follows:
+</p><ul class="points">
+<li>database independent</li>
+<li>supports polymorphic queries</li>
+<li>easy to learn for Java Programmer</li>
+</ul>
+
+<hr>
+<h3 class="h3">Query Interface</h3>
+<p>It is an object oriented representation of Hibernate Query. The object of Query can be obtained by calling the createQuery() method Session interface.</p>
+<p>The query interface provides many methods. There is given commonly used methods:</p>
+
+<ol class="points">
+<li><strong>public int executeUpdate()</strong> is used to execute the update or delete query.</li>
+<li><strong>public List list()</strong> returns the result of the ralation as a list.</li>
+<li><strong>public Query setFirstResult(int rowno)</strong> specifies the row number from where record will be retrieved.</li>
+<li><strong>public Query setMaxResult(int rowno)</strong> specifies the no. of records to be retrieved from the relation (table).</li>
+<li><strong>public Query setParameter(int position, Object value)</strong> it sets the value to the JDBC style query parameter.</li>
+<li><strong>public Query setParameter(String name, Object value)</strong> it sets the value to a named query parameter.</li>
+</ol>
+
+<hr>
+<br>
+
+<h3 class="h3ex">Example of HQL to get all the records</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;query=session.createQuery(</span><span class="string">"from&nbsp;Emp"</span><span>);</span><span class="comment">//here&nbsp;persistent&nbsp;class&nbsp;name&nbsp;is&nbsp;Emp</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>List&nbsp;list=query.list();&nbsp;&nbsp;</span></li></ol></div><textarea name="code" class="java" style="display: none;">
+Query query=session.createQuery("from Emp");//here persistent class name is Emp
+List list=query.list();
+
+</textarea></div>
+
+<hr>
+<h3 class="h3ex">Example of HQL to get records with pagination</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;query=session.createQuery(</span><span class="string">"from&nbsp;Emp"</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span>query.setFirstResult(<span class="number">5</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>query.setMaxResult(<span class="number">10</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span>List&nbsp;list=query.list();<span class="comment">//will&nbsp;return&nbsp;the&nbsp;records&nbsp;from&nbsp;5&nbsp;to&nbsp;10th&nbsp;number</span><span>&nbsp;&nbsp;</span></span></li></ol></div><textarea name="code" class="java" style="display: none;">
+Query query=session.createQuery("from Emp");
+query.setFirstResult(5);
+query.setMaxResult(10);
+List list=query.list();//will return the records from 5 to 10th number
+
+</textarea></div>
+
+<hr>
+<h3 class="h3ex">Example of HQL update query</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Transaction&nbsp;tx=session.beginTransaction();&nbsp;&nbsp;</span></span></li><li class=""><span>Query&nbsp;q=session.createQuery(<span class="string">"update&nbsp;User&nbsp;set&nbsp;name=:n&nbsp;where&nbsp;id=:i"</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>q.setParameter(<span class="string">"n"</span><span>,</span><span class="string">"Udit&nbsp;Kumar"</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span>q.setParameter(<span class="string">"i"</span><span>,</span><span class="number">111</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="keyword">int</span><span>&nbsp;status=q.executeUpdate();&nbsp;&nbsp;</span></span></li><li class="alt"><span>System.out.println(status);&nbsp;&nbsp;</span></li><li class=""><span>tx.commit();&nbsp;&nbsp;</span></li></ol></div><textarea name="code" class="java" style="display: none;">
+	Transaction tx=session.beginTransaction();
+	Query q=session.createQuery("update User set name=:n where id=:i");
+	q.setParameter("n","Udit Kumar");
+	q.setParameter("i",111);
+	
+	int status=q.executeUpdate();
+	System.out.println(status);
+	tx.commit();
+</textarea></div>
+
+<hr>
+<h3 class="h3ex">Example of HQL delete query</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;query=session.createQuery(</span><span class="string">"delete&nbsp;from&nbsp;Emp&nbsp;where&nbsp;id=100"</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span><span class="comment">//specifying&nbsp;class&nbsp;name&nbsp;(Emp)&nbsp;not&nbsp;tablename</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>query.executeUpdate();&nbsp;&nbsp;</span></li></ol></div><textarea name="code" class="java" style="display: none;">
+Query query=session.createQuery("delete from Emp where id=100");
+//specifying class name (Emp) not tablename
+query.executeUpdate();
+
+</textarea></div>
+
+<h3 class="h3">HQL with Aggregate functions</h3>
+<p>You may call avg(), min(), max() etc. aggregate functions by HQL. Let's see some common examples:</p>
+
+<h3 class="h3ex">Example to get total salary of all the employees</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;q=session.createQuery(</span><span class="string">"select&nbsp;sum(salary)&nbsp;from&nbsp;Emp"</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span>List&lt;Emp&gt;&nbsp;list=q.list();&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Emp&gt;&nbsp;itr=list.iterator();&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span><span>(itr.hasNext()){&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(itr.next());&nbsp;&nbsp;</span></li><li class=""><span>}&nbsp;&nbsp;</span></li></ol></div><textarea name="code" class="java" style="display: none;">Query q=session.createQuery("select sum(salary) from Emp");
+List&lt;Emp&gt; list=q.list();
+	Iterator&lt;Emp&gt; itr=list.iterator();
+	while(itr.hasNext()){
+		System.out.println(itr.next());
+}
+</textarea></div>
+<hr>
+<h3 class="h3ex">Example to get maximum salary of employee</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;q=session.createQuery(</span><span class="string">"select&nbsp;max(salary)&nbsp;from&nbsp;Emp"</span><span>);&nbsp;&nbsp;</span></span></li></ol></div><textarea name="code" class="java" style="display: none;">Query q=session.createQuery("select max(salary) from Emp");
+</textarea></div>
+<hr>
+<h3 class="h3ex">Example to get minimum salary of employee</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;q=session.createQuery(</span><span class="string">"select&nbsp;min(salary)&nbsp;from&nbsp;Emp"</span><span>);&nbsp;&nbsp;</span></span></li></ol></div><textarea name="code" class="java" style="display: none;">Query q=session.createQuery("select min(salary) from Emp");
+</textarea></div>
+<hr>
+<h3 class="h3ex">Example to count total number of employee ID</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;q=session.createQuery(</span><span class="string">"select&nbsp;count(id)&nbsp;from&nbsp;Emp"</span><span>);&nbsp;&nbsp;</span></span></li></ol></div><textarea name="code" class="java" style="display: none;">Query q=session.createQuery("select count(id) from Emp");
+</textarea></div>
+<hr>
+<h3 class="h3ex">Example to get average salary of each employees</h3>
+<div class="codeblock"><div class="dp-highlighter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;"></a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;"></a></div></div><ol start="1" class="dp-j"><li class="alt"><span><span>Query&nbsp;q=session.createQuery(</span><span class="string">"select&nbsp;avg(salary)&nbsp;from&nbsp;Emp"</span><span>);&nbsp;&nbsp;</span>
+
+
+<h1>How to call stored procedure in Hibernate</h1>
+<h2>MySQL store procedure</h2><p>Here’s a MySQL store procedure, which accept a stock code parameter and return the related stock data.</p><pre class=" language-sql"><code class=" language-sql"><span class="token keyword">DELIMITER</span> $$
+
+<span class="token keyword">CREATE</span> <span class="token keyword">PROCEDURE</span> <span class="token punctuation">`</span>GetStocks<span class="token punctuation">`</span><span class="token punctuation">(</span>int_stockcode <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">BEGIN</span>
+   <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> stock <span class="token keyword">where</span> stock_code <span class="token operator">=</span> int_stockcode<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> $$
+
+<span class="token keyword">DELIMITER</span> <span class="token punctuation">;</span></code></pre><p>In MySQL, you can simple call it with a <strong>call</strong> keyword :</p><pre class=" language-sql"><code class=" language-sql"><span class="token keyword">CALL</span> GetStocks<span class="token punctuation">(</span><span class="token string">'7277'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><div class="ads-in-post hide_if_width_less_800"><script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <ins class="adsbygoogle hide_if_width_less_800" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2836379775501347" data-ad-slot="7391621200" data-ad-region="mkyongregion">
+
+<h2>Hibernate call store procedure</h2><p>In Hibernate, there are three approaches to call a database store procedure.</p><div class="ads-in-post hide_if_width_less_800"><script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <ins class="adsbygoogle hide_if_width_less_800" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2836379775501347" data-ad-slot="3642936086" data-ad-region="mkyongregion"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div><h2>1. Native SQL – createSQLQuery</h2><p>You can use <strong>createSQLQuery()</strong> to call a store procedure directly.</p><pre class=" language-java"><code class=" language-java">Query query <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">createSQLQuery</span><span class="token punctuation">(</span>
+	<span class="token string">"CALL GetStocks(:stockCode)"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">addEntity</span><span class="token punctuation">(</span>Stock<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">setParameter</span><span class="token punctuation">(</span><span class="token string">"stockCode"</span><span class="token punctuation">,</span> <span class="token string">"7277"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+List result <span class="token operator">=</span> query<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	Stock stock <span class="token operator">=</span> <span class="token punctuation">(</span>Stock<span class="token punctuation">)</span>result<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>stock<span class="token punctuation">.</span><span class="token function">getStockCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><h2>2. NamedNativeQuery in annotation</h2><p>Declare your store procedure inside the <strong>@NamedNativeQueries</strong> annotation.</p><pre class=" language-java"><code class=" language-java"><span class="token comment" spellcheck="true">//Stock.java</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token annotation punctuation">@NamedNativeQueries</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	<span class="token annotation punctuation">@NamedNativeQuery</span><span class="token punctuation">(</span>
+	name <span class="token operator">=</span> <span class="token string">"callStockStoreProcedure"</span><span class="token punctuation">,</span>
+	query <span class="token operator">=</span> <span class="token string">"CALL GetStocks(:stockCode)"</span><span class="token punctuation">,</span>
+	resultClass <span class="token operator">=</span> Stock<span class="token punctuation">.</span><span class="token keyword">class</span>
+	<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Entity</span>
+<span class="token annotation punctuation">@Table</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"stock"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Stock</span> <span class="token keyword">implements</span> <span class="token class-name">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable</span> <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre><p>Call it with <strong>getNamedQuery()</strong>.</p><pre class=" language-java"><code class=" language-java">Query query <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">getNamedQuery</span><span class="token punctuation">(</span><span class="token string">"callStockStoreProcedure"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">setParameter</span><span class="token punctuation">(</span><span class="token string">"stockCode"</span><span class="token punctuation">,</span> <span class="token string">"7277"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+List result <span class="token operator">=</span> query<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>result<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	Stock stock <span class="token operator">=</span> <span class="token punctuation">(</span>Stock<span class="token punctuation">)</span>result<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>stock<span class="token punctuation">.</span><span class="token function">getStockCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+
+
+
+<p>create a SessionFactory and Open a session then</p>
+
+<pre class="default prettyprint prettyprinted" style=""><code><span class="typ">CallableStatement</span><span class="pln"> callableStatement </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">connection</span><span class="pun">().</span><span class="pln">prepareCall</span><span class="pun">(</span><span class="str">"call callStockStoreProcedure(?)"</span><span class="pun">);</span><span class="pln">
+callableStatement</span><span class="pun">.</span><span class="pln">setString</span><span class="pun">(</span><span class="str">"7277"</span><span class="pun">);</span><span class="pln">
+callableStatement</span><span class="pun">.</span><span class="pln">registerOutParameter</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="typ">OracleTypes</span><span class="pun">.</span><span class="pln">CURSOR</span><span class="pun">);</span><span class="pln">
+callableStatement</span><span class="pun">.</span><span class="pln">execute</span><span class="pun">();</span><span class="pln">
+</span><span class="typ">ResultSet</span><span class="pln"> resultSet</span><span class="pun">=(</span><span class="typ">ResultSet</span><span class="pun">)</span><span class="pln"> callableStatement</span><span class="pun">.</span><span class="pln">getObject</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span>

@@ -1,0 +1,125 @@
+body {
+        margin-left:10px;
+        margin-right:10px;
+        line-height: 1.5;
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+        font-size: 0.8em;
+    }
+	    code{
+        font-family:Monaco,Courier,"Courier New";
+    }
+	    .codeblock {
+        margin: 0 30px 0px 30px;
+		background:khaki;
+		font-size:12px;
+		font-family:Monaco,Courier,"Courier New";
+    }
+	
+	 .incodeblock {
+        margin: 0 30px 0px 30px;
+		background:gray;
+		font-weight:bold;
+		font-size:12px;
+		font-family:Monaco,Courier,"Courier New";
+    }	
+	.error{
+	color:red;
+	}
+	.success{
+	color:darkgreen;
+	}	
+	.nolinkBHEAD   {
+        margin-left: 10px;
+		margin-right: 10px;
+        text-indent: -0.3em;
+		font-weight: bold;
+        color: #333;
+    }
+	   .MainFlow_indented {
+        margin-right: 10px;		
+        margin-left: 10px;
+        margin-bottom: 10px;
+
+    }
+	p{
+	text-indent: 5px;
+	}
+	.bold{
+		font-weight:bold;
+	}
+		h3{
+		color:green;		
+	}
+	.highlite{
+		background:gray;
+		color:green
+	}
+.entry-content ul {
+    list-style-type: square;
+}	
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}	
+
+table{
+width:100%;
+border: 1px solid gray;
+
+border-collapse: collapse;
+}
+td {
+    height: 20px;
+    vertical-align: top;
+	border:0px gray;
+}
+th, td {
+    padding: 0px;
+    text-align: left;
+}
+th{
+padding: 15px;
+background:gray;
+text-align:left;
+}
+tbody tr td{
+border: 1px solid gray;
+}
+.tb{
+background:lightgray;
+}
+.center-txt{
+text-align:center;
+color:Green;
+font-weight:bold;
+}
+.center-redtxt{
+text-align:center;
+color:Red;
+font-weight:bold;
+}
+
+.javaKeyword {
+    font-weight: bold;
+    color: #8F1151;
+}
+
+.javaVariable {
+    font-weight: bold;
+    color: #5555f6; #2222ea;
+}
+
+
+pre {
+    background-color: #eeeeee;
+    font-size: 9pt;
+    border: 1px solid #cccccc;
+    margin-bottom: 3em;
+    line-height: 15px;
+}
+	/*http://beginnersbook.com/2013/05*/

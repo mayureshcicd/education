@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+
+ 
+ <h3>Java - Exceptions</h3>
+ 
+ <p>
+ An exception is a problem that arises during the <b>execution of a program.</b> we have three categories of Exceptions.<br>
+ <ul>
+<li><b>Checked exceptions/ compile time exceptions: </b>A checked exception is an exception that occurs at the compile time, these are also called as compile time exceptions. These exceptions cannot simply be ignored at the time of compilation, the Programmer should take care of (handle) these exceptions.</li>
+<li><b>Unchecked exceptions/ Runtime Exceptions: </b>An Unchecked exception is an exception that occurs at the time of execution, these are also called as Runtime Exceptions, these include programming bugs, such as logic errors or improper use of an API. runtime exceptions are ignored at the time of compilation.</li>
+<li></b>Errors: </b>These are not exceptions at all, but problems that arise beyond the control of the user or the programmer. Errors are typically ignored in your code because you can rarely do anything about an error.</li>
+</ul>
+
+<h1>What is the difference between checked and unchecked Exceptions</h1>
+<ul>
+<li>There are some Exceptions which are checked by compiler for smoth execution of the program, so 
+so Exceptions which are checked by compiler that is called <b>checked Exeception.</b> <br>
+<span class="success">Example : - </span><b>File not found Exception</b> is a good example of <b><u>Checked</u></b> Exception.<br>
+checked Exeception is also called default Exception. whether programmer handling or not compiler is always going to check <br><br></li>
+<li>Exception which are not checked by compiler that is called <b>un checked Exeception.</b><br>
+<span class="success">Example : - </span><b>Arthmatic Exception</b> is a good example of <b><u>un checked</u></b> Exception.
+</li>
+</ul>
+<img src="img/checked-exception.png"/>
+<img src="img/unchecked-exception.png"/>
+
+<h1>Throwable Class is the root class is the root of Exceptions.</h1>
+<h3>Throwable containt two child classes.</h3>
+<ul>
+<li><b>Exception</b><br>
+In the Exception , There are serveral child classes.<br>
+<ol>
+<li><h3><b>(Unchecked) Runtime Exception</b></h3>In this Runtime Exception , There are serveral child classes.
+	<ul>
+		<li>Arithmetic Exception</li>
+		<li>ArrayIndexOutOfBounds Exception</li>
+		<li>ArrayStore Exception</li>
+		<li>ClassCast Exception</li>
+		<li>IllegalArgument Exception</li>
+		<li>IllegalMonitorState Exception</li>
+		<li>IllegalState Exception</li>
+		<li>IllegalThreadState Exception</li>
+		<li>IndexOutOfBounds Exception</li>
+		<li>NegativeArraySize Exception</li>
+		<li>NullPointer Exception</li>
+		<li>NumberFormat Exception</li>
+		<li>Security Exception</li>
+		<li>StringIndex OutOfBounds</li>
+	</ul>
+</li>
+<li><h3>Checked Exception (Compile time)</h3>
+	<b> IO Exception</b>In this IO Exception , There are serveral child classes.
+	<ul>
+		<li>File not found Exception</li>
+		<li>EOF Exception</li>
+	</ul>
+
+</li>
+
+</ol>
+
+</li>
+<li><h3><b> Error</b></h3>In this Error , There are serveral child classes.
+<b>Errors are (Unchecked) </b>
+<ul>
+	<li>VM Error (Virtual Machine) Error
+		<ol>
+			<li>Out of Memory Error</li>
+			<li>Stack Overflow Error</li>
+		</ol>
+	</li>
+	<li>Linkage Error
+		<ol>
+			<li>Verify Error</li>
+		</ol>
+	</li>
+</ul>
+
+</li>
+</ul>
+
+<h1>What is the difference between NoclassDefoundError & ClassNotFound Exception</h1>
+<h3> NoclassDefoundError Exception</h3>
+<div class="codeblock">
+<pre>
+For Hard-coded class names at the runtime, if the corresponding class file will not there then 
+the <b>NoclassDefoundError</b> Exception will be raised.
+
+Example : - NoclassDefFoundError Exception
+
+TestClass test=new TestClass();
+
+if (TestClass) will not be available then  Run time "NoclassDefFoundError" Exception will be raised.
+
+
+</pre>
+</div>
+
+<h3> ClassNotFound Exception</h3>
+<div class="codeblock">
+<pre>
+When you provide the class name dynamically at runtime and that time the corresponding class file will not there then 
+the <b>ClassNotFound</b> Exception will be raised.
+
+Example : -  ClassNotFound Exception
+Object obj= Class.forname("TestClass").newInstance();
+
+Here , we are providing "TestClass" dynamically at runtime , but "TestClass" will not be there then we will get
+Runtime ClassNotFound Exception.
+
+</pre>
+</div>
+
+<h1>What is difference between Exception & Error</h1>
+<h3>Exception</h3>
+<ul>
+<li>Throwable is the class</li>
+<li>Throwable acts as root for java exception hierarchy.</li>
+<li>Throwable class contains two child classes
+	<ol>
+		<li>Exception</li>
+		<li>Error</li>
+	</ol>
+</li>
+
+<li>Most of time , Exception caused by program only.</li>
+<li>Exceptions are Re-coverable.<br>
+<img src="img/exception-rec.png"/>
+</li>
+</ul>
+<h3>Error</h3>
+<ul>
+<li>Most of the time, Errors are not caused by program. These are due to lack of System Resources.<br>
+Errors are non Re-coverable.<br>
+<img src="img/exception_error.png"/>
+
+</li>
+</ul>
+ <img src="img/difff-throw-throws.png"/>
+ <h1>What is difference between final, finally & Finalize</h1>
+ 
+ <h3>Final</h3>
+ <ul>
+	<li>Final is a Modifier and it is applicable for (classes, methods, variables)</li>
+	<li>If we declare variable as final , then it will become constant. we can't perform re-assignment(update/change) for the variable.</li>
+	<li>If we declare method as final in super class then we override that method in child class</li>
+	<li>If we declare class as final, then we can't extend that class.</li>
+	<li><img src="img/final_diff.png"/></li>
+ </ul>
+  <h3>Finally</h3>
+  <ul>
+	  <li>Finally is a block and it is always associated with try catch Block.</li>
+	  <li>To maintain clean up code, we use Finally block</li>
+	  <li><img src="img/finally_def.png"/></li>
+  </ul>
+ 
+ <h3>Finalize</h3> 
+ <ul>
+	<li>Finalize is a method <b>Finalize()</b> and it is present in Object Class. Finalize Terminolgy applicable for Garbage collections, and Finalize method always invoked by Garbage collector</li>
+	<li><img src="img/finalize_def.png"/></li>
+ </ul>
+ 
+ <h3>Exception Hierarchy:</h3>
+ 
+All exception classes are subtypes of the <b><u>java.lang.Exception class.</u></b><br>
+The exception class is a subclass of the <b><u>Throwable class.</u></b> <br>
+Other than the exception class there is another subclass called <b><u>Error </u></b>which is derived from the <b><u>Throwable class.</u></b><br>
+Errors are abnormal conditions that happen in case of severe failures, these are not handled by the java programs.<br>
+Errors are generated to indicate errors generated by the <b><u>runtime environment.</u></b><br>
+The Exception class has two main subclasses: <b><u>IOException class and RuntimeException Class.</u></b>
+
+<h3>Java Unchecked RuntimeException.</h3> 
+<table>
+<tbody>
+<tr>
+<th>Exception</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>ArithmeticException</td>
+<td>Arithmetic error, such as divide-by-zero.</td>
+</tr>
+<tr>
+<td>ArrayIndexOutOfBoundsException</td>
+<td>Array index is out-of-bounds.</td>
+</tr>
+
+<tr>
+<td>ArrayStoreException</td>
+<td>Assignment to an array element of an incompatible type.</td>
+</tr>
+
+<tr>
+<td>ClassCastException</td>
+<td>Invalid cast.</td>
+</tr>
+
+<tr>
+<td>IllegalArgumentException</td>
+<td>Illegal argument used to invoke a method.</td>
+</tr>
+
+<tr>
+<td>IllegalMonitorStateException</td>
+<td>Illegal monitor operation, such as waiting on an unlocked thread.</td>
+</tr>
+
+<tr>
+<td>IllegalStateException</td>
+<td>Environment or application is in incorrect state.</td>
+</tr>
+
+<tr>
+<td>IllegalThreadStateException</td>
+<td>Requested operation not compatible with current thread state.</td>
+</tr>
+
+<tr>
+<td>IndexOutOfBoundsException</td>
+<td>Some type of index is out-of-bounds.</td>
+</tr>
+
+<tr>
+<td>NegativeArraySizeException</td>
+<td>Array created with a negative size.</td>
+</tr>
+
+<tr>
+<td>NullPointerException</td>
+<td>Invalid use of a null reference.</td>
+</tr>
+
+<tr>
+<td>NumberFormatException</td>
+<td>Invalid conversion of a string to a numeric format.</td>
+</tr>
+
+<tr>
+<td>SecurityException</td>
+<td>Attempt to violate security.</td>
+</tr>
+
+<tr>
+<td>StringIndexOutOfBounds</td>
+<td>Attempt to index outside the bounds of a string.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Java Checked RuntimeException.</h3> 
+<table>
+<tbody>
+<tr>
+<th>Exception</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>ClassNotFoundException</td>
+<td>Class not found.</td>
+</tr>
+
+<tr>
+<td>CloneNotSupportedException</td>
+<td>Attempt to clone an object that does not implement the Cloneable interface.</td>
+</tr>
+
+<tr>
+<td>IllegalAccessException</td>
+<td>Access to a class is denied.</td>
+</tr>
+
+<tr>
+<td>InstantiationException</td>
+<td>Attempt to create an object of an abstract class or interface.</td>
+</tr>
+
+<tr>
+<td>InterruptedException</td>
+<td>One thread has been interrupted by another thread.</td>
+</tr>
+
+<tr>
+<td>NoSuchFieldException</td>
+<td>A requested field does not exist.</td>
+</tr>
+
+<tr>
+<td>NoSuchMethodException</td>
+<td>A requested method does not exist.</td>
+</tr>
+
+</tbody>
+</table>
+ 
+ 
+ <div class="codeblock">
+ <pre>
+ <h3>Catching Exceptions:</h3>
+	A method catches an exception using a combination of the try and catch keywords.
+	
+<b>The throws/throw Keywords:</b>
+If a method does not handle a checked exception, the method must declare it using the throws keyword. The throws keyword appears at the end of a method's signature.
+You can throw an exception, either a newly instantiated one or an exception that you just caught, by using the throw keyword.
+
+<b>The finally block</b>
+The finally block follows a try block or a catch block. A finally block of code always executes, irrespective of occurrence of an Exception.
+Using a finally block allows you to run any cleanup-type statements that you want to execute, no matter what happens in the protected code.
+
+<b>Common Exceptions:</b>
+In Java, it is possible to define two catergories of Exceptions and Errors.
+<ul>
+<li><b>JVM Exceptions: - </b>These are exceptions/errors that are exclusively or logically thrown by the JVM.  
+	<b>Examples : </b>NullPointerException, ArrayIndexOutOfBoundsException, ClassCastException,</li>
+<li><b>Programmatic exceptions: - </b>These exceptions are thrown explicitly by the application or the API programmers  
+	<b>Examples: </b>IllegalArgumentException, IllegalStateException.</li>
+</ul>
+ 
+ </pre>
+ </div>
+ 
+ <ul>
+	<li>An exception is an event, which occurs during the execution of a program, that interrupts the normal flow of the program. It is an error thrown by a class or method reporting an error in code.</li>
+	<li>The <span class="success">'Throwable'</span> class is the superclass of all errors and exceptions in the Java language</li>
+	<li>Exceptions are broadly classified as <span class="success">'checked exceptions'</span> and <span class="success">'unchecked exceptions'</span>. All RuntimeExceptions and Errors are unchecked exceptions. Rest of the exceptions are called checked exceptions. Checked exceptions should be handled in the code to avoid compile time errors.</li>
+	<li>Exceptions can be handled by using <span class="success">'try-catch'</span> block. Try block contains the code which is under observation for exceptions. The catch block contains the remedy for the exception. If any exception occurs in the try block then the control jumps to catch block.</li>
+	<li>If a method doesn't handle the exception, then it is mandatory to specify the exception type in the method signature using <span class="success">'throws'</span> clause.</li>
+	<li>We can explicitly throw an exception using <span class="success">'throw'</span> clause.</li>
+</ul>
+ </p>
+
+ <h3>Control flow in try catch</h3>
+ <img src="img/exception.png"/>
+  
+  <h3>Control flow in try catch, finally</h3>
+  <img src="img/exception1.png"/>
+  <img src="img/exception2.png"/>
+<img src="img/exception3.png"/>
+<img src="img/exception4.png"/>
+<img src="img/exception5.png"/>
+<img src="img/exception6.png"/>
+<img src="img/exception7.png"/>
+<img src="img/exception8.png"/>
+
+</div>
+</body>
+</html>

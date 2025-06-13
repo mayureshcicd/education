@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">What is Reflection in java./div>
+ <p>
+<h3>Reflection is very capable and powerful tool in java.</h3>
+<ul>
+<li>The ability of computer program to examine and modify the structure and behavior of the program at run time.</li>
+<li>The most important part is " Type introspection" which finds methods, fields, constructor of class.</li>
+<li>Reflection modify the data runtime. due to reflection we can access all private members, data of class and can modify or update runtime.</li>
+<li>Reflection makes it possible to inspect classes,interfaces,fields and methods at runtime, without knowing the names
+of the classes, methods etc. at compile time. it is also possible to instantiate new objects, invoke methods and get/set
+fields values using reflection.</li>
+<li>
+<div class="codeblock">
+<pre>
+<b>Reflection can slow down a program because the JVM can't optimize the code.</b>
+<b>java.lang.reflect : -  </b>is package which provides following classes for reflections.
+
+java.lang.class
+java.lang.reflect.field 
+
+<b>getFields:- </b>use to get all public meta data including super class meta data.
+<b>getDeclaredFields:-</b> All type of meta data (private) 
+
+java.lang.reflect.method
+<b>getMethods:- </b>use to get all public meta data including super class meta data.
+<b>getDeclaredMethods:- </b>All type of meta data (private) 
+
+java.lang.reflect.constructor
+java.lang.reflect.modifier
+</pre></div>
+</li>
+</ul>
+ </p>
+ <h1>REFLECTION API</h1>
+<h3>What is Reflection</h3>
+<img src="img/Reflection-in-java.png"/><br>
+<img src="img/ref1.png"/><br>
+<img src="img/ref-array.png"/><br>
+Reflection is the process of analysing <b>"all the capabilities"</b> of a particular class at a runtime.<br>
+For example, I have a class, and I want to know all details of that class and want to access all<br>
+(implemented interfaces, extended classes, constructors, private members) of that class, then I will use Reflection API.<br>
+Reflection API is useful for products development like(Compilers,JVM Design, Servers Design, Framework Design, Tools Design).<br>
+<b><u>java.lang.reflect</u></b> package is main Reflection API. within following classes are useful for reflection.
+<ul>
+<li><b>java.lang.Class</b> :- It is used to gathered the complete meta data of particular class.</li>
+<li><b>java.lang.reflect.Field</b> :-It is used to gathered the complete declarative information about particular variable. that means meta data of a particular variable.
+<ol>
+<li>Access modifier of particular variable.</li>
+<li>Data type of particular variable.</li>
+<li>Name of particular variable.</li>
+<li>Value of particular variable.</li>
+</ol>
+ </li>
+<li><b>java.lang.reflect.Method</b> :- It is used to store the completive declarative (that means meta data) information about particular methods. the meta data of a particular methods
+<ol>
+<li>Access modifier of particular method.</li>
+<li>Data type of particular method.</li>
+<li>Name of particular method.</li>
+<li>parameters of particular method.</li>
+<li>return type of particular method.</li>
+</ol>
+</li>
+<li><b>java.lang.reflect.Constructor</b> :- It is used to managed the constructor
+<ol>
+<li>Access modifier of particular Constructor.</li>
+<li>Name of particular Constructor.</li>
+<li>parameters of particular Constructor.</li>
+</ol>
+
+</li>
+<li><b>java.lang.reflect.Modifier</b> :- It is used to get Access modifiers information </li>
+</ul>
+
+its ability to modify private members of class at runtime as well as examine a class in general.<br>
+<h1>Reflection can do</h1>
+<ul>
+<li>Can Inspect class and method modifiers(Privat, Public, Final, abstract)</li>
+<li>Can Inspect constructors, methods, and their parameters</li>
+<li>can Change Getting/Setting private Data</li>
+<li>Can Invoke Public/Private methods</li>
+</ul>
+<h1>Example :- how many ways to create class Object</h1> 
+<h3>There are three ways to create Class object in java</h3>
+<ol>
+<li>By using <b>Class.forName("Class name")</b> method<br>
+Example :-<br>
+ Class c= Class.forName("Employee");<br>
+ <hr>
+ <b>forName method</b> is static method of Class class. The functionality <b>forName method</b>  is <b>forName method</b> will search (.class) file of provided "class" in <br>
+ the current location, in java pre-define library, and also search in location which is refered by "Class path environment variable". if provided class will not found in any<br>
+ location, then JVM will rised the exception <b><u>java.lang.ClassNotFound</u></b> 
+ <hr>
+</li>
+<li>By using <b>getClass()</b> method<br>
+Example :-<br>
+Employee e=new Employee();<br>
+Class c=e.getClass();
+<hr>
+Whenever we creat the object of provided class, First JVM executes the constructor of provided class. but before executes the constructor , JVM Loads the class in to memory.
+<hr>
+</li>
+<li>By using <b>Class</b> method
+Example :-<br>
+Class c=Employee.class;</li>
+</li>
+</ol>
+<h1>How to get Class detail information using Reflection</h1>
+<img src="img/ref-cl.png"/><br>
+
+<h1>How to get Class Field information using Reflection</h1>
+<img src="img/ref-field.png"/><br>
+
+<h1>How to get Class Methods information using Reflection</h1>
+<img src="img/ref-meth1.png"/><br>
+<img src="img/ref-meth2.png"/><br>
+
+<h1>How to get Class Constructor information using Reflection</h1>
+<img src="img/ref-const.png"/><br>
+<img src="img/ref-const1.png" /><br>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/app.css"/>	 
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">Final Keyword In Java</div>
+
+<p>The final keyword in java is used to restrict the user. The java final keyword can be used in many context. Final can be:</p>
+<ol>
+    <li>variable</li>
+    <li>method</li>
+    <li>class</li>
+</ol>
+
+<img src="img/final_class_in_java_1.png"/><br>
+<img src="img/final_class_in_java_2.png"/><br>
+<img src="img/final_class_in_java_3.png"/><br>
+<div class="nolinkBHEAD">Java final variable</div>
+<p>If you make any variable as final, you cannot change the value of final variable(It will be constant).</p>
+<div class="codeblock"><pre>
+Example : -
+class Bike9{  
+ final int speedlimit=90;//final variable  
+ void run(){  
+  speedlimit=400;  // You can't change it.
+ }  
+ public static void main(String args[]){  
+ Bike9 obj=new  Bike9();  
+ obj.run();  
+ }  
+}
+<span class="error">Output:Compile Time Error</span>
+</pre></div>
+<div class="nolinkBHEAD">Java final class</div>
+
+
+<p>If you make any class as final, you cannot extend it.</p>
+<div class="codeblock"><pre>
+Example : -
+    final class Bike{}  
+      
+    class Honda1 extends Bike{  // You can't extend final class bike here
+      void run(){System.out.println("running safely with 100kmph");}  
+        
+      public static void main(String args[]){  
+      Honda1 honda= new Honda();  
+      honda.run();  
+      }  
+    }  
+	
+<span class="error">Output:Compile Time Error</span>
+</pre></div>
+
+<div class="nolinkBHEAD">Java final method</div>
+<p>final method  can be inherited but you cannot override it.</p>
+<div class="codeblock"><pre>
+Example : -
+class Bike{  
+  final void run(){System.out.println("running");}  
+}  
+     
+class Honda extends Bike{  
+   void run(){ // You can't override run method.
+		System.out.println("running safely with 100kmph");
+   }       
+   public static void main(String args[])
+   {  
+   Honda honda= new Honda();  
+   honda.run();  
+   }  
+} 
+<span class="error">Output:Compile Time Error</span>
+</pre></div>
+
+<div class="nolinkBHEAD">What is blank or uninitialized final variable</div>
+<p>
+A final variable that is not initialized at the time of declaration is known as blank final variable.
+If you want to create a variable that is initialized at the time of creating object and once initialized may not be changed, 
+it is useful.<span class="bold"> It can be initialized only in constructor.</span></p>
+ <div class="codeblock"><pre>
+Example :- 
+    class Bike10{  
+      final int speedlimit;//blank final variable  
+        
+      Bike10(){  
+      speedlimit=70;  
+      System.out.println(speedlimit);  
+      }  
+      
+      public static void main(String args[]){  
+        new Bike10();  
+     }  
+    }  
+</pre></div>	
+static blank final variable
+
+<p>A static final variable that is not initialized at the time of declaration is known as static blank final variable. 
+It can be initialized only in static block.	</p>
+ <div class="codeblock"><pre>
+Example :- 
+    class A{  
+      static final int data;//static blank final variable  
+      static{ data=50;}  
+      public static void main(String args[]){  
+        System.out.println(A.data);  
+     }  
+    }  
+</pre></div>	
+
+<div class="nolinkBHEAD">What is final parameter?</div>
+
+<p>If you declare any parameter as final, you cannot change the value of it.</p>
+ <div class="codeblock"><pre>
+Example :- 	
+class Bike11{  
+  int cube(final int n){  
+   n=n+2;//can't be changed as n is final  
+   n*n*n;  
+  }  
+  public static void main(String args[]){  
+    Bike11 b=new Bike11();  
+    b.cube(5);  
+ }  
+}
+<span class="error">Output:Compile Time Error</span>
+</pre></div>
+<div class="nolinkBHEAD">Can we declare a constructor final?</div>
+
+<p>No, because constructor is never inherited.</p>
+</div>
+</body>
+</html>

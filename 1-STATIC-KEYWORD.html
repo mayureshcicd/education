@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+
+
+<h3>Static members</h3>
+<ul>
+
+ <li>We can use or acces all static members, methods of class without creating the object.</li>
+ <li>All static members , methods will shared to all created instances means all created object of class.</li>
+ <li>We can not call non static methods from static method.</li>
+ <li>Static methods can not refer using this or super keyword.</li>
+ </ul>
+<div class="nolinkBHEAD">static Keyword In Java</div>
+
+<p>The static keyword in java is used for memory management mainly. We can apply java static keyword with variables, methods, blocks and nested class. The static keyword belongs to the class than instance of the class. Final can be:</p>
+<p> The static can be:
+<ol>
+    <li>variable (also known as class variable)</li>
+    <li> method (also known as class method)</li>
+    <li>block</li>
+	<li>nested class</li>
+</ol>
+</p>
+<div class="nolinkBHEAD">Java static variable</div>
+
+<p>If you declare any variable as static, it is known static variable.</p>
+<ol>
+	<li>The static variable can be used to create common properties in class, and we can acces it without creating a class object</li>    
+    <li>The static variable gets memory only once in class area at the time of class loading.</li>
+</ol>
+
+
+<div class="nolinkBHEAD">Java static method</div>
+
+<p>If you apply static keyword with any method, it is known as static method.</p>
+<ol>
+	<li>A static method belongs to the class rather than object of a class.</li>
+    <li>A static method can be invoked without the need for creating an instance of a class.</li>
+    <li>static method can access static data member and can change the value of it.</li>
+</ol>
+<div class="nolinkBHEAD">Restrictions for static method</div>
+
+<p>There are two main restrictions for the static method. They are:</p>
+<ol>
+	<li>The static method can not use non static data member or call non-static method directly.
+    <li>this and super cannot be used in static context.</li>
+</ol>
+<div class="nolinkBHEAD">Java static block</div>
+
+<ol>
+	<li>Is used to initialize the static data member.</li>
+    It is executed before main method at the time of classloading.</li>
+	<li>
+	<img src="img/static-method.png"/><br>
+	<img src="img/static-method1.png"/><br>
+	</li>
+</ol>
+
+
+<div class="codeblock"><pre>
+Example : -
+ package edu.java.basic;
+
+class Student {
+	int rollno;
+	String name;
+	String schoolName;
+	// creating static variables
+	static int count = 0; // will get memory only once and retain its value
+	static String COLLEGE = "JAVA COLLEGE";
+
+	// Static Block
+	/*
+	 * Note : - whenever you create the object and initialize it 1. before
+	 * creating object and initialize it , Static Block will execute first.  
+	 * then Constructor method will execute and will initialize the created
+	 * class object.
+	 */
+	static {
+
+		String STATIC_BOLCK_NAME = "MAIN BLOCK";
+		staticBlockName(STATIC_BOLCK_NAME);
+
+	}
+
+	// Static class
+	static class CHILD_STANDARD {
+		static String STANDARD = "Inside Class X";
+	}
+
+	Student() {
+
+		count++; // here we are increasing counter from constructor
+
+	}
+
+	Student(int r, String n) {
+		rollno = r;
+		name = n;
+		System.out.println("Constructor  is Called to initialize the object.");
+	}
+
+	void display() {
+
+		System.out.println(count + "  " + rollno + " " + name + " " + COLLEGE);// here we are accessing static variable.																				
+	}
+
+	static void changeCollege(String collegeName) {
+		
+			<span class="error">//schoolName="old school";
+			// can't make a static reference to non-static field (schoolName)</span>
+		COLLEGE = collegeName;
+		<span class="error">//localMethod("sss");
+		// can't make a static reference to non-static method (schoolName)</span>
+	}
+
+	void localMethod(String Block) {
+		System.out.println(Block);
+
+	}
+
+	static void staticBlockName(String Block) {
+		System.out.println(Block);
+	}
+}
+
+public class StaticClass {
+	public static void main(String args[]) {
+		Student s1 = new Student(111, "Karan");
+		System.out.println(Student.CHILD_STANDARD.STANDARD); // without creating class (Student) object, we can access the nested Static Class (CHILD_STANDARD)
+
+		Student.changeCollege("SPRING COLLEGE");// without creating class (Student ) object . we can access the static method changeCollege.
+		s1.display();
+
+		Student s2 = new Student(222, "Aryan");
+		System.out.println(Student.COLLEGE); // without creating class (Student) object . we can access the static variable COLLEGE.
+		s2.display();
+	}
+}
+<span class="error">Output:Compile Time Error</span>
+</pre></div>
+<center><h3>IMPORTANT POINTS</h3></center>
+<h3>Static variable, method, class are stored in perm gen(permanent generation memory).</h3>
+<div class="nolinkBHEAD">Static Variables</div>
+<b>The static is a keyword in java.</b><br>
+<ol>
+
+
+<li>Static can be used with following in java
+	 <ul>
+		<li>variable</li>
+		<li>method</li>
+		<li>static class</li>
+		<li>block</li>
+	</ul>
+</li>
+
+	<li>Static variables are also known as Class Variables.</li>
+    <li>Such variables get default values based on the data type.</li>
+    <li>Data stored in static variables is common for all the objects( or instances ) of that Class.</li>
+    <li>Memory allocation for such variables only happens once when the class is loaded in the memory.</li>
+    <li>These variables can be accessed in any other class using class name.</li>
+    <li>Unlike non-static variables, such variables can be accessed directly in static and non-static methods.</li>	
+	<li>static variables are also known as class variables.</li>
+	<li>We need not to create instance of class for accessing static variables.</li>
+	<li>static variables will remain same for different instance/objects of class but for every new object instance variables will be initialized to new value.</li>
+	<li>Static variables can be used inside constructor.</li>
+	<li>Static variables are not serialized in java.</li>
+	
+</ol>
+<img src="img/static-1.png"/>
+<h3>Difference between static and non-static variable</h3>
+<table>
+<tbody>
+<tr>
+<th>Static variables</th>
+<th>Non-static variables</th>
+</tr>
+<tr>
+<td>Known only as class variables.</td>
+<td>Also known as instance variables.</td>
+</tr>
+<tr>
+<td>Static variables can be accessed inside static block, non-static block (instance block), <br>
+static method, non-static method (instance method), methods of static nested class and inner class.<br>
+</td>
+<td>Non-static variables can be accessed inside non-static block (instance block), <br>
+non-static method (instance method), methods of inner class. in methods of static nested class.
+</td>
+</tr>
+<tr>
+<td>Static variables are class variables access to them is always resolved during compile time.</td>
+<td>Non-Static variables are instance variables access to them is always resolved during runtime.</td>
+</tr>
+<tr>
+<td>Static variables are not serialized in java</td>
+<td>instance variables are serialized in java</td>
+</tr> 
+
+</tbody>
+</table>
+<div class="nolinkBHEAD">Advantage of static variable</div>
+<p>It makes your program memory efficient <span class="bold">(it saves memory).</span></p>
+
+
+<div class="nolinkBHEAD">Static Methods</div>
+<h3>Static method cannot be overridden</h3>
+<p>
+<ul>
+<li>Static Methods can access class variables without using object of the class. </li>
+<li>It can access non-static methods and non-static variables by using objects.</li>
+<li>Static methods can be accessed directly in static and non-static methods.</li>
+<li>static methods are also known as class methods.</li>
+<li>We need not to create instance of class for accessing static methods.</li>
+<li>Static methods can access all static variables, but cannot access non-static (instance variables)</li>
+ <li>
+ <b>Important points about overriding static methods</b><br>
+ <ol>
+	<li>Static method cannot be overridden, any attempt to do this will not cause compilation error.</li>
+	<li>Static method cannot be overridden with non-static method, any attempt to do this will cause compilation error.</li>
+	<li>Non-static method cannot be overridden with static method, any attempt to do this will cause compilation error.</li>
+	<li>We can use staticMethod by using class name example : <b>ClassName.staticMethod()</b>   </li>
+ </ol>
+ </li>
+</ul>
+<h3>Difference between static and non-static method</h3>
+<table>
+<tbody>
+<tr>
+<th>Static method</th>
+<th>Non-static method</th>
+</tr>
+<tr>
+<td>Known only as class method.</td>
+<td>Also known as instance method.</td>
+</tr>
+<tr>
+<td>Only static variables can be accessed inside static method</td>
+<td>Static and non-static variables (instance variables) can be accessed inside static method.</td>
+</tr>
+
+<tr>
+<td>We need not to create instance of class for accessing static methods.</td>
+<td>We need to create instance of class for accessing non-static methods.</td>
+</tr>
+<tr>
+<td>Static methods cannot be overridden. Because static methods are class methods</td>
+<td>Non-static methods can be overridden. Because non static methods are instance </td>
+</tr>
+
+<tr>
+<td>access to them is always resolved during compile time only using the compile time type information.</td>
+<td>methods, access to them is always resolved during runtime time only using the runtime object.</td>
+</tr>
+</tbody>
+</table>
+
+</p>
+
+
+<div class="nolinkBHEAD">Static Class</div>
+<P>A Class can be made static only if it is a nested Class. <br><span class="bold">The nested static class can be accessed without having an object of outer class.</span>
+<ul>
+<li>static class are also known as  static nested classes </li>
+<li>Top level class can never be static in java.</li>
+<li>Only static variables can be accessed inside static nested class.</li>
+<li>StaticNestedClass can be abstract or final.</li>
+<li>StaticNestedClass can be private, protected, public.</li>
+<li>strictfp modifier can also be used with StaticNestedClass.</li>
+<li>Static nested classes can declare static initialization blocks</li>
+<li>Static nested classes can declare member interfaces.</li>
+</ul>
+
+
+<h3>Difference between static and non-static class</h3>
+<table>
+<tbody>
+<tr>
+<th>Static Static class</th>
+<th>class (Non-static class)</th>
+</tr>
+<tr>
+<td>Top level class can never be static in java.</td>
+<td>Top level class is always non static in java.</td>
+</tr>
+<tr>
+<td>static class are also known as static nested classes.</td>
+<td>Top level class is just called as class .<br>
+But, nested class is known as 
+<ul>
+<li>inner class or</li>
+<li>member inner class.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Only Static member variables of outer class can be accessed inside methods of static nested class.</td>
+<td>Static and non-static member variables of outer class can be accessed inside methods of non-static class</td>
+</tr>
+<tr>
+<td>Accessing method of static nested class<br>
+<b>new OuterClass.StaticNestedClass().method();</b><br>
+-Instance of top level class is not needed, we need to have instance of static nested class only
+</td>
+<td>Accessing method of inner class <br>
+<b>new OuterClass().new InnerClass().method();</b><br>
+Instance of top level class and InnerClass is needed.
+</td>
+</tr> 
+</tbody>
+</table>
+
+
+</P>
+
+
+<div class="nolinkBHEAD">Static Block</div>
+<P>
+<ul>
+<li>Static block is mostly used for changing the default values of static variables.</li>
+<li>This block gets executed when the class is loaded in the memory.</li>
+<li>A class can have multiple Static blocks, which will execute in the same sequence in which they have been written into the program.</li>
+<li>static blocks are called as soon as class is loaded even before instance of class is created (i.e. before constructor is called)</li>
+<li>static block are also known as static initialization blocks in java.</li>
+<li>Any code written inside static block is thread safe.</li>
+</ul>
+
+<h3>Difference between static and non-static block</h3>
+<table>
+<tbody>
+<tr>
+<th>Static block</th>
+<th>Non-static blocks</th>
+</tr>
+<tr>
+<td>Known as static initialization blocks.</td>
+<td>Also known as instance initialization  blocks.</td>
+</tr>
+<tr>
+<td>static blocks executes before instance blocks.</td>
+<td>instance blocks executes after static blocks.</td>
+</tr>
+<tr>
+<td>Only static variables can be accessed inside static block</td>
+<td>Static and non-static variables (instance variables) can be accessed inside instance block.</td>
+</tr>
+<tr>
+<td>static blocks can be used for initializing static variables or calling any static method.</td>
+<td>instance blocks can be used for initializing instance variables or calling any instance method.</td>
+</tr> 
+<tr>
+<td>static blocks executes when class is loaded.</td>
+<td>instance block executes only when instance of class is created, not called when class is loaded.</td>
+</tr>
+<tr>
+<td>this keyword cannot be used in static blocks.</td>
+<td>this keyword can be used in instance block.</td>
+</tr>
+</tbody>
+</table>
+
+</P>
+
+<h1>features of static keyword </h1>
+<p>
+1.	The static is a keyword in java.<br>
+2.	Static variable, method, class are stored in perm gen(permanent generation memory).<br>
+
+<h3>Static variable</h3>
+<ul>
+<li>static variables are also known as class variables.</li>
+<li>We need not to create instance of class for accessing static variables.</li>
+<li>static variables will remain same for different instance/objects of class but for every new object instance variables will be initialized to new value.</li>
+<li>Static variables can be used inside constructor.</li>
+<li>Static variables are not serialized in java</li>
+<li>Its important to know that only the variables and their values (primitives or references) are stored in PermGen space.</li>
+<li>If static variable is a reference to an object that which is stored in the normal sections of the heap (string pool, young/old generation or survivor space). <br>
+Those objects are not stored in PermGen space.</li>
+<li>Using instance.staticVariable is bad practice, We must use ClassName.staticVariableName</li>
+</ul>
+
+<h3>Static method</h3>
+<ul>
+<li>static methods are also known as class methods.</li>
+<li>We need not to create instance of class for accessing static methods.</li>
+<li>Static methods can access all static variables, but cannot access non-static (instance variables)</li>
+<li>Static method cannot be overridden, any attempt to do this will not cause compilation error.</li>
+<li>Static method cannot be overridden with non-static method, any attempt to do this will cause compilation error.</li>
+<li>Non-static method cannot be overridden with static method, any attempt to do this will cause compilation error.</li>
+</ul>
+
+<h3>Static class</h3>
+<ul>
+<li>static class are also known as static nested classes</li>
+<li>Top level class can never be static in java.</li>
+<li>18.	Only static variables can be accessed inside static class.</li>
+</ul>
+
+
+<h3>Static block</h3>
+<ul>
+<li>static blocks are also known as static initialization blocks in java.</li>
+<li>static blocks executes as soon as class is loaded even before instance of class is created (i.e. before constructor is called).</li>
+<li>static blocks executes before instance blocks.</li>
+<li>Any code written inside static block is thread safe.</li>
+<li>Only static variables can be accessed inside static block</li>
+<li>static blocks can be used for initializing static variables or  calling any static method.</li>
+<li>this keyword cannot be used in static blocks.</li>
+<li>
+<b>Features of static initialization block </b>
+<ol>
+<li>Static block executes executes when class is loaded.</li>
+<li>static blocks executes before instance blocks.</li>
+<li>Only static variables can be accessed inside static block</li>
+<li>static blocks can be used for initializing static variables or calling any static method.</li>
+<li>this keyword cannot be used in static block.</li>
+</ol>
+</li>
+
+<li>
+<b>Features of instance initialization block </b>
+<ol>
+<li>Instance block executes when instance of class is created.</li>
+<li>Also known as non-static initialization block.</li>
+<li>instance blocks executes after static blocks.</li>
+<li>Static and non-static variables (instance variables) can be accessed inside instance block.</li>
+<li>instance blocks can be used for initializing instance variables or calling any instance method.</li>
+<li>this keyword can be used in instance block.</li>
+</ol>
+</li>
+</ul>
+
+</p>
+
+<h3>Difference between static initialization and instance initialization block</h3>
+<table>
+<tbody>
+<tr>
+<th>Static block</th>
+<th>instance block</th>
+</tr>
+<tr>
+<td>Known only as static initialization block.</td>
+<td>Also known as non-static initialization block.</td>
+</tr>
+<tr>
+<td>static blocks executes before instance blocks.</td>
+<td>instance blocks executes after static blocks.</td>
+</tr>
+<tr>
+<td>Only static variables can be accessed inside static block</td>
+<td>Static and non-static variables (instance variables) can be accessed inside instance block.</td>
+</tr>
+<tr>
+<td>static blocks can be used for initializing static variables or calling any static method.</td>
+<td>instance blocks can be used for initializing instance variables or calling any instance method.</td>
+</tr> 
+<tr>
+<td>static blocks executes when class is loaded.</td>
+<td>instance block executes only when instance of class is created, not called when class is loaded.</td>
+</tr>
+<tr>
+<td>this keyword cannot be used in static blocks.</td>
+<td>this keyword can be used in instance block.</td>
+</tr>
+</tbody>
+</table>
+
+<img src="img/static-non-static.jpg"/>
+
+
+</div>
+</body>
+</html>

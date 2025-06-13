@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<h3>JVM DETAILS</h3>
+<img src="img/jvm_t.png"/>
+
+<h3>FEATURS OF THE JAVA</h3>
+
+<p>
+<ol>
+<li>Java is the object oriented language and Everything in java is object expect primitive data types.</li>
+<li>java is plat form independent. we can't use pointers in java.</li>
+<li>java doesn't  support to multiple inheritance but it supports multi level single inheritance.</li>
+<li>packages  :- </b>packages is nothing but directory structure. </li>
+<li><b>interfaces :- </b>interfaces are nothing but abstract class types. which can be implement in java class. interfaces are used for dynamic binding.</li>
+<li><b>JNI (Java Native Interface) :- </b>Is useful to access system resources.</li>
+<li><b>Exception handling : -  </b>is useful to manage the errors run time.</li>
+<li><b>multi Threading :- </b>It support to execute parallely  two parts of execution which functionally depend on each other.</li>
+</ol>
+
+<h3>DATA TYPES IN JAVA</h3>
+<ol>
+<li><b>Character Data types :- </b>Char (2 bytes)</li>
+<li><b>Integer Data types :-  </b>int (2 bytes), short (4 bytes), long (8 bytes), byte (1 bytes)</li>
+<li><b>Floating Data types:- </b>float (4 bytes) , double (8 bytes)</li>
+<li><b>Boolean Data types:- </b>Boolean (1 bytes)</li>
+</ol>
+<br><br>
+<b>Note : -</b> All char, int, float, Boolean  are  primitive data types.<br>
+<br><br>
+<b>What is  Java primitive types and java primitive variables</b>
+<b>Answer:- </b>	The data types (integer, character, Boolean, float, double) are java primitive types.<br><br>
+<b>default values for primitive data types</b><br>
+Numeric Types = 0<br>
+double Types = 0<br>
+float Types = 0<br>
+Char Types =\u000<br>
+Boolean Types= false<br><br><br>
+
+
+<b>Java reference types and java reference variables</b><br>
+<b>Answer : -</b> The data types (classes, arrays) are java reference types.<br>
+by default All default values for reference types will be null<br><br>
+
+<b> What is array : -</b> Array is a collection similar elements.<br><br>
+
+</p>
+<h3>JVM has stack and heap memory.</h3>
+Whenever the class is institate or loaded in memory that memory is called JVM.<br>
+in JVM has stack and heap memory.<br>
+<b>stack memory :- </b>we stores the local variable, order, private references.<br>
+<b>heap memory :- </b>we stores the class level variables and  objects. <br>
+
+<center><h3>JVM ARCHITECTURE</h3></center>
+<p>
+
+Computer doesn't  understand  java code , A micro processor only understand machine language. <br>
+Java complier (javac) will compile and will convert the .java file into .class file. <br> 
+CLASS file is nothing but byte code.  we will provide the .class file to JVM  (java virtual machine)  and <br>
+JVM  will be responsible to load and execute the java class file.  and<br>
+.class file access as a input  to class loader sub system.<br>
+<h3>class loader sub system has following  three parts.</h3>
+<ul>
+<li><b>LOADING	:-</b><br>
+<ol>
+<li><b>bootstrap class or primordial loader :-</b> it is responsible  to load classes from bootstrap class path.<br>
+bootstrap class path is rt.jar (<b><u>C:\PROGRAM FILES\JAVA\JRE\LIB\RT.JAR </u></b>).<br>
+bootstrap class means all core java API classes. so <b><u>bootstrap class loader</u></b>  will be responsible to load All core java API class.<br>
+it is also called  <b><u>Native class library.</u></b><br><br><br>
+</li>
+<li>
+<b>Extension class loader :- </b>It is responsible to load all classes which are located in <br>
+	<b><u>C:\PROGRAM FILES\JAVA /JRE/LIB/EXT</u></b> folders. Extension class loader is java object only 	and can implements in java program.<br><br><br>
+</li>
+<li>
+<b>Application class or System Class loader :- </b>It is responsible to all classes from  	application level class path.<br><br>
+</li>
+
+<b>Note:- </b>first bootstrap class will be load if it gets failed to load or unable to find .class files then Extension class loader will load if it gets failed to load or unable to find .class files then Application class loader will load. After this loading  Linking process will start.
+<br><br>
+</ol>
+<li><b>LINKING	:-</b>After this loading  Linking process will start.<br>
+<ol>
+<li><b>verify  :- </b> here byte code verifier  verify the generated (.class) code is proper or not. <br>if verification gets failed   we get the verify error. after that prepare will start.<br><br>
+</li>
+
+<li>
+<b>prepare :- </b>it will allocate the memory for static variable and assign it with default values.<br><br>
+</li>
+<li>
+<b>resolve :-</b> after completing  (verification, preparation & initialization) phases it will  convert all symbolic  references into original references from method Area.<br><br>
+</li>
+</ol>
+</li>
+
+<li> <b>INITIALIZATION :- </b>
+<ol>
+<li>
+<b>Initialization :- </b>It will place the original values to local and static  variables and statics block will be executed. <br>
+<b>Note :- </b>after initialization class loading will be completed by <b><u>class loader sub system.</u></b><br><br>
+<b><u>class loader sub system.</u></b>required  some memory areas required to load and execute the java class. for that following memory areas available inside the JVM.<br><br>
+</li>
+</ol>
+
+</li>
+</ul>
+
+
+<center><h3>VARIOUS MEMORY AREAS OF THE JVM</h3></center>
+<ul>
+<li><b>Method Memory Area :- </b>Class level data and static variable will be store in this Area.<br><br></li>
+<li><b>Heap Memory  Area:-  </b>All object data, instance variables  and  Every Array in java is object only so Every Array  will be stored in this Area.<br><br>
+
+<b>Note :-</b> for Every JVM   <b><u>one Method Memory Area </u></b> and <b><u>one Heap Memory Area </u></b>will be available.<br>
+<b>Heap Memory Area</b> and <b>Method Memory area</b> are the <b>shared memory</b> for <b>multiple threads.</b><br>
+The data which stored in <b>Heap Memory Area</b> and <b>Method Memory area</b> are not thread safe.<br>because this data can be accessed by multiple threads.<br><br><br></li>
+
+<li><b>Stack Memory Area:- </b> For Every Thread  a separate <b><u>run time stack</u></b>  will be created. each method performed by thread will also stored in Stack Memory Area including local variables.<br>
+	Each entry in stack is called stack frame and stack frame has three parts <br>
+	<ul>
+	<li><b>local variable array :- </b>all Locale variable array will store here</li>
+	<li><b>operand stack : - </b>operand stack access workspace to perform the intermediate operation.</li>
+	<li><b>frame data :-  </b>it will manages the all exceptions which comes from <b><u>try & catch block .</u></b></li>
+	</ul>
+	</li>
+	<br><br>
+<b>Note :- </b>The data which stored in <b>Stack Memory Area</b> are  thread safe. because the data can be accessed by a particular thread.<br><br>
+
+
+<li><b>PC registers Memory Area:- </b> for Every thread a separate <b><u>PC registers</u></b> will be created. A whole  address of current execution instructions will be managed by PC registers.<br><br></li>
+
+<li><b>Native Method Stacks Memory Area :- </b> for Every thread a separate <b><u>Native Method Stacks</u></b> will be created and it will hold all native method information.<br><br></li>
+
+<b>Note :- </b>Heap Area is most important for programmers.<br><br> 
+</ul>
+
+
+<center><h3>EXECUTION ENGINE</h3></center>
+
+Execution Engine will be responsible to execute the java program, and Execution Engine can communicate with all above Memory areas. <br>
+Execution Engine is central component of JVM and it is responsible to execute a program line by line.<br><br>
+
+<b>Execution Engine has two parts.</b><br><br>
+<ul>
+<li>
+<b>Interpreter :- </b> Interpreter will  responsible to <b><u>read, Interpret  and execute</u></b> the java program line by line. 
+ when we execute the one java method  called multiple time then Interpreter will call every time . that means  which methods will repeatedly executes  that all methods  will be interpreted by interpreter every time.<br><br></li>
+
+<li><b>JIT complier (Just in Time):- </b> JIT compiles only one  time the class code into machine code and next time without Interpreter it executes the code. JIT is important to improve the performance the system.<br><br>
+
+<b>JIT has following components</b><br><br>
+<ol>
+<li><b>Intermediate code generator  :- </b>It produces the Intermediate code.</li>
+<li><b>Code optimizer :-  </b>It is responsible to optimize the Intermediate code.</li>
+<li><b>Target Code generator : - </b>It is responsible to generate machine code or native code.</li>
+<li><b>Profiler : - </b>it will know which methods will repeatedly executes , which methods will repeatedly executes that methods called hotspots.</li>
+<li><b>Garbage collector :- </b>it is used to remove object which goes out of scope means (realising objects). it useful to stop memory leakages .</li>
+<li>Security manager </li>
+</ol>	
+</li>
+<br><br>
+<li><b>Native method Library:- </b>some time Execution Engine required  native method library to execute the java program. Java native interface (JNI) will provide all native method libraries.</li>
+</ul>
+
+<img src="img/class_loader1.png" /><br>
+<img src="img/class_loader.png" /><br>
+<img src="img/class_loader2.png" /><br>
+
+<img src="img/java_packages_1.png" width="800"/><br>
+<img src="img/java_packages_2.png" width="800"/><br>
+<img src="img/what_is_interpreter_in_java.png" width="800"/><br>
+<img src="img/what_is_complier_in_java.png" width="800"/><br>
+
+</p>
+
+<table>
+<tbody>
+<tr>
+<th>Difference between Heap & Stack Memory</th>
+</tr>
+ <tr>
+<td>Heap memory is used by all the parts of the application whereas stack memory is used only by one thread of execution.</td>
+</tr>
+<tr>
+<td>Whenever an object is created, it’s always stored in the Heap space and stack memory contains the reference to it. Stack memory only contains local primitive variables and reference variables to objects in heap space.</td>
+</tr>
+<tr>
+<td>Objects stored in the heap are globally accessible whereas stack memory can’t be accessed by other threads.</td>
+</tr>
+<tr>
+<td>Memory management in stack is done in LIFO manner whereas it’s more complex in Heap memory because it’s used globally. Heap memory is divided into Young-Generation, Old-Generation etc, more details at Java Garbage Collection.</td>
+</tr>
+<tr>
+<td>Stack memory is short-lived whereas heap memory lives from the start till the end of application execution.</td>
+</tr>
+<tr>
+<td>We can use -Xms and -Xmx JVM option to define the startup size and maximum size of heap memory. We can use -Xss to define the stack memory size.</td>
+</tr>
+<tr>
+<td>When stack memory is full, Java runtime throws java.lang.StackOverFlowError whereas if heap memory is full, it throws java.lang.OutOfMemoryError: Java Heap Space error.</td>
+</tr>
+<tr>
+<td>Stack memory size is very less when compared to Heap memory. Because of simplicity in memory allocation (LIFO), stack memory is very fast when compared to heap memory.</td>
+</tr>
+ </tbody>
+
+</table>
+
+<h3>How to compile java file & execute program</h3>
+<div class="codeblock"><pre>
+Example :- Test.java
+
+<b><u>javac</u> : - </b> javac   Test.java : - using <b><u>javac</u></b> command we can compile the java file 
+<b><u>java </u> : - </b>java Test : - using <b><u>java</u></b> command we can execute the java program.
+</pre></div>
+
+<h3>How to create the jar file</h3>
+<div class="codeblock"><pre>
+<b><u>jar -cvf</u> : - </b>  jar-cvf    testDemo.jar  Test.class :- using  <b><u>jar-cvf</u></b>command we can create the jar file.
+</pre></div>
+<h3>How to read the profile Java  class file.</h3>
+<div class="codeblock"><pre>
+<b><u>java p</u> : - </b> javap   java.lang.String
+</pre></div>
+
+<h3>JAVA CODING STANDARDS</h3>
+<ul>
+
+<li>Every java program needs package statement should be there.</li>
+<li>packages should be in lowercase.</li>
+<li>Class should be public.</li>
+<li>Class should have meaningful name</li>
+<li>if  you are not using any instance variable then you need to declare method as static </li>
+<li>method should have meaningful name</li>
+</ul>
+<br>
+<b>Class: - </b>Class name should be start with uppercase character. Every words starts with uppercase. <br> 
+<b>interface :- </b>interface name should be start with uppercase character. Every words starts with uppercase.  <br>
+<b>methods :- </b>methods name should be start with lowercase character. Every words starts with lowercase. camelcase convension<br>
+<b>variables :- </b>variables name should be start with lowercase character. Every words starts with lowercase. camelcase convension<br>
+<b>constants :- </b>constants name should be in uppercase.<br>
+
+<h3>JAVA OPERATORS PRECEDENCE</h3>
+<ul>
+<li>Unary operators: [],x++,x--,++x,--x,~,!,new,&lt;type&gt;</li>
+<li>Arithmetic operators: *,/,%,+,-</li>
+<li>Shift operators: &gt;&gt;, &gt;&gt;&gt;    &lt;&lt; </li>
+<li>Comparison Operators: &lt;,&lt;=,&gt;,&gt;=, instanceof</li>
+<li>equality operators: ==, !=</li>
+<li>Bitwise operators: &,^,|</li>
+<li>Short circuit operators:  && , ||</li>
+<li>Conditional operator: ?:</li>
+<li>Assignment operators: =,+=,-=,*=,.....</li>
+</ul>
+
+<center><h1>Type cast operator</h1></center>
+<div class="codeblock"><pre>
+<b>1. Implicit Type casting :- </b>
+Example : - int="a"; 
+System.out.println(a);
+output=97
+
+Internaly compiler convert char("a") to integer  automatically by implicit typecasting.
+This type of casting is called implicit typecasting.
+
+double d=10;
+System.out.println(d);
+output=10.00;
+internally compiler convert integer (10) value to double automatically by implicit typecasting.
+
+(keep small value in big container)  is also called (widening or upcasting) implicit typecasting is also called  
+
+no loss of imformation is called implicit typecasting is also called.  
+
+smaller datatype value converts to bigger data type value is called implicit typecasting.
+	1. byte datatype converts to short datatype is called implicit typecasting.
+	2. short dattype converts to int datatypes is called implicit typecasting.
+	3. int datatype converts to long  datatypes is called implicit typecasting.
+	4. long datatype converts to double datatypes is called implicit typecasting.
+	5. char datatype convets to int datatypes is called implicit typecasting.
+
+<b>2. Explicit Type casting :-</b>
+ some type casting done by programmer is called explicit type casting.
+ Example:
+ int x=10;
+ byte b=(byte) x; :- explicit typecasting.
+ 
+ Whenever we are assigning bigger datatype value to smaller dattype varible that time explicit type casting is required.
+ There is chance of loss of imformation while explicit typecasting.  
+ (keep big value in small container)  is also called (narrowing or downcasting)  while explicit typecasting . 
+ </pre></div>
+ <img src="img/Implicit_Explicit_typecasting.png"/>
+ 
+ 
+ <img src="img/heap_mem.png"/><br>
+ <img src="img/new-class.png"/><br>
+ <img src="img/new-class1.png"/><br>
+ <img src="img/new-class2.png"/><br>
+ <img src="img/new-class3.png"/><br>
+ <img src="img/mem.png"/><br>
+ <img src="img/memory.png"/><br>
+ <img src="img/decompile.png"/><br>
+ <img src="img/string.png"/><br>
+ <img src="img/dos.png"/><br>
+ <img src="img/reflection.png"/><br>
+ 
+</div>
+</body>
+</html>

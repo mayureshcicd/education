@@ -1,0 +1,106 @@
+<pre>
+<h1>JBOSS 7.1.1 installation on Windows 7 </h1>
+
+
+Download JBOSS7.1.1 Final from following link
+  
+  http://www.jboss.org/jbossas/downloads/
+
+
+
+Step 2:
+
+  Extract jboss-as-7.1.1.Final.Zip file  on C:\  Drive ,
+  like c:\jboss-as-7.1.1.Final
+
+Step 3:
+
+ Set  JBOSS_HOME property into environment variable as below.
+ 
+ 
+ <img src="img/JBOSS-1.png"/>
+ <img src="img/jboss-2.png"/>
+ go to JBOSS home directory like  C:\jboss-as-7.1.1.Final\bin
+
+run  command standalone. like 
+C:\jboss-as-7.1.1.Final\bin>standalone
+
+<h1>How to add Users in JBOSS Server</h1>
+
+D:\Executables\jboss\bin>add-user.bat
+
+What type of user do you wish to add?
+ a) Management User (mgmt-users.properties)
+ b) Application User (application-users.properties)
+(a): a
+
+Enter the details of the new user to add.
+Realm (ManagementRealm) : ManagementRealm
+Username : ratnaparkhi
+Password : mvrmvr
+Re-enter Password : mvrmvr
+About to add user 'ratnaparkhi' for realm 'ManagementRealm'
+Is this correct yes/no? y
+ 
+D:\Executables\jboss\bin>
+
+<br>
+<h1>database module in jboss 7.1</h1>
+
+To configure mysql database module in jboss 7.1, we have to,
+
+    Create module for mysql.
+    Configure module in jboss 7.1 configuration file i.e. standalone.xml
+
+Creating a module :
+
+    Under your jboss 7.1 installation, navigate to <jboss_home>/modules . For e.g. If I have installed jboss in C drive, 
+	then the location would be C:\jboss-as-7.1.1.Final\modules
+    Navigate to com directory
+    Create a folder called mysql under com .
+    Create a folder called main under mysql
+    Under mysql folder, copy your mysql_connector jar file
+    Under mysql folder, create a new file called module.xml
+
+Your folder structure should be:
+
+<img src="img/moduleStructure.jpg"/>
+and under main folder,
+<img src="img/filesForModule.jpg"/>
+Now, open  module.xml  and paste following code in it.
+<img src="img/jboss-3.png"/>
+</pre>
+
+
+<h1>For more understanding please go on following URL</h1>
+<a href="https://ankeetmaini.wordpress.com/2012/09/06/mysql-datasource-jndi-configuration-in-jboss-as-7/">Jboss and JNDI Configuration</a>
+
+<table>
+<tr>
+<td>
+			<h1>How to configure Data Source (JDBC Connection Pool) in JBoss AS 7 standalone mode?</h1>
+			<br>
+			<p class="pgdesc">This page tells you how to configure Data Source (JDBC Connection Pool) on JBoss AS 7.x server on standalone mode. Here are 
+				the step by step instructions. We are configuring Oracle database.</p>
+			<p class="pgdesc">1) Download ojdbc6.jar file from <a href="http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html">Oracle Database 11g Release 2 JDBC Drivers</a></p>
+			<p class="pgdesc">2) Goto JBoss_home_directory/modules folder.</p>
+			<p class="pgdesc">3) Create folder structure like <i>'com/oracle/ojdbc6/main/'</i> inside JBoss_home_directory/modules folder.</p>
+			<p class="pgdesc">4) Create module.xml file inside main folder, and paste below content inside module.xml file.</p>
+			<table class="scode">
+				<tbody><tr><td>
+					<div><div id="highlighter_985165" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java plain">&lt;?xml version=</code><code class="java string">"1.0"</code> <code class="java plain">encoding=</code><code class="java string">"UTF-8"</code><code class="java plain">?&gt;</code></div><div class="line number2 index1 alt1"><code class="java plain">&lt;module xmlns=</code><code class="java string">"urn:jboss:module:1.0"</code> <code class="java plain">name=</code><code class="java string">"com.oracle.ojdbc6"</code><code class="java plain">&gt;</code></div><div class="line number3 index2 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;resources&gt;</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;resource-root path=</code><code class="java string">"ojdbc6.jar"</code><code class="java plain">/&gt;</code></div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;/resources&gt;</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;dependencies&gt;</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;module name=</code><code class="java string">"javax.api"</code><code class="java plain">/&gt;</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;module name=</code><code class="java string">"javax.transaction.api"</code><code class="java plain">/&gt;</code></div><div class="line number9 index8 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;/dependencies&gt;</code></div><div class="line number10 index9 alt1"><code class="java plain">&lt;/module&gt;</code></div></div></td></tr></tbody></table></div></div>
+				</td></tr>
+			</tbody></table>
+			<p class="pgdesc">5) Copy ojdbc6.jar file inside main folder along with module.xml file.</p>
+			<p class="pgdesc">6) Goto JBoss_home_directory/standalone/configuration folder, and open standalone.xml file.</p>
+			<p class="pgdesc">7) Search for datasources and have below configuration: </p>
+			<table class="scode">
+				<tbody><tr><td>
+					<div><div id="highlighter_377508" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java plain">&lt;datasources&gt;</code></div><div class="line number2 index1 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;datasource jndi-name=</code><code class="java string">"java:jboss/jdbc/JNDIName"</code></div><div class="line number3 index2 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">pool-name=</code><code class="java string">"OraclePool"</code> <code class="java plain">enabled=</code><code class="java string">"true"</code> <code class="java plain">use-java-context=</code><code class="java string">"true"</code><code class="java plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;connection-url&gt;jdbc:oracle:thin:</code><code class="java color1">@localhost</code><code class="java plain">:</code><code class="java value">1521</code><code class="java plain">:sid&lt;/connection-url&gt;</code></div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;driver&gt;oracle&lt;/driver&gt;</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;security&gt;</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;user-name&gt;user name&lt;/user-name&gt;</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;password&gt;password&lt;/password&gt;</code></div><div class="line number9 index8 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;/security&gt;</code></div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;/datasource&gt;</code></div><div class="line number11 index10 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;drivers&gt;</code></div><div class="line number12 index11 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;driver name=</code><code class="java string">"oracle"</code> <code class="java plain">module=</code><code class="java string">"com.oracle.ojdbc6"</code><code class="java plain">&gt;</code></div><div class="line number13 index12 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;driver-</code><code class="java keyword">class</code><code class="java plain">&gt;oracle.jdbc.driver.OracleDriver&lt;/driver-</code><code class="java keyword">class</code><code class="java plain">&gt;</code></div><div class="line number14 index13 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;xa-datasource-</code><code class="java keyword">class</code><code class="java plain">&gt;oracle.jdbc.xa.client.OracleXADataSource&lt;/xa-datasource-</code><code class="java keyword">class</code><code class="java plain">&gt;</code></div><div class="line number15 index14 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;/driver&gt;</code></div><div class="line number16 index15 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">&lt;/drivers&gt;</code></div><div class="line number17 index16 alt2"><code class="java plain">&lt;/datasources&gt;</code></div></div></td></tr></tbody></table></div></div>
+				</td></tr>
+			</tbody></table>
+			<p class="pgdesc">Done... your datasource configuration is ready. Use above configured data source to connect to database.</p>
+		</td>
+</tr>
+</table>
+

@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">Annotations in Java</div>
+<img src="img/annotation-0.png"/><br>
+<img src="img/annotation-1.png"/><br>
+<img src="img/annotation-2.png"/><br>
+<img src="img/annotation-3.png"/><br>
+<img src="img/annotation-4.png"/><br>
+<img src="img/annotation-5.png"/><br>
+<ul>
+<li>Annotations is new feature in java provided by jdk 1.5 version.</li>
+<li>Annotations can be used to describe the meta data.</li>
+<li>to describe the coding part we use meta data</li>
+<li>up to jdk 1.4 version xml based Technology were used.</li>
+<li>up to jdk 1.5 version xml based Technology as well as annotation based technology were used.</li>
+</ul>
+<h3>Basic Syntax of Annotation</h3>
+<h3>The difference between comments & annotation</h3>
+
+If you provide meta data by using <b>comments</b> then the meta data will available up to source code.<br>
+it may not be available up to .class file & runtime our application. but if you want meta data up to <br>
+<b><u>source code, .class file & runtime our application.</u></b> then we go for annotation.<br><br>
+
+Annotation is a meta data, that we are able to provide inside java programs and it also available up to java class file and upto runtime our application<br>
+Annotation  are executed by using apt(annotation processing tool).
+There are mainly two syntax of annotation.
+<ul>
+<li>Declaration Syntax :- <b><u> @ interface name , annotation name</u></b></li>
+<li>Utilization Syntax : - <b><u> members : -  datatype membername() [default value]</u></b>
+<ul>
+<li>We can use the Utilization annotation in java for (variable, methods, classes).</li>
+<li>Syntax : - @Annotation name (member1=value1, member2=value2....)<br>
+programming elements (variable, method, class)
+</li>
+
+</ul>
+
+</li>
+</ul>
+
+<h3>There are Three types  of Annotation</h3>
+<ul>
+<li><b>Marker Annotation</b><br>
+Marker annotation is same as marker interface. marker when create interface  without methods (without abstract methods)  that is called marker interface.<br>
+When we declare the annotation without members that annotation called Marker annotation.<br>
+Example : - (@Override , @WebListener)
+</li>
+<li><b>Single Valued Annotation</b><br>
+Single valued annotation contains only one member<br>
+Example : - @SuppressWarnings("unchecked") , @SuppressWarnings("all")<br>
+Description : - "unchecked" value stored as key value (value="unchecked")<br>
+Description : - "all" value stored as key value (value="all")<br>
+</li>
+<li><b>Multi Valued Annotation</b><br>
+If we declared annotation using more than one member that annotation is called Multi Valued Annotation.<br>
+Example : - @WebServlet(name="loginServlet" , urlpatterf={"/login.do","/gologin.htm"})
+
+</li>
+</ul>
+<h3>Classification of Annotation</h3>
+ Annotation are divided into two types (<b> Standard Annotation </b> and  <b>Custom Annotation</b>)
+ <ul><b>Standard Annotation</b><br>
+ Standard annotation are divided into two types  (<b>General purpose annotation</b> and <b>Meta annotation</b>)
+ <ol>
+ <li><b>General purpose annotation</b> :- General purpose annotation used for common purpose
+	<ul>
+		<li><h3>@Override (available upto java 7) : - </h3>To understand the use of @Override annotation, first 
+			we need to understand the What is method overriding <br>
+			<b>method overriding is a process of replacing existing method functionality with new functionality.</b><br>
+			<b>method overriding is a process of replacing super class method functionality within sub class with new functionality.</b><br>
+			<b>@Override</b> is method level annotation, which indicates the method is overrided.
+			<div class="codeblock"><pre>
+			Example : -
+			public class DB_Driver{
+				public void getDriver()
+				{
+					System.out.println("Type 1 Driver");
+				}
+			}
+			
+			public class NEW_DB_Driver extends DB_Driver{
+				@Override
+				public void getDriver()
+				{
+					System.out.println("Type 2 Driver");
+				}
+			}	
+			public class Test{
+				public static void main(String[] args)
+				{
+				
+					DB_Driver driver=new NEW_DB_Driver();
+					// DB_Driver driver : - is reference variable of super class
+					// new New_DB_Driver(); : - object is created of sub class.
+					driver.getDriver(); // Type 2 Driver
+					// by using super class , we are calling super class method
+					// but will get output from sub class method.
+					<b>This is method over riding concept</b>
+				}
+			}		
+			</pre></div>
+		</li>
+		<li><h3>@SuppressWarnings (available upto java 7) : - </h3>
+			To understand SuppressWarnings annotation, first we need to understand (unchecked operations/ unsafe operations) in java application.<br>
+			<b><u>If you want hide the warning messages then you can use @SuppressWarnings annotation</u></b><br>
+			To suppress the Warning messages which are generated by particular method, we need to use @SuppressWarnings annotation.
+		
+		</li>
+		<li><h3>@Depicated (available upto java 7) : - </h3>
+			To understand @Depricated annotation , first we need to understand what is the meaning of Deprecations.<br>
+			all the <b><u>older/out dated methods </u></b> are deprecated methods. if we use deprecated methods in java, then <br>
+			complier will provide "Deprecation message" <br>
+			Java has provided Deprecation servie only for pre-defined methods. but if you want to provide Deprecation expectedly for user defined methods.<br>
+
+			<div class="codeblock"><pre>
+			Example : -
+			public class Employee{
+			
+				@Deprecated // It will gives warning that this method is older/out dated method.
+				public void SalaryCal()
+				{
+					System.out.println("Salary is calcuated using Basic + HRA");
+				}
+				
+				public void New_SalaryCal()
+				{
+					System.out.println("Salary is calcuated using Basic + HRA +TA");
+				}				
+			}
+			
+			public class Test{
+				public static void main(String[] args)
+				{
+				
+					Employee emp=new Employee();
+					emp.SalaryCal();
+					emp.New_SalaryCal();
+ 				}
+			}		
+			</pre></div>			
+		</li>
+		<li><h3>@FunctionalInterface (available into java 8) : - </h3>if declared the interface with one abstract method the it is called unctionalInterface<br>
+		
+		</li>
+		<li><h3>All (@Override, @SuppressWarnings,@Depicated, @FunctionalInterface) annotation are stored in <b><u>java.lang</u></b> package</h3></li>
+	</ul>
+ 
+ 
+ </li>
+ <li><b>Meta annotation</b> :- Meta annotation are annotation about annotation. (To prepare custom annotation we use Meta annotation)
+ 	<ul>
+		<li><h3>@Documented</h3>In java, By default annotation are not Documentable<br>
+		 When you create java help document.<br>
+			
+			<div class="codeblock"><pre>
+			Example : -
+			@CheckSalary
+			public class Employee{
+			
+				 
+				public void SalaryCal()
+				{
+					System.out.println("Salary is calcuated using Basic + HRA");
+				}
+				
+				 			
+			}
+			
+			 <div class="incodeblock">
+			 <pre>
+			  c:\ javadoc Employee.java 
+			  
+			  by using <u><b>javadoc</b></u> command we prepare .html file as help of java file.
+			  then in html file @CheckSalary annotation will not listed (will not come). <br><br>
+			  <b>By default annotations are not Documentable, but the main purpose of 
+			  @Documented annotation is to make any annotation as Documentable annotation.</b>
+			  </pre>
+			 </div>
+			</pre></div>				 
+		</li>
+		<li><h3>@Inherited</h3>Inheritance  provides reusalibity features. We can re use all public variable, methods of superclass within child class.<br> all super class members will inherited by child class.<br>
+		 using @Inherited annotation we can inherit all super class annotation into sub child class.<br>
+		 <b>By default annotations are not inheritable, but the main purpose of @Inherited annotation is to make any annotation as inheritable annotation.</b>
+		</li>
+		<li><h3>@Target</h3><br>
+		<b>Main purpose of @Target annotation is to define target elements for the annotation to which you want to annotation.</b><br>
+		We can apply annotation in java for (variable, methods, classes, constructors, packages, local variables).<br>
+		We can implements following elements type in @Target annotation<br>
+		<h4>Example : - @Target(ElementType.TYPE)</h4>
+		<ul>
+		<li>@Target(ElementType.TYPE) :- means applicable for (Class, Abstract Class, Interface)</li>
+		<li>@Target(ElementType.FIELD) :- means applicable for (class variables)</li>
+		<li>@Target(ElementType.METHOD) :- means applicable for (Class based methods)</li>
+		<li>@Target(ElementType.CONSTRUCTOR) :- means applicable for (Constructors)</li>
+		<li>Example : -<br>
+			@Target(ElementType.TYPE,ElementType.FIELD, ElementType.METHOD)<br>
+			@Interface CustomAnnotation{
+			}
+		</li>
+		</ul>
+
+		
+		</li>
+		<li><h3>@Retention</h3>
+		<b>If you want to define annotation for particular stage level (<b><u>source code level,.class file level or runtime our application.level</u></b>)  </b><br>
+		then you must go for @Retention annotation.<br>
+		<b>Syntax of @Retention annotation</b><br>
+		<ul>
+		<li><b>@Retention(RetentionPolicy.SOURCE  :-  </b> Available up to Source Code (.java File)</li>
+		<li><b>@Retention(RetentionPolicy.CLASS  :-  </b> Available up to (.class File)</li>
+		<li><b>@Retention(RetentionPolicy.RUNTIME  :-  </b> Available up to particular run time. means available for (.java File , .class file) as well as (run time.)</li>		
+		</ul>
+		
+		<div class="codeblock"><pre>
+			<h3>Example : - Class Level (User define Annotation)</h3>
+			import java.lang.annotation.*;
+			@Inherited
+			@Documented
+			@Target(ElementType.TYPE)
+			@Retention(RetentionPolicy.RUNTIME)
+			
+			@interface Course{			
+				String cource_id() default "C-111";
+				String cource_name() default "java programming";
+				int cource_fee() default 1000;
+			}
+			
+			@Course(cource_id="C-333",course_name="SPRING",cource_fee=30000)
+			public class Student{
+			 
+				
+				String student_id;
+				String stundent_name;
+				String student_address;
+				public Student(String student_id,String stundent_name,String student_address)
+				{
+					this.String student_id=String student_id;
+					this.String stundent_name=String stundent_name;
+					this.String student_address=String student_address;
+				}
+				public void getStudentDetails()
+				{
+					System.out.println("Student Details");
+					System.out.println("Student ID : - "+student_id);
+					System.out.println("Student    : - "+stundent_name);
+					System.out.println("Address    : - "+student_address);
+					System.out.println("-------------------------------------");
+				}
+			}
+			
+			<div class="incodeblock">
+			 <pre>
+					   	
+			import java.lang.annotation.*;
+			public class TestAnnotation{
+			
+				public static void main(String[] args) throws Exception
+				{
+					Student student=new Student("1001","Mayuresh","Pune");
+					student.getStudentDetails();
+					// Read Course annotation values;
+					Class class=student.getClass();
+					Annotation annn=class.getAnnotation("Course.class");
+					Course course= (Course) ann;
+					
+					System.out.println("Course Details");
+					System.out.println("Course ID : - "+course.cource_id());
+					System.out.println("Course    : - "+course.cource_name());
+					System.out.println("Fee    : - "+course.cource_fee());
+					System.out.println("-------------------------------------");					
+					
+				}
+			
+			}
+			</pre>
+			 </div>	
+		 
+			</pre></div>
+			
+								
+
+	<div class="codeblock"><pre>
+			<h3>Example : - Method Level (User define Annotation)</h3>
+			import java.lang.annotation.*;
+			@Inherited
+			@Documented
+			@Target(ElementType.METHOD)
+			@Retention(RetentionPolicy.RUNTIME)
+			
+			@interface Course{			
+				String cource_id() default "C-111";
+				String cource_name() default "java programming";
+				int cource_fee() default 1000;
+			}
+			
+			
+			public class Student{
+			 
+				
+				String student_id;
+				String stundent_name;
+				String student_address;
+				public Student(String student_id,String stundent_name,String student_address)
+				{
+					this.String student_id=String student_id;
+					this.String stundent_name=String stundent_name;
+					this.String student_address=String student_address;
+				}
+				
+				@Course(cource_id="C-333",course_name="SPRING",cource_fee=30000)
+				public void getStudentDetails()
+				{
+					System.out.println("Student Details");
+					System.out.println("Student ID : - "+student_id);
+					System.out.println("Student    : - "+stundent_name);
+					System.out.println("Address    : - "+student_address);
+					System.out.println("-------------------------------------");
+				}
+			}
+			 <div class="incodeblock">
+			 <pre>			
+			import java.lang.annotation.*;
+			<b><u>import java.lang.reflect.*;</u></b>
+			public class TestAnnotation{
+			
+				public static void main(String[] args) throws Exception
+				{
+					Student student=new Student("1001","Mayuresh","Pune");
+					student.getStudentDetails();
+					// Read Course annotation values;
+					Class class=student.getClass();
+					Method method=class.getMethod("getStudentDetails");
+					Annotation annn=method.getAnnotation("Course.class");
+					Course course= (Course) ann;
+					
+					System.out.println("Course Details");
+					System.out.println("Course ID : - "+course.cource_id());
+					System.out.println("Course    : - "+course.cource_name());
+					System.out.println("Fee    : - "+course.cource_fee());
+					System.out.println("-------------------------------------");					
+					
+				}
+			
+			}
+			</pre>
+			 </div>	
+		 
+			</pre></div>
+			
+						
+			
+		</li>
+		<li><h3>All (@Documented, @Inherited,@Target, @Retention) annotation are stored in <b><u>java.lang.annotation</u></b> package</h3></li>
+	</ul>
+ </li>
+ 
+ </ol>
+ <b>Custom Annotation</b><br>
+ Custom Annotation are<b>User defined annotation</b>, which are generally created by programmer as per the application requirement.<br>
+ <h3>To create the Custom Annotation are<b>User defined annotation</b> in java follow the following steps</h3>
+ <ul>
+ <li>Define /Declare user define annotation</li>
+ <li>Utilize user define annotation in java program/application</li>
+ <li>Access data from user define annotation : - We required <b>Java Reflection Api</b> to access data from user define annotation</li>
+ </ul>
+ 
+ <li><h3> 
+ All (@Override, @SuppressWarnings,@Depicated, @FunctionalInterface, @Documented, @Inherited,@Target, @Retention) annotation are stored in <b><u>java.lang.annotation.Annotation </u></b> Interface
+ </h3>
+ <h2>Note: - In java,  All the Annotations are interfaces </h2>
+ </li>
+ </ul>
+ 
+ <h1>For validation in Spring </h1>
+ <h3>we required following Validation api</h3>
+ <ul>
+ <li>
+	<b>for Custom Annotation in java : - for hibernate based validation</b><br>
+	https://mvnrepository.com/artifact/org.hibernate/hibernate-validator/4.2.0.Final 
+</li>
+
+<li>
+	<b>Bean Validation API » 1.0.0.GA  : - used for javax. validation</b><br>
+	https://mvnrepository.com/artifact/javax.validation/validation-api/1.0.0.GA
+</li>
+</ul>
+
+<b>Note: -</b> you must download (for hibernate based validation jar and javax.validation jar) otherwise it will never work.<br>
+<h3>EXAMPLE OF SPRING WEB MVC VALIDATION USING ANNOTATION</h3>
+<div class="codeblock"><pre>
+<h3>checkName annotation</h3>
+
+package edu.spring.validator;
+
+import java.lang.annotation.*;
+
+import javax.validation.Constraint;
+import javax.validation.Payload;
+
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD,ElementType.METHOD})
+@Constraint(validatedBy=NameNotNull.class)
+public @interface checkName {
+	String message() default " ";
+	int min() default 0;
+	int max() default 0;
+	Class&lt;?&gt;[] groups() default{};
+	Class&lt;? extends Payload&gt;[] payload() default {};
+  	
+}
+
+<hr>
+<h3>NameNotNull Validator class</h3>
+
+package edu.spring.validator;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class NameNotNull implements ConstraintValidator&lt;checkName, String&gt;{
+
+	private int min;
+    private int max;
+    
+	@Override
+	public void initialize(checkName parameters) {
+		min = parameters.min();
+        max = parameters.max();
+	}
+
+	@Override
+	public boolean isValid(String nme, ConstraintValidatorContext ctx) {
+		if (nme==null)
+		{
+			return false;
+		}
+		 int length = nme.length();
+	        return length &gt;= min && length &lt;= max;
+		 
+	}
+
+}
+
+<hr>
+<h3>Employee Bean and and implement annotation</h3>
+
+package edu.spring.bean;
+
+import edu.spring.validator.checkName;
+
+public class Employee {
+
+	private String countryName;
+	@checkName(message="Enter Name between  2 to 5 characters", min=2,max=5)
+	private String pmName;
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+	public String getPmName() {
+		return pmName;
+	}
+
+	public void setPmName(String pmName) {
+		this.pmName = pmName;
+	}
+
+}
+<hr>
+<h3>Check validation in Controller</h3>
+
+package edu.spring.controller;
+
+import javax.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import edu.spring.bean.Employee;
+
+@Controller
+public class DefaultController {
+ 
+	
+	@RequestMapping(value="/",method=RequestMethod.GET)
+	public String country(Model model){
+		model.addAttribute("employee", new Employee());
+		return  "emppage";
+	}
+	@RequestMapping(value="saveEmp", method = RequestMethod.POST)
+	public String saveCountry(@Valid Employee employee ,BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			return "emppage";
+		}
+		model.addAttribute("countryName", employee.getCountryName());
+		model.addAttribute("pmName", employee.getPmName());
+		return "success";
+	}		
+	
+
+
+}
+
+<hr>
+<h3>Index.jsp for testing Validation</h3>
+&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"&gt;
+&lt;title&gt;EMPLOYEE FORM&lt;/title&gt;
+&lt;style&gt;
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;
+  &lt;form:form action="saveEmployee" method="post" commandName="country"&gt;
+	&lt;tr&gt;  &lt;td&gt;Country Name:&lt;/td&gt; &lt;td&gt;&lt;form:input  path="countryName"/&gt; &lt;/td&gt; &lt;/tr&gt; 
+	&lt;tr&gt; &lt;td&gt; PM Name :&lt;/td&gt; &lt;td&gt;&lt;form:input path="pmName"/&gt; 
+	&lt;form:errors path="pmName" cssClass="error" /&gt;&lt;/td&gt; &lt;/tr&gt; 
+	&lt;tr&gt; &lt;td colspan=2&gt;   &lt;input type="submit"&gt; &lt;/td&gt;
+  &lt;/form:form&gt;
+&lt;/table&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div> 
+</div>
+</body>
+</html>

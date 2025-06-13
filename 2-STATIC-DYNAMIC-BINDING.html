@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">What is reference and object?</div>
+
+<div class="codeblock"><pre>
+Example : What is reference and object 
+
+package edu.java.basic;
+class Human{
+	   public void walk()
+	   {
+	       System.out.println("Human walks");
+	   }
+	}
+	class Boy extends Human{ // Extending human class it called runtime/Dynamic binding.
+	   public void walk(){
+	       System.out.println("Boy walks");
+	   }
+	}
+	public class Testobject{   
+	   public static void main( String args[]) {
+	   
+			/*This statement simply creates an object of class Boy and assigns a reference of Boy to it*/  
+		   //This is static binding..
+	       Boy obj1 = new Boy();
+	       obj1.walk();
+	       /* Since Boy extends Human class. The object creation
+	        * can be done in this way. Parent class reference 
+	        * can point to a child class object*/
+	       	   
+	       //Reference is of parent class
+	       Human myobj = new Boy();
+	       myobj.walk();
+	   }
+	}
+
+<span class="success">Output: Boy walks</span>
+</pre></div>
+
+<div class="nolinkBHEAD">Static Binding or Early Binding</div>
+<p>The binding which can be resolved at compile time by compiler is known as static or early binding. All the static, private and final methods have always been bonded at compile-time .</p>
+
+<div class="codeblock"><pre>
+Example : Static binding example
+package edu.java.basic;
+class Human{
+	   public void walk()
+	   {
+	       System.out.println("Human walks");
+	   }
+	}
+	class Boy extends Human{  
+	   public void walk(){
+	       System.out.println("Boy walks");
+	   }
+	}
+	public class Testobject{   
+	   public static void main( String args[]) {	   		
+	       Boy obj1 = new Boy(); //Static binding
+	       obj1.walk();	       
+	   }
+	}
+
+
+<span class="success">Output: Boy walks</span>
+<span class="success">
+Here we have created an object of Boy class and calling the method walk() of the same class. Since nothing is ambiguous here,
+compiler would be able to resolve this binding during compile-time, such kind of binding is known as static binding.
+</span>
+</pre></div>
+
+<div class="nolinkBHEAD">Dynamic Binding or Late Binding</div>
+
+<p>When compiler is not able to resolve the call/binding at compile time, such binding is known as Dynamic or late Binding. Overriding is a perfect example of dynamic binding as in overriding both parent and child classes have same method. Thus while calling the overridden method, the compiler gets confused between parent and child class method(since both the methods have same name).</p>
+
+
+<div class="codeblock"><pre>
+Example : Dynamic binding example
+package edu.java.basic;
+class Human{
+	   public void walk()
+	   {
+	       System.out.println("Human walks");
+	   }
+	}
+	class Boy extends Human{ // Extending human class it called runtime/Dynamic binding.
+	   public void walk(){
+	       System.out.println("Boy walks");
+	   }
+	}
+	public class Testobject{   
+	   public static void main( String args[]) {	   		
+		   Human myobj = new Boy();
+	       myobj.walk();       
+	   }
+	}
+
+
+<span class="success">Output: Boy walks</span>
+ <span class="success">
+Here Human is a super class and Boy is a child class since Boy extends Human. Both these classes have a same method void walk().  
+Since we have assigned the parent class reference to the child class object, during call of walk() method the compiler would not be  
+able to decide which walk() method to call. It will be confused between the walk() method of Human class and walk() method of Boy class.
+Such kind of bindings are known as dynamic binding as compiler figures out the object type in runtime.
+ </span>
+</pre></div>
+
+<div class="nolinkBHEAD">Static Binding vs Dynamic Binding</div>
+
+<ol>
+    <li>Static binding happens at compile-time while dynamic binding happens at runtime.</li>
+    <li>Binding of private, static and final methods always happen at compile time since these methods cannot be overridden. Binding of overridden methods happen at runtime.</li>
+    <li>Java uses static binding for overloaded methods and dynamic binding for overridden methods.</li>   
+</ol>
+
+
+
+</div>
+</body>
+</html>

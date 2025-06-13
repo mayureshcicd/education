@@ -1,0 +1,340 @@
+<h4 style="text-align: left;">
+What is WSDL?</h4>
+WSDL stands for Web Service Description Language. It is an XML file that describes<br>
+the technical details of how to implement a web service, more specifically the URI,<br>
+port, method names, arguments, and data types. Since WSDL is XML, it is both<br>
+human-readable and machine-consumable, which aids in the ability to call and bind to<br>
+services dynamically.using this WSDL file we can understand things like,<br>
+<ul style="text-align: left;">
+<li>&nbsp;&nbsp;&nbsp; Port / Endpoint – URL of the web service</li>
+<li>&nbsp;&nbsp;&nbsp; Input message format</li>
+<li>&nbsp;&nbsp;&nbsp; Output message format</li>
+<li>&nbsp;&nbsp;&nbsp; Security protocol that needs to be followed </li>
+<li>&nbsp;&nbsp;&nbsp; Which protocol the web service uses</li>
+</ul>
+
+<h4 style="text-align: left;">
+Ways to access web service: </h4>
+<div style="text-align: left;">
+There are two ways to access web service.</div>
+<ul style="text-align: left;">
+<li><b>If Service provider knows client</b>:If service provider knows its client then it will provide its wsdl to client and client will be able to access web service.</li>
+</ul>
+
+<ul style="text-align: left;">
+<li><b>Service provider register its WSDL to UDDI and client can access it from UDDI</b>:UDDI stands for Universal Description, Discovery and Integration.It is a directory service. Web services can register with a UDDI and make themselves available through it for discovery.So following steps are involved. </li>
+<ul>
+</ul>
+<ol>
+<li>Service provider registers with UDDI. </li>
+<li>Client searches for service in UDDI.</li>
+<li>UDDI returns all service providers offering that service.</li>
+<li>Client chooses service provider</li>
+<li>UDDI returns WSDL of chosen service provider.</li>
+<li>Using WSDL of service provider,client accesses web service.</li>
+</ol>
+<ul>
+</ul>
+</ul>
+
+<h4 style="text-align: left;">
+1. What are web services?</h4>
+<div>
+Web services are ways of communication between two application over network. It allows you to expose business logic using API.</div>
+<div>
+<b>For example:</b><br>
+Lets say you are java developer, you can create web service and expose API over internet and any other developer (lets say .net developer ) can access it.</div>
+<h4 style="text-align: left;">
+2. What are features of web services?</h4>
+<ul style="text-align: left;">
+<li>Interoperability</li>
+<li>Reuse already developed(old) functionality into new software:</li>
+<li>Loosely Coupled&nbsp;</li>
+<li>Extensibility</li>
+</ul>
+<h4 style="text-align: left;">
+3. What are different types of web services?</h4>
+<div>
+<ul style="text-align: left;">
+<li>SOAP</li>
+<li>Restful web services</li>
+</ul>
+<div>
+<h4 style="text-align: left;">
+4. What is SOAP?</h4>
+SOAP stands for Simple object access protocol. It is protocol to exchange information using request and response in XML format over transport protocol such as HTTP, SMTP etc.<br>
+<h4 style="text-align: left;">
+5. What are important components for SOAP?</h4>
+<div>
+<ul style="text-align: left;">
+<li>Simple access object protocol (SOAP)</li>
+<li>Web Services Description Language (WSDL)</li>
+<li>Universal Description, Discovery and Integration(UDDI)</li>
+</ul>
+<h4 style="text-align: left;">
+6. What is WSDL?</h4>
+</div>
+WSDL stands for Web Service Description Language. It is an XML file that describes
+the technical details of how to implement a web service, more specifically the URI,
+port, method names, arguments, and data types.
+You can understand following details using WSDL
+
+<br>
+<ul style="text-align: left;">
+<li>&nbsp; &nbsp; Port / Endpoint – URL of the web service</li>
+<li>&nbsp;&nbsp;&nbsp; Input message format</li>
+<li>&nbsp;&nbsp;&nbsp; Output message format</li>
+<li>&nbsp;&nbsp;&nbsp; Security protocol that needs to be followed</li>
+<li>&nbsp;&nbsp;&nbsp; Which protocol the web service uses</li>
+</ul>
+<h4 style="text-align: left;">
+7. What is UDDI?</h4>
+</div>
+</div>
+<div>
+UDDI stands for Universal Description, Discovery and Integration.It is a directory service. Web service provider can register&nbsp;themselves&nbsp;with a UDDI and make themselves available through it for discovery.</div>
+<div>
+<h4 style="text-align: left;">
+8. What is JAX-WS?</h4>
+</div>
+<div>
+JAX-WS stands for Java API for XML Web Services. JAX-WS is standard XML baed java API which is used to create SOAP web services.<br>
+<h4 style="text-align: left;">
+9. What are some important annotations for JAX-WS?</h4>
+<ul>
+<li>@WebService</li>
+<li>@WebMethod</li>
+<li>@SOAPBinding</li>
+</ul>
+<div>
+<h4 style="text-align: left;">
+10. What do you mean by end point in terms of SOAP?</h4>
+</div>
+</div>
+<div>
+End point is nothing but URL which other application can use to access it.<br>
+<div>
+<b>for example:</b></div>
+<div>
+end &nbsp;point:http://localhost:8080/WS/HelloWorld</div>
+</div>
+<div>
+<h4 style="text-align: left;">
+11. How can you access WSDL for web service?</h4>
+</div>
+<div>
+You just need to put ?wsdl at the end of end point URL.</div>
+<div>
+<b>for example:</b></div>
+<div>
+end &nbsp;point:http://localhost:8080/WS/HelloWorld<br>
+WSDL url: http://localhost:8080/WS/HelloWorld?wsdl<br>
+<h4 style="text-align: left;">
+12. What is wsimport?</h4>
+wsimport is utility which generates java classes from WSDL. It is part of JDK 6.<br>
+<h4 style="text-align: left;">
+13.What is sun-jaxws.xml file?&nbsp;</h4>
+This file provides endpoint details  about JAX-WS web service which is deployed on tomcat.It is available at WEB-INF directory.<br>
+<b>For example:
+
+</b><br>
+<pre class="xml" name="code">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0"&gt;
+&nbsp; &lt;endpoint
+&nbsp;&nbsp;&nbsp;&nbsp; name="HelloWorldWS"
+&nbsp;&nbsp;&nbsp;&nbsp; implementation="org.arpit.javapostsforlearning.webservice.HelloWorldImpl"
+&nbsp;&nbsp;&nbsp;&nbsp; url-pattern="/HelloWorldWS"/&gt;
+&lt;/endpoints&gt;&nbsp;</pre>
+<h4 style="text-align: left;">
+14. What are Restful web services?</h4>
+In the web services terms, REpresentational State Transfer (REST) is a stateless client-server architecture in which the web services are viewed as resources and can be identified by their URIs. Web services client uses that URI to access the resource.<br>
+<h4 style="text-align: left;">
+15.What are HTTP methods that can be used with Restful web services?</h4>
+Mainly used HTTP methods are GET, POST, PUT ,DELETE, HEAD and OPTIONS<br>
+<h4 style="text-align: left;">
+16. What is JAX-RS?</h4>
+Java API for RESTful Web Services (<b>JAX-RS</b>), is a set if APIs to develop REST service. JAX-RS is part of the Java EE6, and make developers to develop REST web application easily.<br>
+<div>
+<h4 style="text-align: left;">
+17. What are some important annotations which you use to create Restful web services?</h4>
+</div>
+<div>
+Some of important annotations which are used for creating web services are:</div>
+<b>@Path :</b>&nbsp;This is used to set path for URI at class level or method level<br>
+<b>@GET,@POST,@PUT,@DELETE &nbsp;: </b>There are annotations corresponds to HTTP methods<br>
+<b>@Produces(MediaType.TEXT_XML [, more-types ])</b>: @Produces defines which MIME type is delivered by a method<br>
+<b>@PathParam:</b>&nbsp;Used to inject values from the URL into a method parameter.<br>
+<b>@Consumes</b>(<b>MediaType.TEXT_XML</b>) : @Cosumes defines which MIME type will be consumed by the method .<br>
+<h4 style="text-align: left;">
+18. &nbsp;What are ways to test SOAP web services?</h4>
+<b>For testing SOAP :</b><br>
+SOAPUI<br>
+<b>For testing Restful web services:</b><br>
+<ul style="text-align: left;">
+<li>Postman for chrome browser</li>
+<li>poster for firefox</li>
+</ul>
+<h4 style="text-align: left;">
+19. How to choose between REST and SOAP web services?</h4>
+<ul style="text-align: left;">
+<li>If you want to implement web services in less time, go with REST</li>
+<li>If you know your client beforehand , then you can choose SOAP. If you are not aware about clients then go with REST.</li>
+<li>If you want to work with different format other than XML, go with REST. SOAP only supports XML format.</li>
+</ul>
+<div>
+<h4 style="text-align: left;">
+20. What are differences between SOAP and REST web services.</h4>
+<table class="MsoTableGrid" style="border-collapse: collapse; border: none; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-yfti-tbllook: 1184;" border="1" cellpadding="0" cellspacing="0"><tbody>
+<tr style="height: 12.9pt; mso-yfti-firstrow: yes; mso-yfti-irow: 0;"><th style="border: 1pt solid; height: 12.9pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<b><span lang="EN-US">Parameter<span style="color: red;"><o:p></o:p></span></span></b></div>
+</th><th style="border: 1pt solid; height: 12.9pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<b>SOAP</b></div>
+</th><th style="border: 1pt solid; height: 12.9pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<b>REST</b></div>
+</th></tr>
+<tr style="height: 38.05pt; mso-yfti-irow: 1;"><td style="border: 1pt solid; height: 38.05pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;" lang="EN-US">Acronym<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 38.05pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+SOAP stands for simple object access protocol</div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 38.05pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+REST stands for REpresentational State Transfer</div>
+</td></tr>
+<tr style="height: 51.7pt; mso-yfti-irow: 2;"><td style="border: 1pt solid; height: 51.7pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;">Protocol vs Architectural style</span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 51.7pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+&nbsp;SOAP is a standard protocol to create web services</div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 51.7pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Rest is architectural style to create web services.</div>
+</td></tr>
+<tr style="height: 25.85pt; mso-yfti-irow: 3;"><td style="border: 1pt solid; height: 25.85pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;">Contract</span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.85pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">Client and Server are bind with WSDL contract<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.85pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">There is no contract between client and Server.<o:p></o:p></span></div>
+</td></tr>
+<tr style="height: 25.15pt; mso-yfti-irow: 4; mso-yfti-lastrow: yes;"><td style="border: 1pt solid; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;" lang="EN-US">Format Support<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">SOAP supports only XML format<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">REST web services supports XML, json and plain text etc.</span></div>
+</td></tr>
+<tr style="height: 38.05pt; mso-yfti-irow: 1;"><td style="border: 1pt solid; height: 38.05pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;" lang="EN-US">Maintainability<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 38.05pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+SOAP web services are hard to maintain as if we do any changes in WSDL , we need to create client stub again</div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 38.05pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+REST web services are generally easy to maintain.</div>
+</td></tr>
+<tr style="height: 51.7pt; mso-yfti-irow: 2;"><td style="border: 1pt solid; height: 51.7pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;">Service interfaces vs URI</span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 51.7pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+SOAP uses Service interfaces to expose business logic</div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 51.7pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Rest uses URI to expose&nbsp;business&nbsp;logic</div>
+</td></tr>
+<tr style="height: 25.85pt; mso-yfti-irow: 3;"><td style="border: 1pt solid; height: 25.85pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;">Security</span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.85pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">SOAP has its own security : WS-security<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.85pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">Rest inherits its security from underlying transport layer.<o:p></o:p></span></div>
+</td></tr>
+<tr style="height: 25.15pt; mso-yfti-irow: 4; mso-yfti-lastrow: yes;"><td style="border: 1pt solid; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;" lang="EN-US">Bandwidth<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">SOAP requires more bandwidth and resources as it uses XML messages to exchange information<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">REST requires less bandwith and resources. It can use JSON also.</span></div>
+</td></tr>
+<tr style="height: 25.15pt; mso-yfti-irow: 4; mso-yfti-lastrow: yes;"><td style="border: 1pt solid; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span style="color: red;" lang="EN-US">Learning curve<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">SOAP web services are hard to learn as you need to understand WSDL , client stub<o:p></o:p></span></div>
+</td><td style="border-bottom-width: 1pt; border-color: initial; border-right-width: 1pt; border-style: none solid solid none; height: 25.15pt; padding: 0cm 5.4pt; width: 159.1pt;" valign="top" width="212"><div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+<span lang="EN-US">REST web services are easy to understand as you need to annotate plain java class with JAX-RS annotations to use various HTTP methods.</span></div>
+</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<h4 style="text-align: left;">
+1. What is REST?</h4>
+REST is an architectural style which was brought in by Roy Fielding in 2000 in his doctoral thesis.<br>
+<br>
+In the REST architecture style, clients and servers exchange representations of resources by using a standardized interface and protocol.REST isn't protocol specific, but when people talk about REST they usually mean REST over HTTP.<br>
+<h4 style="text-align: left;">
+2. What are Restful web services?</h4>
+In the web services terms, REpresentational State Transfer (REST) is  a stateless client-server architecture in which the web services are viewed as resources and can be identified by their URIs. Web services client uses that URI to access the resource.<br>
+It consists of two components REST server which provides access to the resources and a REST client which accesses and modify the REST resources.<br>
+<h4>
+3. What are important features of Restful web services?</h4>
+Some important features of Restful web services are:<br>
+<b>Resource identification through URI</b>:Resources are identified by their URIs (typically links on internet). So, a client can directly access a RESTful Web Services using the URIs of the resources (same as you put a website address in the browser’s address bar and get some representation as response).<br>
+<b>Uniform interface</b>: Resources are manipulated using a fixed set of four create, read, update, delete operations: PUT, GET, POST, and DELETE.<br>
+<b>Client-Server</b>: A clear separation concerns is the reason behind this constraint. Separating concerns between the Client and Server helps improve portability in the Client and Scalability of the server components.<br>
+<b>Stateless</b>: each request from client to server must contain all the information necessary to understand the request, and cannot take advantage of any stored context on the server.<br>
+<b>Cache</b>: to improve network efficiency responses must be capable of being labeled as cacheable or non-cacheable.<br>
+<b>Named resources</b>&nbsp;- the system is comprised of resources which are named using a URL.<br>
+<b>Interconnected resource representations</b>&nbsp;- the representations of the resources are interconnected using URLs, thereby enabling a client to progress from one state to another.<br>
+<b>Layered components</b>&nbsp;- intermediaries, such as proxy servers, cache servers, gateways, etc, can be inserted between clients and resources to support performance, security, etc.<br>
+<b>Self-descriptive messages</b>: Resources are decoupled from their representation so that their content can be accessed in a variety of formats, such as HTML, XML, plain text, PDF, JPEG, JSON, and others.<br>
+<h4 style="text-align: left;">
+4. What are HTTP methods that can be used in Restful web services?</h4>
+RESTful web services use HTTP protocol methods for the operations they perform.<br>
+Some important Methods are:<br>
+<b>GET :</b> It defines a reading access of the resource without side-effects.This operation is idempotent i.e.they can be applied multiple times without changing the result<br>
+<b>PUT :</b>  It is generally used for updating resource. It must also be idempotent.<br>
+<b>DELETE :</b> It removes the resources. The operations are idempotent i.e. they can get repeated without leading to different results.<br>
+<b>POST :</b> It is used for creating a new resource. It is not idempotent.<br>
+<h4 style="text-align: left;">
+5. What do you mean by Idempotent and which HTTP methods are idempotent?</h4>
+Idempotent means result of multiple successful request will not change state of resource after initial application<br>
+For example : 
+Delete is idempotent method because when you first time use delete, it will delete the resource (initial application) but after that, all other request will have no result because resource is already deleted.
+
+Get, put and delete are HTTP Idempotent methods.<br>
+<h4 style="text-align: left;">
+6. What are differences between Post and Put Http methods?</h4>
+<b>POST :</b>It is used for creating a new resource. It is not idempotent.<br>
+<b>PUT :</b> It is generally used for updating resource. It is idempotent.<br>
+Idempotent means result of multiple successful request will not change state of resource after initial application<br>
+<h4 style="text-align: left;">
+7. What happens if resources are shared by multiple clients? Do you need to make it thread safe explicitly?</h4>
+New resource instance is created for each request, so you don't need to implement thread safety or synchronization aid. It is by default thread safe.<br>
+<h4 style="text-align: left;">
+8. What is JAX-RS?</h4>
+Java API for RESTful Web Services (<b>JAX-RS</b>), is a set if APIs to developer REST service. JAX-RS is part of the Java EE6, and make developers to develop REST web application easily.<br>
+<h4 style="text-align: left;">
+9. What are REST frameworks that you are aware of and which can be used to create Restful webservices?</h4>
+There are multiple Rest framework that can be used to create Restful web services such as
+<br>
+<ul style="text-align: left;">
+<li>Jersey</li>
+<li>RestEasy</li>
+<li>Restlet</li>
+<li>CFX</li>
+<li>Spring Rest webservices</li>
+</ul>
+<div>
+<h4 style="text-align: left;">
+10. What are some important annotations which you use to create Restful web services?</h4>
+</div>
+<div>
+Some of important annotations which are used for creating web services are:</div>
+<b>@Path :</b> This is used to set path for URI at class level or method level<br>
+<b>@GET,@POST,@PUT,@DELETE &nbsp;:&nbsp;</b>There are annotations corresponds to HTTP methods<br>
+<b>@Produces(MediaType.TEXT_XML [, more-types ])</b>: @Produces defines which MIME type is delivered by a method<br>
+<b>@PathParam:</b>&nbsp;Used to inject values from the URL into a method parameter.<br>
+<b>@Consumes</b>(<b>MediaType.TEXT_XML</b>) : @Cosumes defines which MIME type will be consumed by the method .<br>
+<h4 style="text-align: left;">
+11. Can you use get method to create Resources rather than post?</h4>
+No, Get should be used only for resource retrieval and not for resource creation.<br>
+<h4 style="text-align: left;">
+12. &nbsp;What are ways to test Restful web services?</h4>
+You require a restful client to test restful web services. You can use:<br>
+<ul style="text-align: left;">
+<li>Postman for chrome browser</li>
+<li>poster for firefox</li>
+</ul>

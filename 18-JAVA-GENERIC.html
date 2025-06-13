@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">What is Generic in java</div>
+ <p>  
+ The main purpose of "Generic" is to provide Type safety and to resolve type casting problem.<br>
+Java Generic methods and generic classes enable programmers to specify, with a single method declaration, 
+a set of related methods or, with a single class declaration, a set of related types, respectively. <br>
+Generics also provide compile-time type safety that allows programmers to catch invalid types at compile time.<br>
+ </p>
+<div class="codeblock"><pre>  
+<h3>Before Generics, we need to type cast.</h3>
+
+    List list = new ArrayList();  
+    list.add("hello");  
+    String s = (String) list.get(0);//typecasting  
+	
+<h3>After Generics, we don't need to typecast the object.</h3>
+
+    List&lt;String&gt; list = new ArrayList&lt;String&gt;();  
+    list.add("hello");  
+    String s = list.get(0);  
+ </pre></div>
+ 
+ <h1>Advantage of Java Generics</h1>
+ <h3>There are mainly 3 advantages of generics. They are as follows:</h3>
+ <ul>
+	<li><b>Type-safety : </b>We can hold only a single type of objects in generics. It doesn’t allow to store other objects.
+	<li><b>Type casting is not required: </b>There is no need to typecast the object.</li>
+	<li><b>Compile-Time Checking:</b> It is checked at compile time so problem will not occur at runtime. 
+	The good programming strategy says it is far better to handle the problem at compile time than runtime.</li>
+ </ul>
+ 
+<div class="codeblock"><pre>
+<h1> Example of Java Generics using ArrayList</h1>
+
+ArrayList&lt;String&gt; list=new ArrayList&lt;String&gt;();  
+list.add("rahul");  
+list.add("jai");  
+
+String s=list.get(1);//type casting is not required  
+System.out.println("element is: "+s);  
+  
+Iterator&lt;String&gt;itr=list.iterator();  
+while(itr.hasNext()){  
+System.out.println(itr.next());  
+} 
+ 
+<h1>Example of Java Generics using Map</h1>
+
+Map&lt;Integer,String&gt; map=new HashMap&lt;Integer,String&gt;();  
+map.put(1,"vijay");  
+map.put(4,"umesh");  
+map.put(2,"ankit");  
+  
+//Now use Map.Entry for Set and Iterator  
+Set&lt;Map.Entry&lt;Integer,String&gt;&gt; set=map.entrySet();  
+  
+Iterator&lt;Map.Entry&lt;Integer,String&gt;&gt; itr=set.iterator();  
+while(itr.hasNext()){  
+Map.Entry e=itr.next();//no need to typecast  
+System.out.println(e.getKey()+" "+e.getValue());  
+}
+
+</pre></div>
+<h1>Generic class</h1>
+<p>
+A class that can refer to any type is known as generic class. <br>
+Here, we are using T type parameter to create the generic class of specific type.
+</p>
+<div class="codeblock"><pre>
+Example : -  Generic class in java
+
+public class MyGen<T>
+{  
+	private T obj;  
+	public void add(T obj)
+	{
+		this.obj=obj;
+	}  
+	public T get()
+	{
+		return obj;
+	}  
+} 
+
+MyGen&lt;Integer&gt; m=new MyGen<Integer>();  
+m.add(2);  
+//m.add("vivek");//Compile time error  
+System.out.println(m.get());  
+</pre></div>
+
+<h1>Type Parameters</h1>
+
+<h3>The type parameters naming conventions are important to learn generics thoroughly. The commonly type parameters are as follows:</h3>
+	<ul>
+    <li>T - Type</li>
+    <li>E - Element</li>
+    <li>K - Key</li>
+    <li>N - Number</li>
+    <li>V - Value</li>
+	</ul>
+	
+<h1>Generic Method</h1>
+
+Like generic class, we can create generic method that can accept any type of argument.	
+<div class="codeblock"><pre>
+  public static &lt; E &gt; void printArray(E[] elements) {  
+        for ( E element : elements){          
+            System.out.println(element );  
+         }  
+         System.out.println();  
+    }  
+
+	 Integer[] intArray = { 10, 20, 30, 40, 50 };  
+        Character[] charArray = { 'J', 'A', 'V', 'A', 'T','P','O','I','N','T' };  
+  
+        System.out.println( "Printing Integer Array" );  
+        printArray( intArray  );   
+  
+       System.out.println( "Printing Character Array" );  
+        printArray( charArray );   
+</pre></div>
+
+<h1>Wildcard in Java Generics</h1>
+The ? (question mark) symbol represents wildcard element. It means any type.
+<div class="codeblock"><pre>
+public abstract class Shape
+{  
+	public abstract void draw();  
+}  
+
+
+public class Rectangle extends Shape
+{  
+	public void draw()
+	{
+		System.out.println("drawing rectangle");
+	}  
+}  
+public class Circle extends Shape
+{  
+	public void draw()
+	{
+		System.out.println("drawing circle");
+	}  
+}  
+
+public class GenericTest
+{  
+	//creating a method that accepts only child class of Shape  
+	public static void drawShapes(List&lt;? extends Shape&gt; lists)
+	{  
+		for(Shape s:lists)
+		{  
+			s.draw();//calling method of Shape class by child class instance  
+		}  
+	}  
+	public static void main(String args[])
+	{  
+		List&lt;Rectangle&gt; list1=new ArrayList&lt;Rectangle&gt;();  
+		list1.add(new Rectangle());  
+	  
+		List&lt;Circle&gt; list2=new ArrayList&lt;Circle&gt;();  
+		list2.add(new Circle());  
+		list2.add(new Circle());    
+		drawShapes(list1);  
+		drawShapes(list2);  
+	}
+
+} 
+</pre></div>
+
+<h1>What is the need of Generic...?</h1>
+<img src="img/all.png" width="700 px"/><br>
+The main purpose of "Generic" is to provide Type safety and to resolve type casting problem.<br>
+<h1>Type Safety</h1>
+<p>
+Arrays are Type safe, that is we can give the guarantee for the type of elements present inside the array.<br>
+<b>Example :- </b>If our program requirement is to hold only string type of objects. we can choose String array. by mistake , <br>
+If you are trying to add any other type of objects , we will get compile time error.
+<div class="codeblock"><pre>
+String student_nm=new String[1000];
+student_nm[0]="Name_1";
+student_nm[1]="Name_2";
+student_nm[2]="Name_3";
+<span class="error">student_nm[3]=new Integet(10);</span>
+Whenever , I am trying to add Interger value , we will get compile time error <span class="error">(incompatible type found java.lang.Integer required java.lang.String)</span>.<br>
+hence, String array can contain only string type of objects. due to this , we can give the guarantee for the type of elements present inside the array. <br>
+hence, Arrays are Type safe.<br>
+</pre></div>
+<hr>
+But , Collections are not Type safe. that is we can not give the guarantee for the type of elements present inside the collections.<br>
+<b>Example :- </b>If our program requirement is to hold only string type of objects. and if we choose the choose String arraylist,  by mistake , <br>
+If you are trying to add any other type of objects , we will not get compile time error. but the program may fail at runtime   <span class="error">(ClasscastException)</span> error.
+<div class="codeblock"><pre>
+ArrayList student_nm= new ArrayList();
+student_nm.add("name_1");
+student_nm.add("name_2");
+student_nm.add("name_3");
+student_nm.add(new Integer(10));
+
+Now , I am trying to reterive the object from ArrayList.
+String  name1=(String) student_nm.get(0);
+String  name2=(String) student_nm.get(1);
+String  name3=(String) student_nm.get(2);
+<span class="error">String  name3=(String) student_nm.get(3);</span>
+we will get runtime error <span class="error">(ClasscastException)</span>.<br>
+Hence, we can not give the guarantee for the type of elements present inside the collections. due to this collections are not safe to use with respective type. <br>
+that is collections are not type safe.
+</pre></div>
+</p>
+
+<h1>Type casting</h1>
+<p>
+In the case of arrays, at the time of reterival, it is not required to perform the type casting. because there is a guarantee for the type of elements present inside the array.
+<div class="codeblock"><pre>
+String student_nm=new String[1000];
+student_nm[0]="Name_1";
+student_nm[1]="Name_2";
+student_nm[2]="Name_3";
+<span class="success">String name1= student_nm[0]; // Type casting not requried</span>
+</pre></div>
+
+But in the case of collections, at the time of reterival, it is required to perform the type casting. because there is no guarantee for the type of elements present inside the collections.
+
+<div class="codeblock"><pre>
+ArrayList student_nm= new ArrayList();
+student_nm.add("name_1");
+student_nm.add("name_2");
+student_nm.add("name_3");
+
+<span class="error">
+String  name1=student_nm.get(0); // Type casting required , other wise will get compile time error 
+<u>( incompatible type found java.lang.Object required java.lang.String )</u>
+</span>
+<h3>Type cast is required</h3>
+<span class="success">String  name1=(String) student_nm.get(0);</span>
+</pre></div>
+Hence, type casting is a bigger problem in collections. To overcome this problems of collections <b>Sun people</b> introduced generic concepts in java 1.5 version.<br>
+Hence, the main objectives of generics are
+<ul>
+<li>Type Safety</li>
+<li>To Resolve Type Casting problems.</li>
+</ul>
+for Example, to hold the only string type of objects, we can create generic version of ArrayList object. as follows.<br>
+for this ArrayList , we can add only String type of Objects. by mistake,if we are trying to add any other type then we will get compile time error.<br>
+hence, through generic, we are getting type safty.<br>
+<div class="codeblock"><pre>
+
+ArrayList&ltString&gt; student_nm= new ArrayList&ltString&gt;();
+student_nm.add("name_1");
+student_nm.add("name_2");
+student_nm.add("name_3");
+<span class="error">student_nm.add(new Integer(10)); 
+if we are trying to add any other type then we will get compile time error.</span>
+
+<h1>at the time of reterival , we are not required to perform type casting </h1>
+<span class="error">
+String  name1=(String) student_nm.get(0);
+String  name2=(String) student_nm.get(1);
+String  name3=(String) student_nm.get(2);
+</span>
+<h1>hence, through generic , We can solve type casting problems.</h1>
+String  name1=student_nm.get(0);
+String  name2=student_nm.get(1);
+String  name3=student_nm.get(2);
+</pre></div>
+<table>
+<tr>
+<th>ArrayList student_nm= new ArrayList();</th>
+<th>ArrayList&ltString&gt; student_nm= new ArrayList&ltString&gt;();</th>
+</tr>
+<tr>
+<td>It is a non generic version of ArrayList Object</td>
+<td>It is a generic version of ArrayList Object</td>
+</tr>
+<tr>
+<td>For this ArrayList We can add any type of object, and the hence it is not type safe.</td>
+<td>For this ArrayList , We can add only String type object, and the hence it is type safe.</td>
+</tr>
+<tr>
+<td>At the time of reterival, Type casting is required</td>
+<td>At the time of reterival, Type casting is not required</td>
+</tr>
+</table>
+
+<h1>Conclusion</h1>
+<ul>
+<li>Polymorphisim concept applicable only for the base type but not for parameter type(usage of parent reference to hold child object is concept of Polymorphisim
+<div class="codeblock"><pre>
+ArrayList&ltString&gt; student_nm= new ArrayList&ltString&gt;();
+List&ltString&gt; student_nm= new ArrayList&ltString&gt;();
+LinkedList&ltString&gt; student_nm= new ArrayList&ltString&gt;();
+Collection&ltString&gt; student_nm= new ArrayList&ltString&gt;();
+<span class="error"> ArrayList&ltObject&gt; student_nm= new ArrayList&ltString&gt;();
+We will get compile time error <u>(incompatible type found ArrayList&ltString&gt; required ArrayList&ltObject&gt;)</u>
+</span>
+</pre></div>
+</li>
+
+<li>
+For the type parameter , we can provide any class or interface name but not primitives., if you are trying to provide primitive then we will get compile time error.<br>
+Example : -
+<div class="codeblock"><pre>
+<span class="error"> ArrayList&ltint&gt; student_nm= new ArrayList&ltint&gt;();
+We will get compile time error <u>(unexcepted type found  int  required reference)</u>
+</span>
+</pre></div>
+</li>
+</ul>
+</p>
+
+<h1>Generic Classes</h1>
+until 1.4 version, in non gereric version of ArrayList class is declared as follows.
+<div class="codeblock"><pre>
+class ArrayList{
+	add (Object o);
+	Object  get(int index);
+}
+</pre></div>
+The <b><u>add (Object o);</u></b> method has input parameter is Object and hence , we can add any type of object to the ArrayList. due to this , we are missing Type Safety.<br>
+The return type of <b><u>Object  get(int index);</u></b>  method is Object ,hence at the time of reterival, we have to perform Type Casting. <br>
+<hr>
+But in java 1.5 version, a generice version of ArrayList Class is declared as follows
+<div class="codeblock"><pre>
+class ArrayList&lt;T&gt;{
+	add (T o);
+	T  get(int index);
+}
+</pre></div>
+This parameterized class with (T) parameter is nothing but generic class.<br>
+based on our runtime requirement (T) will be replaced with our provided type.<br>
+Example to hold only string type of objects, a generic version of ArrayList object can be created as follows
+<div class="codeblock"><pre>
+ArrayList&ltString&gt; student_nm= new ArrayList&ltString&gt;();
+</pre></div>
+for this requirement, compiler cosidered version of ArrayList class is as follows.
+
+<div class="codeblock"><pre>
+class ArrayList&lt;String&gt;{
+	add (String o);
+	String  get(int index);
+}
+</pre></div>
+
+The <b><u>add (String o);</u></b> method has input parameter is String type and hence , we can add only String type of object to the ArrayList. due to this , we get Type Safety.<br>
+The return type of <b><u>String  get(int index);</u></b>  method is String ,hence at the time of reterival, we do not required to perform Type Casting. <br>
+hence, through generic we are getting type safety as well as at the time of reterival, we do not required to perform Type Casting.<br>
+<h3>In Generic, We are associating a type parameter to the class , such type of  parameterized classes are nothing but Generic classes or Template Classes.</h3>
+Based on our requirement , we can define our own Generic Classes also.<br>
+<div class="codeblock"><pre>
+public  class Gen &lt;T&gt;{
+	T ob;
+	Gen(T ob)
+	{
+		this.ob=ob;
+	}
+	public void show()
+	{
+		System.out.println("The type of ob is "+ob.getClass()+getName());
+	}
+	public T getObject()
+	{
+		return ob;
+	}
+	
+}
+
+public class GenDemo{
+
+	public static void main(String args[])
+	{
+		Gen &lt;String&gt; gen1=new Account &lt;String&gt;("Durga");
+		gen1.show();
+		System.out.println(gen1.getObject());
+		
+		Gen &lt;Integer&gt; gen2=new Account &lt;Integer&gt;(10);
+		gen2.show();		
+		System.out.println(gen2.getObject());
+		
+		Gen &lt;Double&gt; gen2=new Account &lt;Double&gt;(12.45);
+		gen3.show();		 		
+		System.out.println(gen3.getObject());
+		
+	}
+
+}
+ 
+</pre></div>
+
+<h1>extends keyword in Generic & Bounded Type</h1>
+<h3>Using <b><u>extends</u></b> keyword in generic , we can bound the type parameters for particular range. and it is called bounded type.</h3>
+
+<h1>Bounded Types</h1>
+We can bound the type parameter for a particular range by using extends keyword, such types are called Bounded types.
+<table>
+<tr>
+<th><u>Un bounded class </u>  public  class Test &lt;T&gt;{}</th>
+<th><u>bounded class </u>  public  class Test &lt;T extends x &gt;{}</th>
+</tr>
+<tr>
+<td>As a type parameter we can pass any type and there are no restrictions, and hence it is unbounded type class
+<div class="codeblock"><pre>
+public  class Test &lt;T&gt;{
+
+}
+
+Test &lt;Integer&gt; Roll_num=new Test &lt;Integer&gt;();
+Test &lt;Float&gt; Roll_num=new Test &lt;Float&gt;();
+Test &lt;Double&gt; Roll_num=new Test &lt;Double&gt;();
+Test &lt;String&gt; Roll_num=new Test &lt;String&gt;();
+</pre></div>
+</td>
+<td>It is a bounded class , we can add only number types (int, float, double, short,long)
+Syntax for bounded type : -
+<div class="codeblock"><pre>
+<b>public  class Test &lt;T extends x &gt;{}</b>
+
+x can be either class or interface.
+if x is a class then as the type parameter , we can pass either x type or it's child classes.
+if x is an interface then as the type parameter, we can pass either x type or it's implementation classes.
+</pre></div>
+<div class="codeblock"><pre>
+public  class Test &lt;T extends Number &gt;{
+
+}
+
+Test &lt;Integer&gt; Roll_num=new Test &lt;Integer&gt;();
+Test &lt;Float&gt; Roll_num=new Test &lt;Float&gt;();
+Test &lt;Double&gt; Roll_num=new Test &lt;Double&gt;();
+<span class="error">Test &lt;String&gt; Roll_num=new Test &lt;String&gt;();
+we will get compile time error <b><u>(Type parameter java.lang.String is not within its bound)</u></b>
+</span>
+
+</pre></div>
+
+
+<div class="codeblock"><pre>
+public  class Test &lt;T extends Runnable &gt;{
+
+}
+
+Test &lt;Thread&gt; Roll_num=new Test &lt;Thread&gt;();
+<span class="error">Test &lt;String&gt; Roll_num=new Test &lt;String&gt;();
+we will get compile time error <b><u>(Type parameter java.lang.String is not within its bound)</u></b>
+</span>
+</pre></div>
+
+We can define bounded types even in combinations also
+<div class="codeblock"><pre>
+public  class Test &lt;T extends Number & Runnable &gt;{
+
+}
+
+</pre></div>
+as a type parameter, we can take anything which should be child class of Number and should implement Runnable interface.<br>
+<hr>
+<div class="codeblock"><pre>
+public  class Test &lt;T extends Number & Runnable &gt;{
+
+}
+<span class="success">
+because
+Number  is class.
+Runnable is interface
+</span>
+</pre></div>
+
+<div class="codeblock"><pre>
+public  class Test &lt;T extends Runnable & Comparable &gt;{
+
+}
+<span class="success">
+because
+Runnable & Comparable are interface
+</span>
+</pre></div>
+
+<div class="codeblock"><pre>
+public  class Test &lt;T extends Number & Runnable & Comparable &gt;{
+
+}
+<span class="success">
+because
+Number  is class.
+Runnable & Comparable are interface
+</span>
+</pre></div>
+
+<span class="error">
+
+<div class="codeblock"><pre>
+public  class Test &lt;T extends Number & Thread &gt;{
+
+}
+
+It is invalid  , because we can not extends more than one class.
+Number & Thread are Classes.
+</pre></div>
+
+</span>
+</td>
+</tr>
+ 
+</table>
+
+<h1>Note</h1>
+<ul>
+<li>We can define Bounded types only by using extends keyword. we can not use implements & super keywords. but we can replace implement keyword purpose with extends keyword.</li>
+<li>As the type parameter (T) , we can take any valid java identifier but it is convention to use (T) 
+<div class="codeblock"><pre>
+public  class Test &lt;T&gt;{
+
+}
+</pre></div>
+
+<div class="codeblock"><pre>
+public  class Test &lt;X&gt;{
+
+}
+</pre></div>
+
+<div class="codeblock"><pre>
+public  class Test &lt;Durga&gt;{
+
+} 
+</pre></div>
+
+</li>
+<li>Based on our Requirement, We can declare any number of type parameters and all these type parameteres should be seprated with comma(,)
+
+<div class="codeblock"><pre>
+public  class Test &lt;A,B&gt;{
+
+} 
+</pre></div>
+
+<div class="codeblock"><pre>
+public  class Test &lt;A,B,C&gt;{
+
+} 
+</pre></div>
+
+<div class="codeblock"><pre>
+public  class Test &lt;K,V&gt;{
+
+} 
+</pre></div>
+
+</li>
+</ul>
+
+<h1>Generic Methods & Wild-card Character (?)</h1>
+<ul>
+
+<li> 
+<div class="codeblock"><pre>
+m1(ArrayList&lt;String&gt; student_names)
+</pre></div>
+<ol>
+	<li>We can call this method by passing ArrayList of only String type.</li>
+	<li>But within method , we can add only String type of Objects to list. by mistake if we are trying to add any other type then we will get compile time error </li>
+	<li>
+	<div class="codeblock"><pre>
+		m1(ArrayList&lt;String&gt; student_names)
+		{
+			student_names.add("First Name");
+			student_names.add(null);
+			
+			<span class="error">student_names.add(10);
+				by mistake if we are trying to add any other type then we will get compile time error
+			</span>
+		}
+	</pre></div>
+	</li>
+</ol>
+</li>
+
+<li>
+<div class="codeblock"><pre>
+m1(ArrayList&lt;?&gt; student_names)
+</pre></div>
+<ol>
+	<li>We can call this method by passing ArrayList of any type.</li>
+	<li>But within a method we can not add anything to the list expect null. because we do not know the type exactly.</li>
+	<li>null is allowed because it is valid value for any type</li>
+	<li>This type of method are best suitable for read only operation.</li>
+	<li>
+		<div class="codeblock"><pre>
+		
+		ArrayList&lt;String&gt; studentName =new  ArrayList&lt;String&gt; ();
+		m1(studentName);
+
+		ArrayList&lt;Integer&gt; rollNo =new  ArrayList&lt;Integer&gt; ();
+		m1(rollNo);
+		
+		
+		m1(ArrayList&lt;?&gt; student_names)
+		{
+			student_names.add("First Name");
+			student_names.add(null);
+			
+			<span class="error">student_names.add(10);
+				by mistake if we are trying to add any other type then we will get compile time error
+			</span>	 
+		}
+	</pre></div>
+	</li>
+</ol>
+</li>
+
+<li>
+<div class="codeblock"><pre>
+m1(ArrayList&lt;? extends x &gt; student_names)
+</pre></div>
+<ol>
+<li>x can be either class or interface</li>
+<li>if x is a class then, we can call this method by passing ArrayList of  either x type or it's child classes.</li>
+<li>if x is an interface then, we can call this method by passing ArrayList of  either x type or it's implementation classes.</li>
+<li>But within a method we can not add anything to the list expect null. because we do not know the type of (x) exactly.</li>
+<li>This type of method are best suitable for read only operation.</li>
+</ol>
+</li>
+
+<li>
+<div class="codeblock"><pre>
+m1(ArrayList&lt;? super x &gt; student_names)
+</pre></div>
+<ol>
+<li>x can be either class or interface</li>
+<li>if x is a class then, we can call this method by passing ArrayList of  either x type or it's super classes.</li>
+<li>if x is an interface then, we can call this method by passing ArrayList of  either x type or super class of  implementation class of (x).</li>
+<li>But within a method we can add (x) type of objects and null to the list.</li>
+<li>This type of method are best suitable for read only operation.</li>
+<li>
+	
+	<div class="codeblock"><pre>		
+	<h3>Some Valid Generic Method Examples</h3>
+			<span class="success">
+			<ul>
+			<li>ArrayList&lt;String&gt; studentName =new  ArrayList&lt;String&gt; ();</li>
+			<li>ArrayList&lt;?&gt; studentName =new  ArrayList&lt;String&gt; ();</li>
+			<li>ArrayList&lt;?&gt; studentName =new  ArrayList&lt;Integer&gt; ();</li>
+			<li>ArrayList&lt;? extends Number&gt; studentName =new  ArrayList&lt;Integer&gt; ();</li>
+			<li>ArrayList&lt;? super String&gt; studentName =new  ArrayList&lt;Object&gt; ();</li>
+			</ul>
+			</span>	
+	<h3> Some Invalid Generic Method Examples</h3>		
+			<span class="error">
+			<ul>			
+			 <li>ArrayList&lt;? extends Number&gt; studentName =new  ArrayList&lt;String&gt; ();</li> 
+			 <li>ArrayList&lt;? &gt; studentName =new  ArrayList&lt;?&gt; ();</li> 
+			 <li>ArrayList&lt;? &gt; studentName =new  ArrayList&lt;? extends Number&gt; ();</li>
+			</ul>
+			</span>
+		</pre></div>
+</li>
+</ol>
+</li>
+</ul>
+
+<h1> What is Generic Methods</h1>
+<ul>
+<li>We can declare type parameter either at class level or at method level</li>
+<li>Declaring type parameter at the class level
+	<div class="codeblock"><pre>	
+		class Test&lt;T&gt;
+		{
+			<span class="success"> We can use (T) within the class based on our requirement.</span>
+		}
+	</pre></div>
+</li>
+<li>We have to declare type parameter just before return type.</li>
+<li>Declaring type parameter at the method level
+	<div class="codeblock"><pre>	
+		class Test
+		{
+			public &lt;T&gt; void m1()
+			{
+				<span class="success"> We can use (T) anywhere in this method based on our requirement.</span>
+			}
+		}
+	</pre></div>
+</li>
+<li>We can define bounded type method level also
+	<div class="codeblock"><pre>	
+		class Test
+		{
+			public &lt;T extends Number&gt; void m1()
+			{
+				<span class="success"> We can use (T) anywhere in this method based on our requirement.</span>
+			}
+		}
+	</pre></div>
+
+</li>
+</ul>
+<h1>Communication with non Generic Code</h1>
+<h3>If we send the Generice object to non Generic Area then it starts behaving like non Generic Object. similary If we send  non Generic Object to Generic Area then<br>
+it starts behaving like Generic Objects. that is the location in which object present based on that behavior will be defined.</h3>
+<h1>Note</h1>
+<ul>
+<li>The main purpose of Generic is to provide type safety and to resolve the type casting problems.</li>
+<li>Type safety and Type casting both are applicable at the compile time , hence Generic concept also applicable only at complie time but not at run time.</li>
+<li><h3>in oops concept , compiler is going to check onlyh reference type and JVM check runtime object </h3></li>
+<li>At the time of runtime , Generic syntax will be removed automatically.</li>
+<li>At the time of compliation , as last step Generic syntax will be removed. and the hence for the JVM Generic syntax will not be available.</li>
+<li>hence, the following declaration are equal.</li>
+<li><img src="img/al.png" width="700 px"/></li>
+<li>The following declaration are equal.
+<div class="codeblock"><pre>
+	ArrayList&lt;String&gt; studentName =new  ArrayList&lt;String&gt; ();
+	ArrayList&lt;String&gt; studentName =new  ArrayList ();
+</pre></div>
+<h3>for these ArrayList object, We can add only String type of Objects.</h3>
+</li>
+<li><img src="img/al1.png" width="700 px"/></li>
+</ul>
+
+</div>
+</body>
+</html>

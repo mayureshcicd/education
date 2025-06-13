@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">Immutable</div>
+ <p><b>String is Immutable</b>
+ <br>Immutable means not changable. There are many immutable classes like String, Boolean, Byte, Short, Integer, Long, Float, Double etc. In short, all the wrapper classes and String class is immutable. 
+ </p>
+
+
+<center><h3>Wrapper class  </h3></center>
+<ol>
+<li>All the wrapper classes (Integer, Long, Byte, Double, Float, Short) are subclasses of the abstract class Number.</li>
+<li>The object of the wrapper class contains or wraps its respective primitive data type.</li> 
+<li>converting primitive data types into object is called boxing, and this is taken care by the compiler.</li>
+<li>Wrapper class in java provides the mechanism to convert primitive into object and object into primitive.</li>
+<li>Wrapper classes are used to wrap the data in a new object which contains the value of that variable.</li>
+</ol>
+<img src="img/wrapp.png"/>
+<table>
+<tbody><tr>
+  <th>Data Type</th>
+  <th>Wrapper Class</th>
+</tr>
+<tr>
+  <td>byte</td>
+  <td>Byte</td>
+</tr>
+<tr class="alt">
+  <td>short</td>
+  <td>Short</td>
+</tr>
+<tr>
+  <td>int</td>
+  <td>Integer</td>
+</tr>
+<tr class="alt">
+  <td>long</td>
+  <td>Long</td>
+</tr>
+<tr>
+  <td>float</td>
+  <td>Float</td>
+</tr>
+<tr class="alt">
+  <td>double</td>
+  <td>Double</td>
+</tr>
+<tr>
+  <td>char</td>
+  <td>Character</td>
+</tr>
+<tr class="alt">
+  <td>boolean</td>
+  <td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<div class="nolinkBHEAD">Creating objects of the Wrapper classes</div><br>
+
+<div class="codeblock"><pre>
+Example: - Creating a wrapper class object using the constructors and retrieving the values wrapped by those objects using the methods
+Integer intObject = new Integer (34);
+Integer intObject = new Integer ( "34");
+</pre></div>
+
+
+<div class="nolinkBHEAD">Retrieving the value wrapped by a wrapper class object</div><br> 
+<div class="codeblock"><pre>
+Example: - retrieving the values wrapped by those objects using the methods
+int x = intObject.intValue();
+</pre></div>
+
+
+<h3>Similarly, we have methods for the other seven wrapper classes: byteValue(), shortValue(), longValue(), floatValue(), doubleValue(), charValue(), booleanValue(). </h3>
+
+
+<div class="nolinkBHEAD">User defined wrapper class</div><br> 
+<div class="codeblock"><pre>
+Example : -  user defined /customized Wrapper Class
+
+import java.util.ArrayList;
+import java.util.List;
+
+class IntVal 
+{
+    private int i;
+    public IntVal(int a) 
+	{
+		i = a;
+    }
+    public int getVal() 
+	{
+		return i;
+    }
+    public void setValue(int a) 
+	{
+		this.i = a;
+    }
+    public void increment() 
+	{
+		i++;
+    }
+    @Override
+    public String toString() 
+	{
+		return Integer.toString(i);
+    }
+}
+
+public class WrapperClass 
+{
+    public static void main(String[] args) 
+	{
+		List list = new ArrayList();
+		for (int i = 0; i &gt; 10; i++) 
+		{
+			list.add(new IntVal(i));
+		}
+		System.out.println(list); 
+
+		for (int i = 0; i &gt; list.size(); i++) 
+		{
+			((IntVal) list.get(i)).increment();
+		}
+		System.out.println(list);
+    }
+}
+<span class="success">
+Output: 
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</span>
+</pre></div>
+<h3>Mutable and Immutable</h3>
+<p>
+If an object is known to be immutable, the object reference can be shared. <br>
+For example, Boolean, Byte, Character, Double, Float, Integer, Long, Short, and String are immutable classes in Java,<br>
+but the class StringBuffer is a mutable object in addition to the immutable String.<br>
+A mutable object can be changed after it's created, and an immutable object can't. <br>
+</p>
+
+
+<h3>What is immutable  class in java</h3>
+<img src="img/mut-imut.png"/>
+<img src="img/strin.png"/>
+<p>
+ <b>Answer:</b> There are many immutable classes like String, Boolean, Byte, Short, Integer, Long, Float, Double etc. In short,<br> 
+ all the wrapper classes and String class is immutable.<br>
+ An immutable class is one whose state can not be changed once created.<br>
+
+ 
+ <b>We can also create immutable class by creating final class</b><br><br>
+ <b>benefits: </b>
+
+<ul>
+<li>immutable  class are simple to construct, test, and use</li>
+<li>immutable  class are automatically thread-safe and have no synchronization issues</li>
+<li>immutable  class do not need a copy constructor</li>
+<li>immutable  class do not need an implementation of clone</li>
+<li>immutable  class allow hashCode to use lazy initialization, and to cache its return value</li>
+<li>immutable  class do not need to be copied defensively when used as a field</li>
+<li>immutable  class make good Map keys and Set elements (these objects must not change state while in the collection)</li>
+<li>immutable  class have their class invariant established once upon construction, and it never needs to be checked again</li>
+<li>immutable  class always have “failure atomicity” (a term used by Joshua Bloch) : if an immutable object throws an exception, 
+it’s never left in an undesirable or indeterminate state</li>
+</ul><br><br>
+<b>Guidelines to make a class immutable</b><br><br>
+<ul>
+ 
+<li>Don’t provide “setter” methods — methods that modify fields or objects referred to by fields.</li>
+<li>Make all fields final and private</li>
+<li>Don’t allow subclasses to override methods</li>
+</ul>
+</p>		 
+<div class="codeblock"><pre>
+Example :-
+import java.util.Date;
+ 
+/**
+* Always remember that your instance variables will be either mutable or immutable.
+* Identify them and return new objects with copied content for all mutable objects.
+* Immutable variables can be returned safely without extra effort.
+* */
+public final class ImmutableClass
+{
+ 
+    /**
+    * Integer class is immutable as it does not provide any setter to change its content
+    * */
+    private final Integer immutableField1;
+    /**
+    * String class is immutable as it also does not provide setter to change its content
+    * */
+    private final String immutableField2;
+    /**
+    * Date class is mutable as it provide setters to change various date/time parts
+    * */
+    private final Date mutableField;
+ 
+    //Default private constructor will ensure no unplanned construction of class
+    private ImmutableClass(Integer fld1, String fld2, Date date)
+    {
+        this.immutableField1 = fld1;
+        this.immutableField2 = fld2;
+        this.mutableField = new Date(date.getTime());
+    }
+ 
+    //Factory method to store object creation logic in single place
+    public static ImmutableClass createNewInstance(Integer fld1, String fld2, Date date)
+    {
+        return new ImmutableClass(fld1, fld2, date);
+    }
+ 
+    //Provide no setter methods
+ 
+    /**
+    * Integer class is immutable so we can return the instance variable as it is
+    * */
+    public Integer getImmutableField1() {
+        return immutableField1;
+    }
+ 
+    /**
+    * String class is also immutable so we can return the instance variable as it is
+    * */
+    public String getImmutableField2() {
+        return immutableField2;
+    }
+ 
+    /**
+    * Date class is mutable so we need a little care here.
+    * We should not return the reference of original instance variable.
+    * Instead a new Date object, with content copied to it, should be returned.
+    * */
+    public Date getMutableField() {
+        return new Date(mutableField.getTime());
+    }
+ 
+    @Override
+    public String toString() {
+        return immutableField1 +" - "+ immutableField2 +" - "+ mutableField;
+    }
+}
+ 
+ class TestMain
+{
+    public static void main(String[] args)
+    {
+        ImmutableClass im = ImmutableClass.createNewInstance(100,"test", new Date());
+        System.out.println(im);
+        tryModification(im.getImmutableField1(),im.getImmutableField2(),im.getMutableField());
+        System.out.println(im);
+    }
+ 
+    private static void tryModification(Integer immutableField1, String immutableField2, Date mutableField)
+    {
+        immutableField1 = 10000;
+        immutableField2 = "test changed";
+        mutableField.setDate(10);
+    }
+}
+</pre></div>
+
+<h1>Autoboxing and Unboxing:</h1>
+The automatic conversion of primitive data types into its equivalent Wrapper type is known as boxing and opposite operation is known as unboxing.<br><br><br>
+<b>Autoboxing :- </b> Autoboxing is the automatic conversion that the java compiler makes between the primitive types and their corresponding object wrapper classes.<br>
+Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes. <br><br>
+
+<b>For example, converting an int to an Integer, a double to a Double, and so on. </b><br>
+<b>If the conversion goes the other way, this is called unboxing.</b><br>
+<h3> When a primitive data type get convert into Wrapper Type Object, it is called Autoboxing</h3>
+
+<div class="codeblock"><pre>
+Example : -  An example of autoboxing
+Character ch="a";
+
+Here is the simplest example of autoboxing:
+
+Character ch = 'a';
+
+List&lt;Integer&gt; li = new ArrayList&lt;Integer&gt;();
+for (int i = 1; i &gt; 50; i += 2)
+    li.add(Integer.valueOf(i));
+	
+</pre></div>
+<b>Unboxing :- </b>Unboxing is the automatic conversion that the java compiler makes between the object wrapper classes and their corresponding primitive types.<br>
+Converting an object of a wrapper type (Integer) to its corresponding primitive (int) value is called unboxing. <br><br>
+
+<b>The Java compiler applies unboxing when an object of a wrapper class is:</b>
+<ul>
+<li>Passed as a parameter to a method that expects a value of the corresponding primitive type.</li>
+<li>Assigned to a variable of the corresponding primitive type.</li>
+</ul>
+<h3> When a Wrapper Type object get convert into primitive data type  , it is called Unboxing</h3>
+<div class="codeblock"><pre>
+Example : -  An example of Unboxing
+Character ch=  new Character("a");
+char chc=ch;
+</pre></div>
+
+
+<div class="codeblock"><pre>
+Example: unboxing
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Unboxing {
+
+    public static void main(String[] args) {
+        Integer i = new Integer(-8);
+
+        // 1. Unboxing through method invocation
+        int absVal = absoluteValue(i);
+        System.out.println("absolute value of " + i + " = " + absVal);
+
+        List&lt;Double&gt; ld = new ArrayList&lt;Double&gt;();
+        ld.add(3.1416);    // ? is autoboxed through method invocation.
+
+        // 2. Unboxing through assignment
+        double pi = ld.get(0);
+        System.out.println("pi = " + pi);
+    }
+
+    public static int absoluteValue(int i) {
+        return (i &gt; 0) ? -i : i;
+    }
+}
+</pre></div>
+<h3>The automatic conversion of wrapper class type into corresponding primitive type, is known as Unboxing.</h3>
+<div class="codeblock"><pre>
+Example : -  An example of Unboxing
+  class UnboxingExample1{  
+    public static void main(String args[]){  
+      Integer i=new Integer(50);  
+          int a=i;  
+          
+         System.out.println(a);
+		 Integer no=new Integer(50);  
+          
+          if(no&gt;100){            //unboxing internally  
+           System.out.println(no);  
+         }  
+
+   }   
+  } 
+</pre></div>
+<img src="img/autobox.png"/>
+<img src="img/auto-box.png"/>
+
+<h3>Difference between String, StringBuffer and StringBuilder in java</h3>
+<table>
+ <tbody>
+ <tr>
+  <th>No</th>
+  <th>Property </th>
+  <th>String</th>
+  <th>StringBuffer</th>
+  <th>StringBuilder</th>
+ </tr>
+ 
+  <tr>
+  <td>1</td>
+  <td><b>Storage area</b></td>
+  <td>
+	When String is created without using new operator, JVM will create string in string pool area of heap.<br>
+	When String is created using new operator, it will force JVM to create new string in heap (not in string pool).<br>
+	Example --><br><br>
+	String s1 = "abc";<br>
+	in string pool area of heap.<br><br>
+	String s2 = new String("abc");<br>
+	in heap<br>
+  </td>
+  <td> StringBuffer is created in heap.</td>
+  <td> StringBuilder is created in heap.</td>
+ </tr>
+
+ <tr>
+  <td>2</td>
+  <td><b>mutable/ Immutable</b></td>
+  <td>String is immutable class in java, any changes made to Sting class produces new String.</td>
+  <td>StringBuffer is mutable class in java, any changes made to StringBuffer class won’t produces new String.</td>
+  <td>StringBuilder is mutable class in java, any changes made to StringBuilder class won’t produces new String.</td>
+ </tr>
+ 
+  <tr>
+  <td>3</td>
+  <td><b>Thread-safe/ Synchronized</b></td>
+  <td>String is immutable that makes it a thread -safe class.</td>
+  <td>StringBuffer methods are synchronized. <br>Means no 2 threads on same StringBuffer object cannot access methods concurrently.</td>
+  <td>StringBuilder methods are not synchronized.<br> Means 2 threads on same StringBuilder object can access methods concurrently.<br>
+	<b>Note :</b> Methods of StringBuffer and StringBuilder are same, the only difference is of synchronization.
+ </td>
+ </tr>
+ 
+ <tr>
+  <td>4</td>
+  <td><b>Performance</b></td>
+  <td>Value of String in String pool is cached, hence making it fast.<br>String created with new operator is also fast process.</td>
+  <td>Because of synchronized methods its slow.</td>
+  <td>Because of non synchronized methods its fast.</td>
+ </tr> 
+ 
+ <tr>
+  <td>5</td>
+  <td><b>Internal working</b></td>
+  <td>Let’s say we have following statements -<br> 
+	String str = "abc" ;<br>
+	str = str + "def";<br><br>
+	Internally + operator uses StringBuffer for concatenating strings.<br>
+	So,<br>
+	String str = new StringBuilder(str).append("def").toString(); <br>
+</td>
+  <td>Internally StringBuffer adds new characters to previous StringBuffer.</td>
+  <td>Internally StringBuilder adds new characters to previous StringBuilder.</td>
+ </tr>  
+</tbody>
+</table>
+   
+   
+<h1>What is an immutable class?</h1>
+
+<p> Immutable class is a class which once created, it’s contents can not be changed. Immutable objects are the objects whose state can not be changed once constructed. e.g. String class</p>
+
+<h1> How to create an immutable class?</h1>
+
+<h3> To create an immutable class following steps should be followed:</h3>
+
+<ul>
+    <li>Create a final class.</li>
+    <li>Set the values of properties using constructor only.</li>
+    <li>Make the properties of the class final and private</li>
+    <li>Do not provide any setters for these properties.</li>
+    <li>If the instance fields include references to mutable objects, don't allow those objects to be changed:
+		<ul>
+        <li>Don't provide methods that modify the mutable objects.</li>
+        <li>Don't share references to the mutable objects. Never store references to external, mutable objects passed to the constructor; if necessary, create copies, and store references to the copies. Similarly, create copies of your internal mutable objects when necessary to avoid returning the originals in your methods.</li> 
+		</ul>
+   </li>
+</ul>
+
+<img src="img/mut-imu.png"/>
+</div>
+</body>
+</html>

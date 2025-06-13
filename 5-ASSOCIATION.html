@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="MainFlow_indented">
+<div class="nolinkBHEAD">What is Association in java</div>
+ <p>Association establish relationship between two classes through their objects. 
+ <br>The relationship can be one to one, One to many, many to one and many to many.
+ </p>
+  
+<div class="codeblock"><pre>
+Example : 
+Association Example
+
+package edu.java.basic;
+class CarClass{
+   String carName;
+   double carSpeed;
+   int carId;
+   CarClass(String name, double speed, int Id)
+   {
+	this.carName=name;
+	this.carSpeed=speed;
+	this.carId=Id;
+   }
+}
+class Driver{
+   String driverName;
+   int driverAge;
+   Driver(String name, int age){
+      this.driverName=name;
+      this.driverAge=age;
+   }
+}
+class TransportCompany{
+   public static void main(String args[])
+   {
+	CarClass obj= new CarClass("Ford", 180.15, 9988);
+	Driver obj2 = new Driver("Andy", 45);
+	System.out.println(obj2.driverName+" is a driver of car Id: "+obj.carId);
+   }
+}  
+<span class="success">Output: Andy is a driver of car Id: 9988</span>
+<span class="success">In the above example, there is a one to one relationship(Association) between two classes: Car and Driver. 
+Both the classes represents two separate entities.</span>
+</pre></div>
+
+</div>
+</body>
+</html>

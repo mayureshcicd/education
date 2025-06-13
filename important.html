@@ -1,0 +1,114 @@
+<pre>
+Implicit and explicit : -
+
+Explicit means done by the programmer. Implicit means done by the JVM or the tool , not the Programmer.
+
+Explicit means done by the programmer. Implicit means done by the JVM or the tool , not the Programmer.
+For Example: Java will provide us default constructor implicitly.Even if the programmer didn't write code for constructor, 
+he can call default constructor.Explicit is opposite to this , ie. programmer has to write .
+explicit is clearly stated and implicit is not clearly stated.
+
+
+When calling a method of an object it's common to pass a value to the method. For example, if the object Employee has a method called setJobTitle:
+
+ Employee dave = new Employee();
+ dave.setJobTitle("Candlestick Maker"); 
+
+the String "Candlestick Maker" is an explicit parameter being passed to the setJobTitle method. 
+However, there is another parameter in the method call that is known as the implicit parameter. 
+The implicit parameter is the object the method belongs to. In the above example it's dave, the object of type employee.
+
+Implicit parameters are not defined within a method declaration because they are implied by the class the method is in:
+
+ public class Employee {
+ 
+   public void setJobTitle(String jobTitle)
+   {
+     this.jobTitle = jobTitle;
+   }
+ } 
+
+In order to call the setJobTitle method there must be an object of type Employee.
+
+
+
+ Callable vs Runnable interface in Java
+As I explained major differences between a Callable and Runnable interface in the last section. 
+Sometimes this question is also asked as the difference between call() and run() method in Java. All the points discussed here is equally 
+related to that question as well. 
+Let's see them in point format for better understanding :
+
+1) The Runnable interface is older than Callable, there from JDK 1.0, while Callable is added on Java 5.0.
+
+2) Runnable interface has run() method to define task while Callable interface uses call() method for task definition.
+
+3) run() method does not return any value, it's return type is void while call method returns value. 
+The Callable interface is a generic parameterized interface and Type of value is provided when an instance of Callable implementation is created.
+
+4) Another difference on run and call method is that run method can not throw checked exception while call method can throw checked exception in Java.
+
+
+
+</pre>
+
+<u>Difference between start and run in Java Thread</u></h2>
+<img src="img/Difference between Runnable and Callable in Java.jpg"/>
+<div class="MsoNormal">
+So what is difference between start and run method? Main difference is that when program calls start() method a new Thread is created and code inside run() method is executed in new Thread while if you call run() method directly no new Thread is created and code inside run() will execute on current Thread. Most of the time calling run() is bug or programming mistake because caller has intention of calling start() to create new thread and this error can be detect by many static code coverage tools like findbugs. If you want to perform time consuming task than always call start() method otherwise your main thread will stuck while performing time consuming task if you call run() method directly. Another difference between start vs run in Java thread is that you can not call start() method twice on thread object. once started, second call of start() will throw IllegalStateException in Java while you can call run() method twice. 
+<div class="MsoNormal">
+<br>
+ 
+<h2>
+<u>Code Example of start vs run method </u></h2>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9pt;">Here is a simple code example which prints name of Thread which executes </span><span style="font-family: &quot;Courier New&quot;; font-size: 9pt;">run()</span><span style="font-family: Arial; font-size: 9pt;"> method of Runnable task. Its clear that if you call </span><span style="font-family: &quot;Courier New&quot;; font-size: 9pt;">start()</span><span style="font-family: Arial; font-size: 9pt;"> method a new Thread executes Runnable task while if you directly call </span><span style="font-family: &quot;Courier New&quot;; font-size: 9pt;">run()</span><span style="font-family: Arial; font-size: 9pt;"> method task, current thread which is main in this case will execute the task.</span></div>
+<div class="MsoNormal">
+<br></div>
+<div style="background: #F3F3F3; border: dotted windowtext 1.0pt; mso-border-alt: dotted windowtext .5pt; mso-element: para-border-div; padding: 1.0pt 4.0pt 1.0pt 4.0pt;">
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in;">
+<b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">public</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">class</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> StartVsRunCall</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">{</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+<br>
+&nbsp; &nbsp; </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">public</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">static</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><b><span style="color: #006600; font-family: &quot;Courier New&quot;; font-size: 9pt;">void</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> main</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">(</span><b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;">String</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> args</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">[])</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">{</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; &nbsp; &nbsp; </span><i><span style="color: #666666; font-family: &quot;Courier New&quot;; font-size: 9pt;">//creating two threads for start and run method call</span></i><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html"><b><span style="color: #003399;">Thread</span></b></a> startThread = </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">new</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> <b>Thread</b></span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">(</span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">new</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> Task</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">(</span><span style="color: blue; font-family: &quot;Courier New&quot;; font-size: 9pt;">"start"</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">))</span><span style="color: #339933; font-family: &quot;Courier New&quot;; font-size: 9pt;">;</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <b>Thread</b> runThread = </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">new</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> <b>Thread</b></span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">(</span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">new</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> Task</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">(</span><span style="color: blue; font-family: &quot;Courier New&quot;; font-size: 9pt;">"run"</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">))</span><span style="color: #339933; font-family: &quot;Courier New&quot;; font-size: 9pt;">;</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; &nbsp; &nbsp; startThread.</span><span style="color: #006633; font-family: &quot;Courier New&quot;; font-size: 9pt;">start</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">()</span><span style="color: #339933; font-family: &quot;Courier New&quot;; font-size: 9pt;">;</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><i><span style="color: #666666; font-family: &quot;Courier New&quot;; font-size: 9pt;">//calling start method of Thread - will execute in new Thread</span></i><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; runThread.</span><span style="color: #006633; font-family: &quot;Courier New&quot;; font-size: 9pt;">run</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">()</span><span style="color: #339933; font-family: &quot;Courier New&quot;; font-size: 9pt;">;</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> &nbsp;</span><i><span style="color: #666666; font-family: &quot;Courier New&quot;; font-size: 9pt;">//calling run method of Thread - will execute in current Thread</span></i><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+<br>
+&nbsp; &nbsp; </span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">}</span></div>
+<div class="MsoNormal" style="background: #F3F3F3; border: none; mso-border-alt: dotted windowtext .5pt; mso-padding-alt: 1.0pt 4.0pt 1.0pt 4.0pt; padding: 0in;">
+<span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; </span><i><span style="color: #666666; font-family: &quot;Courier New&quot;; font-size: 9pt;">/*<br>
+&nbsp; &nbsp; &nbsp;* Simple Runnable implementation<br>
+&nbsp; &nbsp; &nbsp;*/</span></i><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">private</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">static</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">class</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> Task </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">implements</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html"><b><span style="color: #003399;">Runnable</span></b></a></span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">{</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">private</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> <b>String</b> caller</span><span style="color: #339933; font-family: &quot;Courier New&quot;; font-size: 9pt;">;</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; &nbsp; &nbsp; </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">public</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> Task</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">(</span><b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;">String</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> caller</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">){</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">this</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;">.</span><span style="color: #006633; font-family: &quot;Courier New&quot;; font-size: 9pt;">caller</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> = caller</span><span style="color: #339933; font-family: &quot;Courier New&quot;; font-size: 9pt;">;</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">}</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; &nbsp; &nbsp; @<b>Override</b><br>
+&nbsp; &nbsp; &nbsp; &nbsp; </span><b><span style="color: black; font-family: &quot;Courier New&quot;; font-size: 9pt;">public</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><b><span style="color: #006600; font-family: &quot;Courier New&quot;; font-size: 9pt;">void</span></b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> run</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">()</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> </span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">{</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>System</b>.</span><span style="color: #006633; font-family: &quot;Courier New&quot;; font-size: 9pt;">out</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;">.</span><span style="color: #006633; font-family: &quot;Courier New&quot;; font-size: 9pt;">println</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">(</span><span style="color: blue; font-family: &quot;Courier New&quot;; font-size: 9pt;">"Caller: "</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;">+ caller + </span><span style="color: blue; font-family: &quot;Courier New&quot;; font-size: 9pt;">" and code on this Thread is executed by : "</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> + <b>Thread</b>.</span><span style="color: #006633; font-family: &quot;Courier New&quot;; font-size: 9pt;">currentThread</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">()</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;">.</span><span style="color: #006633; font-family: &quot;Courier New&quot;; font-size: 9pt;">getName</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">())</span><span style="color: #339933; font-family: &quot;Courier New&quot;; font-size: 9pt;">;</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">}</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; <br>
+&nbsp; &nbsp; </span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">}</span><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"> <br>
+</span><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">}</span></div>
+<div class="MsoNormal" style="background: none repeat scroll 0% 0% rgb(243, 243, 243); border: medium none; padding: 0in;">
+<br></div>
+<div class="MsoNormal" style="background: none repeat scroll 0% 0% rgb(243, 243, 243); border: medium none; padding: 0in;">
+<b><span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">Output:</span></b></div>
+<div class="MsoNormal" style="background: none repeat scroll 0% 0% rgb(243, 243, 243); border: medium none; padding: 0in;">
+<span style="color: #009900; font-family: &quot;Courier New&quot;; font-size: 9pt;">Caller: start and code on this Thread is executed by : <b>Thread-0</b><br>
+Caller: run and code on this Thread is executed by : <b>main </b></span><b><span style="color: #000066; font-family: &quot;Courier New&quot;; font-size: 9pt;"></span></b></div>
+</div>
+<div class="MsoNormal">
+<br></div>
+<div class="MsoNormal">
+<br></div>
+</div>
+<div class="MsoNormal">
+<span style="font-family: Arial; font-size: 9pt;">In Summary only <b style="mso-bidi-font-weight: normal;">difference between </b></span><b style="mso-bidi-font-weight: normal;"><span style="font-family: &quot;Courier New&quot;; font-size: 9pt;">start</span></b><b style="mso-bidi-font-weight: normal;"><span style="font-family: Arial; font-size: 9pt;">() and </span></b><b style="mso-bidi-font-weight: normal;"><span style="font-family: &quot;Courier New&quot;; font-size: 9pt;">run()</span></b><b style="mso-bidi-font-weight: normal;"><span style="font-family: Arial; font-size: 9pt;"> method in Thread</span></b><span style="font-family: Arial; font-size: 9pt;"> is that </span><span style="font-family: &quot;Courier New&quot;; font-size: 9pt;">start</span><span style="font-family: Arial; font-size: 9pt;"> creates new thread while run doesn't create any thread and simply execute in current thread like a normal method call.</span> 
