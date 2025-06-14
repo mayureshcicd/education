@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/app.css"/>
 </head>
 <body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
 <div class="MainFlow_indented">
 <img src="class-img/oops_1.png"/><br>
 <h3>What is packages in java</h3>
@@ -283,8 +284,8 @@ public static void main(String[] args)
  <div class="nolinkBHEAD">Runtime Polymorhism( or Dynamic polymorphism)</div>
  <p>
 	Method overriding is a perfect example of  runtime polymorphism<br>
-	in method overriding both the classes(base class and child class) have same method, compile doesn’t figure out which method to call at compile-time. <br>
-	In this case JVM(java virtual machine) decides which method to call at runtime that’s why it is known as runtime or dynamic polymorphism.
+	in method overriding both the classes(base class and child class) have same method, compile doesn\92t figure out which method to call at compile-time. <br>
+	In this case JVM(java virtual machine) decides which method to call at runtime that\92s why it is known as runtime or dynamic polymorphism.
  </p>
 <div class="codeblock"><pre>
 Example : 
@@ -469,7 +470,7 @@ Inheritance allows a class to use the properties and methods of another class.
 	<li>The derived class can add its own additional variables and methods. </li> 
 	<li>These additional variable and methods differentiates the derived class from the base class.</li>
 	<li>Inheritance is a compile-time mechanism. A super-class can have any number of subclasses. But a subclass can have only one superclass.</li>
-	<li>The superclass and subclass have <b>“is-a”</b> relationship between them. </li>
+	<li>The superclass and subclass have <b>\93is-a\94</b> relationship between them. </li>
 	<li>
 	<b>Inheritance :-</b> inheritance is the "is a releationship" , When you create a new class that is based on existing (super) class<br>
 	and inherite all public (properties, methods) from existing (super) class. extends is keyword which is used for inheritace.<br>
@@ -479,7 +480,7 @@ Inheritance allows a class to use the properties and methods of another class.
 	<ul>
 	
 	<li> 
-		<b>Inheritance : -</b>An important feature of object-oriented programs is inheritance—the ability to create classes that share the attributes and methods of existing classes.<br>
+		<b>Inheritance : -</b>An important feature of object-oriented programs is inheritance\97the ability to create classes that share the attributes and methods of existing classes.<br>
 	Inheritance is mainly used for code reusability. 
 	</li>
 	<li>
@@ -542,7 +543,7 @@ The super keyword is similar to this keyword following are the scenarios where t
  <div class="codeblock"><pre>
 <b>Inheritance IS-A Relationship : - </b>
 
-•	IS-A is a way of saying : This object is a type of that object
+\95	IS-A is a way of saying : This object is a type of that object
 public class Animal{
 }
 
@@ -555,15 +556,15 @@ public class Reptile extends Animal{
 public class Dog extends Mammal{
 }
 Now, based on the above example, In Object Oriented terms, the following are true -
-•	Animal is the superclass of Mammal class.
-•	Animal is the superclass of Reptile class.
-•	Mammal and Reptile are subclasses of Animal class.
-•	Dog is the subclass of both Mammal and Animal classes.
+\95	Animal is the superclass of Mammal class.
+\95	Animal is the superclass of Reptile class.
+\95	Mammal and Reptile are subclasses of Animal class.
+\95	Dog is the subclass of both Mammal and Animal classes.
 Now, if we consider the IS-A relationship, we can say -
-•	Mammal IS-A Animal
-•	Reptile IS-A Animal
-•	Dog IS-A Mammal
-•	Hence : Dog IS-A Animal as well
+\95	Mammal IS-A Animal
+\95	Reptile IS-A Animal
+\95	Dog IS-A Mammal
+\95	Hence : Dog IS-A Animal as well
 With use of the extends keyword the subclasses will be able to inherit all the properties of the superclass except for the private properties of the superclass.
 We can assure that Mammal is actually an Animal with the use of the instance operator.
 Since we have a good understanding of the extends keyword let us look into how the implements keyword is used to get the IS-A relationship.
@@ -578,7 +579,7 @@ public class Mammal implements Animal{
 public class Dog extends Mammal{
 }
 Inheritance HAS-A relationship
-•	These relationships are mainly based on the usage. This determines whether a certain class HAS-A certain thing. 
+\95	These relationships are mainly based on the usage. This determines whether a certain class HAS-A certain thing. 
 	This relationship helps to reduce duplication of code as well as bugs.
 public class Vehicle{}
 public class Speed{}
@@ -935,7 +936,7 @@ Max: 80Kmph</span>
  
  <div class="nolinkBHEAD">multiple Inheritance</div>
  <p>
-	java doesn’t support multiple inheritance.  We can achieve it by using interfaces in Java.
+	java doesn\92t support multiple inheritance.  We can achieve it by using interfaces in Java.
  </p>
  
  <div class="codeblock"><pre>
@@ -1189,7 +1190,7 @@ public class student
 	This way data can only be accessed by public methods thus making the private fields and 
 	their implementation hidden for outside classes. 
 
-	That’s why encapsulation is known as data hiding.
+	That\92s why encapsulation is known as data hiding.
 	 </pre>
 	 </div>
 	 </li>
@@ -1204,7 +1205,7 @@ public class student
  <li>Using public getter and setter methods we update and reads the private data fields</li>
  <li>The outside class can access those private data fields via public methods.</li>
  <li>The private fields and their implementation hidden for outside classes. </li>
- <li>That’s why encapsulation is known as data hiding.</li>
+ <li>That\92s why encapsulation is known as data hiding.</li>
  </ul>
  </b>
  </span>
@@ -1368,8 +1369,8 @@ class Outer_Demo{
 </div>
 Nested classes are divided into two types: 
 
-•	Non-static nested classes: These are the non-static members of a class. 
-•	Static nested classes: These are the static members of a class.
+\95	Non-static nested classes: These are the non-static members of a class. 
+\95	Static nested classes: These are the static members of a class.
 
 
 
@@ -1537,7 +1538,7 @@ You also don't need any instance of Outer class to create instance of nested sta
 Here is an example of nested static class in Java. 
 It look exactly similar to member inner classes but has quite a few significant difference with them, e.g. 
 you can access them inside main method because they are static. 
-In order to create instance of nested static class, you don’t need instance of enclosing class. 
+In order to create instance of nested static class, you don\92t need instance of enclosing class. 
 You can refer them with class name and you can also import them using static import feature of Java 5.
 
 
@@ -1563,7 +1564,7 @@ Better example of nested static class can be implementing a custom Comparator e.
 
 <h3>Difference between Inner class and nested static class in Java.</h3>
 
-Both static and non static nested class or Inner needs to declare inside enclosing class in Java and that’s why they are collectively known as nested classes  
+Both static and non static nested class or Inner needs to declare inside enclosing class in Java and that\92s why they are collectively known as nested classes  
 but they have couple of differences as shown below:
 
 
@@ -1605,13 +1606,13 @@ A class within another class is called nested class.
 	1.4) Inner class has access to all other member variables of outer class. 
 		
 		Inner class can access -
-		•	instance member variable of outer class
-		•	instance methods of outer class
-		•	static member variable of outer class
-		•	static methods of outer class
-		•	Outer class reference 
-		•	Inner class reference
-		•	Inner class is instance specific/ object specific class. It has got access to this reference of outer class.
+		\95	instance member variable of outer class
+		\95	instance methods of outer class
+		\95	static member variable of outer class
+		\95	static methods of outer class
+		\95	Outer class reference 
+		\95	Inner class reference
+		\95	Inner class is instance specific/ object specific class. It has got access to this reference of outer class.
 			Hence, can access OuterClass instance variable and instance method using OuterClass reference this.
 
 	1.5) InnerClass can be declared private, protected, public.
@@ -1811,8 +1812,8 @@ In StaticNestedClass's method
 	3.1) LocalInnerClass can be accessed inside method in which it has been created.
 	3.2) LocalInnerClass has access to all other member variables of OuterClass like InnerClass.
 	3.3) LocalInnerClass can be abstract or final.
-	3.4) LocalInnerClass can’t be static.
-	3.5) LocalInnerClass can’t be private, protected, public.
+	3.4) LocalInnerClass can\92t be static.
+	3.5) LocalInnerClass can\92t be private, protected, public.
 	3.6) LocalInnerClass can be declared in Expressions, Statements, and Blocks.
 <div class="incodeblock">	
 class OuterClass{
@@ -1977,7 +1978,7 @@ Note :  AnonymousInnerClass extends OuterClass, without explicit use of extends 
 
 Program 3 to understand how AnonymousInnerClass implement interface
 
-AnonymousInnerClass cannot implement more than one interface. Let’s create a program 
+AnonymousInnerClass cannot implement more than one interface. Let\92s create a program 
 
 <div class="incodeblock">
 interface MyInterface{
@@ -2009,7 +2010,7 @@ Program 4 to understand how AnonymousInnerClass can implement more than 2 interf
 
 Though, AnonymousInnerClass can implement more than one interface in following way 
 
-Let’s create MyInterface which will extend Runnable interface. Now, AnonymousInnerClass will implement 2 interfaces.
+Let\92s create MyInterface which will extend Runnable interface. Now, AnonymousInnerClass will implement 2 interfaces.
 
 <div class="incodeblock">
 interface MyInterface extends Runnable{

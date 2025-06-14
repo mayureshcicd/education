@@ -9,6 +9,15 @@
       margin: 0;
       padding: 0;
     }
+.header-title {
+  font-weight: 900; /* Extra bold */
+  font-size: 2.2rem; /* Increased font size */
+  background: linear-gradient(90deg, #e74c3c, #f1c40f, #2ecc71, #3498db, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  flex: 1;
+}
 
     body {
       font-family: Arial, sans-serif;
@@ -16,20 +25,20 @@
       overflow: hidden;
     }
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem;
-      font-size: 1.2rem;
-      z-index: 10;
-      border-bottom: 1px solid #ccc;
-    }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center items */
+  padding: 1rem;
+  font-size: 1.2rem;
+  z-index: 10;
+  border-bottom: 1px solid #ccc;
+}
 
     header img {
       height: 80px;
@@ -107,6 +116,8 @@
     <div class="header-left">
       <img src="img/developer.png" alt="Developer">
     </div>
+    
+    <div class="header-title">Learning Resources for Freshers and Developers</div>
   </header>
 
   <div class="container">

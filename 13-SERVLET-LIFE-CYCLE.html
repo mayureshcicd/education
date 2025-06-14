@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/app.css"/>
 </head>
 <body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
 <div class="MainFlow_indented">
 
 <div class="nolinkBHEAD">Servlet life cycle</div>
@@ -252,10 +253,10 @@ public void destroy();
     <li>When ever you hit the final URL <b>(http://localhost:8080/Servlet-Life-CycleExample/Servlet-Life-CycleExample), </b><br>
 	servlet container will first loads <b>web.xml</b> and check the value in <b>&lt;url-pattern&gt;</b> tag [ line number 10, we have given the pattern name as /lifecycle1 ]</li>
 	<li>Immediately it will check the value in <b>&lt;servlet-name&gt;</b> tag [line number 9, we have given second]
-    Now it will search for the same value second in <b>&lt;servlet-name&gt;</b> under <b>&lt;servlet&gt;</b> tag [that’s what we have in line number 3 ]</li>
+    Now it will search for the same value second in <b>&lt;servlet-name&gt;</b> under <b>&lt;servlet&gt;</b> tag [that\92s what we have in line number 3 ]</li>
     <li>So value of <b>&lt;servlet-name&gt;</b> under <b>&lt;servlet-mapping&gt;</b> & <b>&lt;servlet&gt;</b> are same [in this case @ line numbers 9,3 ]</li>
     <li>If so container will load java class given in <b>&lt;servlet-class&gt;</b> tag [line number 4, our class name is java4s.ServletLifeCycle ]</li>
-   <li> Finally servlet container came to ‘ServletLifeCycle‘ class, it will executes init() method first (only once) > then service() or doGet() or doPost() method [ in our case doGet() ]</li>
+   <li> Finally servlet container came to \91ServletLifeCycle\91 class, it will executes init() method first (only once) > then service() or doGet() or doPost() method [ in our case doGet() ]</li>
     <li>Finally destroy() method will be executed before our object get garbage collected.</li>
 
 </ol>

@@ -1,3 +1,13 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 10px; /* Very small font */
+  color: gray;
+  margin: 10px 20px 0 0; /* Top & right spacing */
+  text-align: right;
+}
+
 body {
         margin-left:10px;
         margin-right:10px;
@@ -122,4 +132,5 @@ pre {
     margin-bottom: 3em;
     line-height: 15px;
 }
+
 	/*http://beginnersbook.com/2013/05*/
