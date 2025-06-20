@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Expose Spring Boot Application Using Ngrok</title>
+  <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+  <h1>How to Expose Spring Boot Application Using Ngrok</h1>
+
+  <p>Ngrok allows you to expose a local server (like your Spring Boot application) to the internet via a secure public URL. This is especially useful for testing webhooks, APIs, or sharing your local app with others.</p>
+
+  <h2>Step 1: Download Ngrok</h2>
+  <ol>
+    <li>Go to the official Ngrok website: <a href="https://ngrok.com/download" target="_blank">https://ngrok.com/download</a></li>
+    <li>Choose your operating system (Windows, Linux, Mac, etc.)</li>
+    <li>Download the zip file</li>
+  </ol>
+
+  <h2>Step 2: Install Ngrok</h2>
+  <p>After downloading:</p>
+  <ul>
+    <li>Extract the downloaded zip file</li>
+    <li>You will get an executable file named <code>ngrok</code> (or <code>ngrok.exe</code> on Windows)</li>
+    <li>Move it to a known location like <code>/usr/local/bin</code> (Linux/Mac) or keep it in a folder on Windows and add that folder to your PATH</li>
+  </ul>
+
+  <h2>Step 3: Sign Up & Get Your Authtoken</h2>
+  <ol>
+    <li>Create a free account on <a href="https://dashboard.ngrok.com/signup" target="_blank">https://dashboard.ngrok.com/signup</a></li>
+    <li>Once logged in, go to the dashboard</li>
+    <li>Copy your unique <strong>AuthToken</strong> from the "Setup & Installation" section</li>
+  </ol>
+
+  <h2>Step 4: Connect Ngrok with Your Account</h2>
+  <p>Open a terminal and run:</p>
+  <pre><code>ngrok config add-authtoken &lt;YOUR_AUTHTOKEN&gt;</code></pre>
+  <p>Example:</p>
+  <pre><code>ngrok config add-authtoken 2MkYkFjB1uSxEXAMPLE1v8czp1Zd3k6U8abB</code></pre>
+
+  <h2>Step 5: Start Your Spring Boot Application</h2>
+  <p>Make sure your Spring Boot app is running. Typically, it's accessible at:</p>
+  <pre><code>http://localhost:8080</code></pre>
+  <p>You can run your Spring Boot app using:</p>
+  <pre><code>mvn spring-boot:run</code>
+or
+<code>java -jar target/your-app.jar</code></pre>
+
+  <h2>Step 6: Start Ngrok on Port 8080</h2>
+  <p>In a new terminal window, run:</p>
+  <h3>⚠️ If your Spring Boot app runs on a different port</h3>
+  <p>Just replace <code>8080</code> with your actual port. For example:</p>
+  <ul>
+    <li>If your app runs on <code>localhost:9090</code>, run:</li>
+    <pre><code>ngrok http 9090</code>
+    This tells Ngrok to expose your local server running on port 9090. 
+    </pre>
+    <li>If it runs on <code>localhost:8080</code>, run:</li>
+    <pre><code>ngrok http 8080</code>
+     This tells Ngrok to expose your local server running on port 8080. 
+    </pre>
+  </ul>
+
+
+  <h2>Step 7: Access Your Public URL</h2>
+  <p>After running the above command, you will see output like this:</p>
+  <pre>
+Session Status                online
+Account                       Mayuresh Ratnaparkhi (Plan: Free)
+Version                       3.9.0
+Forwarding                    http://abc123.ngrok.io -> http://localhost:8080
+Forwarding                    https://abc123.ngrok.io -> http://localhost:8080
+  </pre>
+  <p>You can now access your Spring Boot app using the <code>https://abc123.ngrok.io</code> public URL from anywhere.</p>
+
+  <h2>Step 8: Use Cases</h2>
+  <ul>
+    <li><strong>API testing</strong> from external tools like Postman</li>
+    <li><strong>Webhook testing</strong> for services like Stripe, Razorpay, PayPal, etc.</li>
+    <li><strong>Share your app</strong> with teammates or clients without deploying</li>
+  </ul>
+
+  <h2>Note:</h2>
+  <ul>
+    <li>Each time you restart Ngrok, the public URL will change (unless you are on a paid plan with reserved domains)</li>
+    <li>To make it permanent or use subdomains, upgrade to a paid plan on Ngrok</li>
+  </ul>
+
+  <h2>Troubleshooting Tips</h2>
+  <ul>
+    <li>Make sure your Spring Boot app is running and accessible at <code>localhost:8080</code></li>
+    <li>Ensure Ngrok is properly authenticated with your token</li>
+    <li>If you see errors, check Ngrok logs and Spring Boot logs for port issues</li>
+  </ul>
+
+  <p><strong>That's it!</strong> Your Spring Boot app is now live on the internet using Ngrok 🚀</p>
+</div>
+</div>
+</body>
+</html>
+
