@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-left: 4px solid #ccc;
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #ddd;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+
+<h1>What is <code>@JsonBackReference</code>?</h1>
+
+<p><code>@JsonBackReference</code> is part of the Jackson JSON serialization library. It's used to <strong>prevent infinite recursion</strong> when you have <strong>bidirectional relationships</strong> in JPA entities.</p>
+
+<h2>Example Scenario:</h2>
+
+<p>Suppose you have two entities:</p>
+
+<h3>CampaignDetail.java</h3>
+<pre>
+@Entity
+public class CampaignDetail {
+    @Id
+    private Long id;
+
+    @OneToMany(mappedBy = "campaignDetail")
+    @JsonManagedReference
+    private List&lt;AdDetail&gt; adDetails;
+}
+</pre>
+
+<h3>AdDetail.java</h3>
+<pre>
+@Entity
+public class AdDetail {
+    @Id
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "campaign_id")
+    @JsonBackReference
+    private CampaignDetail campaignDetail;
+}
+</pre>
+
+<h2>🔁 Without <code>@JsonBackReference</code> / <code>@JsonManagedReference</code>:</h2>
+<ul>
+    <li>When Jackson tries to serialize <code>CampaignDetail</code>, it includes the list of <code>AdDetail</code>.</li>
+    <li>Then it sees <code>campaignDetail</code> inside each <code>AdDetail</code>, and tries to serialize it again (causing recursion).</li>
+    <li>This goes on infinitely → ❌ <strong>StackOverflowError</strong>.</li>
+</ul>
+
+<h2>✅ How <code>@JsonBackReference</code> helps</h2>
+<ul>
+    <li><code>@JsonManagedReference</code> (on the <strong>parent</strong> side) marks the forward part of the relationship (to be serialized).</li>
+    <li><code>@JsonBackReference</code> (on the <strong>child</strong> side) marks the back part (to be ignored during serialization).</li>
+</ul>
+
+<p>This breaks the infinite loop, keeping only one side during JSON output.</p>
+
+<h2>✅ Where should you use it?</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Use Case</th>
+        <th>Place to Use <code>@JsonBackReference</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Entity &lt;-&gt; Entity mapping</td>
+        <td>On the entity class (child side)</td>
+    </tr>
+    <tr>
+        <td>DTOs</td>
+        <td>❌ Not needed, avoid using it on DTOs</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>📌 In short:</h2>
+<ul>
+    <li>Use it <strong>only on entity side</strong>, not on DTOs.</li>
+    <li>DTOs are for controlling what to expose in the API — you usually avoid recursion there by <strong>not nesting full entities</strong>.</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
+
