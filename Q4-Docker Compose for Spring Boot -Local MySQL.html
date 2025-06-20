@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Docker Compose for Spring Boot + Local MySQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      overflow-x: auto;
+    }
+    code {
+      background-color: #f9f9f9;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    ul {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Docker Compose: Spring Boot with Local MySQL (Host Machine)</h1>
+
+  <p>This guide explains how to containerize your Spring Boot app using Docker Compose and connect it to a MySQL instance installed on your local machine.</p>
+
+  <h2>📁 Project Structure</h2>
+  <pre>
+spring-boot-mysql-app/
+├── Dockerfile
+├── docker-compose.yml
+├── .env
+├── target/your-app.jar
+└── ...
+  </pre>
+
+  <h2>1️⃣ Create <code>Dockerfile</code></h2>
+  <p>This file builds your Spring Boot Docker image:</p>
+  <pre><code>
+# Dockerfile
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+  </code></pre>
+
+  <h2>2️⃣ Create <code>.env</code> File</h2>
+  <p>Store sensitive or environment-specific variables here:</p>
+  <pre><code>
+SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/your_db_name
+SPRING_DATASOURCE_USERNAME=your_mysql_user
+SPRING_DATASOURCE_PASSWORD=your_mysql_password
+SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  </code></pre>
+
+  <h2>3️⃣ Create <code>docker-compose.yml</code></h2>
+  <p>This file runs your Spring Boot app and loads environment variables from the <code>.env</code> file.</p>
+  <pre><code>
+version: '3.8'
+
+services:
+  springboot-app:
+    build: .
+    image: springboot-mysql-app
+    container_name: springboot_app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    networks:
+      - springboot-network
+
+networks:
+  springboot-network:
+    driver: bridge
+  </code></pre>
+
+<h2>4️⃣ Spring Boot Application Properties (with Defaults)</h2>
+<p>Update your <code>application.properties</code> to support environment variables <strong>with fallback/default values</strong>:</p>
+<pre><code>
+# application.properties
+
+spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/your_db_name}
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME:your_default_user}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD:your_default_password}
+spring.jpa.hibernate.ddl-auto=${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+</code></pre>
+
+<p><strong>Explanation:</strong></p>
+<ul>
+  <li>If the environment variable <code>SPRING_DATASOURCE_URL</code> is not provided, it falls back to <code>jdbc:mysql://localhost:3306/your_db_name</code></li>
+  <li>Same applies for username, password, and Hibernate DDL strategy</li>
+  <li>This ensures your app runs even in local development or testing without `.env` configured</li>
+</ul>
+
+
+  <h2>5️⃣ Build Spring Boot Jar</h2>
+  <p>Build your application with Maven:</p>
+  <pre><code>./mvnw clean package -DskipTests</code></pre>
+
+  <h2>6️⃣ Run Docker Compose</h2>
+  <p>To build and start the app:</p>
+  <pre><code>docker-compose up --build</code></pre>
+
+  <h2>✅ Production Tips</h2>
+  <ul>
+    <li>✅ Use strong MySQL credentials and avoid <code>root</code> for production</li>
+    <li>✅ Replace <code>update</code> with <code>validate</code> or <code>none</code> for schema strategy</li>
+    <li>✅ Externalize secrets using Docker secrets or cloud secret managers</li>
+    <li>✅ Use <code>healthcheck</code> directive for production-grade monitoring</li>
+  </ul>
+
+  <h2>📌 Note for Linux Users</h2>
+  <p><code>host.docker.internal</code> works on Windows and macOS. On Linux, use your actual host IP:</p>
+  <pre><code>
+# Find host IP (Linux)
+ip route | grep docker0
+
+# Example JDBC URL
+SPRING_DATASOURCE_URL=jdbc:mysql://172.17.0.1:3306/your_db_name
+  </code></pre>
+
+  <h2>🎉 You're All Set!</h2>
+  <p>Your Spring Boot app is now running in Docker and securely connected to MySQL running on your local machine.</p>
+
+</body>
+</html>
+
