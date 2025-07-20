@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java 8 Interview Mastery</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 25px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        .definition {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+        .interview-question {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 5px solid #ffc107;
+        }
+        .advanced-example {
+            background-color: #282c34;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            color: #abb2bf;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            color: #c7254e;
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Java 8 Interview Mastery</h1>
+
+    <div class="definition">
+        <p><strong>Java 8</strong>: Introduced functional programming, streams, and modern APIs to revolutionize Java development.</p>
+    </div>
+
+    <h2>Core Concepts</h2>
+
+    <div class="definition">
+        <h3>1. Lambda Expressions</h3>
+        <p><strong>Definition</strong>: Anonymous functions that enable functional programming style.</p>
+        <p><strong>Syntax</strong>: <code>(parameters) -> expression</code> or <code>(parameters) -> { statements; }</code></p>
+        <p><strong>Key Points</strong>:
+            - Must match a functional interface
+            - Can access final or effectively final variables
+            - 'this' refers to enclosing class
+        </p>
+    </div>
+
+    <div class="interview-question">
+        <h4>Interview Question: When would you use a lambda vs anonymous class?</h4>
+        <p><strong>Answer</strong>: Lambdas for simple interface implementations (single method), anonymous classes when you need:
+            - Multiple methods
+            - State via instance variables
+            - Complex implementations
+        </p>
+    </div>
+
+    <div class="advanced-example">
+        <h4>Advanced Lambda Example: Strategy Pattern</h4>
+        <pre><code class="language-java">interface PaymentStrategy {
+    void pay(double amount);
+}
+
+class Order {
+    private PaymentStrategy strategy;
+    
+    void setStrategy(PaymentStrategy strategy) {
+        this.strategy = strategy;
+    }
+    
+    void checkout(double amount) {
+        strategy.pay(amount);
+    }
+}
+
+// Usage:
+Order order = new Order();
+order.setStrategy(amount -> System.out.println("Paid via Credit Card: " + amount));
+order.checkout(100.00);
+
+order.setStrategy(amount -> System.out.println("Paid via PayPal: " + amount));
+order.checkout(50.00);</code></pre>
+    </div>
+
+    <div class="definition">
+        <h3>2. Stream API</h3>
+        <p><strong>Definition</strong>: Sequence of elements supporting functional-style operations.</p>
+        <p><strong>Key Characteristics</strong>:
+            - Not a data structure
+            - Lazy evaluation for intermediate operations
+            - Parallelizable
+            - Cannot be reused
+        </p>
+    </div>
+
+    <div class="advanced-example">
+        <h4>Advanced Stream Example: Financial Data Processing</h4>
+        <pre><code class="language-java">List&lt;Transaction&gt; transactions = // get transactions
+
+Map&lt;String, Double&gt; categoryExpenses = transactions.stream()
+    .filter(t -> t.getType() == Transaction.Type.DEBIT)
+    .collect(Collectors.groupingBy(
+        Transaction::getCategory,
+        Collectors.summingDouble(Transaction::getAmount)
+    ));
+
+// Multi-level analytics
+Map&lt;String, Map&lt;YearMonth, Double&gt;&gt; monthlyExpensesByCategory = transactions.stream()
+    .filter(t -> t.getType() == Transaction.Type.DEBIT)
+    .collect(Collectors.groupingBy(
+        Transaction::getCategory,
+        Collectors.groupingBy(
+            t -> YearMonth.from(t.getDate()),
+            Collectors.summingDouble(Transaction::getAmount)
+        )
+    ));
+
+// Find most expensive transaction per category
+Map&lt;String, Optional&lt;Transaction&gt;&gt; mostExpensiveByCategory = transactions.stream()
+    .collect(Collectors.groupingBy(
+        Transaction::getCategory,
+        Collectors.maxBy(Comparator.comparing(Transaction::getAmount))
+    ));</code></pre>
+    </div>
+
+    <div class="definition">
+        <h3>3. Collectors</h3>
+        <p><strong>Definition</strong>: Implementations of reduction operations that accumulate elements into collections.</p>
+        <p><strong>Common Collectors</strong>:
+            - <code>toList()</code>, <code>toSet()</code>, <code>toMap()</code>
+            - <code>groupingBy()</code>, <code>partitioningBy()</code>
+            - <code>summingInt()</code>, <code>averagingDouble()</code>
+            - <code>joining()</code>
+        </p>
+    </div>
+
+    <div class="advanced-example">
+        <h4>Custom Collector: Statistical Summary</h4>
+        <pre><code class="language-java">class Stats {
+    private int count;
+    private double sum;
+    private double min = Double.POSITIVE_INFINITY;
+    private double max = Double.NEGATIVE_INFINITY;
+    
+    // Add methods to update stats
+}
+
+Collector&lt;Transaction, Stats, Stats&gt; transactionStats = Collector.of(
+    Stats::new,
+    (stats, t) -> {
+        stats.setCount(stats.getCount() + 1);
+        stats.setSum(stats.getSum() + t.getAmount());
+        stats.setMin(Math.min(stats.getMin(), t.getAmount()));
+        stats.setMax(Math.max(stats.getMax(), t.getAmount()));
+    },
+    (stats1, stats2) -> {
+        Stats merged = new Stats();
+        merged.setCount(stats1.getCount() + stats2.getCount());
+        merged.setSum(stats1.getSum() + stats2.getSum());
+        merged.setMin(Math.min(stats1.getMin(), stats2.getMin()));
+        merged.setMax(Math.max(stats1.getMax(), stats2.getMax()));
+        return merged;
+    },
+    Characteristics.UNORDERED
+);
+
+Stats summary = transactions.stream().collect(transactionStats);</code></pre>
+    </div>
+
+    <div class="definition">
+        <h3>4. Functional Interfaces</h3>
+        <p><strong>Definition</strong>: Interfaces with a single abstract method (SAM).</p>
+        <p><strong>Key Interfaces</strong>:
+            - <code>Predicate&lt;T&gt;</code>: boolean test(T t)
+            - <code>Function&lt;T,R&gt;</code>: R apply(T t)
+            - <code>Consumer&lt;T&gt;</code>: void accept(T t)
+            - <code>Supplier&lt;T&gt;</code>: T get()
+            - <code>BiFunction&lt;T,U,R&gt;</code>: R apply(T t, U u)
+        </p>
+    </div>
+
+    <div class="interview-question">
+        <h4>Interview Question: Difference between Function and BiFunction?</h4>
+        <p><strong>Answer</strong>:
+            - Function takes 1 argument and produces result
+            - BiFunction takes 2 arguments and produces result
+            - Both can be chained with andThen()
+        </p>
+    </div>
+
+    <div class="advanced-example">
+        <h4>BiFunction Advanced Usage: Rate Calculator</h4>
+        <pre><code class="language-java">BiFunction&lt;Double, Double, Double&gt; simpleInterest = 
+    (principal, rate) -> principal * rate / 100;
+
+BiFunction&lt;Double, Integer, Double&gt; compoundInterest = 
+    (principal, years) -> principal * Math.pow(1.05, years);
+
+// Chain them
+Function&lt;Double, String&gt; format = amount -> String.format("$%.2f", amount);
+
+BiFunction&lt;Double, Double, String&gt; interestCalculator = 
+    simpleInterest.andThen(amount -> compoundInterest.apply(amount, 5))
+                 .andThen(format);
+
+String result = interestCalculator.apply(1000.0, 2.5);</code></pre>
+    </div>
+
+    <h2>Interview Cheat Sheet</h2>
+
+    <table>
+        <tr>
+            <th>Concept</th>
+            <th>Key Points</th>
+            <th>Common Interview Questions</th>
+        </tr>
+        <tr>
+            <td>Optional</td>
+            <td>- Avoid NPEs<br>- Use orElse/orElseGet<br>- Don't use get() directly</td>
+            <td>How would you handle nested Optionals?<br>Difference between orElse/orElseGet?</td>
+        </tr>
+        <tr>
+            <td>Stream Performance</td>
+            <td>- Lazy evaluation<br>- Order matters<br>- Parallel streams need careful use</td>
+            <td>When would you use parallelStream?<br>How to optimize stream pipelines?</td>
+        </tr>
+        <tr>
+            <td>Method References</td>
+            <td>- Static: Class::method<br>- Instance: object::method<br>- Constructor: Class::new</td>
+            <td>Convert lambda to method reference<br>When can't you use method ref?</td>
+        </tr>
+        <tr>
+            <td>Date/Time API</td>
+            <td>- Immutable<br>- Zone support<br>- Period/Duration differences</td>
+            <td>How to calculate days between dates?<br>Convert between time zones</td>
+        </tr>
+    </table>
+
+    <div class="interview-question">
+        <h3>Final Interview Challenge</h3>
+        <p><strong>Problem</strong>: Given a list of employees, find:
+            - Average salary by department
+            - Top 3 highest earners
+            - Salary distribution (0-50k, 50-100k, 100k+)
+            - All in a single stream pipeline
+        </p>
+        
+        <div class="advanced-example">
+            <h4>Solution</h4>
+            <pre><code class="language-java">Map&lt;String, DoubleSummaryStatistics&gt; result = employees.stream()
+    .collect(Collectors.groupingBy(
+        Employee::getDepartment,
+        Collectors.summarizingDouble(Employee::getSalary)
+    ));
+
+List&lt;Employee&gt; topEarners = employees.stream()
+    .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+    .limit(3)
+    .collect(Collectors.toList());
+
+Map&lt;String, Long&gt; salaryDistribution = employees.stream()
+    .collect(Collectors.groupingBy(
+        e -> {
+            double salary = e.getSalary();
+            if (salary < 50000) return "0-50k";
+            else if (salary < 100000) return "50-100k";
+            else return "100k+";
+        },
+        Collectors.counting()
+    ));</code></pre>
+        </div>
+    </div>
+</body>
+</html>
