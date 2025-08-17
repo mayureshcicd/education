@@ -47,7 +47,7 @@
     <!-- 1. What is Angular -->
     <section id="what-is-angular">
       <h2>1) What is Angular</h2>
-      <p><b>Answer:</b> Angular is an open source, TypeScript based front end web application framework and TypeScript is a superset of JavaScript that adds static typing, making code safer and easier to maintain.</p>
+      <p><b>Answer:</b> Angular is an open source, TypeScript based front end web application framework and TypeScript is a superset of JavaScript <br>that adds static typing, making code safer and easier to maintain.</p> <br>
       <p>Angular is a TypeScript-based framework for building dynamic single-page applications (SPAs).</p>
     </section>
 
@@ -57,7 +57,7 @@
       <p><b>Answer:</b> Components, Metadata, Template, Data Binding, Module, Service, Dependency Injection, Directives, Pipes</p>
 
       <h3>Components</h3>
-      <p>Angular application is collection of components. In components we will write logic to send data to template and capture data from template. Components are TypeScript classes. Components are the building blocks of an Angular application. The primary use of Angular Component is to generate a section of web page called View.</p>
+      <p>Angular application is collection of components. In components we will write logic to send data to template and capture data from template.<br> Components are TypeScript classes. Components are the building blocks of an Angular application. The primary use of Angular Component is to generate a section of web page called View.</p>
       <p><b>Structure of Angular Component</b></p>
       <ol>
         <li><b>@Component</b> Decorator: All the application related configurations are written inside this decorator.</li>
@@ -73,8 +73,8 @@
       <p>Template is a view where we will write our presentation logic. In Angular application template is a HTML file. Every Component contains its own Template.</p>
 
       <h3>Data Binding</h3>
-      <p>Data Binding is the process of binding data between component property and view element in template file. The Data Binding is used to establish relation between component and template.</p>
-      <p>When the value of component is changed then template will be changed automatically. When the value of template is changed, then the component will be changed automatically.</p>
+      <p>Data Binding is the process of binding data between component property and view element in template file.<br> The Data Binding is used to establish relation between component and template.</p>
+      <p>When the value of component is changed then template will be changed automatically. <br>When the value of template is changed, then the component will be changed automatically.</p>
       <p><b>Data bindings are four types</b></p>
       <ol>
         <li><b>Interpolation</b>
@@ -110,7 +110,7 @@
       </ol>
 
       <h3>Module</h3>
-      <p>Module is a collection of components, directives and pipes. An Angular module is set of Angular basic building blocks like component, directives, services etc. An app can have more than one module.</p>
+      <p>Module is a collection of components, directives and pipes. <br>An Angular module is set of Angular basic building blocks like component, directives, services etc. An app can have more than one module.</p>
       <p><b>Types of Modules</b></p>
       <ul>
         <li><b>Root Module</b>: The core module that serves as the entry point for your application. It's often called AppModule.</li>
@@ -176,13 +176,13 @@
     <section id="routing">
       <h2>3) Routing</h2>
       <p>The Routing concept is used to create page navigations in angular application. Routing is the process of mapping between the <b>route (url)</b> and corresponding component.</p>
-      <p>Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route. They make this decision by looking for a true or false return value from a class which implements the given guard interface.</p>
+      <p>Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route. <br>They make this decision by looking for a true or false return value from a class which implements the given guard interface.</p>
     </section>
 
     <!-- 4. Routing Guards -->
     <section id="routing-guards">
       <h2>4) Routing Guard in Angular</h2>
-      <p>Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route. They make this decision by looking for a true or false return value from a class which implements the given guard interface.</p>
+      <p>Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route. <br>They make this decision by looking for a true or false return value from a class which implements the given guard interface.</p>
     </section>
 
     <!-- 5. Decorators -->
@@ -193,6 +193,13 @@
         <li><b>@Output()</b>: Components emit events to notify the parent through this decorator.</li>
         <li><b>@ViewChild</b>: @ViewChild is used when you want to get a reference to a single child element, directive, or component inside your template.</li>
         <li><b>@ViewChildren</b>: @ViewChildren is used when you want to get references to multiple child elements/components (like a list).</li>
+        <li><b>EventEmitter</b>: EventEmitter is a class in Angular used to create custom events in a component <br>
+        It is mainly used with @Output() to send data from a child component to a parent component.</li>
+ 
+
+
+
+
       </ul>
     </section>
 
