@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Angular Interview Notes – Complete</title>
+  
+  
+    <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background: #ffffff; color: #000000; }
+    h1, h2 { color: #000000; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; color: #000000; }
+    pre { background: #f4f4f4; color: #000000; padding: 15px; border-radius: 6px; overflow-x: auto; }
+    .callout { background: #f9f9f9; padding: 10px; border-left: 4px solid #000000; margin: 15px 0; color: #000000; }
+  </style>
+   <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+  <div class="container">
+    <header>
+      <h1>Angular Interview Notes – Complete</h1>
+      <div class="refs">References: 
+        <a href="https://github.com/ayatrahmani/angular-interview-questions-1" target="_blank" rel="noopener">ayatrahmani/angular-interview-questions-1</a> · 
+        <a href="https://github.com/Devinterview-io/angular-interview-questions" target="_blank" rel="noopener">Devinterview-io/angular-interview-questions</a>
+      </div>
+    </header>
+
+    <nav>
+      <div class="title">Table of Contents</div>
+      <ul>
+        <li><a href="#what-is-angular">1) What is Angular</a></li>
+        <li><a href="#important-blocks">2) Angular Important Blocks</a></li>
+        <li><a href="#routing">3) Routing</a></li>
+        <li><a href="#routing-guards">4) Routing Guard in Angular</a></li>
+        <li><a href="#decorators">5) Common Decorators (@Input, @Output, @ViewChild, @ViewChildren)</a></li>
+        <li><a href="#config-files">6) Key Config Files</a></li>
+        <li><a href="#lifecycle">7) Angular Lifecycle Hooks</a></li>
+        <li><a href="#js-types">8) JavaScript Data Types</a></li>
+        <li><a href="#aot-vs-jit">9) AOT vs JIT</a></li>
+        <li><a href="#promise-rxjs">10) Promise, RxJS & Differences</a></li>
+        <li><a href="#secure-tokens">11) Secure Token Storage (JWT + Cookies)</a></li>
+      </ul>
+    </nav>
+
+    <!-- 1. What is Angular -->
+    <section id="what-is-angular">
+      <h2>1) What is Angular</h2>
+      <p><b>Answer:</b> Angular is an open source, TypeScript based front end web application framework and TypeScript is a superset of JavaScript that adds static typing, making code safer and easier to maintain.</p>
+      <p>Angular is a TypeScript-based framework for building dynamic single-page applications (SPAs).</p>
+    </section>
+
+    <!-- 2. Important Blocks -->
+    <section id="important-blocks">
+      <h2>2) Angular Important Blocks</h2>
+      <p><b>Answer:</b> Components, Metadata, Template, Data Binding, Module, Service, Dependency Injection, Directives, Pipes</p>
+
+      <h3>Components</h3>
+      <p>Angular application is collection of components. In components we will write logic to send data to template and capture data from template. Components are TypeScript classes. Components are the building blocks of an Angular application. The primary use of Angular Component is to generate a section of web page called View.</p>
+      <p><b>Structure of Angular Component</b></p>
+      <ol>
+        <li><b>@Component</b> Decorator: All the application related configurations are written inside this decorator.</li>
+        <li><b>HTML Template</b>: View of the Angular application.</li>
+        <li><b>Styles</b>: It controls the styles of a view.</li>
+        <li><b>TypeScript Class</b>: Code related to behavior of the Angular application goes into this class.</li>
+      </ol>
+
+      <h3>MetaData</h3>
+      <p>Metadata nothing but data about the data. It provides information about components and templates.</p>
+
+      <h3>Template</h3>
+      <p>Template is a view where we will write our presentation logic. In Angular application template is a HTML file. Every Component contains its own Template.</p>
+
+      <h3>Data Binding</h3>
+      <p>Data Binding is the process of binding data between component property and view element in template file. The Data Binding is used to establish relation between component and template.</p>
+      <p>When the value of component is changed then template will be changed automatically. When the value of template is changed, then the component will be changed automatically.</p>
+      <p><b>Data bindings are four types</b></p>
+      <ol>
+        <li><b>Interpolation</b>
+          <ul>
+            <li>It is used to display the value of variable/ property in template file.</li>
+            <li>If the property value is changed then automatically it will be updated in template.</li>
+            <li><b>Syntax</b>: <code>{{ '{{propertyName}}' }}</code></li>
+          </ul>
+        </li>
+        <li><b>Property Binding</b>
+          <ul>
+            <li>Property Binding is used to send the data from component to template and assign the same into an attribute of tag.</li>
+            <li>If the property value is changed then automatically it will be updated in template.</li>
+            <li><b>Syntax</b>: <code>[attribute]="property"</code></li>
+          </ul>
+        </li>
+        <li><b>Event Binding</b>
+          <ul>
+            <li>It is used to pass event notifications from template to component.</li>
+            <li><b>Syntax</b>: <code>&lt;tag (event)="method()"&gt;&lt;/tag&gt;</code></li>
+          </ul>
+        </li>
+        <li><b>Two-way Binding</b>
+          <ul>
+            <li>Two-way data binding is the combination of both property binding and event binding.</li>
+            <li>When we change the value of the property then automatically it will be updated in HTML element.</li>
+            <li>When we change the value of HTML element then automatically it will updated in property.</li>
+            <li><code>ngModel</code> is the pre-defined directive which is used to achieve two-way data binding.</li>
+            <li>Two way data binding is applicable only for <code>&lt;input/&gt;</code> and <code>&lt;select/&gt;</code> tags.</li>
+            <li><b>FormsModule</b> must be imported in order to use Two way data binding.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>Module</h3>
+      <p>Module is a collection of components, directives and pipes. An Angular module is set of Angular basic building blocks like component, directives, services etc. An app can have more than one module.</p>
+      <p><b>Types of Modules</b></p>
+      <ul>
+        <li><b>Root Module</b>: The core module that serves as the entry point for your application. It's often called AppModule.</li>
+        <li><b>Feature Module</b>: An optional module that's usually smaller in scope and can be lazily loaded. It usually targets a specific feature or a set of related features, allowing for better code organization and loading only when needed.</li>
+      </ul>
+      <p><b>Advantages of Using Modules</b></p>
+      <ul>
+        <li><b>Organization and Reusability</b>: Components, services, directives, and more are logically grouped, making their intent clear and their code easily accessible. They can also be shared across modules as needed.</li>
+        <li><b>Performance and Efficiency</b>: Modules can be eager-loaded (automatically loaded with the application) or lazily-loaded (loaded on-demand), optimizing initial bundle size and reducing start-up time.</li>
+        <li><b>Collaborative Development</b>: By defining clear boundaries between components, directives, and services, modules facilitate team collaboration and help in preventing naming conflicts or unintentional dependencies.</li>
+      </ul>
+
+      <h3>Service</h3>
+      <p>Service means it contains re-usable business logic. Service classes we will inject into Components using Depency Injections. Service class logics we can access in one or more component classes.</p>
+      <p>Service is a class in Angular application which contains re-usable business logic.</p>
+      <ul>
+        <li>To represent one class as service we will use <code>@Injectable</code> decorator</li>
+        <li>We will inject service class object into component class using <code>@Inject</code> decorator</li>
+        <li>Service class object we will take as a parameter for component class constructor.</li>
+        <li>One Service class object can be used in any no.of component classes.</li>
+        <li>Angular services are singleton objects which get instantiated only once during the lifetime of an application. They contain methods that maintain data throughout the life of an application.</li>
+      </ul>
+
+      <h3>Dependency Injection</h3>
+      <p>Dependency Injection is the process of injecting dependent object into target object. In Angular applications Services will be injected into components using DI.</p>
+      <p><b>DI takes three steps</b>:</p>
+      <ol>
+        <li><b>Registration</b>: Identify the components to be injected.</li>
+        <li><b>Resolution</b>: Find the appropriate dependencies.</li>
+        <li><b>Injection</b>: Insert the resolved dependencies.</li>
+      </ol>
+      <p><b>Key Angular Features Linked to DI</b></p>
+      <ul>
+        <li><b>Modules</b>: Angular applications are made up of modules, each with its dependency injector.</li>
+        <li><b>Providers</b>: Within modules, providers offer a mechanism for registering dependencies.</li>
+      </ul>
+
+      <h3>Directives</h3>
+      <p>Directives are used to manipulate DOM elements in the Template. We can execute presentation logic based on conditions like if-else, loops etc using directives.</p>
+      <p>There are mainly three kinds of directives.</p>
+      <ul>
+        <li><b>Components</b> — These are directives with a template.</li>
+        <li><b>Structural directives</b> — These directives change the DOM layout by adding and removing DOM elements. (<code>ngFor</code>, <code>ngIf</code>)</li>
+        <li><b>Attribute directives</b> — These directives change the appearance or behavior of an element, component, or another directive. (<code>ngStyle</code>, <code>ngClass</code>)</li>
+      </ul>
+      <p><b>Commonly Used Directives</b></p>
+      <ul>
+        <li><b>ngIf</b>: This Angular structural directive conditionally adds or removes elements from the DOM tree.</li>
+        <li><b>ngFor</b>: Useful for iterating through arrays and iterating over object properties. It dynamically renders elements based on the collection it's given.</li>
+        <li><b>ngStyle</b>: This attribute directive allows for inline CSS styling based on template expressions.</li>
+        <li><b>ngClass</b>: This attribute directive dynamically adds and removes classes from elements based on template expressions.</li>
+        <li><b>ngModel</b>: This directive establishes two-way data binding between input elements and component data. It's commonly used in forms.</li>
+        <li><b>ngSwitch</b>: This set of structural directives is like an enhanced version of ngIf by providing else and default matching functionalities.</li>
+      </ul>
+
+      <h3>Pipes</h3>
+      <p>Pipes are used to transform the data before displaying (example: lower case to upper case, INR to USD, dd/mm/yyyy to DD-MM-YYYY). Pipes are used to transform the value into user-expected-format. Pipes are invoked in expression (interpolation binding), through pipe (<code>|</code>) symbol.</p>
+      <p><b>List of built-in pipes</b> (uppercase, lowercase, slice, number, currency, percent, date, json).</p>
+      <p>A pipe takes in data as input and transforms it to a desired output.</p>
+    </section>
+
+    <!-- 3. Routing -->
+    <section id="routing">
+      <h2>3) Routing</h2>
+      <p>The Routing concept is used to create page navigations in angular application. Routing is the process of mapping between the <b>route (url)</b> and corresponding component.</p>
+      <p>Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route. They make this decision by looking for a true or false return value from a class which implements the given guard interface.</p>
+    </section>
+
+    <!-- 4. Routing Guards -->
+    <section id="routing-guards">
+      <h2>4) Routing Guard in Angular</h2>
+      <p>Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route. They make this decision by looking for a true or false return value from a class which implements the given guard interface.</p>
+    </section>
+
+    <!-- 5. Decorators -->
+    <section id="decorators">
+      <h2>5) Common Decorators</h2>
+      <ul>
+        <li><b>@Input()</b>: Data flows into a component from its parent using this decorator.</li>
+        <li><b>@Output()</b>: Components emit events to notify the parent through this decorator.</li>
+        <li><b>@ViewChild</b>: @ViewChild is used when you want to get a reference to a single child element, directive, or component inside your template.</li>
+        <li><b>@ViewChildren</b>: @ViewChildren is used when you want to get references to multiple child elements/components (like a list).</li>
+      </ul>
+    </section>
+
+    <!-- 6. Config Files -->
+    <section id="config-files">
+      <h2>6) Key Configuration Files</h2>
+      <ul>
+        <li><b>use of angular.json</b>: It is Angular’s configuration file defining build (projects, architect, settings, styles, scripts, assets, and environments.)</li>
+        <li><b>package.json</b>: Contains project details, scripts, and dependency version ranges.</li>
+        <li><b>package-lock.json</b>: Stores exact versions of installed dependencies for consistency.</li>
+        <li><b>TSLint</b>: is a tool that checks TypeScript code for style and errors. <b>tslint.json</b> is the configuration file where linting rules are defined.</li>
+      </ul>
+    </section>
+
+    <!-- 7. Lifecycle Hooks -->
+    <section id="lifecycle">
+      <h2>7) Angular Lifecycle Hooks</h2>
+      <p><b>Definition</b>: Methods triggered at component lifecycle stages.</p>
+      <p><b>Usage</b>: Manage initialization, updates, cleanup.</p>
+      <ul>
+        <li><b>ngOnInit</b>: After component initialization.</li>
+        <li><b>ngOnChanges</b>: When input properties change.</li>
+        <li><b>ngDoCheck</b>: Custom change detection.</li>
+        <li><b>ngAfterContentInit</b>: After content projection.</li>
+        <li><b>ngAfterContentChecked</b>: After content check.</li>
+        <li><b>ngAfterViewInit</b>: After view initialization.</li>
+        <li><b>ngAfterViewChecked</b>: After view check.</li>
+        <li><b>ngOnDestroy</b>: Before component destruction.</li>
+      </ul>
+    </section>
+
+    <!-- 8. JS Types -->
+    <section id="js-types">
+      <h2>8) Data types in JavaScript</h2>
+      <p><b>Primitive</b>: string, number, boolean, null, undefined, bigint, symbol</p>
+      <p><b>Reference</b>: object, array, function</p>
+    </section>
+
+    <!-- 9. AOT vs JIT -->
+    <section id="aot-vs-jit">
+      <h2>9) Explain the difference between AOT and JIT compilation in Angular</h2>
+      <p><b>AOT (Ahead-of-Time)</b> compiles templates during the build process, producing smaller, faster-rendering bundles without needing client-side compilation.</p>
+      <p><b>JIT (Just-in-Time)</b> compiles templates in the browser at runtime, which is slower but useful for development.</p>
+    </section>
+
+    <!-- 10. Promise & RxJS -->
+    <section id="promise-rxjs">
+      <h2>10) Promise, RxJS & Differences</h2>
+      <h3>What is promise?</h3>
+      <p>A Promise is an object in JavaScript that represents the eventual result (success or failure) of an asynchronous operation.</p>
+      <h3>What is RxJS?</h3>
+      <p>RxJS (Reactive Extensions for JavaScript) is a library for handling asynchronous data streams using Observables.</p>
+      <h3>Difference between Promise and Observable?</h3>
+      <ul>
+        <li><b>Promise</b>: Handles one async value, executes immediately, not cancellable.</li>
+        <li><b>Observable</b>: Handles multiple async values over time, lazy execution, cancellable.</li>
+      </ul>
+    </section>
+
+    <!-- 11. Secure Token Storage -->
+    <section id="secure-tokens">
+      <h2>11) Where to store secure tokens (Angular 8)</h2>
+      <p>The best practice is to store tokens in <b>HTTP-only, Secure Cookies</b> (set by the backend) so they are not accessible by JavaScript.</p>
+      <div class="callout">
+        <b>JWT + Cookies Flow</b>
+        <ol>
+          <li>User logs in → Spring Boot sets JWT in HttpOnly, Secure Cookie.</li>
+          <li>Angular calls <code>POST /api/orders</code> with <code>withCredentials: true</code>.</li>
+          <li>Browser auto-sends cookie.</li>
+          <li>Spring Boot filter extracts JWT from cookie → validates → allows request.</li>
+        </ol>
+      </div>
+    </section>
+    
+
+  <!-- 11. Secure Token Storage -->
+  <section id="secure-tokens">
+    <h2>11) Where to store secure tokens (Angular 8)</h2>
+    <p>The best practice is to store tokens in <b>HTTP-only, Secure Cookies</b> (set by the backend) so they are not accessible by JavaScript.</p>
+    <div class="callout">
+      <b>JWT + Cookies Flow</b>
+      <ol>
+        <li>User logs in → Spring Boot sets JWT in HttpOnly, Secure Cookie.</li>
+        <li>Angular calls <code>POST /api/orders</code> with <code>withCredentials: true</code>.</li>
+        <li>Browser auto-sends cookie.</li>
+        <li>Spring Boot filter extracts JWT from cookie → validates → allows request.</li>
+      </ol>
+    </div>
+
+    <h3>🔹 Complete Example Code</h3>
+
+    <h4>Spring Boot – JWT Filter (OncePerRequestFilter)</h4>
+    <pre>
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+
+    private static final String SECRET = "secret-key";
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain chain)
+            throws IOException, ServletException {
+
+        String token = null;
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("jwt".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                }
+            }
+        }
+
+        if (token != null) {
+            try {
+                Claims claims = Jwts.parser()
+                        .setSigningKey(SECRET)
+                        .parseClaimsJws(token)
+                        .getBody();
+
+                String username = claims.getSubject();
+                UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            } catch (Exception e) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
+        }
+
+        chain.doFilter(request, response);
+    }
+}
+    </pre>
+
+    <h4>Spring Boot – Security Config</h4>
+    <pre>
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private JwtFilter jwtFilter;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/auth/login").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+}
+    </pre>
+
+    <h4>Spring Boot – AuthController (Login + Secure Endpoint)</h4>
+    <pre>
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private static final String SECRET = "secret-key";
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> creds, HttpServletResponse response) {
+        String username = creds.get("username");
+        String password = creds.get("password");
+
+        // Dummy validation
+        if ("admin".equals(username) && "password".equals(password)) {
+            String token = Jwts.builder()
+                    .setSubject(username)
+                    .setIssuedAt(new Date())
+                    .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15)) // 15 min expiry
+                    .signWith(SignatureAlgorithm.HS256, SECRET)
+                    .compact();
+
+            Cookie cookie = new Cookie("jwt", token);
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true); // ensure HTTPS in production
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            return ResponseEntity.ok("Login successful");
+        }
+        return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    @PostMapping("/orders")
+    public ResponseEntity<?> createOrder(@RequestBody Map<String, Object> payload) {
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok("Order created by " + username + " with data: " + payload);
+    }
+}
+    </pre>
+
+    <h4>Angular 8 – Auth + Order Service</h4>
+    <pre>
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private baseUrl = 'http://localhost:8080/api/auth/login';
+
+  constructor(private http: HttpClient) {}
+
+  login(username: string, password: string) {
+    return this.http.post(this.baseUrl, { username, password }, { withCredentials: true });
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class OrderService {
+  private baseUrl = 'http://localhost:8080/api/auth/orders';
+
+  constructor(private http: HttpClient) {}
+
+  createOrder(orderData: any) {
+    return this.http.post(this.baseUrl, orderData, { withCredentials: true });
+  }
+}
+    </pre>
+
+    <h4>Angular 8 – Component Example</h4>
+    <pre>
+@Component({
+  selector: 'app-login-order',
+  template: `
+    <button (click)="login()">Login</button>
+    <button (click)="placeOrder()">Place Order</button>
+  `
+})
+export class LoginOrderComponent {
+  constructor(private authService: AuthService, private orderService: OrderService) {}
+
+  login() {
+    this.authService.login('admin', 'password').subscribe(
+      res => console.log('Login success:', res),
+      err => console.error('Login failed:', err)
+    );
+  }
+
+  placeOrder() {
+    const order = { item: 'Laptop', qty: 1 };
+    this.orderService.createOrder(order).subscribe(
+      res => console.log('Order Response:', res),
+      err => console.error('Order failed:', err)
+    );
+  }
+}
+    </pre>
+  </section>    
+  </div>
+  </div>
+</body>
+</html>
+
