@@ -167,6 +167,64 @@
             font-size: 0.9rem;
         }
         
+        /* Q&A Specific Styles */
+        .qa-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .question {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .question-number {
+            background: var(--secondary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        
+        .answer {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0 20px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .simple-explanation {
+            background: #e8f5e9;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid var(--success);
+        }
+        
+        .analogy {
+            background: #fff3e0;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid var(--warning);
+            font-style: italic;
+        }
+        
         @media (max-width: 768px) {
             .concept-grid {
                 grid-template-columns: 1fr;
@@ -185,6 +243,121 @@
             <div class="subtitle">Essential MongoDB components and their usage in Spring Boot applications</div>
         </header>
         
+        <!-- MongoDB Basics Q&A Section -->
+        <section>
+            <h2 class="section-title">MongoDB Basics - Q&A</h2>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">1</div>
+                    <div>Give MongoDB Introduction</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB is a popular NoSQL database that stores data in flexible, JSON-like documents instead of traditional tables with rows and columns.
+                </div>
+                <div class="simple-explanation">
+                    <strong>Simple Explanation:</strong> Think of MongoDB as a digital filing cabinet where each document (file) can have different information without needing a fixed format.
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">2</div>
+                    <div>What is MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB is a document-oriented database that provides high performance, high availability, and easy scalability.
+                </div>
+                <div class="analogy">
+                    <strong>Simple Analogy:</strong> Like a smart notebook where each page can contain different types of information without predefined columns.
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">3</div>
+                    <div>What is document in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> A document is the basic unit of data in MongoDB, stored in BSON format (Binary JSON). It's similar to a row in SQL databases but more flexible.
+                </div>
+                <div class="example">
+                    <strong>Example:</strong> A user document: <code>{_id: "123", name: "John", age: 30, email: "john@example.com"}</code>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">4</div>
+                    <div>What is collection in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> A collection is a group of MongoDB documents, similar to a table in relational databases.
+                </div>
+                <div class="analogy">
+                    <strong>Simple Analogy:</strong> Like a folder containing multiple files (documents) of similar type.
+                </div>
+            </div>
+        </section>
+        
+        <!-- MongoDB Architecture Q&A Section -->
+        <section>
+            <h2 class="section-title">MongoDB Architecture - Q&A</h2>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">5</div>
+                    <div>What is replica set in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> A replica set is a group of MongoDB servers that maintain the same data set, providing redundancy and high availability.
+                </div>
+                <div class="simple-explanation">
+                    <strong>Simple Explanation:</strong> Like having multiple photocopies of important documents stored in different locations for safety.
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">6</div>
+                    <div>What is sharding in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Sharding is a method for distributing data across multiple machines to handle large data sets and high throughput operations.
+                </div>
+                <div class="analogy">
+                    <strong>Simple Analogy:</strong> Like splitting a big library into multiple smaller libraries, each storing different sections of books.
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">17</div>
+                    <div>What is the role of mongod process in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> The mongod process is the primary daemon process for MongoDB that handles data requests, manages data access, and performs background operations.
+                </div>
+                <div class="analogy">
+                    <strong>Simple Analogy:</strong> Like the manager of a warehouse who handles all incoming and outgoing goods.
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">18</div>
+                    <div>What is the role of mongo shell in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> The mongo shell is an interactive JavaScript interface to MongoDB used for administrative operations, data queries, and maintenance.
+                </div>
+                <div class="analogy">
+                    <strong>Simple Analogy:</strong> Like a remote control that lets you interact with and manage your database.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Core MongoDB Concepts -->
         <section>
             <h2 class="section-title">Core MongoDB Concepts</h2>
             <div class="concept-grid">
@@ -254,6 +427,67 @@
             </div>
         </section>
         
+        <!-- Indexing & Performance Q&A Section -->
+        <section>
+            <h2 class="section-title">Indexing & Performance - Q&A</h2>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">7</div>
+                    <div>What is indexing in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Indexing is a technique to improve query performance by creating special data structures that allow faster data retrieval.
+                </div>
+                <div class="analogy">
+                    <strong>Simple Analogy:</strong> Like an index in a book that helps you find information quickly without reading every page.
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">8</div>
+                    <div>What are the different types of Indexing in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB supports several index types:
+                    <ul>
+                        <li><strong>Single Field:</strong> Index on one field</li>
+                        <li><strong>Compound:</strong> Index on multiple fields</li>
+                        <li><strong>Multikey:</strong> Index on array fields</li>
+                        <li><strong>Text:</strong> For text search</li>
+                        <li><strong>Geospatial:</strong> For location data</li>
+                        <li><strong>Hashed:</strong> For sharding</li>
+                        <li><strong>TTL:</strong> Auto-delete after time</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">13</div>
+                    <div>What is the difference between primary key and secondary key in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> 
+                    <ul>
+                        <li><strong>Primary Key (_id):</strong> Unique identifier for each document, automatically indexed</li>
+                        <li><strong>Secondary Key:</strong> Any other field that is indexed to improve query performance</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+                    <span class="comment">// Primary key (automatically indexed)</span><br>
+                    <span class="annotation-name">@Id</span><br>
+                    <span class="keyword">private</span> String id;<br><br>
+                    
+                    <span class="comment">// Secondary key (manually indexed)</span><br>
+                    <span class="annotation-name">@Indexed</span><br>
+                    <span class="keyword">private</span> String email;
+                </div>
+            </div>
+        </section>
+        
+        <!-- Spring Data MongoDB Components -->
         <section>
             <h2 class="section-title">Spring Data MongoDB Components</h2>
             <div class="concept-grid">
@@ -322,6 +556,87 @@
             </div>
         </section>
         
+        <!-- Data Operations Q&A Section -->
+        <section>
+            <h2 class="section-title">Data Operations - Q&A</h2>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">9</div>
+                    <div>What is mapReduce in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster.
+                </div>
+                <div class="simple-explanation">
+                    <strong>Simple Explanation:</strong> Like having multiple workers process different parts of a big task and then combining their results.
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">10</div>
+                    <div>How to store images, pdf in MongoDB using GridFS?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> GridFS is a specification for storing and retrieving large files (over 16MB) by dividing them into smaller chunks.
+                </div>
+                <div class="code-block">
+                    <span class="comment">// Store file using GridFS</span><br>
+                    GridFSBucket gridFSBucket = GridFSBuckets.create(database);<br>
+                    ObjectId fileId = gridFSBucket.uploadFromStream(<span class="string">"image.jpg"</span>, inputStream);<br><br>
+                    
+                    <span class="comment">// Retrieve file</span><br>
+                    gridFSBucket.downloadToStream(fileId, outputStream);
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">11</div>
+                    <div>What is the aggregation pipeline in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Aggregation pipeline is a framework for data aggregation that processes documents through a series of stages.
+                </div>
+                <div class="analogy">
+                    <strong>Simple Analogy:</strong> Like an assembly line where raw data goes through different processing stations to become useful information.
+                </div>
+                <div class="code-block">
+                    <span class="comment">// Example aggregation pipeline</span><br>
+                    Aggregation aggregation = Aggregation.newAggregation(<br>
+                    &nbsp;&nbsp;Aggregation.match(Criteria.where(<span class="string">"status"</span>).is(<span class="string">"active"</span>)),<br>
+                    &nbsp;&nbsp;Aggregation.group(<span class="string">"department"</span>).count().as(<span class="string">"count"</span>),<br>
+                    &nbsp;&nbsp;Aggregation.sort(Sort.Direction.DESC, <span class="string">"count"</span>)<br>
+                    );
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">12</div>
+                    <div>What is the difference between update & Save in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong>
+                    <ul>
+                        <li><strong>Save:</strong> Replaces entire document if _id exists, inserts new document if _id doesn't exist</li>
+                        <li><strong>Update:</strong> Modifies specific fields without replacing the entire document</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+                    <span class="comment">// Save - replaces entire document</span><br>
+                    userRepository.save(user);<br><br>
+                    
+                    <span class="comment">// Update - modifies specific fields</span><br>
+                    Query query = <span class="keyword">new</span> Query(Criteria.where(<span class="string">"id"</span>).is(userId));<br>
+                    Update update = <span class="keyword">new</span> Update().set(<span class="string">"email"</span>, newEmail);<br>
+                    mongoTemplate.updateFirst(query, update, User.<span class="keyword">class</span>);
+                </div>
+            </div>
+        </section>
+        
+        <!-- MongoDB Annotations in Spring Boot -->
         <section>
             <h2 class="section-title">MongoDB Annotations in Spring Boot</h2>
             <div class="concept-grid">
@@ -372,102 +687,139 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- @Transient -->
-                <div class="concept-card">
-                    <div class="card-header">
-                        <h3>@Transient Annotation</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="definition">
-                            <p>Specifies that a field is not persistent and should not be stored in the database.</p>
-                        </div>
-                        <div class="code-block">
-                            <span class="annotation-name">@Transient</span><br>
-                            <span class="keyword">private</span> String temporaryData;
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- @DBRef -->
-                <div class="concept-card">
-                    <div class="card-header">
-                        <h3>@DBRef Annotation</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="definition">
-                            <p>Creates a reference to another document, similar to foreign keys in relational databases.</p>
-                        </div>
-                        <div class="code-block">
-                            <span class="annotation-name">@DBRef</span><br>
-                            <span class="keyword">private</span> Address address;
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
         
+        <!-- Advanced Features Q&A Section -->
         <section>
-            <h2 class="section-title">MongoDB Operations & Features</h2>
-            <div class="concept-grid">
-                <!-- Aggregation Framework -->
-                <div class="concept-card">
-                    <div class="card-header">
-                        <h3>Aggregation Framework</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="definition">
-                            <p>A data processing pipeline that transforms documents through a series of stages (filter, group, sort, etc.).</p>
-                        </div>
-                        <div class="usage">
-                            <strong>Common Stages:</strong> $match, $group, $sort, $project, $unwind, $lookup
-                        </div>
-                    </div>
+            <h2 class="section-title">Advanced Features - Q&A</h2>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">14</div>
+                    <div>How does MongoDB ensure data consistency?</div>
                 </div>
-                
-                <!-- Transactions -->
-                <div class="concept-card">
-                    <div class="card-header">
-                        <h3>Transactions</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="definition">
-                            <p>Multi-document ACID operations that ensure data consistency across multiple operations.</p>
-                        </div>
-                        <div class="usage">
-                            <strong>Spring Boot Usage:</strong> Use @Transactional annotation on service methods.
-                        </div>
-                    </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB ensures data consistency through:
+                    <ul>
+                        <li><strong>Write Concern:</strong> Controls acknowledgment level for write operations</li>
+                        <li><strong>Read Concern:</strong> Controls isolation level for read operations</li>
+                        <li><strong>Replica Sets:</strong> Maintain multiple copies of data</li>
+                        <li><strong>Transactions:</strong> Multi-document ACID transactions (v4.0+)</li>
+                    </ul>
                 </div>
-                
-                <!-- Indexes -->
-                <div class="concept-card">
-                    <div class="card-header">
-                        <h3>Indexes</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="definition">
-                            <p>Data structures that improve the speed of data retrieval operations.</p>
-                        </div>
-                        <div class="usage">
-                            <strong>Types:</strong> Single Field, Compound, Text, Unique, TTL, Geospatial
-                        </div>
-                    </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">15</div>
+                    <div>How does MongoDB handle schema changes?</div>
                 </div>
-                
-                <!-- Embedded Documents -->
-                <div class="concept-card">
-                    <div class="card-header">
-                        <h3>Embedded Documents</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="definition">
-                            <p>Documents nested within other documents, used for one-to-few relationships where data is frequently accessed together.</p>
-                        </div>
-                        <div class="example">
-                            <strong>Example:</strong> A user document containing an embedded addresses document.
-                        </div>
-                    </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB handles schema changes flexibly through:
+                    <ul>
+                        <li><strong>Schema-less Design:</strong> Documents in same collection can have different fields</li>
+                        <li><strong>Backward Compatibility:</strong> Old applications can read new documents (ignore unknown fields)</li>
+                        <li><strong>Migration Scripts:</strong> Update existing documents when needed</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">16</div>
+                    <div>How does MongoDB handle transactions?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB supports multi-document ACID transactions (since v4.0) that can span multiple operations, collections, and databases.
+                </div>
+                <div class="code-block">
+                    <span class="annotation-name">@Transactional</span><br>
+                    <span class="keyword">public void</span> transferMoney(String from, String to, BigDecimal amount) {<br>
+                    &nbsp;&nbsp;<span class="comment">// Multiple database operations in single transaction</span><br>
+                    &nbsp;&nbsp;accountRepository.debitAccount(from, amount);<br>
+                    &nbsp;&nbsp;accountRepository.creditAccount(to, amount);<br>
+                    &nbsp;&nbsp;<span class="comment">// Both succeed or both fail</span><br>
+                    }
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">19</div>
+                    <div>How does MongoDB handle security?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB provides multiple security features:
+                    <ul>
+                        <li><strong>Authentication:</strong> Username/password, LDAP, Kerberos</li>
+                        <li><strong>Authorization:</strong> Role-based access control</li>
+                        <li><strong>Encryption:</strong> TLS/SSL for network, encryption at rest</li>
+                        <li><strong>Auditing:</strong> Track database operations</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">20</div>
+                    <div>What are the different data models in MongoDB? (embedded & reference)</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB supports two main data modeling approaches:
+                    <ul>
+                        <li><strong>Embedded Documents:</strong> Related data stored within a single document (one-to-few relationships)</li>
+                        <li><strong>Document References:</strong> Related data stored in separate documents with references (one-to-many relationships)</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+                    <span class="comment">// Embedded document (one-to-few)</span><br>
+                    <span class="keyword">public class</span> <span class="class-name">User</span> {<br>
+                    &nbsp;&nbsp;private List&lt;Address&gt; addresses; <span class="comment">// Embedded</span><br>
+                    }<br><br>
+                    
+                    <span class="comment">// Document reference (one-to-many)</span><br>
+                    <span class="keyword">public class</span> <span class="class-name">Order</span> {<br>
+                    &nbsp;&nbsp;<span class="annotation-name">@DBRef</span><br>
+                    &nbsp;&nbsp;private User user; <span class="comment">// Reference</span><br>
+                    }
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">21</div>
+                    <div>What is the difference between join & lookup in MongoDB?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong>
+                    <ul>
+                        <li><strong>Join (SQL):</strong> Combines rows from multiple tables at query time</li>
+                        <li><strong>$lookup (MongoDB):</strong> Performs left outer join between collections in aggregation pipeline</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+                    <span class="comment">// $lookup example in aggregation</span><br>
+                    Aggregation.newAggregation(<br>
+                    &nbsp;&nbsp;Aggregation.lookup(<span class="string">"orders"</span>, <span class="string">"userId"</span>, <span class="string">"userId"</span>, <span class="string">"userOrders"</span>)<br>
+                    );
+                </div>
+            </div>
+            
+            <div class="qa-section">
+                <div class="question">
+                    <div class="question-number">22</div>
+                    <div>How does MongoDB handle data backup and recovery?</div>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> MongoDB provides several backup options:
+                    <ul>
+                        <li><strong>mongodump/mongorestore:</strong> Binary export/import of database</li>
+                        <li><strong>mongoexport/mongoimport:</strong> JSON/CSV export/import</li>
+                        <li><strong>File System Snapshots:</strong> Point-in-time backups</li>
+                        <li><strong>Cloud Manager:</strong> Automated backup service</li>
+                        <li><strong>Replica Sets:</strong> Built-in redundancy</li>
+                    </ul>
                 </div>
             </div>
         </section>
