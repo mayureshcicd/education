@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot MongoDB Interview Q&A</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        h2 {
+            border-left: 5px solid #ff9900;
+            padding-left: 15px;
+            margin-top: 40px;
+            background: linear-gradient(90deg, #fffaf0, transparent);
+            padding: 15px;
+        }
+        h3 {
+            border-left: 4px solid #4caf50;
+            padding-left: 12px;
+            margin-top: 25px;
+        }
+        .qa-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .question {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: bold;
+            border-left: 4px solid #2196f3;
+        }
+        .answer {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+        }
+        .benefits {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .usage {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #ff9800;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .simple-explanation {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #9c27b0;
+        }
+        .interview-tip {
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #f44336;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #ff9900;
+            color: white;
+            font-weight: bold;
+        }
+        .usage-table {
+            background: #e1f5fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+    <div class="container">
+        <h1>🎯 Spring Boot with MongoDB Interview Q&A</h1>
+        <h2>Complete Guide with Simple Explanations</h2>
+
+        <!-- 1. MongoDB Basics -->
+        <div class="qa-section">
+            <h2>1. MongoDB Basics</h2>
+
+            <div class="question">Q1: What is MongoDB in simple words?</div>
+            <div class="answer">
+                <strong>Answer:</strong> MongoDB is a NoSQL database that stores data in flexible JSON-like documents instead of fixed tables and rows like traditional databases.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like storing customer information in a flexible file folder where you can add any type of information (address, preferences, orders) without predefined structure, unlike Excel sheets with fixed columns.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Flexible schema - add fields anytime</li>
+                    <li>✅ Fast for read-heavy applications</li>
+                    <li>✅ Handles large amounts of data</li>
+                    <li>✅ Easy to scale horizontally</li>
+                    <li>✅ JSON-like structure - familiar to developers</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>When to Use MongoDB:</strong>
+                <ul>
+                    <li>Content management systems</li>
+                    <li>Real-time analytics</li>
+                    <li>Internet of Things (IoT) applications</li>
+                    <li>Mobile applications</li>
+                    <li>Catalogs and product data</li>
+                </ul>
+            </div>
+
+            <div class="question">Q2: What is the difference between SQL and MongoDB?</div>
+            <div class="answer">
+                <table border="1" style="width:100%; border-collapse: collapse;">
+                    <tr>
+                        <th>Aspect</th>
+                        <th>SQL Databases (MySQL, PostgreSQL)</th>
+                        <th>MongoDB</th>
+                    </tr>
+                    <tr>
+                        <td>Data Structure</td>
+                        <td>Tables with fixed rows and columns</td>
+                        <td>Documents with flexible fields</td>
+                    </tr>
+                    <tr>
+                        <td>Schema</td>
+                        <td>Fixed schema - define structure first</td>
+                        <td>Flexible schema - add fields anytime</td>
+                    </tr>
+                    <tr>
+                        <td>Query Language</td>
+                        <td>SQL (Structured Query Language)</td>
+                        <td>JSON-like queries</td>
+                    </tr>
+                    <tr>
+                        <td>Scalability</td>
+                        <td>Vertical scaling (bigger server)</td>
+                        <td>Horizontal scaling (more servers)</td>
+                    </tr>
+                    <tr>
+                        <td>Transactions</td>
+                        <td>ACID transactions (strong consistency)</td>
+                        <td>Eventual consistency (fast performance)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. Spring Data MongoDB -->
+        <div class="qa-section">
+            <h2>2. Spring Data MongoDB</h2>
+
+            <div class="question">Q3: What is Spring Data MongoDB?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Spring Data MongoDB is a Spring framework that makes it easy to work with MongoDB. It reduces boilerplate code and provides ready-to-use database operations.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like having a smart assistant for database work. Instead of writing complex database commands, you just tell Spring Data what you want, and it handles the rest.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Less code - automatic CRUD operations</li>
+                    <li>✅ Built-in repository pattern</li>
+                    <li>✅ Automatic object-document mapping</li>
+                    <li>✅ Custom query methods</li>
+                    <li>✅ Integration with Spring ecosystem</li>
+                </ul>
+            </div>
+
+            <div class="question">Q4: How to setup Spring Boot with MongoDB?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Add MongoDB dependency and configure connection in application.properties
+            </div>
+            <div class="code-example">
+            <pre><code>
+// 1. Add dependency in pom.xml
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+// 2. Configure in application.properties
+spring.data.mongodb.uri=mongodb://localhost:27017/mydatabase
+spring.data.mongodb.database=myapp
+
+// 3. Create Document class
+@Document(collection = "users")
+public class User {
+    @Id
+    private String id;
+    private String name;
+    private String email;
+    // getters and setters
+}
+</pre></code>
+            </div>
+        </div>
+
+        <!-- 3. MongoDB Annotations -->
+        <div class="qa-section">
+            <h2>3. MongoDB Annotations</h2>
+
+            <div class="question">Q5: What are key MongoDB annotations in Spring Boot?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Spring Data MongoDB provides annotations to map Java objects to MongoDB documents.
+            </div>
+            <div class="code-example">
+            <pre><code>
+// Main MongoDB Annotations:
+@Document(collection = "users")        // Maps to "users" collection
+public class User {
+    
+    @Id                               // Primary key field
+    private String id;
+    
+    private String name;
+    private String email;
+    
+    @Field("user_age")                // Custom field name in database
+    private int age;
+    
+    @Indexed                          // Create database index for faster queries
+    private String email;
+    
+    @Transient                        // Don't save this field in database
+    private String temporaryData;
+    
+    @DBRef                           // Reference to another document
+    private Address address;
+    
+    // Embedded document (stored inside parent document)
+    private List<Order> orders;
+}
+</pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Why use annotations:</strong>
+                <ul>
+                    <li>✅ Clear mapping between Java and MongoDB</li>
+                    <li>✅ Automatic conversion between types</li>
+                    <li>✅ Database optimization with indexes</li>
+                    <li>✅ Flexible field naming</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. MongoDB Repository -->
+        <div class="qa-section">
+            <h2>4. MongoDB Repository Pattern</h2>
+
+            <div class="question">Q6: What is MongoRepository?</div>
+            <div class="answer">
+                <strong>Answer:</strong> MongoRepository is an interface that provides ready-to-use database operations like save, delete, find, without writing any implementation code.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like having a pre-built toolbox for database operations. You get common tools (save, find, delete) without building them from scratch.
+            </div>
+            <div class="code-example">
+            <pre><code>
+// Repository interface - no implementation needed!
+public interface UserRepository extends MongoRepository<User, String> {
+    
+    // Automatic query methods
+    List<User> findByName(String name);
+    List<User> findByEmail(String email);
+    List<User> findByAgeGreaterThan(int age);
+    List<User> findByNameAndEmail(String name, String email);
+    
+    // Custom query with @Query
+    @Query("{ 'age' : { $gt: ?0, $lt: ?1 } }")
+    List<User> findUsersByAgeBetween(int minAge, int maxAge);
+    
+    // Pageable queries
+    Page<User> findByName(String name, Pageable pageable);
+}
+
+// Usage in Service class
+@Service
+public class UserService {
+    @Autowired
+    private UserRepository userRepository;
+    
+    public User createUser(User user) {
+        return userRepository.save(user);  // Auto-generated method
+    }
+    
+    public List<User> findUsersByName(String name) {
+        return userRepository.findByName(name); // Auto-implemented
+    }
+}
+</pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Benefits of MongoRepository:</strong>
+                <ul>
+                    <li>✅ Zero implementation code</li>
+                    <li>✅ Automatic query generation from method names</li>
+                    <li>✅ Built-in pagination and sorting</li>
+                    <li>✅ Custom queries with @Query annotation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. MongoDB Queries -->
+        <div class="qa-section">
+            <h2>5. MongoDB Query Methods</h2>
+
+            <div class="question">Q7: How to write queries in Spring Data MongoDB?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Three ways: 1) Method name queries, 2) @Query annotation, 3) MongoTemplate for complex queries.
+            </div>
+            <div class="code-example">
+            <pre><code>
+// 1. Method Name Queries (Auto-generated)
+public interface UserRepository extends MongoRepository<User, String> {
+    List<User> findByName(String name);
+    List<User> findByEmailAndActiveTrue(String email);
+    List<User> findByAgeBetween(int minAge, int maxAge);
+    List<User> findByNameStartingWith(String prefix);
+    List<User> findByOrdersSize(int size);
+}
+
+// 2. @Query Annotation (Custom queries)
+public interface UserRepository extends MongoRepository<User, String> {
+    @Query("{ 'name' : ?0 }")
+    List<User> findUsersByName(String name);
+    
+    @Query("{ 'age' : { $gte: ?0, $lte: ?1 } }")
+    List<User> findUsersInAgeRange(int minAge, int maxAge);
+    
+    @Query(value = "{ 'active' : true }", fields = "{ 'name' : 1, 'email' : 1 }")
+    List<User> findActiveUsersWithProjection();
+}
+
+// 3. MongoTemplate (Complex operations)
+@Service
+public class UserService {
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    
+    public List<User> complexQuery() {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("age").gt(18).lte(65));
+        query.with(Sort.by(Sort.Direction.DESC, "createdDate"));
+        query.limit(10);
+        
+        return mongoTemplate.find(query, User.class);
+    }
+}
+</pre></code>
+            </div>
+            <div class="usage">
+                <strong>When to use each approach:</strong>
+                <ul>
+                    <li><strong>Method names</strong> - Simple queries</li>
+                    <li><strong>@Query</strong> - Medium complexity, readable</li>
+                    <li><strong>MongoTemplate</strong> - Complex dynamic queries</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. Aggregation Framework -->
+        <div class="qa-section">
+            <h2>6. MongoDB Aggregation Framework</h2>
+
+            <div class="question">Q8: What is Aggregation in MongoDB?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Aggregation is like a data processing pipeline that transforms and analyzes documents through multiple stages (filter, group, sort, calculate).
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like an assembly line in a factory where raw materials (documents) go through different stations (stages) to become finished products (results).
+            </div>
+            <div class="code-example">
+            <pre><code>
+// Aggregation Example: Group users by city and count
+@Service
+public class UserAnalyticsService {
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    
+    public List<UserCountByCity> getUsersByCity() {
+        Aggregation aggregation = Aggregation.newAggregation(
+            Aggregation.group("city").count().as("userCount"),
+            Aggregation.sort(Sort.Direction.DESC, "userCount")
+        );
+        
+        return mongoTemplate.aggregate(aggregation, "users", UserCountByCity.class)
+                           .getMappedResults();
+    }
+}
+
+// Common Aggregation Stages:
+// $match    - Filter documents (like WHERE in SQL)
+// $group    - Group by field and calculate
+// $sort     - Sort results
+// $project  - Select which fields to include
+// $unwind   - Deconstruct array fields
+// $lookup   - Join with another collection
+</pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Benefits of Aggregation:</strong>
+                <ul>
+                    <li>✅ Complex data analysis in database</li>
+                    <li>✅ Better performance than application-side processing</li>
+                    <li>✅ Real-time analytics</li>
+                    <li>✅ Data transformation before sending to client</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. Indexing in MongoDB -->
+        <div class="qa-section">
+            <h2>7. Indexing and Performance</h2>
+
+            <div class="question">Q9: Why are indexes important in MongoDB?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Indexes make database queries faster, just like an index in a book helps you find information quickly without reading every page.
+            </div>
+            <div class="code-example">
+            <pre><code>
+// Creating Indexes in Spring Boot
+@Document(collection = "users")
+@CompoundIndexes({
+    @CompoundIndex(name = "email_age", def = "{'email': 1, 'age': -1}")
+})
+public class User {
+    @Id
+    private String id;
+    
+    @Indexed(unique = true)  // Unique index
+    private String email;
+    
+    @Indexed                 // Regular index
+    private String name;
+    
+    @Indexed(direction = IndexDirection.DESCENDING)
+    private int age;
+}
+
+// Programmatic index creation
+@Component
+public class IndexCreator {
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    
+    @PostConstruct
+    public void createIndexes() {
+        mongoTemplate.indexOps("users").ensureIndex(
+            new Index().on("email", Sort.Direction.ASC).unique()
+        );
+    }
+}
+</pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Types of Indexes:</strong>
+                <ul>
+                    <li>✅ Single Field Index - on one field</li>
+                    <li>✅ Compound Index - on multiple fields</li>
+                    <li>✅ Text Index - for text search</li>
+                    <li>✅ Unique Index - ensures field values are unique</li>
+                    <li>✅ TTL Index - automatically delete documents after time</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8. Transactions in MongoDB -->
+        <div class="qa-section">
+            <h2>8. Transactions and ACID Properties</h2>
+
+            <div class="question">Q10: Does MongoDB support transactions?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Yes, MongoDB supports multi-document ACID transactions (since version 4.0), ensuring data consistency across multiple operations.
+            </div>
+            <div class="code-example">
+            <pre><code>
+// MongoDB Transactions in Spring Boot
+@Service
+public class OrderService {
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    
+    @Transactional  // Spring's @Transactional works with MongoDB
+    public void placeOrder(Order order, Payment payment) {
+        // These operations will be in single transaction
+        mongoTemplate.save(order);
+        mongoTemplate.save(payment);
+        
+        // If any operation fails, both will be rolled back
+        inventoryService.updateStock(order.getItems());
+    }
+}
+
+// Configuration needed:
+@Configuration
+@EnableMongoAuditing
+@EnableTransactionManagement  // Enable transaction support
+public class MongoConfig {
+    
+    @Bean
+    public MongoTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
+        return new MongoTransactionManager(dbFactory);
+    }
+}
+</pre></code>
+            </div>
+            <div class="usage">
+                <strong>When to use transactions:</strong>
+                <ul>
+                    <li>Banking operations (transfer money between accounts)</li>
+                    <li>E-commerce (create order + update inventory)</li>
+                    <li>Any operation requiring multiple document updates</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 9. MongoDB with Microservices -->
+        <div class="qa-section">
+            <h2>9. MongoDB in Microservices Architecture</h2>
+
+            <div class="question">Q11: How to use MongoDB in Microservices?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Each microservice has its own MongoDB database or collection, following the "Database per Service" pattern.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like each department in a company having its own filing system. Sales doesn't access HR files directly - they request information through proper channels.
+            </div>
+            <div class="code-example">
+            <pre><code>
+// Microservice 1: User Service
+@Service
+public class UserService {
+    @Autowired
+    private UserRepository userRepository;
+    
+    public UserDTO getUserWithProfile(String userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        
+        // Call Profile Service via Feign Client
+        ProfileDTO profile = profileServiceClient.getProfile(userId);
+        
+        return UserDTO.builder()
+            .user(user)
+            .profile(profile)
+            .build();
+    }
+}
+
+// Microservice 2: Profile Service  
+@Document(collection = "profiles")
+public class Profile {
+    @Id
+    private String userId;  // Same as user ID
+    private String bio;
+    private String avatar;
+    // Other profile fields
+}
+
+// Each service connects to different database
+// user-service application.properties:
+spring.data.mongodb.uri=mongodb://localhost:27017/user-service-db
+
+// profile-service application.properties:
+spring.data.mongodb.uri=mongodb://localhost:27017/profile-service-db
+</pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Benefits in Microservices:</strong>
+                <ul>
+                    <li>✅ Data isolation between services</li>
+                    <li>✅ Independent database scaling</li>
+                    <li>✅ Different data models for different services</li>
+                    <li>✅ No database-level coupling</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10. Best Practices -->
+        <div class="qa-section">
+            <h2>10. MongoDB Best Practices</h2>
+
+            <div class="question">Q12: What are MongoDB best practices in Spring Boot?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Follow these practices for better performance and maintainability.
+            </div>
+            <div class="code-example">
+            <pre><code>
+// 1. Use appropriate data types
+@Document
+public class Product {
+    @Id
+    private String id;           // String for MongoDB ObjectId
+    
+    private String name;
+    private BigDecimal price;    // Use BigDecimal for money
+    private LocalDateTime createdAt; // Java 8 time types
+    
+    private List<String> tags;   // Arrays for multiple values
+}
+
+// 2. Design documents for query patterns
+@Document
+public class Order {
+    @Id
+    private String id;
+    private String userId;
+    private List<OrderItem> items; // Embedded documents
+    private Address shippingAddress;
+    
+    // Fields you query frequently should be top-level
+    @Indexed
+    private OrderStatus status;
+    @Indexed  
+    private LocalDate orderDate;
+}
+
+// 3. Use projections to fetch only needed fields
+public interface OrderRepository extends MongoRepository<Order, String> {
+    @Query(value = "{ 'userId': ?0 }", fields = "{ 'items': 0 }")
+    List<Order> findOrdersByUserIdWithoutItems(String userId);
+}
+</pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Key Best Practices:</strong>
+                <ul>
+                    <li>✅ Design documents based on query patterns</li>
+                    <li>✅ Use embedded documents for one-to-few relationships</li>
+                    <li>✅ Create indexes for frequently queried fields</li>
+                    <li>✅ Use projections to limit returned data</li>
+                    <li>✅ Monitor query performance with explain()</li>
+                    <li>✅ Use connection pooling</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Usage Table -->
+        <div class="usage-table">
+            <h2>📊 Spring Boot MongoDB - Usage Summary</h2>
+            <table>
+                <tr>
+                    <th>Component/Feature</th>
+                    <th>Primary Usage</th>
+                    <th>Real-World Example</th>
+                    <th>When to Use</th>
+                </tr>
+                <tr>
+                    <td><strong>MongoRepository</strong></td>
+                    <td>Automatic CRUD operations</td>
+                    <td>User registration, product catalog</td>
+                    <td>When you need basic create, read, update, delete operations</td>
+                </tr>
+                <tr>
+                    <td><strong>@Query Annotation</strong></td>
+                    <td>Custom database queries</td>
+                    <td>Find users by multiple criteria, complex searches</td>
+                    <td>When method name queries are not sufficient</td>
+                </tr>
+                <tr>
+                    <td><strong>MongoTemplate</strong></td>
+                    <td>Complex dynamic queries</td>
+                    <td>Advanced search with multiple optional filters</td>
+                    <td>When you need full control over query building</td>
+                </tr>
+                <tr>
+                    <td><strong>Aggregation Framework</strong></td>
+                    <td>Data analysis and reporting</td>
+                    <td>Sales reports, user analytics, dashboard data</td>
+                    <td>When you need to process and analyze data in database</td>
+                </tr>
+                <tr>
+                    <td><strong>Indexes</strong></td>
+                    <td>Query performance optimization</td>
+                    <td>Fast user search by email, product search by category</td>
+                    <td>When you have fields queried frequently</td>
+                </tr>
+                <tr>
+                    <td><strong>Transactions</strong></td>
+                    <td>Data consistency across operations</td>
+                    <td>Bank transfers, order processing with inventory update</td>
+                    <td>When multiple operations must succeed or fail together</td>
+                </tr>
+                <tr>
+                    <td><strong>Embedded Documents</strong></td>
+                    <td>One-to-few relationships</td>
+                    <td>User with addresses, order with items</td>
+                    <td>When related data is accessed together frequently</td>
+                </tr>
+                <tr>
+                    <td><strong>DBRef</strong></td>
+                    <td>References between collections</td>
+                    <td>User referencing company, post referencing author</td>
+                    <td>When you have true one-to-many relationships</td>
+                </tr>
+                <tr>
+                    <td><strong>GridFS</strong></td>
+                    <td>Large file storage</td>
+                    <td>User uploads, document storage, images</td>
+                    <td>When you need to store files larger than 16MB</td>
+                </tr>
+                <tr>
+                    <td><strong>TTL Indexes</strong></td>
+                    <td>Automatic data expiration</td>
+                    <td>Session data, temporary tokens, cache data</td>
+                    <td>When data has a limited lifespan</td>
+                </tr>
+                <tr>
+                    <td><strong>Text Search</strong></td>
+                    <td>Full-text search capabilities</td>
+                    <td>Product search, article search, content search</td>
+                    <td>When you need to search text content</td>
+                </tr>
+                <tr>
+                    <td><strong>Change Streams</strong></td>
+                    <td>Real-time data changes</td>
+                    <td>Live notifications, real-time dashboards</td>
+                    <td>When you need to react to database changes in real-time</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Quick Revision -->
+        <div class="note">
+            <h3>🚀 Quick Revision - Key Points</h3>
+            <ul>
+                <li><strong>MongoDB</strong> - Flexible NoSQL document database</li>
+                <li><strong>Spring Data MongoDB</strong> - Easy database operations</li>
+                <li><strong>MongoRepository</strong> - Automatic CRUD operations</li>
+                <li><strong>@Document</strong> - Maps Java class to MongoDB collection</li>
+                <li><strong>@Id</strong> - Marks primary key field</li>
+                <li><strong>@Indexed</strong> - Creates database indexes for performance</li>
+                <li><strong>Aggregation</strong> - Data processing pipeline</li>
+                <li><strong>Embedded Documents</strong> - Store related data together</li>
+                <li><strong>Transactions</strong> - ACID operations across documents</li>
+                <li><strong>MongoTemplate</strong> - Advanced query operations</li>
+            </ul>
+        </div>
+
+        <!-- Interview Tips -->
+        <div class="interview-tip">
+            <h3>💡 MongoDB Interview Tips</h3>
+            <ul>
+                <li>Explain the difference between SQL and NoSQL clearly</li>
+                <li>Know when to use embedded documents vs references</li>
+                <li>Understand indexing and its impact on performance</li>
+                <li>Be prepared to discuss aggregation pipeline stages</li>
+                <li>Explain transactions in MongoDB context</li>
+                <li>Discuss real-world use cases for MongoDB</li>
+                <li>Know the limitations of MongoDB</li>
+            </ul>
+        </div>
+
+    </div>
+    </div>    
+</body>
+</html>

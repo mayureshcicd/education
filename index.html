@@ -9,15 +9,16 @@
       margin: 0;
       padding: 0;
     }
-.header-title {
-  font-weight: 900; /* Extra bold */
-  font-size: 2.2rem; /* Increased font size */
-  background: linear-gradient(90deg, #e74c3c, #f1c40f, #2ecc71, #3498db, #9b59b6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  flex: 1;
-}
+    
+    .header-title {
+      font-weight: 900; /* Extra bold */
+      font-size: 2.2rem; /* Increased font size */
+      background: linear-gradient(90deg, #e74c3c, #f1c40f, #2ecc71, #3498db, #9b59b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      flex: 1;
+    }
 
     body {
       font-family: Arial, sans-serif;
@@ -25,20 +26,20 @@
       overflow: hidden;
     }
 
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* center items */
-  padding: 1rem;
-  font-size: 1.2rem;
-  z-index: 10;
-  border-bottom: 1px solid #ccc;
-}
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center; /* center items */
+      padding: 1rem;
+      font-size: 1.2rem;
+      z-index: 10;
+      border-bottom: 1px solid #ccc;
+    }
 
     header img {
       height: 80px;
@@ -90,15 +91,67 @@ header {
       border-right: 1px solid #ccc;
     }
 
-    nav a {
-      display: block;
-      margin-bottom: 10px;
-      color: #2c3e50;
-      text-decoration: none;
-      font-weight: bold;
+    /* Tree view styles */
+    .tree {
+      list-style: none;
+      padding-left: 0;
     }
 
-    nav a:hover {
+    .tree-item {
+      margin-bottom: 5px;
+    }
+
+    .tree-header {
+      display: flex;
+      align-items: center;
+      padding: 8px 10px;
+      background-color: #3498db;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .tree-header:hover {
+      background-color: #2980b9;
+    }
+
+    .tree-header::before {
+      content: '▶';
+      display: inline-block;
+      margin-right: 8px;
+      transition: transform 0.2s;
+      font-size: 0.8rem;
+    }
+
+    .tree-header.expanded::before {
+      transform: rotate(90deg);
+    }
+
+    .tree-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      padding-left: 20px;
+    }
+
+    .tree-content.expanded {
+      max-height: 1000px; /* Adjust based on your content */
+    }
+
+    .tree-link {
+      display: block;
+      padding: 8px 10px;
+      color: #2c3e50;
+      text-decoration: none;
+      border-radius: 4px;
+      margin: 2px 0;
+      transition: background-color 0.2s;
+    }
+
+    .tree-link:hover {
+      background-color: #d5dbdb;
       color: #2980b9;
     }
 
@@ -122,66 +175,148 @@ header {
 
   <div class="container">
     <nav>
-	<a href="https://mayureshcicd.github.io/education/0-CORE-JAVA.html" target="contentFrame">0 - CORE JAVA</a>
-	<a href="https://mayureshcicd.github.io/education/1-STATIC-KEYWORD.html" target="contentFrame">1 - STATIC KEYWORD</a>
-	<a href="https://mayureshcicd.github.io/education/2-STATIC-DYNAMIC-BINDING.html" target="contentFrame">2 - STATIC & DYNAMIC BINDING</a>
-	<a href="https://mayureshcicd.github.io/education/3-ACCESS-MODIFIERS.html" target="contentFrame">3 - ACCESS MODIFIERS</a>
-	<a href="https://mayureshcicd.github.io/education/4-AGGEREGATION.html" target="contentFrame">4 - AGGREGATION</a>
-	<a href="https://mayureshcicd.github.io/education/5-ASSOCIATION.html" target="contentFrame">5 - ASSOCIATION</a>
-	<a href="https://mayureshcicd.github.io/education/6-FINAL-KEYWORD.html" target="contentFrame">6 - FINAL KEYWORD</a>
-	<a href="https://mayureshcicd.github.io/education/7-JAVA-SERIALIZATION.html" target="contentFrame">7 - JAVA SERIALIZATION</a>
-	<a href="https://mayureshcicd.github.io/education/8-COLLECTION-FRAMEWORK.html" target="contentFrame">8 - COLLECTION FRAMEWORK</a>
-	<a href="https://mayureshcicd.github.io/education/9-COMPLETE-OOPS-CLASSES-1.html" target="contentFrame">9 - OOPS CLASSES - 1</a>
-	<a href="https://mayureshcicd.github.io/education/10-COMPLETE-OOPS-CLASSES-2.html" target="contentFrame">10 - OOPS CLASSES - 2</a>
-	<a href="https://mayureshcicd.github.io/education/11-NESTED-INHERITANCE.html" target="contentFrame">11 - NESTED INHERITANCE</a>
-	<a href="https://mayureshcicd.github.io/education/12-JSP-LIFE-CYCLE.html" target="contentFrame">12 - JSP LIFE CYCLE</a>
-	<a href="https://mayureshcicd.github.io/education/13-SERVLET-LIFE-CYCLE.html" target="contentFrame">13 - SERVLET LIFE CYCLE</a>
-	<a href="https://mayureshcicd.github.io/education/14-Thread.html" target="contentFrame">14 - THREAD</a>
-	<a href="https://mayureshcicd.github.io/education/15-annotation.html" target="contentFrame">15 - ANNOTATION</a>
-	<a href="https://mayureshcicd.github.io/education/16-Java%20-%20Exceptions.html" target="contentFrame">16 - EXCEPTIONS</a>
-	<a href="https://mayureshcicd.github.io/education/17-%20Immutable%20Vs%20Mutable-Wrapper%20class.html" target="contentFrame">17 - IMMUTABLE VS MUTABLE</a>
-	<a href="https://mayureshcicd.github.io/education/18-JAVA-GENERIC.html" target="contentFrame">18 - JAVA GENERIC</a>
-	<a href="https://mayureshcicd.github.io/education/19-REFLECTION.html" target="contentFrame">19 - REFLECTION</a>
-	<a href="https://mayureshcicd.github.io/education/20-JAVA-RESTFUL-API.html" target="contentFrame">20 - RESTFUL API</a>
-	<a href="https://mayureshcicd.github.io/education/21-HIBERNATE.html" target="contentFrame">21 - HIBERNATE</a>
-	<a href="https://mayureshcicd.github.io/education/AOP.html" target="contentFrame">22 - AOP</a>
-	<a href="https://mayureshcicd.github.io/education/hiber-important.html" target="contentFrame">23 - HIBERNATE IMPORTANT</a>
-	<a href="https://mayureshcicd.github.io/education/hibernate-question.html" target="contentFrame">24 - HIBERNATE QUESTION</a>
-	<a href="https://mayureshcicd.github.io/education/imp-hibernate-question.html" target="contentFrame">25 - IMP HIBERNATE QUESTION</a>
-	<a href="https://mayureshcicd.github.io/education/important.html" target="contentFrame">26 - IMPLICIT AND EXPLICIT</a>
-	<a href="https://mayureshcicd.github.io/education/jboss.html" target="contentFrame">27 - JBOSS</a>
-	<a href="https://mayureshcicd.github.io/education/rest.html" target="contentFrame">28 - REST</a>
-	<a href="https://mayureshcicd.github.io/education/SHORT-NOTE-REST.html" target="contentFrame">29 - SHORT NOTE - REST</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/Advanced Sql.pdf" target="contentFrame">30 - Advanced SQL</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/Apache KAFKA.pdf" target="contentFrame">31 - Apache KAFKA</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/aws-cli.pdf" target="contentFrame">32 - AWS CLI</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/AWS-QUESTION-ANSWERS.pdf" target="contentFrame">33 - AWS Question & Answers</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/AWS-Solution-Arc.pdf" target="contentFrame">34 - AWS Solution Architect</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/spring-boot.pdf" target="contentFrame">35 - Spring Boot</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/Java-8.pdf" target="contentFrame">36 - Java 8</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/java-collections.pdf" target="contentFrame">37 - Java Collections</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/Java_Design_Pattern_eBook.pdf" target="contentFrame">38 - Java Design Patterns</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/JPA-ANNOTATION.pdf" target="contentFrame">39 - JPA Annotations</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/kubernetes and docker.pdf" target="contentFrame">40 - Kubernetes and Docker</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/MicroServices-and-Agile.pdf" target="contentFrame">41 - Microservices and Agile</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/restful_interview_questions.pdf" target="contentFrame">42 - RESTful Interview Questions</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/Spring-interview.pdf" target="contentFrame">43 - Spring Interview</a>
-	<a href="https://mayureshcicd.github.io/education/pdf/Spring-Interview-Questions.pdf" target="contentFrame">44 - Spring Interview Questions</a>
-        <a href="https://mayureshcicd.github.io/education/Q1-What-is-jsonBackReference.html" target="contentFrame">45 - What is jsonBackReference</a>
-        <a href="https://mayureshcicd.github.io/education/Q2-Some-Imp-sql.html" target="contentFrame">46 - PostgreSQL Commands</a>    
-        <a href="https://mayureshcicd.github.io/education/Q3-Expose Spring Boot Application Using Ngrok.html" target="contentFrame">47 - Spring Boot App with Ngrok</a>    
-        <a href="https://mayureshcicd.github.io/education/Q4-Docker Compose for Spring Boot -Local MySQL.html" target="contentFrame">48 - Spring Boot with docker compose</a>    
-        <a href="https://mayureshcicd.github.io/education/FINAL-ANGULAR.html" target="contentFrame">49 - Angular 8 Interview preparation</a> 
-        <br/>
-	<br/>
-        <hr/>
-        <h3>📦 GitHub Repositories</h3>
-        <hr/>
-        <br/>
-	<br/>        
-        <a href="https://github.com/mayureshcicd/java8-interview-preparation/tree/main" target="_blank" rel="noopener noreferrer">🔹 JAVA 8 Preparation </a> 
-        <a href="https://github.com/mayureshcicd/TRAINING" target="_blank"  rel="noopener noreferrer">🔹 Rest API with JWT (Spring Security)</a> 
-        <a href="https://github.com/mayureshcicd/cerebra" target="_blank"  rel="noopener noreferrer">🔹 Asynchronous Processing</a>         
+      <ul class="tree">
+        <!-- Core Java Concepts -->
+        <li class="tree-item">
+          <div class="tree-header">Core Java Concepts</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/0-CORE-JAVA.html" class="tree-link" target="contentFrame">0 - CORE JAVA</a>
+            <a href="https://mayureshcicd.github.io/education/1-STATIC-KEYWORD.html" class="tree-link" target="contentFrame">1 - STATIC KEYWORD</a>
+            <a href="https://mayureshcicd.github.io/education/2-STATIC-DYNAMIC-BINDING.html" class="tree-link" target="contentFrame">2 - STATIC & DYNAMIC BINDING</a>
+            <a href="https://mayureshcicd.github.io/education/3-ACCESS-MODIFIERS.html" class="tree-link" target="contentFrame">3 - ACCESS MODIFIERS</a>
+            <a href="https://mayureshcicd.github.io/education/4-AGGEREGATION.html" class="tree-link" target="contentFrame">4 - AGGREGATION</a>
+            <a href="https://mayureshcicd.github.io/education/5-ASSOCIATION.html" class="tree-link" target="contentFrame">5 - ASSOCIATION</a>
+            <a href="https://mayureshcicd.github.io/education/6-FINAL-KEYWORD.html" class="tree-link" target="contentFrame">6 - FINAL KEYWORD</a>
+            <a href="https://mayureshcicd.github.io/education/7-JAVA-SERIALIZATION.html" class="tree-link" target="contentFrame">7 - JAVA SERIALIZATION</a>
+            <a href="https://mayureshcicd.github.io/education/8-COLLECTION-FRAMEWORK.html" class="tree-link" target="contentFrame">8 - COLLECTION FRAMEWORK</a>
+            <a href="https://mayureshcicd.github.io/education/9-COMPLETE-OOPS-CLASSES-1.html" class="tree-link" target="contentFrame">9 - OOPS CLASSES - 1</a>
+            <a href="https://mayureshcicd.github.io/education/10-COMPLETE-OOPS-CLASSES-2.html" class="tree-link" target="contentFrame">10 - OOPS CLASSES - 2</a>
+            <a href="https://mayureshcicd.github.io/education/11-NESTED-INHERITANCE.html" class="tree-link" target="contentFrame">11 - NESTED INHERITANCE</a>
+            <a href="https://mayureshcicd.github.io/education/14-Thread.html" class="tree-link" target="contentFrame">14 - THREAD</a>
+            <a href="https://mayureshcicd.github.io/education/15-annotation.html" class="tree-link" target="contentFrame">15 - ANNOTATION</a>
+            <a href="https://mayureshcicd.github.io/education/16-Java%20-%20Exceptions.html" class="tree-link" target="contentFrame">16 - EXCEPTIONS</a>
+            <a href="https://mayureshcicd.github.io/education/17-%20Immutable%20Vs%20Mutable-Wrapper%20class.html" class="tree-link" target="contentFrame">17 - IMMUTABLE VS MUTABLE</a>
+            <a href="https://mayureshcicd.github.io/education/18-JAVA-GENERIC.html" class="tree-link" target="contentFrame">18 - JAVA GENERIC</a>
+            <a href="https://mayureshcicd.github.io/education/19-REFLECTION.html" class="tree-link" target="contentFrame">19 - REFLECTION</a>
+          </div>
+        </li>
+
+        <!-- Web Technologies -->
+        <li class="tree-item">
+          <div class="tree-header">Web Technologies</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/12-JSP-LIFE-CYCLE.html" class="tree-link" target="contentFrame">12 - JSP LIFE CYCLE</a>
+            <a href="https://mayureshcicd.github.io/education/13-SERVLET-LIFE-CYCLE.html" class="tree-link" target="contentFrame">13 - SERVLET LIFE CYCLE</a>
+            <a href="https://mayureshcicd.github.io/education/20-JAVA-RESTFUL-API.html" class="tree-link" target="contentFrame">20 - RESTFUL API</a>
+            <a href="https://mayureshcicd.github.io/education/rest.html" class="tree-link" target="contentFrame">28 - REST</a>
+            <a href="https://mayureshcicd.github.io/education/SHORT-NOTE-REST.html" class="tree-link" target="contentFrame">29 - SHORT NOTE - REST</a>
+            <a href="https://mayureshcicd.github.io/education/FINAL-ANGULAR.html" class="tree-link" target="contentFrame">49 - Angular 8 Interview preparation</a>
+          </div>
+        </li>
+
+        <!-- Spring Framework -->
+        <li class="tree-item">
+          <div class="tree-header">Spring Framework</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/AOP.html" class="tree-link" target="contentFrame">22 - AOP</a>
+            <a href="https://mayureshcicd.github.io/education/Q1-What-is-jsonBackReference.html" class="tree-link" target="contentFrame">45 - What is jsonBackReference</a>
+            <a href="https://mayureshcicd.github.io/education/Q3-Expose Spring Boot Application Using Ngrok.html" class="tree-link" target="contentFrame">47 - Spring Boot App with Ngrok</a>
+            <a href="https://mayureshcicd.github.io/education/Q4-Docker Compose for Spring Boot -Local MySQL.html" class="tree-link" target="contentFrame">48 - Spring Boot with docker compose</a>
+          </div>
+        </li>
+
+        <!-- Hibernate & JPA -->
+        <li class="tree-item">
+          <div class="tree-header">Hibernate & JPA</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/21-HIBERNATE.html" class="tree-link" target="contentFrame">21 - HIBERNATE</a>
+            <a href="https://mayureshcicd.github.io/education/hiber-important.html" class="tree-link" target="contentFrame">23 - HIBERNATE IMPORTANT</a>
+            <a href="https://mayureshcicd.github.io/education/hibernate-question.html" class="tree-link" target="contentFrame">24 - HIBERNATE QUESTION</a>
+            <a href="https://mayureshcicd.github.io/education/imp-hibernate-question.html" class="tree-link" target="contentFrame">25 - IMP HIBERNATE QUESTION</a>
+            <a href="https://mayureshcicd.github.io/education/JPA-ANNOTATION.pdf" class="tree-link" target="contentFrame">39 - JPA Annotations</a>
+          </div>
+        </li>
+
+        <!-- Database & SQL -->
+        <li class="tree-item">
+          <div class="tree-header">Database & SQL</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/pdf/Advanced Sql.pdf" class="tree-link" target="contentFrame">30 - Advanced SQL</a>
+            <a href="https://mayureshcicd.github.io/education/Q2-Some-Imp-sql.html" class="tree-link" target="contentFrame">46 - PostgreSQL Commands</a>
+          </div>
+        </li>
+
+        <!-- Cloud & DevOps -->
+        <li class="tree-item">
+          <div class="tree-header">Cloud & DevOps</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/pdf/Apache KAFKA.pdf" class="tree-link" target="contentFrame">31 - Apache KAFKA</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/aws-cli.pdf" class="tree-link" target="contentFrame">32 - AWS CLI</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/AWS-QUESTION-ANSWERS.pdf" class="tree-link" target="contentFrame">33 - AWS Question & Answers</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/AWS-Solution-Arc.pdf" class="tree-link" target="contentFrame">34 - AWS Solution Architect</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/kubernetes and docker.pdf" class="tree-link" target="contentFrame">40 - Kubernetes and Docker</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/MicroServices-and-Agile.pdf" class="tree-link" target="contentFrame">41 - Microservices and Agile</a>
+          </div>
+        </li>
+	<!-- Spring Boot & Microservices -->
+	<li class="tree-item">
+	  <div class="tree-header">Spring Boot & Microservices</div>
+	  <div class="tree-content">
+	    <a href="https://mayureshcicd.github.io/education/SpringBootMicroservicesArchitecture.html" class="tree-link" target="contentFrame">Spring Boot Microservices Architecture</a>
+	    <a href="https://mayureshcicd.github.io/education/SpringBootMicroservicesInterviewQ-A.html" class="tree-link" target="contentFrame">Spring Boot Microservices Interview</a>
+	  </div>
+	</li>
+
+	<!-- Spring Boot with Databases & Messaging -->
+	<li class="tree-item">
+	  <div class="tree-header">Spring Boot Integration</div>
+	  <div class="tree-content">
+	    <a href="https://mayureshcicd.github.io/education/SpringBootDatabaseConnectionwithAWSRDSProxy.html" class="tree-link" target="contentFrame">Spring Boot with AWS RDS Proxy</a>
+	    <a href="https://mayureshcicd.github.io/education/SpringBootwithApacheKafkaInterviewQ-A.html" class="tree-link" target="contentFrame">Spring Boot with Apache Kafka</a>
+	    <a href="https://mayureshcicd.github.io/education/SpringBootwithMongoDBInterviewQ-A.html" class="tree-link" target="contentFrame">Spring Boot with MongoDB</a>
+	  </div>
+	</li>
+
+	<!-- Java Versions -->
+	<li class="tree-item">
+	  <div class="tree-header">Java Versions</div>
+	  <div class="tree-content">
+	    <a href="https://mayureshcicd.github.io/education/JavaVersionsComparisonJava8Java11Java25.html" class="tree-link" target="contentFrame">Java 8, 11, 25 Comparison</a>
+	  </div>
+	</li>
+        <!-- Interview Preparation -->
+        <li class="tree-item">
+          <div class="tree-header">Interview Preparation</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/pdf/spring-boot.pdf" class="tree-link" target="contentFrame">35 - Spring Boot</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/Java-8.pdf" class="tree-link" target="contentFrame">36 - Java 8</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/java-collections.pdf" class="tree-link" target="contentFrame">37 - Java Collections</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/Java_Design_Pattern_eBook.pdf" class="tree-link" target="contentFrame">38 - Java Design Patterns</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/restful_interview_questions.pdf" class="tree-link" target="contentFrame">42 - RESTful Interview Questions</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/Spring-interview.pdf" class="tree-link" target="contentFrame">43 - Spring Interview</a>
+            <a href="https://mayureshcicd.github.io/education/pdf/Spring-Interview-Questions.pdf" class="tree-link" target="contentFrame">44 - Spring Interview Questions</a>
+          </div>
+        </li>
+
+        <!-- Miscellaneous -->
+        <li class="tree-item">
+          <div class="tree-header">Miscellaneous</div>
+          <div class="tree-content">
+            <a href="https://mayureshcicd.github.io/education/important.html" class="tree-link" target="contentFrame">26 - IMPLICIT AND EXPLICIT</a>
+            <a href="https://mayureshcicd.github.io/education/jboss.html" class="tree-link" target="contentFrame">27 - JBOSS</a>
+          </div>
+        </li>
+
+        <!-- GitHub Repositories -->
+        <li class="tree-item">
+          <div class="tree-header">📦 GitHub Repositories</div>
+          <div class="tree-content">
+            <a href="https://github.com/mayureshcicd/java8-interview-preparation/tree/main" class="tree-link" target="_blank" rel="noopener noreferrer">🔹 JAVA 8 Preparation</a>
+            <a href="https://github.com/mayureshcicd/TRAINING" class="tree-link" target="_blank" rel="noopener noreferrer">🔹 Rest API with JWT (Spring Security)</a>
+            <a href="https://github.com/mayureshcicd/cerebra" class="tree-link" target="_blank" rel="noopener noreferrer">🔹 Asynchronous Processing</a>
+          </div>
+        </li>
+      </ul>
     </nav>
 
     <iframe name="contentFrame" src="https://mayureshcicd.github.io/education/0-CORE-JAVA.html"></iframe>
@@ -194,6 +329,19 @@ header {
     </div>
   </footer>
 
+  <script>
+    // Add toggle functionality to tree headers
+    document.addEventListener('DOMContentLoaded', function() {
+      const treeHeaders = document.querySelectorAll('.tree-header');
+      
+      treeHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+          const content = this.nextElementSibling;
+          this.classList.toggle('expanded');
+          content.classList.toggle('expanded');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
-

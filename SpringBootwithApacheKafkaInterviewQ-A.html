@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot Kafka Interview Q&A</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        h2 {
+            border-left: 5px solid #ff9900;
+            padding-left: 15px;
+            margin-top: 40px;
+            background: linear-gradient(90deg, #fffaf0, transparent);
+            padding: 15px;
+        }
+        h3 {
+            border-left: 4px solid #4caf50;
+            padding-left: 12px;
+            margin-top: 25px;
+        }
+        .qa-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .question {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: bold;
+            border-left: 4px solid #2196f3;
+        }
+        .answer {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+        }
+        .benefits {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .usage {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #ff9800;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .simple-explanation {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #9c27b0;
+        }
+        .interview-tip {
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #f44336;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #ff9900;
+            color: white;
+            font-weight: bold;
+        }
+        .usage-table {
+            background: #e1f5fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .architecture-diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+    </style>
+      <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+    <div class="container">
+        <h1>🎯 Spring Boot with Apache Kafka Interview Q&A</h1>
+        <h2>Complete Guide with Simple Explanations</h2>
+
+        <!-- 1. Kafka Basics -->
+        <div class="qa-section">
+            <h2>1. Apache Kafka Basics</h2>
+
+            <div class="question">Q1: What is Apache Kafka in simple words?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Kafka is a distributed messaging system that allows applications to send and receive messages in real-time. It acts like a central nervous system for data flow between microservices.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like a postal service for data. Producers (senders) put messages into topics (post offices), and Consumers (receivers) collect messages from topics. Kafka ensures messages are delivered reliably and in order.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ High throughput - handles millions of messages per second</li>
+                    <li>✅ Scalability - easy to add more servers</li>
+                    <li>✅ Durability - messages are persisted on disk</li>
+                    <li>✅ Fault-tolerant - no data loss even if servers fail</li>
+                    <li>✅ Real-time processing - immediate message delivery</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>When to Use Kafka:</strong>
+                <ul>
+                    <li>Real-time data processing</li>
+                    <li>Microservices communication</li>
+                    <li>Event-driven architectures</li>
+                    <li>Log aggregation and monitoring</li>
+                    <li>Stream processing</li>
+                </ul>
+            </div>
+
+            <div class="question">Q2: What are key Kafka concepts?</div>
+            <div class="answer">
+                <table border="1" style="width:100%; border-collapse: collapse;">
+                    <tr>
+                        <th>Concept</th>
+                        <th>Description</th>
+                        <th>Simple Analogy</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Topic</strong></td>
+                        <td>A category/feed name to which messages are published</td>
+                        <td>Newspaper section (Sports, Business)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Producer</strong></td>
+                        <td>Application that sends messages to Kafka topics</td>
+                        <td>Newspaper writer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Consumer</strong></td>
+                        <td>Application that reads messages from Kafka topics</td>
+                        <td>Newspaper reader</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Broker</strong></td>
+                        <td>Kafka server that stores messages</td>
+                        <td>Post office building</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Partition</strong></td>
+                        <td>Division of topic for parallelism</td>
+                        <td>Different lanes in a highway</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Offset</strong></td>
+                        <td>Unique ID for each message in partition</td>
+                        <td>Page number in a book</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Consumer Group</strong></td>
+                        <td>Group of consumers that work together</td>
+                        <td>Team of workers sharing tasks</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. Spring Kafka Setup -->
+        <div class="qa-section">
+            <h2>2. Spring Boot Kafka Setup</h2>
+
+            <div class="question">Q3: How to setup Spring Boot with Kafka?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Add Spring Kafka dependency and configure Kafka properties in application.yml
+            </div>
+            <div class="code-example">
+             <pre><code>
+// 1. Add dependency in pom.xml
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-kafka&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+// 2. Configure in application.yml
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: my-app-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.example.models"
+
+// 3. Create configuration class
+@Configuration
+@EnableKafka
+public class KafkaConfig {
+    
+    @Bean
+    public ProducerFactory<String, Object> producerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(config);
+    }
+    
+    @Bean
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+}
+ </pre></code>
+            </div>
+        </div>
+
+        <!-- 3. Kafka Producer -->
+        <div class="qa-section">
+            <h2>3. Kafka Producers</h2>
+
+            <div class="question">Q4: How to create a Kafka Producer in Spring Boot?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Use KafkaTemplate to send messages to Kafka topics, or use @KafkaListener for reactive approaches.
+            </div>
+            <div class="code-example">
+             <pre><code>
+// Method 1: Using KafkaTemplate (Most Common)
+@Service
+public class OrderEventProducer {
+    
+    private static final String ORDER_TOPIC = "order-events";
+    
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+    
+    public void sendOrderCreatedEvent(Order order) {
+        OrderEvent event = OrderEvent.builder()
+            .eventId(UUID.randomUUID().toString())
+            .eventType("ORDER_CREATED")
+            .orderId(order.getId())
+            .userId(order.getUserId())
+            .timestamp(Instant.now())
+            .build();
+            
+        // Send to specific partition based on orderId for ordering
+        kafkaTemplate.send(ORDER_TOPIC, order.getId(), event);
+    }
+    
+    public void sendOrderWithCallback(Order order) {
+        OrderEvent event = createOrderEvent(order);
+        
+        ListenableFuture<SendResult<String, Object>> future = 
+            kafkaTemplate.send(ORDER_TOPIC, order.getId(), event);
+            
+        future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
+            @Override
+            public void onSuccess(SendResult<String, Object> result) {
+                System.out.println("Message sent successfully: " + result.getRecordMetadata().offset());
+            }
+            
+            @Override
+            public void onFailure(Throwable ex) {
+                System.err.println("Message failed: " + ex.getMessage());
+            }
+        });
+    }
+}
+
+// Method 2: Using @EventListener (Event-Driven)
+@Component
+public class OrderEventListener {
+    
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+    
+    @EventListener
+    public void handleOrderCreated(OrderCreatedEvent event) {
+        kafkaTemplate.send("order-events", event.getOrder().getId(), event);
+    }
+}
+ </pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Producer Best Practices:</strong>
+                <ul>
+                    <li>✅ Use meaningful keys for partitioning</li>
+                    <li>✅ Implement retry mechanisms for failures</li>
+                    <li>✅ Use async callbacks for performance</li>
+                    <li>✅ Configure appropriate acks (acknowledgement) settings</li>
+                    <li>✅ Use compression for large messages</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. Kafka Consumer -->
+        <div class="qa-section">
+            <h2>4. Kafka Consumers</h2>
+
+            <div class="question">Q5: How to create a Kafka Consumer in Spring Boot?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Use @KafkaListener annotation to create message consumers that automatically listen to Kafka topics.
+            </div>
+            <div class="code-example">
+             <pre><code>
+// Basic Consumer with @KafkaListener
+@Service
+public class OrderEventConsumer {
+    
+    private static final Logger logger = LoggerFactory.getLogger(OrderEventConsumer.class);
+    
+    @KafkaListener(
+        topics = "order-events",
+        groupId = "order-processor",
+        containerFactory = "kafkaListenerContainerFactory"
+    )
+    public void consumeOrderEvent(OrderEvent event) {
+        logger.info("Received order event: {}", event.getEventType());
+        
+        try {
+            // Process the order event
+            processOrderEvent(event);
+        } catch (Exception e) {
+            logger.error("Error processing order event: {}", event.getEventId(), e);
+            // Handle error (send to DLQ, retry, etc.)
+        }
+    }
+    
+    // Consumer with specific partition
+    @KafkaListener(
+        topicPartitions = @TopicPartition(
+            topic = "order-events",
+            partitions = {"0", "1"}
+        ),
+        groupId = "order-processor-partition"
+    )
+    public void consumeFromSpecificPartitions(OrderEvent event) {
+        // Process events only from partitions 0 and 1
+        processOrderEvent(event);
+    }
+    
+    // Consumer with manual acknowledgment
+    @KafkaListener(
+        topics = "order-events",
+        groupId = "order-processor-ack",
+        containerFactory = "ackKafkaListenerContainerFactory"
+    )
+    public void consumeWithAck(OrderEvent event, Acknowledgment ack) {
+        try {
+            processOrderEvent(event);
+            ack.acknowledge(); // Manual commit offset
+        } catch (Exception e) {
+            // Don't acknowledge, message will be redelivered
+            logger.error("Processing failed, will retry", e);
+        }
+    }
+    
+    private void processOrderEvent(OrderEvent event) {
+        switch (event.getEventType()) {
+            case "ORDER_CREATED":
+                orderService.processNewOrder(event);
+                break;
+            case "ORDER_UPDATED":
+                orderService.updateOrder(event);
+                break;
+            case "ORDER_CANCELLED":
+                orderService.cancelOrder(event);
+                break;
+        }
+    }
+}
+ </pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Consumer Best Practices:</strong>
+                <ul>
+                    <li>✅ Handle exceptions gracefully</li>
+                    <li>✅ Use manual acknowledgment for critical processing</li>
+                    <li>✅ Implement idempotent consumers</li>
+                    <li>✅ Monitor consumer lag</li>
+                    <li>✅ Use appropriate concurrency settings</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Error Handling -->
+        <div class="qa-section">
+            <h2>5. Error Handling and Retry Mechanisms</h2>
+
+            <div class="question">Q6: How to handle errors in Kafka consumers?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Use Dead Letter Topics (DLT), retry mechanisms, and error handlers to manage processing failures.
+            </div>
+            <div class="code-example">
+             <pre><code>
+// Configuration for Error Handling
+@Configuration
+@EnableKafka
+public class KafkaErrorConfig {
+    
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = 
+            new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        
+        // Error Handler - Send to Dead Letter Topic after retries
+        factory.setErrorHandler(new SeekToCurrentErrorHandler(
+            new DeadLetterPublishingRecoverer(kafkaTemplate()), 
+            new FixedBackOff(1000L, 3L) // Retry 3 times with 1 second delay
+        ));
+        
+        return factory;
+    }
+}
+
+// Consumer with specific error handling
+@Service
+public class RobustOrderConsumer {
+    
+    @KafkaListener(topics = "order-events", groupId = "robust-consumer")
+    public void consumeWithErrorHandling(
+            OrderEvent event,
+            @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
+            @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+            @Header(KafkaHeaders.OFFSET) long offset) {
+        
+        try {
+            processOrderEvent(event);
+        } catch (DataIntegrityViolationException e) {
+            // Non-retryable error - log and skip
+            logger.warn("Data integrity violation, skipping message: {}", event.getEventId());
+        } catch (TemporaryFailureException e) {
+            // Retryable error - throw to trigger retry mechanism
+            throw e;
+        } catch (Exception e) {
+            // Unexpected error - log and throw for DLQ
+            logger.error("Unexpected error processing event: {}", event.getEventId(), e);
+            throw e;
+        }
+    }
+}
+
+// Dead Letter Topic Consumer
+@Service
+public class DeadLetterConsumer {
+    
+    @KafkaListener(topics = "order-events.DLT", groupId = "dlt-processor")
+    public void processDeadLetterMessage(OrderEvent event) {
+        logger.error("Processing message from Dead Letter Topic: {}", event);
+        // Alert administrators, store in database, or take corrective action
+        alertService.notifyAdmins("Failed to process order event: " + event.getEventId());
+    }
+}
+ </pre></code>
+            </div>
+            <div class="usage">
+                <strong>Error Handling Strategies:</strong>
+                <ul>
+                    <li><strong>Retry</strong> - For temporary failures</li>
+                    <li><strong>Dead Letter Topic</strong> - For permanent failures</li>
+                    <li><strong>Circuit Breaker</strong> - Stop processing during system issues</li>
+                    <li><strong>Manual Offset Management</strong> - Control when to commit</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 6. Kafka Streams -->
+        <div class="qa-section">
+            <h2>6. Kafka Streams for Real-time Processing</h2>
+
+            <div class="question">Q7: What is Kafka Streams and how to use it?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Kafka Streams is a client library for building real-time streaming applications that process data in Kafka topics.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like a factory assembly line where raw materials (input messages) are transformed into finished products (output messages) through various processing steps.
+            </div>
+            <div class="code-example">
+             <pre><code>
+// Kafka Streams Configuration
+@Configuration
+@EnableKafkaStreams
+public class KafkaStreamsConfig {
+    
+    @Bean
+    public KStream<String, OrderEvent> orderStream(StreamsBuilder streamsBuilder) {
+        KStream<String, OrderEvent> stream = streamsBuilder.stream("order-events");
+        
+        // Real-time processing pipeline
+        stream
+            // Filter only successful orders
+            .filter((key, order) -> "COMPLETED".equals(order.getStatus()))
+            
+            // Map to different structure
+            .mapValues(order -> OrderSummary.builder()
+                .orderId(order.getId())
+                .totalAmount(order.getTotalAmount())
+                .userId(order.getUserId())
+                .build())
+            
+            // Group by user for aggregation
+            .groupBy((key, summary) -> summary.getUserId())
+            
+            // Count orders per user
+            .count(Materialized.as("orders-per-user"))
+            
+            // Convert to stream and send to output topic
+            .toStream()
+            .to("user-order-counts", Produced.with(Serdes.String(), Serdes.Long()));
+            
+        return stream;
+    }
+}
+
+// More Complex Stream Processing
+@Bean
+public KStream<String, PaymentEvent> paymentProcessingStream(StreamsBuilder streamsBuilder) {
+    KStream<String, PaymentEvent> payments = streamsBuilder.stream("payment-events");
+    
+    // Join orders with payments within 30 minutes window
+    KStream<String, OrderEvent> orders = streamsBuilder.stream("order-events");
+    
+    payments
+        .join(orders,
+            (payment, order) -> EnrichedOrder.builder()
+                .order(order)
+                .payment(payment)
+                .build(),
+            JoinWindows.of(Duration.ofMinutes(30)),
+            StreamJoined.with(Serdes.String(), Serdes.serdeFrom(new JsonSerializer<>(), new JsonDeserializer<>(PaymentEvent.class)),
+                            Serdes.serdeFrom(new JsonSerializer<>(), new JsonDeserializer<>(OrderEvent.class))))
+        .to("enriched-orders");
+    
+    return payments;
+}
+ </pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Kafka Streams Benefits:</strong>
+                <ul>
+                    <li>✅ Real-time data processing</li>
+                    <li>✅ Exactly-once processing semantics</li>
+                    <li>✅ No separate processing cluster needed</li>
+                    <li>✅ Built-in state stores for aggregation</li>
+                    <li>✅ Scalable and fault-tolerant</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7. Kafka in Microservices -->
+        <div class="qa-section">
+            <h2>7. Kafka in Microservices Architecture</h2>
+
+            <div class="question">Q8: How to use Kafka for Microservices communication?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Kafka enables event-driven communication between microservices, providing loose coupling and scalability.
+            </div>
+            <div class="architecture-diagram">
+                <strong>Microservices with Kafka Flow:</strong><br>
+                Order Service → [order-events topic] → Payment Service + Notification Service + Analytics Service
+            </div>
+            <div class="code-example">
+             <pre><code>
+// Order Service (Producer)
+@Service
+public class OrderService {
+    
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+    
+    @Transactional
+    public Order createOrder(CreateOrderRequest request) {
+        Order order = orderRepository.save(createOrderFromRequest(request));
+        
+        // Publish event to Kafka
+        OrderCreatedEvent event = OrderCreatedEvent.builder()
+            .orderId(order.getId())
+            .userId(order.getUserId())
+            .totalAmount(order.getTotalAmount())
+            .items(order.getItems())
+            .build();
+            
+        kafkaTemplate.send("order-events", order.getId(), event);
+        
+        return order;
+    }
+}
+
+// Payment Service (Consumer)
+@Service
+public class PaymentService {
+    
+    @KafkaListener(topics = "order-events", groupId = "payment-service")
+    public void processOrderEvent(OrderEvent event) {
+        if ("ORDER_CREATED".equals(event.getEventType())) {
+            processPayment(event.getOrderId(), event.getTotalAmount());
+        }
+    }
+    
+    private void processPayment(String orderId, BigDecimal amount) {
+        // Process payment
+        Payment payment = paymentProcessor.charge(orderId, amount);
+        
+        // Publish payment result
+        PaymentEvent paymentEvent = PaymentEvent.builder()
+            .orderId(orderId)
+            .paymentId(payment.getId())
+            .status(payment.getStatus())
+            .build();
+            
+        kafkaTemplate.send("payment-events", orderId, paymentEvent);
+    }
+}
+
+// Notification Service (Consumer)
+@Service
+public class NotificationService {
+    
+    @KafkaListener(topics = "order-events", groupId = "notification-service")
+    public void notifyUser(OrderEvent event) {
+        if ("ORDER_CREATED".equals(event.getEventType())) {
+            notificationSender.sendOrderConfirmation(event.getUserId(), event.getOrderId());
+        }
+    }
+}
+
+// Analytics Service (Consumer)
+@Service
+public class AnalyticsService {
+    
+    @KafkaListener(topics = "order-events", groupId = "analytics-service")
+    public void trackOrderAnalytics(OrderEvent event) {
+        analyticsEngine.trackOrderEvent(event);
+    }
+}
+ </pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Benefits in Microservices:</strong>
+                <ul>
+                    <li>✅ Loose coupling between services</li>
+                    <li>✅ Event sourcing and CQRS patterns</li>
+                    <li>✅ Scalable event processing</li>
+                    <li>✅ Reliable message delivery</li>
+                    <li>✅ Real-time data flow</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8. Performance and Monitoring -->
+        <div class="qa-section">
+            <h2>8. Performance Optimization and Monitoring</h2>
+
+            <div class="question">Q9: How to optimize Kafka performance in Spring Boot?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Optimize through proper configuration, partitioning, batching, and monitoring.
+            </div>
+            <div class="code-example">
+             <pre><code>
+// Performance Configuration
+@Configuration
+public class KafkaPerformanceConfig {
+    
+    @Bean
+    public ProducerFactory<String, Object> highPerformanceProducerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        
+        // Performance optimizations
+        config.put(ProducerConfig.LINGER_MS_CONFIG, 20); // Wait up to 20ms to batch
+        config.put(ProducerConfig.BATCH_SIZE_CONFIG, 32 * 1024); // 32KB batch size
+        config.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy"); // Compress messages
+        config.put(ProducerConfig.ACKS_CONFIG, "1"); // Leader acknowledgment
+        config.put(ProducerConfig.RETRIES_CONFIG, 3); // Retry failed sends
+        
+        return new DefaultKafkaProducerFactory<>(config);
+    }
+    
+    @Bean
+    public ConsumerFactory<String, Object> highPerformanceConsumerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        config.put(JsonDeserializer.TRUSTED_PACKAGES, "com.example.models");
+        
+        // Performance optimizations
+        config.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1024); // Min bytes to fetch
+        config.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 500); // Max wait time
+        config.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 500); // Max records per poll
+        
+        return new DefaultKafkaConsumerFactory<>(config);
+    }
+}
+
+// Monitoring with Micrometer
+@Component
+public class KafkaMetrics {
+    
+    @Autowired
+    private MeterRegistry meterRegistry;
+    
+    @EventListener
+    public void handleKafkaEvent(ListenerContainerIdleEvent event) {
+        // Monitor consumer lag and performance
+        meterRegistry.counter("kafka.consumer.idle").increment();
+    }
+}
+            </div>
+            <div class="usage">
+                <strong>Performance Tips:</strong>
+                <ul>
+                    <li>✅ Use appropriate partition counts</li>
+                    <li>✅ Configure batching and compression</li>
+                    <li>✅ Monitor consumer lag</li>
+                    <li>✅ Use connection pooling</li>
+                    <li>✅ Tune fetch and poll settings</li>
+                </ul>
+            </div>
+        </div>
+ </pre></code>
+        <!-- 9. Security -->
+        <div class="qa-section">
+            <h2>9. Kafka Security</h2>
+
+            <div class="question">Q10: How to secure Kafka in Spring Boot?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Secure Kafka using SSL/TLS encryption, SASL authentication, and ACL authorization.
+            </div>
+            <div class="code-example">
+             <pre><code>
+// Secure Kafka Configuration
+@Configuration
+@EnableKafka
+public class SecureKafkaConfig {
+    
+    @Bean
+    public ProducerFactory<String, Object> secureProducerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9093");
+        
+        // Security Configuration
+        config.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
+        config.put(SaslConfigs.SASL_MECHANISM, "SCRAM-SHA-256");
+        config.put(SaslConfigs.SASL_JAAS_CONFIG, 
+            "org.apache.kafka.common.security.scram.ScramLoginModule required " +
+            "username=\"kafka-user\" password=\"kafka-password\";");
+        
+        // SSL Configuration
+        config.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, "/path/to/truststore.jks");
+        config.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG, "truststore-password");
+        config.put(SslConfigs.SSL_KEYSTORE_LOCATION_CONFIG, "/path/to/keystore.jks");
+        config.put(SslConfigs.SSL_KEYSTORE_PASSWORD_CONFIG, "keystore-password");
+        
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        
+        return new DefaultKafkaProducerFactory<>(config);
+    }
+}
+
+// Schema Registry with Avro (for data contracts)
+@Configuration
+public class SchemaRegistryConfig {
+    
+    @Bean
+    public SchemaRegistryClient schemaRegistryClient() {
+        MockSchemaRegistryClient client = new MockSchemaRegistryClient();
+        // Register schemas
+        return client;
+    }
+    
+    @Bean
+    public KafkaAvroSerializer kafkaAvroSerializer() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
+        return new KafkaAvroSerializer(new CachedSchemaRegistryClient("http://localhost:8081", 100));
+    }
+}
+ </pre></code>
+            </div>
+            <div class="benefits">
+                <strong>Security Features:</strong>
+                <ul>
+                    <li>✅ SSL/TLS for encryption in transit</li>
+                    <li>✅ SASL for authentication</li>
+                    <li>✅ ACL for authorization</li>
+                    <li>✅ Schema Registry for data validation</li>
+                    <li>✅ Audit logging for compliance</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Usage Table -->
+        <div class="usage-table">
+            <h2>📊 Spring Boot Kafka - Usage Summary</h2>
+            <table>
+                <tr>
+                    <th>Component/Feature</th>
+                    <th>Primary Usage</th>
+                    <th>Real-World Example</th>
+                    <th>When to Use</th>
+                </tr>
+                <tr>
+                    <td><strong>KafkaTemplate</strong></td>
+                    <td>Sending messages to Kafka topics</td>
+                    <td>Order service publishing order events</td>
+                    <td>When you need to produce messages to Kafka</td>
+                </tr>
+                <tr>
+                    <td><strong>@KafkaListener</strong></td>
+                    <td>Receiving messages from Kafka topics</td>
+                    <td>Payment service listening to order events</td>
+                    <td>When you need to consume and process messages</td>
+                </tr>
+                <tr>
+                    <td><strong>Kafka Streams</strong></td>
+                    <td>Real-time stream processing</td>
+                    <td>Calculating real-time analytics, data enrichment</td>
+                    <td>When you need to process and transform data streams</td>
+                </tr>
+                <tr>
+                    <td><strong>Error Handling</strong></td>
+                    <td>Managing processing failures</td>
+                    <td>Dead Letter Topics for failed messages</td>
+                    <td>When you need reliable message processing</td>
+                </tr>
+                <tr>
+                    <td><strong>Transactions</strong></td>
+                    <td>Exactly-once processing</td>
+                    <td>Banking transactions, order processing</td>
+                    <td>When you need atomic operations across systems</td>
+                </tr>
+                <tr>
+                    <td><strong>Consumer Groups</strong></td>
+                    <td>Scalable message consumption</td>
+                    <td>Multiple instances of same service processing messages</td>
+                    <td>When you need to scale horizontally</td>
+                </tr>
+                <tr>
+                    <td><strong>Partitioning</strong></td>
+                    <td>Parallel message processing</td>
+                    <td>Processing orders by customer ID in different partitions</td>
+                    <td>When you need ordering and parallelism</td>
+                </tr>
+                <tr>
+                    <td><strong>Schema Registry</strong></td>
+                    <td>Data contract management</td>
+                    <td>Ensuring message format compatibility</td>
+                    <td>When you have multiple services with evolving data formats</td>
+                </tr>
+                <tr>
+                    <td><strong>Monitoring</strong></td>
+                    <td>Performance and health tracking</td>
+                    <td>Monitoring consumer lag, throughput metrics</td>
+                    <td>When you need to ensure system reliability</td>
+                </tr>
+                <tr>
+                    <td><strong>Security</strong></td>
+                    <td>Secure message transmission</td>
+                    <td>Encrypted financial transactions</td>
+                    <td>When dealing with sensitive data</td>
+                </tr>
+                <tr>
+                    <td><strong>Exactly-Once Semantics</strong></td>
+                    <td>Guaranteed message processing</td>
+                    <td>Financial systems, inventory management</td>
+                    <td>When duplicate processing is unacceptable</td>
+                </tr>
+                <tr>
+                    <td><strong>Event Sourcing</strong></td>
+                    <td>Storing state as sequence of events</td>
+                    <td>Order history, audit trails</td>
+                    <td>When you need complete audit trail and temporal queries</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Quick Revision -->
+        <div class="note">
+            <h3>🚀 Quick Revision - Key Points</h3>
+            <ul>
+                <li><strong>Kafka</strong> - Distributed streaming platform for real-time data</li>
+                <li><strong>Topic</strong> - Category/feed where messages are published</li>
+                <li><strong>Producer</strong> - Sends messages to Kafka topics</li>
+                <li><strong>Consumer</strong> - Reads messages from Kafka topics</li>
+                <li><strong>@KafkaListener</strong> - Annotation for creating message consumers</li>
+                <li><strong>KafkaTemplate</strong> - Template for sending messages</li>
+                <li><strong>Partition</strong> - Division of topic for parallelism</li>
+                <li><strong>Consumer Group</strong> - Group of consumers working together</li>
+                <li><strong>Kafka Streams</strong> - Library for stream processing</li>
+                <li><strong>Dead Letter Topic</strong> - For handling failed messages</li>
+            </ul>
+        </div>
+
+        <!-- Interview Tips -->
+        <div class="interview-tip">
+            <h3>💡 Kafka Interview Tips</h3>
+            <ul>
+                <li>Understand the difference between Kafka and traditional message queues</li>
+                <li>Know when to use partitions and consumer groups</li>
+                <li>Be prepared to discuss delivery semantics (at-least-once, at-most-once, exactly-once)</li>
+                <li>Understand error handling strategies and Dead Letter Topics
+            </ul>
+        </div>
+</div>                        
+</div>                
+</body>
+</html>                

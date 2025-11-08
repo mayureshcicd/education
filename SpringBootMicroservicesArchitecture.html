@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot Microservices Architecture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        h2 {
+            border-left: 5px solid #ff9900;
+            padding-left: 15px;
+            margin-top: 40px;
+            background: linear-gradient(90deg, #fffaf0, transparent);
+            padding: 15px;
+        }
+        h3 {
+            border-left: 4px solid #4caf50;
+            padding-left: 12px;
+            margin-top: 25px;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-left: 4px solid #ff9900;
+        }
+        code {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #ff9900;
+            color: white;
+            font-weight: bold;
+        }
+        .architecture {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .component-list {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+     <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+    </script>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+    <div class="container">
+        <h1>🚀 Spring Boot Microservices Architecture</h1>
+        <h2>Complete Enterprise Microservices Ecosystem</h2>
+
+        <div class="architecture">
+            <h3>🏗️ Microservices Architecture Overview</h3>
+            <p>Config Server | API Gateway | Eureka | Keycloak | Circuit Breaker | ELK Stack</p>
+        </div>
+
+        <!-- Architecture Diagram -->
+        <h2>1. Complete Architecture Diagram</h2>
+        <div class="architecture">
+            <div class="mermaid">
+graph TB
+    %% Client Layer
+    subgraph ClientLayer["📱 Client Layer"]
+        WebClient["Web Browser<br/>SPA/React/Angular"]
+        MobileClient["Mobile App<br/>iOS/Android"]
+        ExternalAPI["External Systems<br/>API Consumers"]
+    end
+
+    %% API Gateway Layer
+    subgraph GatewayLayer["🚪 API Gateway Layer"]
+        SpringGateway["Spring Cloud Gateway<br/>Routing, Rate Limiting, Security"]
+        
+        subgraph GatewayFeatures["Gateway Features"]
+            RateLimiter["Rate Limiter<br/>Redis-based"]
+            CircuitBreaker["Circuit Breaker<br/>Resilience4j"]
+            JWTValidation["JWT Validation<br/>Keycloak Integration"]
+            CORS["CORS Configuration"]
+            LoadBalancer["Load Balancer<br/>Eureka Client"]
+        end
+    end
+
+    %% Service Discovery
+    subgraph DiscoveryLayer["🔍 Service Discovery"]
+        EurekaServer["Eureka Server<br/>Service Registry"]
+        
+        subgraph EurekaClients["Registered Services"]
+            UserService["User Service<br/>port: 8081"]
+            OrderService["Order Service<br/>port: 8082"]
+            ProductService["Product Service<br/>port: 8083"]
+            PaymentService["Payment Service<br/>port: 8084"]
+            NotificationService["Notification Service<br/>port: 8085"]
+        end
+    end
+
+    %% Configuration Management
+    subgraph ConfigLayer["⚙️ Configuration Management"]
+        ConfigServer["Spring Cloud Config Server<br/>Git Backend"]
+        
+        subgraph ConfigRepos["Configuration Repositories"]
+            UserConfig["user-service.yml<br/>Database, Keycloak"]
+            OrderConfig["order-service.yml<br/>Circuit Breaker"]
+            SharedConfig["shared-config.yml<br/>Common settings"]
+        end
+    end
+
+    %% Security Layer
+    subgraph SecurityLayer["🔐 Security Layer"]
+        Keycloak["Keycloak Server<br/>OAuth2/OIDC Provider"]
+        
+        subgraph KeycloakConfig["Keycloak Configuration"]
+            Realms["Realms: myapp-realm"]
+            Clients["Clients: web-app, mobile-app"]
+            Users["Users & Roles<br/>ADMIN, USER, OPERATOR"]
+            Policies["Authorization Policies<br/>@PreAuthorize"]
+        end
+    end
+
+    %% Database Layer
+    subgraph DatabaseLayer["💾 Database Layer"]
+        MySQL["MySQL Cluster<br/>Primary + Replicas"]
+        
+        subgraph ServiceDatabases["Service Databases"]
+            UserDB["User Database<br/>users, roles, permissions"]
+            OrderDB["Order Database<br/>orders, order_items"]
+            ProductDB["Product Database<br/>products, categories"]
+            PaymentDB["Payment Database<br/>payments, transactions"]
+        end
+    end
+
+    %% Monitoring & Observability
+    subgraph MonitoringLayer["📊 Monitoring & Observability"]
+        subgraph Logging["Logging Stack"]
+            ELK["ELK Stack<br/>Elasticsearch, Logstash, Kibana"]
+            Filebeat["Filebeat Agents<br/>Log collection"]
+            CentralizedLogs["Centralized Logging<br/>JSON Format"]
+        end
+        
+        subgraph Tracing["Distributed Tracing"]
+            Zipkin["Zipkin Server<br/>Request tracing"]
+            Sleuth["Spring Cloud Sleuth<br/>Trace IDs"]
+        end
+        
+        subgraph Metrics["Metrics & Monitoring"]
+            Prometheus["Prometheus<br/>Metrics collection"]
+            Grafana["Grafana<br/>Dashboards & Alerts"]
+            Actuator["Spring Boot Actuator<br/>/actuator endpoints"]
+        end
+    end
+
+    %% Connections
+    WebClient --> SpringGateway
+    MobileClient --> SpringGateway
+    ExternalAPI --> SpringGateway
+    
+    SpringGateway --> EurekaServer
+    SpringGateway --> Keycloak
+    
+    EurekaServer --> EurekaClients
+    EurekaClients --> ConfigServer
+    
+    UserService --> UserDB
+    OrderService --> OrderDB
+    ProductService --> ProductDB
+    PaymentService --> PaymentDB
+    
+    EurekaClients --> Zipkin
+    EurekaClients --> ELK
+    EurekaClients --> Prometheus
+    
+    ConfigServer --> ConfigRepos
+
+    classDef clientStyle fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef gatewayStyle fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef discoveryStyle fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef configStyle fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef securityStyle fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef dbStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef monitoringStyle fill:#fff8e1,stroke:#ff6f00,stroke-width:2px
+    
+    class ClientLayer clientStyle
+    class GatewayLayer gatewayStyle
+    class DiscoveryLayer discoveryStyle
+    class ConfigLayer configStyle
+    class SecurityLayer securityStyle
+    class DatabaseLayer dbStyle
+    class MonitoringLayer monitoringStyle
+            </div>
+        </div>
+
+        <!-- 1. Config Server Setup -->
+        <h2>2. Spring Cloud Config Server</h2>
+
+        <div class="step">
+            <h3>Step 2.1: Config Server Dependencies</h3>
+            <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"&gt;
+    &lt;dependencies&gt;
+        &lt;!-- Spring Cloud Config --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        
+        &lt;!-- Eureka Client --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        
+        &lt;!-- Security --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        
+        &lt;!-- Actuator --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 2.2: Config Server Application</h3>
+            <pre><code>// ConfigServerApplication.java
+@SpringBootApplication
+@EnableConfigServer
+@EnableEurekaClient
+public class ConfigServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServerApplication.class, args);
+    }
+}
+
+// Security configuration for Config Server
+@Configuration
+@EnableWebSecurity
+public class ConfigSecurityConfig extends WebSecurityConfigurerAdapter {
+    
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/actuator/health").permitAll()
+            .antMatchers("/encrypt/**", "/decrypt/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .httpBasic();
+    }
+}</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 2.3: Config Server Properties</h3>
+            <pre><code># application.yml - Config Server
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/my-org/config-repo
+          default-label: main
+          clone-on-start: true
+          force-pull: true
+  security:
+    user:
+      name: config-user
+      password: ${CONFIG_SERVER_PASSWORD}
+
+# Encryption for sensitive properties
+encrypt:
+  key: ${CONFIG_ENCRYPTION_KEY}
+
+# Eureka Registration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# Actuator Endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 2.4: Sample Configuration Files</h3>
+            <pre><code># user-service.yml in Git Repository
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  realm: myapp-realm
+  resource: user-service
+  credentials:
+    secret: ${KEYCLOAK_SECRET}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userService:
+        register-health-indicator: true
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        sliding-window-size: 10
+
+logging:
+  level:
+    com.example.userservice: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{traceId:-},%X{spanId:-}] %-5level %logger{36} - %msg%n"</code></pre>
+        </div>
+
+        <!-- 2. Eureka Server Setup -->
+        <h2>3. Eureka Service Discovery</h2>
+
+        <div class="step">
+            <h3>Step 3.1: Eureka Server Configuration</h3>
+            <pre><code>// EurekaServerApplication.java
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+
+# application.yml - Eureka Server
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  server:
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 15000
+    response-cache-update-interval-ms: 30000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always</code></pre>
+        </div>
+
+        <!-- 3. API Gateway Setup -->
+        <h2>4. Spring Cloud Gateway</h2>
+
+        <div class="step">
+            <h3>Step 4.1: Gateway Dependencies</h3>
+            <pre><code>&lt;dependencies&gt;
+    &lt;!-- Spring Cloud Gateway --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Eureka Client --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Resilience4j Circuit Breaker --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-circuitbreaker-reactor-resilience4j&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Redis Rate Limiter --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-data-redis-reactive&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Keycloak Adapter --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.keycloak&lt;/groupId&gt;
+        &lt;artifactId&gt;keycloak-spring-boot-starter&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 4.2: Gateway Configuration</h3>
+            <pre><code># application.yml - API Gateway
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: userService
+                fallbackUri: forward:/fallback/user-service
+            - StripPrefix=1
+            
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 20
+                redis-rate-limiter.burstCapacity: 40
+            - name: CircuitBreaker
+              args:
+                name: orderService
+                fallbackUri: forward:/fallback/order-service
+            - StripPrefix=1
+            
+        - id: keycloak-auth
+          uri: http://localhost:8080
+          predicates:
+            - Path=/auth/**
+
+  redis:
+    host: localhost
+    port: 6379
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userService:
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        sliding-window-size: 10
+      orderService:
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  realm: myapp-realm
+  resource: api-gateway
+  credentials:
+    secret: ${KEYCLOAK_GATEWAY_SECRET}</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 4.3: Gateway Security Configuration</h3>
+            <pre><code>// GatewaySecurityConfig.java
+@Configuration
+@EnableWebFluxSecurity
+public class GatewaySecurityConfig {
+
+    @Bean
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        http
+            .csrf().disable()
+            .authorizeExchange()
+            .pathMatchers("/auth/**", "/fallback/**", "/actuator/health").permitAll()
+            .pathMatchers("/api/users/public/**").permitAll()
+            .pathMatchers("/api/users/admin/**").hasRole("ADMIN")
+            .pathMatchers("/api/orders/**").hasAnyRole("USER", "ADMIN")
+            .anyExchange().authenticated()
+            .and()
+            .oauth2ResourceServer()
+            .jwt();
+        
+        return http.build();
+    }
+
+    @Bean
+    public ReactiveRedisTemplate<String, String> reactiveRedisTemplate(
+            ReactiveRedisConnectionFactory factory) {
+        RedisSerializationContext<String, String> serializationContext = 
+            RedisSerializationContext.<String, String>newSerializationContext(
+                RedisSerializer.string())
+            .value(RedisSerializer.string())
+            .build();
+        return new ReactiveRedisTemplate<>(factory, serializationContext);
+    }
+}
+
+// Fallback Controller
+@RestController
+public class FallbackController {
+    
+    @GetMapping("/fallback/user-service")
+    public Mono<String> userServiceFallback() {
+        return Mono.just("User Service is temporarily unavailable. Please try again later.");
+    }
+    
+    @GetMapping("/fallback/order-service")
+    public Mono<String> orderServiceFallback() {
+        return Mono.just("Order Service is temporarily unavailable. Please try again later.");
+    }
+}</code></pre>
+        </div>
+
+        <!-- 4. Keycloak Security Setup -->
+        <h2>5. Keycloak Centralized Security</h2>
+
+        <div class="step">
+            <h3>Step 5.1: Keycloak Docker Setup</h3>
+            <pre><code># docker-compose.yml for Keycloak
+version: '3.8'
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.0.0
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+    ports:
+      - "8080:8080"
+    command:
+      - start-dev
+    networks:
+      - microservices-net
+
+  mysql-keycloak:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: keycloak
+    ports:
+      - "3307:3306"
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 5.2: Keycloak Realm Configuration</h3>
+            <pre><code>// Keycloak Realm Export (keycloak-realm.json)
+{
+  "realm": "myapp-realm",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "api-gateway",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "secret": "gateway-secret-123",
+      "publicClient": false,
+      "redirectUris": ["http://localhost:8080/*"],
+      "webOrigins": ["*"],
+      "roles": ["user", "admin"]
+    },
+    {
+      "clientId": "user-service",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "secret": "user-service-secret-123",
+      "publicClient": false,
+      "serviceAccountsEnabled": true
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "ADMIN",
+        "description": "Administrator role"
+      },
+      {
+        "name": "USER",
+        "description": "Regular user role"
+      },
+      {
+        "name": "OPERATOR",
+        "description": "Operator role"
+      }
+    ]
+  },
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123"
+        }
+      ],
+      "realmRoles": ["ADMIN"],
+      "clientRoles": {
+        "api-gateway": ["admin"]
+      }
+    }
+  ]
+}</code></pre>
+        </div>
+
+        <!-- 5. Microservice Implementation -->
+        <h2>6. Microservice Implementation (User Service)</h2>
+
+        <div class="step">
+            <h3>Step 6.1: User Service Dependencies</h3>
+            <pre><code>&lt;dependencies&gt;
+    &lt;!-- Spring Boot Starters --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Spring Data JPA --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- MySQL Connector --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;8.0.33&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Eureka Client --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Config Client --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Keycloak Security --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.keycloak&lt;/groupId&gt;
+        &lt;artifactId&gt;keycloak-spring-boot-starter&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Feign Client --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Resilience4j --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-circuitbreaker-resilience4j&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Sleuth & Zipkin --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-sleuth&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-sleuth-zipkin&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 6.2: User Service Security Configuration</h3>
+            <pre><code>// SecurityConfig.java
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        super.configure(http);
+        http
+            .csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/actuator/health").permitAll()
+            .antMatchers("/api/users/public/**").permitAll()
+            .antMatchers("/api/users/admin/**").hasRole("ADMIN")
+            .anyRequest().authenticated();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
+        KeycloakAuthenticationProvider keycloakAuthenticationProvider = 
+            keycloakAuthenticationProvider();
+        keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(
+            new SimpleAuthorityMapper());
+        auth.authenticationProvider(keycloakAuthenticationProvider);
+    }
+
+    @Bean
+    @Override
+    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+        return new RegisterSessionAuthenticationStrategy(
+            new SessionRegistryImpl());
+    }
+
+    @Bean
+    public KeycloakConfigResolver KeycloakConfigResolver() {
+        return new KeycloakSpringBootConfigResolver();
+    }
+}
+
+// Keycloak JWT Authentication Converter
+@Component
+public class KeycloakJwtAuthenticationConverter implements 
+    Converter<Jwt, Collection<GrantedAuthority>> {
+
+    @Override
+    public Collection<GrantedAuthority> convert(Jwt jwt) {
+        Map<String, Object> realmAccess = jwt.getClaimAsMap("realm_access");
+        Collection<String> roles = (Collection<String>) realmAccess.get("roles");
+        
+        return roles.stream()
+            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+            .collect(Collectors.toList());
+    }
+}</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 6.3: User Service with @PreAuthorize</h3>
+            <pre><code>// UserController.java
+@RestController
+@RequestMapping("/api/users")
+@Validated
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/public/info")
+    public ResponseEntity<String> publicInfo() {
+        return ResponseEntity.ok("Public user information");
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUserRequest request) {
+        UserDTO user = userService.createUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and #id == authentication.principal.id)")
+    public ResponseEntity<UserDTO> updateUser(
+            @PathVariable Long id, 
+            @Valid @RequestBody UpdateUserRequest request) {
+        UserDTO user = userService.updateUser(id, request);
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/admin/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<UserDTO>> getAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        List<UserDTO> users = userService.getAllUsers(page, size);
+        return ResponseEntity.ok(users);
+    }
+}
+
+// User Entity
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(unique = true, nullable = false)
+    private String username;
+    
+    @Column(unique = true, nullable = false)
+    private String email;
+    
+    private String firstName;
+    private String lastName;
+    
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+    
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+}
+
+enum UserStatus {
+    ACTIVE, INACTIVE, SUSPENDED
+}</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 6.4: Feign Client with Circuit Breaker</h3>
+            <pre><code>// OrderServiceClient.java - Feign Client
+@FeignClient(name = "order-service", 
+             configuration = FeignConfig.class,
+             fallback = OrderServiceFallback.class)
+public interface OrderServiceClient {
+    
+    @GetMapping("/api/orders/user/{userId}")
+    List<OrderDTO> getUserOrders(@PathVariable("userId") Long userId);
+    
+    @PostMapping("/api/orders")
+    OrderDTO createOrder(@RequestBody CreateOrderRequest request);
+}
+
+// Feign Configuration
+@Configuration
+public class FeignConfig {
+    
+    @Bean
+    public Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
+    }
+    
+    @Bean
+    public RequestInterceptor requestInterceptor() {
+        return requestTemplate -> {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication != null && authentication.getCredentials() instanceof String) {
+                String token = (String) authentication.getCredentials();
+                requestTemplate.header("Authorization", "Bearer " + token);
+            }
+        };
+    }
+}
+
+// Fallback Implementation
+@Component
+public class OrderServiceFallback implements OrderServiceClient {
+    
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceFallback.class);
+
+    @Override
+    public List<OrderDTO> getUserOrders(Long userId) {
+        logger.warn("Order Service fallback triggered for user: {}", userId);
+        return Collections.emptyList();
+    }
+
+    @Override
+    public OrderDTO createOrder(CreateOrderRequest request) {
+        logger.warn("Order Service fallback triggered for order creation");
+        throw new ServiceUnavailableException("Order service is temporarily unavailable");
+    }
+}
+
+// Circuit Breaker Configuration
+@Configuration
+public class CircuitBreakerConfig {
+    
+    @Bean
+    public Customizer<Resilience4JCircuitBreakerFactory> defaultCustomizer() {
+        return factory -> factory.configureDefault(id -> Resilience4JConfigBuilder.of(id)
+            .circuitBreakerConfig(CircuitBreakerConfig.custom()
+                .slidingWindowSize(10)
+                .failureRateThreshold(50)
+                .waitDurationInOpenState(Duration.ofSeconds(10))
+                .build())
+            .build());
+    }
+}</code></pre>
+        </div>
+
+        <!-- 6. ELK Stack Setup -->
+        <h2>7. ELK Stack for Centralized Logging</h2>
+
+        <div class="step">
+            <h3>Step 7.1: Docker Compose for ELK</h3>
+            <pre><code># docker-compose-elk.yml
+version: '3.8'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    networks:
+      - elk
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.6.0
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    environment:
+      - LS_JAVA_OPTS=-Xmx256m -Xms256m
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.6.0
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.6.0
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+      - logstash
+
+networks:
+  elk:
+    driver: bridge</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 7.2: Logstash Configuration</h3>
+            <pre><code># logstash/config/logstash.yml
+http.host: "0.0.0.0"
+path.config: /usr/share/logstash/pipeline
+
+# logstash/pipeline/logstash.conf
+input {
+  beats {
+    port => 5044
+  }
+  tcp {
+    port => 5000
+    codec => json_lines
+  }
+}
+
+filter {
+  # Parse Spring Boot JSON logs
+  if [message] =~ /^{.*}$/ {
+    json {
+      source => "message"
+    }
+  }
+  
+  # Add microservice name if not present
+  if ![service] {
+    mutate {
+      add_field => { "service" => "unknown" }
+    }
+  }
+  
+  # Parse timestamp
+  date {
+    match => [ "timestamp", "ISO8601" ]
+  }
+  
+  # Add geoip for IP addresses
+  if [client_ip] {
+    geoip {
+      source => "client_ip"
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+    index => "microservices-logs-%{+YYYY.MM.dd}"
+  }
+  
+  # For debugging
+  stdout {
+    codec => rubydebug
+  }
+}</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 7.3: Spring Boot Logging Configuration</h3>
+            <pre><code># application.yml - Logging Configuration
+logging:
+  level:
+    com.example: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: WARN
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  file:
+    path: ./logs
+    name: ./logs/microservice.log
+  
+  # Logstash JSON Appender
+  logstash:
+    enabled: true
+    url: http://localhost:5000
+
+# Spring Boot Actuator for Loggers
+management:
+  endpoints:
+    web:
+      exposure:
+        include: loggers,metrics,health
+  endpoint:
+    loggers:
+      enabled: true
+
+// Logback Configuration (logback-spring.xml)
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;configuration&gt;
+    &lt;include resource="org/springframework/boot/logging/logback/defaults.xml"/&gt;
+    
+    &lt;appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender"&gt;
+        &lt;destination&gt;localhost:5000&lt;/destination&gt;
+        &lt;encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder"&gt;
+            &lt;providers&gt;
+                &lt;timestamp/&gt;
+                &lt;logLevel/&gt;
+                &lt;loggerName/&gt;
+                &lt;message/&gt;
+                &lt;threadName/&gt;
+                &lt;context/&gt;
+                &lt;stackTrace/&gt;
+                &lt;mdc/&gt;
+            &lt;/providers&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;root level="INFO"&gt;
+        &lt;appender-ref ref="LOGSTASH"/&gt;
+        &lt;appender-ref ref="CONSOLE"/&gt;
+    &lt;/root&gt;
+&lt;/configuration&gt;</code></pre>
+        </div>
+
+        <!-- 7. Zipkin Distributed Tracing -->
+        <h2>8. Zipkin Distributed Tracing</h2>
+
+        <div class="step">
+            <h3>Step 8.1: Zipkin Docker Setup</h3>
+            <pre><code># docker-compose-zipkin.yml
+version: '3.8'
+services:
+  zipkin:
+    image: openzipkin/zipkin:2.24
+    ports:
+      - "9411:9411"
+    environment:
+      - STORAGE_TYPE=mem
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 8.2: Spring Boot Sleuth Configuration</h3>
+            <pre><code># application.yml - Sleuth & Zipkin
+spring:
+  sleuth:
+    sampler:
+      probability: 1.0 # 100% sampling for development
+    web:
+      client:
+        enabled: true
+    feign:
+      enabled: true
+    scheduled:
+      enabled: true
+    
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
+
+# Custom Sleuth Configuration
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+// Custom Trace Configuration
+@Configuration
+public class TracingConfig {
+    
+    @Bean
+    public Sampler alwaysSampler() {
+        return Sampler.ALWAYS_SAMPLE;
+    }
+    
+    @Bean
+    public BaggagePropagation.FactoryBuilder baggagePropagationFactoryBuilder() {
+        return BaggagePropagation.newFactoryBuilder(B3Propagation.FACTORY);
+    }
+}
+
+// Tracing aware Feign Client
+@Component
+public class TracingAwareFeignClient {
+    
+    private final OrderServiceClient orderServiceClient;
+    private final Tracer tracer;
+    
+    public TracingAwareFeignClient(OrderServiceClient orderServiceClient, Tracer tracer) {
+        this.orderServiceClient = orderServiceClient;
+        this.tracer = tracer;
+    }
+    
+    public List<OrderDTO> getUserOrdersWithTracing(Long userId) {
+        Span span = tracer.nextSpan().name("getUserOrders").start();
+        try (Tracer.SpanInScope ws = tracer.withSpanInScope(span)) {
+            span.tag("user.id", userId.toString());
+            return orderServiceClient.getUserOrders(userId);
+        } finally {
+            span.finish();
+        }
+    }
+}</code></pre>
+        </div>
+
+        <!-- 8. Complete Deployment -->
+        <h2>9. Complete Deployment & Monitoring</h2>
+
+        <div class="step">
+            <h3>Step 9.1: Docker Compose - Complete Stack</h3>
+            <pre><code># docker-compose-full.yml
+version: '3.8'
+services:
+  # MySQL Databases
+  mysql-user:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user_db
+    ports:
+      - "3306:3306"
+    networks:
+      - microservices-net
+
+  mysql-order:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: order_db
+    ports:
+      - "3307:3306"
+    networks:
+      - microservices-net
+
+  # Redis for Rate Limiting
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - microservices-net
+
+  # Eureka Server
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-net
+
+  # Config Server
+  config-server:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - microservices-net
+    depends_on:
+      - eureka-server
+
+  # API Gateway
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - microservices-net
+    depends_on:
+      - eureka-server
+      - config-server
+      - redis
+
+  # Microservices
+  user-service:
+    build: ./user-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - microservices-net
+    depends_on:
+      - eureka-server
+      - config-server
+      - mysql-user
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - microservices-net
+    depends_on:
+      - eureka-server
+      - config-server
+      - mysql-order
+
+  # Keycloak
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.0.0
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "9080:8080"
+    networks:
+      - microservices-net
+    command:
+      - start-dev
+
+  # Zipkin
+  zipkin:
+    image: openzipkin/zipkin:2.24
+    ports:
+      - "9411:9411"
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 9.2: Health Check & Monitoring Endpoints</h3>
+            <pre><code>// HealthCheckController.java
+@RestController
+@RequestMapping("/actuator")
+public class HealthCheckController {
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, Object>> health() {
+        Map<String, Object> health = new HashMap<>();
+        health.put("status", "UP");
+        health.put("timestamp", Instant.now());
+        health.put("service", "user-service");
+        return ResponseEntity.ok(health);
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<Map<String, Object>> info() {
+        Map<String, Object> info = new HashMap<>();
+        info.put("name", "User Service");
+        info.put("version", "1.0.0");
+        info.put("description", "User Management Microservice");
+        return ResponseEntity.ok(info);
+    }
+}
+
+// Custom Health Indicators
+@Component
+public class DatabaseHealthIndicator implements HealthIndicator {
+    
+    @Autowired
+    private DataSource dataSource;
+    
+    @Override
+    public Health health() {
+        try (Connection connection = dataSource.getConnection()) {
+            if (connection.isValid(1000)) {
+                return Health.up()
+                    .withDetail("database", "MySQL")
+                    .withDetail("validation", "successful")
+                    .build();
+            } else {
+                return Health.down()
+                    .withDetail("database", "MySQL")
+                    .withDetail("error", "Connection validation failed")
+                    .build();
+            }
+        } catch (SQLException e) {
+            return Health.down(e).build();
+        }
+    }
+}
+
+@Component
+public class KeycloakHealthIndicator implements HealthIndicator {
+    
+    @Autowired
+    private Keycloak keycloak;
+    
+    @Override
+    public Health health() {
+        try {
+            keycloak.realm("myapp-realm").toRepresentation();
+            return Health.up()
+                .withDetail("service", "Keycloak")
+                .withDetail("status", "connected")
+                .build();
+        } catch (Exception e) {
+            return Health.down(e)
+                .withDetail("service", "Keycloak")
+                .withDetail("error", "Connection failed")
+                .build();
+        }
+    }
+}</code></pre>
+        </div>
+
+        <!-- Final Architecture Summary -->
+        <div class="success">
+            <h3>✅ Complete Microservices Architecture Summary</h3>
+            <div class="component-list">
+                <ul>
+                    <li><strong>Config Server</strong>: Centralized configuration management with Git backend</li>
+                    <li><strong>Eureka Server</strong>: Service discovery and registration</li>
+                    <li><strong>API Gateway</strong>: Routing, rate limiting, circuit breaker, security</li>
+                    <li><strong>Keycloak</strong>: Centralized OAuth2/OIDC authentication & authorization</li>
+                    <li><strong>Microservices</strong>: User, Order, Product services with @PreAuthorize</li>
+                    <li><strong>Feign Clients</strong>: Declarative REST clients with circuit breakers</li>
+                    <li><strong>Resilience4j</strong>: Circuit breaker, retry, rate limiter patterns</li>
+                    <li><strong>ELK Stack</strong>: Centralized logging with Elasticsearch, Logstash, Kibana</li>
+                    <li><strong>Zipkin</strong>: Distributed tracing with Spring Cloud Sleuth</li>
+                    <li><strong>MySQL</strong>: Database per service pattern</li>
+                    <li><strong>Docker</strong>: Containerized deployment</li>
+                    <li><strong>Health Checks</strong>: Comprehensive monitoring endpoints</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note">
+            <h3>🎯 Key Benefits of This Architecture</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Benefit</th>
+                    <th>Implementation</th>
+                </tr>
+                <tr>
+                    <td><strong>Centralized Security</strong></td>
+                    <td>Single point of authentication & authorization</td>
+                    <td>Keycloak with @PreAuthorize annotations</td>
+                </tr>
+                <tr>
+                    <td><strong>Service Discovery</strong></td>
+                    <td>Dynamic service registration & discovery</td>
+                    <td>Eureka Server with client-side load balancing</td>
+                </tr>
+                <tr>
+                    <td><strong>Configuration Management</strong></td>
+                    <td>Externalized configuration across environments</td>
+                    <td>Spring Cloud Config Server with Git backend</td>
+                </tr>
+                <tr>
+                    <td><strong>API Gateway</strong></td>
+                    <td>Unified entry point with cross-cutting concerns</td>
+                    <td>Spring Cloud Gateway with rate limiting</td>
+                </tr>
+                <tr>
+                    <td><strong>Resilience</strong></td>
+                    <td>Fault tolerance and circuit breaking</td>
+                    <td>Resilience4j with fallback mechanisms</td>
+                </tr>
+                <tr>
+                    <td><strong>Observability</strong></td>
+                    <td>Distributed tracing and centralized logging</td>
+                    <td>Zipkin + ELK Stack with structured logging</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    </div>    
+</body>
+</html>
