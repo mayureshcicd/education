@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Versions Comparison: Java 8, Java 11, Java 25</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .feature-section {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .version-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .java8 { background-color: #e74c3c; }
+        .java11 { background-color: #3498db; }
+        .java25 { background-color: #9b59b6; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+        }
+        .topic-table {
+            font-size: 0.95em;
+        }
+        .topic-table td {
+            vertical-align: top;
+        }
+        .usage-cell {
+            max-width: 300px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+    <h1>Java Versions Comparison: Java 8, Java 11, Java 25</h1>
+    
+    <div class="feature-section">
+        <h2>Introduction</h2>
+        <p>Java has evolved significantly over the years, with each version introducing new features and improvements. This document compares three important Java versions: Java 8 (a major milestone), Java 11 (the first LTS after Oracle's new release model), and Java 25 (a recent version showcasing modern Java capabilities).</p>
+    </div>
+
+    <div class="feature-section">
+        <h2>Topics and Their Usages</h2>
+        <table class="topic-table">
+            <thead>
+                <tr>
+                    <th>Topic/Feature</th>
+                    <th>Java Version</th>
+                    <th>Usage/Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lambda Expressions</td>
+                    <td><span class="version-badge java8">Java 8</span></td>
+                    <td class="usage-cell">Enables functional programming by allowing functions as method arguments and concise syntax for anonymous classes</td>
+                </tr>
+                <tr>
+                    <td>Stream API</td>
+                    <td><span class="version-badge java8">Java 8</span></td>
+                    <td class="usage-cell">Process collections of objects in a functional style with operations like filter, map, reduce</td>
+                </tr>
+                <tr>
+                    <td>Optional Class</td>
+                    <td><span class="version-badge java8">Java 8</span></td>
+                    <td class="usage-cell">Container object to avoid null pointer exceptions and handle null values explicitly</td>
+                </tr>
+                <tr>
+                    <td>Date/Time API</td>
+                    <td><span class="version-badge java8">Java 8</span></td>
+                    <td class="usage-cell">Modern date and time handling with immutable classes in java.time package</td>
+                </tr>
+                <tr>
+                    <td>Default Methods</td>
+                    <td><span class="version-badge java8">Java 8</span></td>
+                    <td class="usage-cell">Allows interfaces to have method implementations without breaking existing implementations</td>
+                </tr>
+                <tr>
+                    <td>Method References</td>
+                    <td><span class="version-badge java8">Java 8</span></td>
+                    <td class="usage-cell">Shorthand syntax for lambda expressions that call existing methods</td>
+                </tr>
+                <tr>
+                    <td>HTTP Client API</td>
+                    <td><span class="version-badge java11">Java 11</span></td>
+                    <td class="usage-cell">Modern HTTP client supporting HTTP/2 and WebSocket, replaces HttpURLConnection</td>
+                </tr>
+                <tr>
+                    <td>Local Variable Type Inference (var)</td>
+                    <td><span class="version-badge java11">Java 11</span></td>
+                    <td class="usage-cell">Reduces boilerplate code by allowing local variable type inference</td>
+                </tr>
+                <tr>
+                    <td>New String Methods</td>
+                    <td><span class="version-badge java11">Java 11</span></td>
+                    <td class="usage-cell">lines(), isBlank(), repeat() for better string manipulation</td>
+                </tr>
+                <tr>
+                    <td>Epsilon GC</td>
+                    <td><span class="version-badge java11">Java 11</span></td>
+                    <td class="usage-cell">No-op garbage collector for performance testing and short-lived applications</td>
+                </tr>
+                <tr>
+                    <td>Single-File Source Code</td>
+                    <td><span class="version-badge java11">Java 11</span></td>
+                    <td class="usage-cell">Run Java programs directly from source files without explicit compilation</td>
+                </tr>
+                <tr>
+                    <td>Records</td>
+                    <td><span class="version-badge java25">Java 25</span></td>
+                    <td class="usage-cell">Compact syntax for data carrier classes, automatically generates constructors, getters, equals, hashCode</td>
+                </tr>
+                <tr>
+                    <td>Pattern Matching</td>
+                    <td><span class="version-badge java25">Java 25</span></td>
+                    <td class="usage-cell">Simplifies instanceof checks and casting with direct variable binding</td>
+                </tr>
+                <tr>
+                    <td>Sealed Classes</td>
+                    <td><span class="version-badge java25">Java 25</span></td>
+                    <td class="usage-cell">Restricts which classes can extend/implement a class/interface for better domain modeling</td>
+                </tr>
+                <tr>
+                    <td>Text Blocks</td>
+                    <td><span class="version-badge java25">Java 25</span></td>
+                    <td class="usage-cell">Multi-line string literals with better formatting for JSON, HTML, SQL</td>
+                </tr>
+                <tr>
+                    <td>Switch Expressions</td>
+                    <td><span class="version-badge java25">Java 25</span></td>
+                    <td class="usage-cell">Enhanced switch statements that can return values and have cleaner syntax</td>
+                </tr>
+                <tr>
+                    <td>Vector API</td>
+                    <td><span class="version-badge java25">Java 25</span></td>
+                    <td class="usage-cell">Express vector computations for better performance on modern CPU architectures</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="feature-section">
+        <h2>Key Differences Comparison Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Java 8</th>
+                    <th>Java 11</th>
+                    <th>Java 25</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Release Date</td>
+                    <td>March 2014</td>
+                    <td>September 2018</td>
+                    <td>March 2025</td>
+                </tr>
+                <tr>
+                    <td>Support Status</td>
+                    <td>Commercial support ended</td>
+                    <td>LTS (Long Term Support)</td>
+                    <td>Latest feature release</td>
+                </tr>
+                <tr>
+                    <td>Lambda Expressions</td>
+                    <td>✓ Introduced</td>
+                    <td>✓ Enhanced</td>
+                    <td>✓ Further enhanced</td>
+                </tr>
+                <tr>
+                    <td>Stream API</td>
+                    <td>✓ Introduced</td>
+                    <td>✓ Enhanced</td>
+                    <td>✓ Further enhanced</td>
+                </tr>
+                <tr>
+                    <td>Modules (JPMS)</td>
+                    <td>✗ Not available</td>
+                    <td>✓ Standardized</td>
+                    <td>✓ Enhanced</td>
+                </tr>
+                <tr>
+                    <td>HTTP Client</td>
+                    <td>✗ Limited (HttpURLConnection)</td>
+                    <td>✓ New HTTP Client API</td>
+                    <td>✓ Enhanced HTTP Client</td>
+                </tr>
+                <tr>
+                    <td>Local-Variable Syntax</td>
+                    <td>✗ Not available</td>
+                    <td>✓ var keyword</td>
+                    <td>✓ Enhanced var</td>
+                </tr>
+                <tr>
+                    <td>String Methods</td>
+                    <td>Limited</td>
+                    <td>✓ lines(), isBlank(), repeat()</td>
+                    <td>✓ More utility methods</td>
+                </tr>
+                <tr>
+                    <td>Records</td>
+                    <td>✗ Not available</td>
+                    <td>✗ Not available</td>
+                    <td>✓ Records feature</td>
+                </tr>
+                <tr>
+                    <td>Pattern Matching</td>
+                    <td>✗ Not available</td>
+                    <td>✗ Not available</td>
+                    <td>✓ Enhanced pattern matching</td>
+                </tr>
+                <tr>
+                    <td>Garbage Collectors</td>
+                    <td>Parallel, CMS, G1 (initial)</td>
+                    <td>Epsilon, ZGC (experimental)</td>
+                    <td>ZGC, Shenandoah (production)</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Good</td>
+                    <td>Better</td>
+                    <td>Best</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="feature-section">
+        <h2>Java 8 Features</h2>
+        <p><span class="version-badge java8">Java 8</span> was a revolutionary release that introduced functional programming concepts to Java.</p>
+        
+        <h3>Lambda Expressions</h3>
+        <p>Lambda expressions enable functional programming by allowing you to treat functionality as a method argument.</p>
+        <div class="code-block">
+<pre><code>// Before Java 8
+Collections.sort(names, new Comparator&lt;String&gt;() {
+    @Override
+    public int compare(String a, String b) {
+        return a.compareTo(b);
+    }
+});
+
+// With Java 8 Lambda
+Collections.sort(names, (a, b) -> a.compareTo(b));</code></pre>
+        </div>
+        
+        <h3>Stream API</h3>
+        <p>The Stream API allows functional-style operations on streams of elements.</p>
+        <div class="code-block">
+<pre><code>List&lt;String&gt; filtered = names.stream()
+    .filter(name -> name.startsWith("A"))
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());</code></pre>
+        </div>
+        
+        <h3>Default Methods in Interfaces</h3>
+        <p>Interfaces can now have default method implementations.</p>
+        <div class="code-block">
+<pre><code>interface Vehicle {
+    void start();
+    
+    default void honk() {
+        System.out.println("Beep beep!");
+    }
+}</code></pre>
+        </div>
+        
+        <h3>Optional Class</h3>
+        <p>Optional provides a container object which may or may not contain a non-null value.</p>
+        <div class="code-block">
+<pre><code>Optional&lt;String&gt; optionalName = Optional.ofNullable(getName());
+String result = optionalName.orElse("Default Name");</code></pre>
+        </div>
+        
+        <h3>New Date/Time API</h3>
+        <p>Java 8 introduced a new Date/Time API in the java.time package.</p>
+        <div class="code-block">
+<pre><code>LocalDate today = LocalDate.now();
+LocalDate tomorrow = today.plusDays(1);
+LocalDateTime timestamp = LocalDateTime.now();</code></pre>
+        </div>
+    </div>
+    
+    <div class="feature-section">
+        <h2>Java 11 Features</h2>
+        <p><span class="version-badge java11">Java 11</span> was the first long-term support (LTS) release after Java 8, with significant improvements.</p>
+        
+        <h3>Local Variable Syntax for Lambda Parameters</h3>
+        <p>Allows using <span class="highlight">var</span> in lambda expressions.</p>
+        <div class="code-block">
+<pre><code>// Before Java 11
+Function&lt;String, String&gt; func = (String s) -> s.toUpperCase();
+
+// With Java 11
+Function&lt;String, String&gt; func = (var s) -> s.toUpperCase();</code></pre>
+        </div>
+        
+        <h3>New String Methods</h3>
+        <p>Java 11 added several useful methods to the String class.</p>
+        <div class="code-block">
+<pre><code>String multiline = "First line\nSecond line\nThird line";
+long lineCount = multiline.lines().count();
+
+String str = "   ";
+boolean empty = str.isBlank(); // true
+boolean emptyOld = str.isEmpty(); // false
+
+String repeated = "Java ".repeat(3); // "Java Java Java "</code></pre>
+        </div>
+        
+        <h3>HTTP Client API</h3>
+        <p>A new standard HTTP client that supports HTTP/2 and WebSocket.</p>
+        <div class="code-block">
+<pre><code>HttpClient client = HttpClient.newHttpClient();
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.example.com/data"))
+    .build();
+
+HttpResponse&lt;String&gt; response = 
+    client.send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());</code></pre>
+        </div>
+        
+        <h3>Launch Single-File Source-Code Programs</h3>
+        <p>You can now run a Java source file directly without compiling it first.</p>
+        <div class="code-block">
+<pre><code>// File: HelloWorld.java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+// Run with: java HelloWorld.java</code></pre>
+        </div>
+        
+        <h3>Epsilon Garbage Collector</h3>
+        <p>A no-op GC that handles memory allocation but does not reclaim memory.</p>
+        <div class="code-block">
+<pre><code>// Use with: java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC MyApp</code></pre>
+        </div>
+    </div>
+    
+    <div class="feature-section">
+        <h2>Java 25 Features</h2>
+        <p><span class="version-badge java25">Java 25</span> continues Java's evolution with modern language features and performance improvements.</p>
+        
+        <h3>Records (Finalized)</h3>
+        <p>Records provide a compact syntax for declaring classes that are transparent holders for immutable data.</p>
+        <div class="code-block">
+<pre><code>// Traditional class
+public class Person {
+    private final String name;
+    private final int age;
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Getters, equals, hashCode, toString...
+}
+
+// With Records
+public record Person(String name, int age) { }</code></pre>
+        </div>
+        
+        <h3>Pattern Matching for instanceof</h3>
+        <p>Simplifies the common pattern of using instanceof followed by casting.</p>
+        <div class="code-block">
+<pre><code>// Before pattern matching
+if (obj instanceof String) {
+    String s = (String) obj;
+    System.out.println(s.length());
+}
+
+// With pattern matching
+if (obj instanceof String s) {
+    System.out.println(s.length());
+}</code></pre>
+        </div>
+        
+        <h3>Sealed Classes</h3>
+        <p>Sealed classes restrict which other classes may extend them.</p>
+        <div class="code-block">
+<pre><code>public sealed class Shape 
+    permits Circle, Rectangle, Triangle {
+    // Common shape methods
+}
+
+public final class Circle extends Shape {
+    private final double radius;
+    // Circle implementation
+}
+
+public non-sealed class Rectangle extends Shape {
+    private final double width, height;
+    // Rectangle implementation
+}</code></pre>
+        </div>
+        
+        <h3>Enhanced Switch Expressions</h3>
+        <p>Switch expressions can now return values and have more concise syntax.</p>
+        <div class="code-block">
+<pre><code>// Traditional switch statement
+String dayType;
+switch (day) {
+    case "MONDAY":
+    case "TUESDAY":
+    case "WEDNESDAY":
+    case "THURSDAY":
+    case "FRIDAY":
+        dayType = "Weekday";
+        break;
+    case "SATURDAY":
+    case "SUNDAY":
+        dayType = "Weekend";
+        break;
+    default:
+        throw new IllegalArgumentException("Invalid day: " + day);
+}
+
+// Enhanced switch expression
+String dayType = switch (day) {
+    case "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY" -> "Weekday";
+    case "SATURDAY", "SUNDAY" -> "Weekend";
+    default -> throw new IllegalArgumentException("Invalid day: " + day);
+};</code></pre>
+        </div>
+        
+        <h3>Text Blocks</h3>
+        <p>Text blocks make it easier to work with multi-line string literals.</p>
+        <div class="code-block">
+<pre><code>// Before text blocks
+String html = "&lt;html&gt;\n" +
+              "    &lt;body&gt;\n" +
+              "        &lt;p&gt;Hello, World!&lt;/p&gt;\n" +
+              "    &lt;/body&gt;\n" +
+              "&lt;/html&gt;\n";
+
+// With text blocks
+String html = """
+              &lt;html&gt;
+                  &lt;body&gt;
+                      &lt;p&gt;Hello, World!&lt;/p&gt;
+                  &lt;/body&gt;
+              &lt;/html&gt;
+              """;</code></pre>
+        </div>
+        
+        <h3>Vector API (Incubator)</h3>
+        <p>Provides a way to express vector computations that reliably compile at runtime.</p>
+        <div class="code-block">
+<pre><code>// Example of vector computation
+void vectorComputation(float[] a, float[] b, float[] c) {
+    for (int i = 0; i &lt; a.length; i += VectorSpecies.FLOAT.vectorLength()) {
+        var va = FloatVector.fromArray(VectorSpecies.FLOAT, a, i);
+        var vb = FloatVector.fromArray(VectorSpecies.FLOAT, b, i);
+        var vc = va.mul(va).add(vb.mul(vb)).neg();
+        vc.intoArray(c, i);
+    }
+}</code></pre>
+        </div>
+    </div>
+    
+    <div class="feature-section">
+        <h2>Migration Considerations</h2>
+        <p>When migrating between Java versions, consider these key points:</p>
+        <ul>
+            <li><strong>Java 8 to Java 11:</strong> Modularization (JPMS) may require changes to classpath-based applications</li>
+            <li><strong>Java 11 to Java 25:</strong> New language features like records and pattern matching can significantly simplify code</li>
+            <li><strong>Tooling:</strong> Ensure your build tools (Maven, Gradle) and IDEs support the target Java version</li>
+            <li><strong>Dependencies:</strong> Verify that third-party libraries are compatible with the target Java version</li>
+            <li><strong>Performance:</strong> Newer Java versions generally offer better performance, especially with modern GCs like ZGC</li>
+        </ul>
+    </div>
+    
+    <div class="footer">
+        <p>Java Version Comparison Document | Generated for educational purposes</p>
+        <p>Note: Java 25 features are based on the ongoing development and may change in the final release.</p>
+    </div>
+    </div>
+</body>
+</html>

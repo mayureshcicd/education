@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Interview Q&A - Short Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        h2 {
+            border-left: 5px solid #ff9900;
+            padding-left: 15px;
+            margin-top: 40px;
+            background: linear-gradient(90deg, #fffaf0, transparent);
+            padding: 15px;
+        }
+        h3 {
+            border-left: 4px solid #4caf50;
+            padding-left: 12px;
+            margin-top: 25px;
+        }
+        .qa-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .question {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: bold;
+            border-left: 4px solid #2196f3;
+        }
+        .answer {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+        }
+        .benefits {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #4caf50;
+        }
+        .usage {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #ff9800;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .simple-explanation {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #9c27b0;
+        }
+        .interview-tip {
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #f44336;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #ff9900;
+            color: white;
+            font-weight: bold;
+        }
+        .usage-table {
+            background: #e1f5fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+    </style>
+     <link rel="stylesheet" type="text/css" href="css/app.css"/>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+    <div class="container">
+        <h1>🎯 Spring Boot Microservices Interview Q&A</h1>
+        <h2>Simple Short Notes with Benefits & Usage</h2>
+
+        <!-- 1. Microservices Basics -->
+        <div class="qa-section">
+            <h2>1. Microservices Architecture Basics</h2>
+
+            <div class="question">Q1: What are Microservices in simple words?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Instead of one big application, we break it into small independent services. 
+                Each service does one specific job and they talk to each other.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like a restaurant kitchen - different chefs for different dishes (pizza chef, pasta chef, dessert chef) instead of one chef doing everything.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Easy to develop and maintain small services</li>
+                    <li>✅ One service down doesn't affect others</li>
+                    <li>✅ Different teams can work on different services</li>
+                    <li>✅ Easy to scale only the busy services</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>When to Use:</strong>
+                <ul>
+                    <li>Large applications with multiple teams</li>
+                    <li>When different parts have different scaling needs</li>
+                    <li>When you want to use different technologies</li>
+                </ul>
+            </div>
+
+            <div class="question">Q2: What is Spring Boot in Microservices?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Spring Boot makes it easy to create Microservices. It automatically sets up everything needed to run a web service.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Quick setup - less configuration</li>
+                    <li>✅ Built-in web server (Tomcat)</li>
+                    <li>✅ Auto-configuration - works out of the box</li>
+                    <li>✅ Production-ready features</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. Config Server -->
+        <div class="qa-section">
+            <h2>2. Spring Cloud Config Server</h2>
+
+            <div class="question">Q3: What is Config Server and why do we need it?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Config Server is like a central settings manager for all microservices. Instead of each service having its own configuration file, they all get settings from one central place.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like a school principal's office that keeps all classroom rules. Teachers don't need separate rule books - they check with principal's office.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ One place to change settings for all services</li>
+                    <li>✅ No need to restart services when config changes</li>
+                    <li>✅ Same settings across all environments</li>
+                    <li>✅ Secure storage for passwords and secrets</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>Usage Example:</strong>
+                <ul>
+                    <li>Database connection strings</li>
+                    <li>API keys and secrets</li>
+                    <li>Feature flags (turn features on/off)</li>
+                    <li>Server settings</li>
+                </ul>
+            </div>
+
+            <div class="question">Q4: How does Config Server work?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Config Server reads settings from Git (GitHub) and gives them to microservices when they start. Services ask: "Hey Config Server, what are my settings?"
+            </div>
+            <div class="interview-tip">
+                <strong>Interview Tip:</strong> Say "Centralized configuration management" and "Externalized configuration"
+            </div>
+        </div>
+
+        <!-- 3. Eureka Service Discovery -->
+        <div class="qa-section">
+            <h2>3. Eureka Service Discovery</h2>
+
+            <div class="question">Q5: What is Eureka and why is it important?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Eureka is like a phonebook for microservices. Services register themselves in Eureka and other services can find them without knowing their exact location.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like a hotel reception desk. Guests (services) check in at reception (Eureka), and when someone wants to find a guest, they ask reception instead of knocking on every door.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Services can find each other automatically</li>
+                    <li>✅ Load balancing - traffic distributed evenly</li>
+                    <li>✅ Handles service failures gracefully</li>
+                    <li>✅ No hardcoded service locations</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <ul>
+                    <li>When User Service needs to call Order Service</li>
+                    <li>When multiple instances of same service are running</li>
+                    <li>For automatic load balancing</li>
+                </ul>
+            </div>
+
+            <div class="question">Q6: How does service discovery work?</div>
+            <div class="answer">
+                <strong>Answer:</strong> 
+                <ol>
+                    <li>Service starts and says "Hi Eureka, I'm User Service running at port 8081"</li>
+                    <li>Eureka notes this in its registry</li>
+                    <li>Another service asks Eureka: "Where can I find User Service?"</li>
+                    <li>Eureka replies: "Here are all User Service locations"</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 4. API Gateway -->
+        <div class="qa-section">
+            <h2>4. API Gateway</h2>
+
+            <div class="question">Q7: What is API Gateway and its purpose?</div>
+            <div class="answer">
+                <strong>Answer:</strong> API Gateway is like a main entrance door to your microservices. All external requests come through this single door which then routes them to the right service.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like a building security guard. Everyone enters through the main gate, security checks their ID, and directs them to the right office.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Single entry point for all clients</li>
+                    <li>✅ Security - authentication and authorization</li>
+                    <li>✅ Rate limiting - prevent too many requests</li>
+                    <li>✅ Request routing - send to right service</li>
+                    <li>✅ Cross-cutting concerns in one place</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>What it does:</strong>
+                <ul>
+                    <li>Checks if user is logged in (authentication)</li>
+                    <li>Limits how many requests per minute</li>
+                    <li>Routes /api/users to User Service</li>
+                    <li>Routes /api/orders to Order Service</li>
+                </ul>
+            </div>
+
+            <div class="question">Q8: What is Rate Limiting in API Gateway?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Rate limiting controls how many requests a client can make in a certain time. Like "maximum 100 requests per minute per user".
+            </div>
+            <div class="benefits">
+                <strong>Why important:</strong>
+                <ul>
+                    <li>✅ Prevents system overload</li>
+                    <li>✅ Stops abuse and attacks</li>
+                    <li>✅ Fair usage for all users</li>
+                    <li>✅ Protects backend services</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Keycloak Security -->
+        <div class="qa-section">
+            <h2>5. Keycloak Security</h2>
+
+            <div class="question">Q9: What is Keycloak and why use it?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Keycloak is a centralized security server that handles user login and permissions for all microservices. It's like having one security team for entire building instead of each office having its own security.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like a company ID card system. One security office issues ID cards that work in all departments, instead of each department having separate login systems.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Single sign-on - login once, access all services</li>
+                    <li>✅ Centralized user management</li>
+                    <li>✅ Standard security (OAuth2, OpenID)</li>
+                    <li>✅ No need to build login in each service</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>How it works:</strong>
+                <ul>
+                    <li>User logs in to Keycloak once</li>
+                    <li>Gets a token (JWT)</li>
+                    <li>Uses this token to access any microservice</li>
+                    <li>Services check with Keycloak if token is valid</li>
+                </ul>
+            </div>
+
+            <div class="question">Q10: What is @PreAuthorize in Spring Security?</div>
+            <div class="answer">
+                <strong>Answer:</strong> @PreAuthorize is like a bouncer at a VIP section. It checks if user has proper role before allowing access to a method.
+            </div>
+            <div class="usage">
+                <strong>Examples:</strong>
+                <pre>
+@PreAuthorize("hasRole('ADMIN')")        // Only admins can access
+@PreAuthorize("hasRole('USER')")         // Only users can access  
+@PreAuthorize("hasAnyRole('ADMIN','USER')") // Either role can access
+                </pre>
+            </div>
+        </div>
+
+        <!-- 6. Feign Client -->
+        <div class="qa-section">
+            <h2>6. Feign Client</h2>
+
+            <div class="question">Q11: What is Feign Client?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Feign Client is a easy way for one microservice to call another microservice. It's like having a pre-written phone script for calling other services.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like having speed dial numbers. Instead of manually dialing and remembering what to say, you just press "Call Order Service" and it automatically makes the call with right message.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Easy to call other services</li>
+                    <li>✅ No need to write HTTP code manually</li>
+                    <li>✅ Automatic service discovery integration</li>
+                    <li>✅ Clean and declarative code</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>Example Code:</strong>
+                <pre>
+@FeignClient(name = "order-service")
+public interface OrderServiceClient {
+    @GetMapping("/api/orders/user/{userId}")
+    List<Order> getUserOrders(@PathVariable Long userId);
+}
+// Then just call: orderServiceClient.getUserOrders(123);
+                </pre>
+            </div>
+        </div>
+
+        <!-- 7. Circuit Breaker -->
+        <div class="qa-section">
+            <h2>7. Circuit Breaker Pattern</h2>
+
+            <div class="question">Q12: What is Circuit Breaker and why is it important?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Circuit Breaker is like an electrical circuit breaker. When a service is failing too much, it "trips" and stops calling that service to prevent system-wide failure.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like when you keep calling a friend who never answers. After few tries, you stop calling and leave a message instead of wasting time.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Prevents cascade failures</li>
+                    <li>✅ Gives failing services time to recover</li>
+                    <li>✅ Provides fallback responses</li>
+                    <li>✅ Better user experience</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>How it works:</strong>
+                <ul>
+                    <li>CLOSED: Normal operation, calls going through</li>
+                    <li>OPEN: Service failing, no calls allowed</li>
+                    <li>HALF-OPEN: Testing if service recovered</li>
+                </ul>
+            </div>
+
+            <div class="question">Q13: What is Fallback Method?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Fallback method is a backup plan when main service fails. It provides a basic response instead of error.
+            </div>
+            <div class="usage">
+                <strong>Example:</strong>
+                <pre>
+// If order service fails, return empty list instead of error
+public List<Order> getUserOrdersFallback(Long userId) {
+    return Collections.emptyList(); // Fallback response
+}
+                </pre>
+            </div>
+        </div>
+
+        <!-- 8. ELK Stack -->
+        <div class="qa-section">
+            <h2>8. ELK Stack - Centralized Logging</h2>
+
+            <div class="question">Q14: What is ELK Stack?</div>
+            <div class="answer">
+                <strong>Answer:</strong> ELK is three tools that work together to collect, store, and view logs from all microservices in one place.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like having one central complaint department for all branches instead of each branch keeping separate complaint books.
+            </div>
+            <div class="benefits">
+                <strong>ELK Components:</strong>
+                <ul>
+                    <li>✅ <strong>Elasticsearch</strong> - Database for storing logs</li>
+                    <li>✅ <strong>Logstash</strong> - Processes and prepares logs</li>
+                    <li>✅ <strong>Kibana</strong> - Web interface to view and search logs</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>See all service logs in one dashboard</li>
+                    <li>Search across all logs quickly</li>
+                    <li>Create alerts for errors</li>
+                    <li>Track user requests across services</li>
+                </ul>
+            </div>
+
+            <div class="question">Q15: Why centralized logging in microservices?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Because when you have 10+ services, checking logs in each service separately is like looking for a needle in 10 different haystacks. Centralized logging puts all hay in one place.
+            </div>
+        </div>
+
+        <!-- 9. Zipkin Distributed Tracing -->
+        <div class="qa-section">
+            <h2>9. Zipkin Distributed Tracing</h2>
+
+            <div class="question">Q16: What is Distributed Tracing?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Distributed Tracing tracks a single user request as it travels through multiple microservices. It's like putting a tracking number on a package as it moves through different delivery stations.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like following a food order from kitchen to serving - which chef cooked it, which waiter served it, how long each step took.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ See complete request journey</li>
+                    <li>✅ Identify performance bottlenecks</li>
+                    <li>✅ Debug issues across services</li>
+                    <li>✅ Monitor service dependencies</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>How it works:</strong>
+                <ul>
+                    <li>Each request gets unique Trace ID</li>
+                    <li>Each service call gets Span ID</li>
+                    <li>Zipkin collects all this timing information</li>
+                    <li>Shows beautiful flow diagrams</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10. Database per Service -->
+        <div class="qa-section">
+            <h2>10. Database Patterns</h2>
+
+            <div class="question">Q17: What is "Database per Service" pattern?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Each microservice has its own private database. No service can directly access another service's database.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like each department in company having its own filing cabinet. HR doesn't look in Sales cabinet, they ask Sales for information.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Services are independent</li>
+                    <li>✅ Can use different database types</li>
+                    <li>✅ No database coupling</li>
+                    <li>✅ Better data ownership</li>
+                </ul>
+            </div>
+            <div class="usage">
+                <strong>Example:</strong>
+                <ul>
+                    <li>User Service → User Database</li>
+                    <li>Order Service → Order Database</li>
+                    <li>Product Service → Product Database</li>
+                </ul>
+            </div>
+
+            <div class="question">Q18: How do services share data then?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Through APIs only. If User Service needs order data, it calls Order Service API, never accesses Order Database directly.
+            </div>
+        </div>
+
+        <!-- 11. Docker & Containers -->
+        <div class="qa-section">
+            <h2>11. Docker & Containerization</h2>
+
+            <div class="question">Q19: Why Docker in Microservices?</div>
+            <div class="answer">
+                <strong>Answer:</strong> Docker packages each microservice with all its dependencies into a container. This ensures it runs the same way everywhere - on your laptop, testing, production.
+            </div>
+            <div class="simple-explanation">
+                <strong>Simple Example:</strong> Like shipping a ready-to-eat meal instead of ingredients and recipe. The meal tastes same whether you eat at home or in restaurant.
+            </div>
+            <div class="benefits">
+                <strong>Benefits:</strong>
+                <ul>
+                    <li>✅ Consistent environments</li>
+                    <li>✅ Easy deployment</li>
+                    <li>✅ Isolation between services</li>
+                    <li>✅ Scalability - run multiple copies</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 12. Common Interview Questions -->
+        <div class="qa-section">
+            <h2>12. Common Interview Questions</h2>
+
+            <div class="question">Q20: What are advantages of Microservices over Monolith?</div>
+            <div class="answer">
+                <strong>Answer:</strong>
+                <ul>
+                    <li>✅ Independent development and deployment</li>
+                    <li>✅ Technology diversity - use right tool for each service</li>
+                    <li>✅ Fault isolation - one service down doesn't break all</li>
+                    <li>✅ Scalability - scale only busy services</li>
+                </ul>
+            </div>
+
+            <div class="question">Q21: What are challenges of Microservices?</div>
+            <div class="answer">
+                <strong>Answer:</strong>
+                <ul>
+                    <li>❌ Complexity - more moving parts</li>
+                    <li>❌ Network latency - services talking over network</li>
+                    <li>❌ Data consistency - harder with distributed data</li>
+                    <li>❌ Testing - need to test service interactions</li>
+                </ul>
+            </div>
+
+            <div class="question">Q22: When NOT to use Microservices?</div>
+            <div class="answer">
+                <strong>Answer:</strong>
+                <ul>
+                    <li>Small applications with simple requirements</li>
+                    <li>When team is small and experienced with monolith</li>
+                    <li>When tight data consistency is critical</li>
+                    <li>When you can't handle the operational complexity</li>
+                </ul>
+            </div>
+
+            <div class="question">Q23: What is the difference between Monolith and Microservices?</div>
+            <div class="answer">
+                <table border="1" style="width:100%; border-collapse: collapse;">
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Monolith</th>
+                        <th>Microservices</th>
+                    </tr>
+                    <tr>
+                        <td>Architecture</td>
+                        <td>One big application</td>
+                        <td>Many small services</td>
+                    </tr>
+                    <tr>
+                        <td>Deployment</td>
+                        <td>Deploy entire app</td>
+                        <td>Deploy services independently</td>
+                    </tr>
+                    <tr>
+                        <td>Scaling</td>
+                        <td>Scale entire app</td>
+                        <td>Scale individual services</td>
+                    </tr>
+                    <tr>
+                        <td>Technology</td>
+                        <td>Same tech stack</td>
+                        <td>Different tech per service</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>Single database</td>
+                        <td>Database per service</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Usage Table -->
+        <div class="usage-table">
+            <h2>📊 Microservices Components - Usage Summary</h2>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Primary Usage</th>
+                    <th>Real-World Example</th>
+                    <th>When to Use</th>
+                </tr>
+                <tr>
+                    <td><strong>Config Server</strong></td>
+                    <td>Centralized configuration management</td>
+                    <td>Store database URLs, API keys, feature flags</td>
+                    <td>When you have multiple services needing same configuration</td>
+                </tr>
+                <tr>
+                    <td><strong>Eureka Server</strong></td>
+                    <td>Service discovery and registration</td>
+                    <td>User Service finding Order Service location</td>
+                    <td>When services need to communicate with each other</td>
+                </tr>
+                <tr>
+                    <td><strong>API Gateway</strong></td>
+                    <td>Single entry point, security, routing</td>
+                    <td>Route /api/users to User Service, /api/orders to Order Service</td>
+                    <td>When you have multiple clients (web, mobile) accessing services</td>
+                </tr>
+                <tr>
+                    <td><strong>Keycloak</strong></td>
+                    <td>Centralized authentication & authorization</td>
+                    <td>Single login for all microservices, role-based access</td>
+                    <td>When you need secure access control across multiple services</td>
+                </tr>
+                <tr>
+                    <td><strong>Feign Client</strong></td>
+                    <td>Service-to-service communication</td>
+                    <td>User Service calling Order Service to get user orders</td>
+                    <td>When one service needs data from another service</td>
+                </tr>
+                <tr>
+                    <td><strong>Circuit Breaker</strong></td>
+                    <td>Failure protection and resilience</td>
+                    <td>Stop calling Order Service if it's failing repeatedly</td>
+                    <td>When you have dependent services that might fail</td>
+                </tr>
+                <tr>
+                    <td><strong>ELK Stack</strong></td>
+                    <td>Centralized logging and monitoring</td>
+                    <td>View all service logs in one dashboard, search errors</td>
+                    <td>When you need to debug issues across multiple services</td>
+                </tr>
+                <tr>
+                    <td><strong>Zipkin</strong></td>
+                    <td>Distributed tracing</td>
+                    <td>Track a user request through all services it touches</td>
+                    <td>When you need to monitor performance across services</td>
+                </tr>
+                <tr>
+                    <td><strong>Docker</strong></td>
+                    <td>Containerization and deployment</td>
+                    <td>Package each service with its dependencies</td>
+                    <td>When you need consistent environments across development to production</td>
+                </tr>
+                <tr>
+                    <td><strong>Database per Service</strong></td>
+                    <td>Data isolation and independence</td>
+                    <td>User Service has user table, Order Service has orders table</td>
+                    <td>When you want services to be truly independent</td>
+                </tr>
+                <tr>
+                    <td><strong>Rate Limiter</strong></td>
+                    <td>Request throttling and protection</td>
+                    <td>Allow maximum 100 requests per minute per user</td>
+                    <td>When you need to prevent abuse and ensure fair usage</td>
+                </tr>
+                <tr>
+                    <td><strong>@PreAuthorize</strong></td>
+                    <td>Method-level security</td>
+                    <td>Only ADMIN users can delete users, USER can view their data</td>
+                    <td>When you need fine-grained access control in your APIs</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Quick Revision -->
+        <div class="note">
+            <h3>🚀 Quick Revision - Key Points</h3>
+            <ul>
+                <li><strong>Config Server</strong> - Central settings manager</li>
+                <li><strong>Eureka</strong> - Service phonebook</li>
+                <li><strong>API Gateway</strong> - Main entrance door</li>
+                <li><strong>Keycloak</strong> - Central security office</li>
+                <li><strong>Feign Client</strong> - Easy service calling</li>
+                <li><strong>Circuit Breaker</strong> - Failure protection</li>
+                <li><strong>ELK Stack</strong> - Centralized logging</li>
+                <li><strong>Zipkin</strong> - Request journey tracking</li>
+                <li><strong>Database per Service</strong> - Private databases</li>
+                <li><strong>Docker</strong> - Consistent packaging</li>
+            </ul>
+        </div>
+
+        <!-- Interview Tips -->
+        <div class="interview-tip">
+            <h3>💡 Interview Tips</h3>
+            <ul>
+                <li>Use simple analogies (like I used above)</li>
+                <li>Focus on benefits and real-world usage</li>
+                <li>Be honest about challenges too</li>
+                <li>Show you understand both pros and cons</li>
+                <li>Relate to business value - not just technical features</li>
+            </ul>
+        </div>
+
+    </div>
+    </div>    
+</body>
+</html>

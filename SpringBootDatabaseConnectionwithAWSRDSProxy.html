@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot Database Connection with RDS Proxy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            border-bottom: 3px solid #ff9900;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        h2 {
+            border-left: 5px solid #ff9900;
+            padding-left: 15px;
+            margin-top: 40px;
+            background: linear-gradient(90deg, #fffaf0, transparent);
+            padding: 15px;
+        }
+        h3 {
+            border-left: 4px solid #4caf50;
+            padding-left: 12px;
+            margin-top: 25px;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-left: 4px solid #ff9900;
+        }
+        code {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #ff9900;
+            color: white;
+            font-weight: bold;
+        }
+        .comparison {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .architecture {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+        <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+    </script>
+</head>
+<body>
+<div class="header">prepared by Mayuresh Ratnaparkhi</div>
+<div class="MainFlow_indented">
+    <div class="container">
+        <h1>🚀 Spring Boot Database Connection with AWS RDS Proxy</h1>
+        <h2>Enterprise-Grade Connection Pooling for Millions of Users</h2>
+
+        <div class="architecture">
+            <h3>🏗️ Database Connection Architecture</h3>
+            <p>RDS Proxy vs Direct Connections - Auto-scaling Connection Pool</p>
+        </div>
+
+        <!-- Connection Strategy Comparison -->
+        <div class="comparison">
+            <h2>📊 Connection Strategy Comparison</h2>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Direct Connection</th>
+                    <th>RDS Proxy</th>
+                    <th>Recommendation</th>
+                </tr>
+                <tr>
+                    <td><strong>Connection Pooling</strong></td>
+                    <td>Application-level (HikariCP)</td>
+                    <td>Proxy-level + Application-level</td>
+                    <td>RDS Proxy for high traffic</td>
+                </tr>
+                <tr>
+                    <td><strong>Max Connections</strong></td>
+                    <td>Limited by RDS instance</td>
+                    <td>Up to 20,000+ connections</td>
+                    <td>RDS Proxy for scalability</td>
+                </tr>
+                <tr>
+                    <td><strong>Failover Time</strong></td>
+                    <td>30-60 seconds</td>
+                    <td>~10 seconds</td>
+                    <td>RDS Proxy for high availability</td>
+                </tr>
+                <tr>
+                    <td><strong>Cost</strong></td>
+                    <td>No additional cost</td>
+                    <td>$0.015-$0.135 per vCPU-hour</td>
+                    <td>Direct for small apps, Proxy for large</td>
+                </tr>
+                <tr>
+                    <td><strong>Setup Complexity</strong></td>
+                    <td>Simple</td>
+                    <td>Medium (IAM, Security Groups)</td>
+                    <td>Direct for simple apps</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Step 1: RDS Proxy Setup -->
+        <h2>1. AWS RDS Proxy Setup</h2>
+
+        <div class="step">
+            <h3>Step 1.1: Create RDS Proxy via AWS Console</h3>
+            <ol>
+                <li>Navigate to <strong>RDS → Proxies</strong></li>
+                <li>Click <strong>"Create proxy"</strong></li>
+                <li>Configure:
+                    <ul>
+                        <li><strong>Proxy identifier:</strong> myapp-proxy</li>
+                        <li><strong>Engine family:</strong> PostgreSQL/MySQL/Aurora</li>
+                        <li><strong>RDS instance:</strong> Select your database</li>
+                    </ul>
+                </li>
+                <li>Authentication: <strong>Secrets Manager</strong></li>
+                <li>Connectivity: Same VPC as application</li>
+                <li>Security Groups: Allow from ECS/EC2 security group</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Step 1.2: Store Database Secrets</h3>
+            <pre><code># Store database credentials in AWS Secrets Manager
+{
+  "username": "app_user",
+  "password": "secure_password_123",
+  "engine": "postgresql",
+  "host": "myapp-proxy.proxy-xxxxxx.us-east-1.rds.amazonaws.com",
+  "port": 5432,
+  "dbname": "myappdb"
+}</code></pre>
+        </div>
+
+        <!-- Step 2: Spring Boot Configuration -->
+        <h2>2. Spring Boot Application Configuration</h2>
+
+        <div class="step">
+            <h3>Step 2.1: application.yml Configuration</h3>
+            <pre><code># application.yml - RDS Proxy Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_PROXY_ENDPOINT}:5432/myappdb
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      leak-detection-threshold: 60000
+      pool-name: HikariPool-RDS-Proxy
+      
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 25
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+        
+  # For MySQL
+  # datasource:
+  #   url: jdbc:mysql://${DB_PROXY_ENDPOINT}:3306/myappdb
+  #   username: ${DB_USERNAME}
+  #   password: ${DB_PASSWORD}
+  
+  # For Aurora PostgreSQL
+  # datasource:
+  #   url: jdbc:postgresql://${DB_PROXY_ENDPOINT}:5432/myappdb
+  #   username: ${DB_USERNAME}
+  #   password: ${DB_PASSWORD}
+
+# Database connection monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info
+  endpoint:
+    health:
+      show-details: always
+  health:
+    db:
+      enabled: true
+
+# Logging for connection monitoring
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 2.2: Database Configuration Class</h3>
+            <pre><code>// DatabaseConfig.java
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.myapp.repository")
+public class DatabaseConfig {
+
+    @Value("${spring.datasource.url}")
+    private String dataSourceUrl;
+    
+    @Value("${spring.datasource.username}")
+    private String username;
+    
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    @Bean
+    @ConfigurationProperties("spring.datasource.hikari")
+    public DataSource dataSource() {
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(dataSourceUrl);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        
+        // RDS Proxy optimized settings
+        dataSource.setConnectionTestQuery("SELECT 1");
+        dataSource.setInitializationFailTimeout(30000);
+        
+        return dataSource;
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource());
+        em.setPackagesToScan("com.myapp.entity");
+        
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(additionalProperties());
+        
+        return em;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+        return transactionManager;
+    }
+
+    private Properties additionalProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.show_sql", "false");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.jdbc.batch_size", "25");
+        properties.setProperty("hibernate.order_inserts", "true");
+        properties.setProperty("hibernate.order_updates", "true");
+        properties.setProperty("hibernate.batch_versioned_data", "true");
+        
+        // Connection pool validation
+        properties.setProperty("hibernate.hikari.connectionTimeout", "30000");
+        properties.setProperty("hibernate.hikari.idleTimeout", "600000");
+        properties.setProperty("hibernate.hikari.maxLifetime", "1800000");
+        
+        return properties;
+    }
+}</code></pre>
+        </div>
+
+        <!-- Step 3: Advanced Connection Management -->
+        <h2>3. Advanced Connection Pool Management</h2>
+
+        <div class="step">
+            <h3>Step 3.1: Dynamic Connection Pool Sizing</h3>
+            <pre><code>// DynamicConnectionPoolConfig.java
+@Component
+public class DynamicConnectionPoolConfig {
+    
+    private static final Logger logger = LoggerFactory.getLogger(DynamicConnectionPoolConfig.class);
+    
+    @Autowired
+    private HikariDataSource dataSource;
+    
+    @EventListener
+    public void handleContextRefresh(ContextRefreshedEvent event) {
+        // Monitor and adjust pool size based on application needs
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(this::monitorAndAdjustPool, 0, 5, TimeUnit.MINUTES);
+    }
+    
+    private void monitorAndAdjustPool() {
+        HikariPoolMXBean pool = dataSource.getHikariPoolMXBean();
+        
+        int activeConnections = pool.getActiveConnections();
+        int idleConnections = pool.getIdleConnections();
+        int totalConnections = pool.getTotalConnections();
+        int threadsWaiting = pool.getThreadsAwaitingConnection();
+        
+        logger.info("Connection Pool Stats - Active: {}, Idle: {}, Total: {}, Waiting: {}", 
+                   activeConnections, idleConnections, totalConnections, threadsWaiting);
+        
+        // Auto-adjust pool size based on load
+        if (threadsWaiting > 5) {
+            // Increase pool size if many threads are waiting
+            int newMaxSize = Math.min(dataSource.getMaximumPoolSize() + 5, 50);
+            dataSource.setMaximumPoolSize(newMaxSize);
+            logger.info("Increased maximum pool size to: {}", newMaxSize);
+        } else if (idleConnections > dataSource.getMaximumPoolSize() * 0.7) {
+            // Decrease pool size if too many idle connections
+            int newMaxSize = Math.max(dataSource.getMaximumPoolSize() - 2, 10);
+            dataSource.setMaximumPoolSize(newMaxSize);
+            logger.info("Decreased maximum pool size to: {}", newMaxSize);
+        }
+    }
+}</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 3.2: Database Health Check & Monitoring</h3>
+            <pre><code>// DatabaseHealthIndicator.java
+@Component
+public class DatabaseHealthIndicator implements HealthIndicator {
+    
+    @Autowired
+    private DataSource dataSource;
+    
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseHealthIndicator.class);
+
+    @Override
+    public Health health() {
+        try (Connection connection = dataSource.getConnection()) {
+            // Test connection and basic query
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery("SELECT 1")) {
+                 
+                if (resultSet.next()) {
+                    // Check connection pool stats for HikariCP
+                    if (dataSource instanceof HikariDataSource) {
+                        HikariDataSource hikariDataSource = (HikariDataSource) dataSource;
+                        HikariPoolMXBean pool = hikariDataSource.getHikariPoolMXBean();
+                        
+                        Map<String, Object> details = new HashMap<>();
+                        details.put("activeConnections", pool.getActiveConnections());
+                        details.put("idleConnections", pool.getIdleConnections());
+                        details.put("totalConnections", pool.getTotalConnections());
+                        details.put("threadsWaiting", pool.getThreadsAwaitingConnection());
+                        details.put("connectionTimeout", hikariDataSource.getConnectionTimeout());
+                        
+                        return Health.up()
+                            .withDetails(details)
+                            .build();
+                    }
+                    
+                    return Health.up().build();
+                } else {
+                    return Health.down().withDetail("error", "Database query failed").build();
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Database health check failed", e);
+            return Health.down(e).build();
+        }
+    }
+}
+
+// DatabaseMetrics.java
+@Component
+public class DatabaseMetrics {
+    
+    @Autowired
+    private MeterRegistry meterRegistry;
+    
+    @Autowired
+    private DataSource dataSource;
+    
+    @PostConstruct
+    public void registerMetrics() {
+        if (dataSource instanceof HikariDataSource) {
+            HikariDataSource hikariDataSource = (HikariDataSource) dataSource;
+            
+            Gauge.builder("db.connections.active", hikariDataSource, 
+                ds -> ds.getHikariPoolMXBean().getActiveConnections())
+                .description("Active database connections")
+                .register(meterRegistry);
+                
+            Gauge.builder("db.connections.idle", hikariDataSource,
+                ds -> ds.getHikariPoolMXBean().getIdleConnections())
+                .description("Idle database connections")
+                .register(meterRegistry);
+                
+            Gauge.builder("db.connections.waiting", hikariDataSource,
+                ds -> ds.getHikariPoolMXBean().getThreadsAwaitingConnection())
+                .description("Threads waiting for database connections")
+                .register(meterRegistry);
+        }
+    }
+}</code></pre>
+        </div>
+
+        <!-- Step 4: Database-Specific Configurations -->
+        <h2>4. Database-Specific Configurations</h2>
+
+        <div class="step">
+            <h3>Step 4.1: PostgreSQL Configuration</h3>
+            <pre><code># PostgreSQL specific configuration
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: false
+    
+  datasource:
+    hikari:
+      data-source-properties:
+        socketTimeout: 30
+        connectTimeout: 10
+        loginTimeout: 10
+        tcpKeepAlive: true
+        # RDS Proxy specific optimizations
+        prepareThreshold: 2
+        unknownLength: 2147483647
+        logUnclosedConnections: true
+
+# PostgreSQL RDS Proxy endpoint
+DB_PROXY_ENDPOINT: myapp-proxy.proxy-xxxxxx.us-east-1.rds.amazonaws.com</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 4.2: MySQL Configuration</h3>
+            <pre><code># MySQL specific configuration
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_PROXY_ENDPOINT}:3306/myappdb?useSSL=false&serverTimezone=UTC
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 25
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        useLocalTransactionState: true
+        rewriteBatchedStatements: true
+        maintainTimeStats: false
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        order_inserts: true
+        order_updates: true
+        jdbc:
+          batch_size: 25
+
+# MySQL RDS Proxy endpoint  
+DB_PROXY_ENDPOINT: myapp-proxy.proxy-xxxxxx.us-east-1.rds.amazonaws.com</code></pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 4.3: Aurora PostgreSQL Configuration</h3>
+            <pre><code># Aurora PostgreSQL specific configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_PROXY_ENDPOINT}:5432/myappdb
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 30  # Aurora can handle more connections
+      minimum-idle: 10
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      data-source-properties:
+        socketTimeout: 30
+        connectTimeout: 10
+        tcpKeepAlive: true
+        # Aurora specific optimizations
+        assumeMinServerVersion: 9.4
+        readOnly: false
+        binaryTransfer: true
+        disableColumnSanitiser: true
+        
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 30
+        connection:
+          provider_disables_autocommit: true
+
+# Aurora RDS Proxy endpoint (supports read/write splitting)
+DB_PROXY_ENDPOINT: myapp-proxy.proxy-xxxxxx.us-east-1.rds.amazonaws.com</code></pre>
+        </div>
+
+        <!-- Step 5: Repository Best Practices -->
+        <h2>5. Repository & Service Layer Best Practices</h2>
+
+        <div class="step">
+            <h3>Step 5.1: Optimized Repository Implementation</h3>
+            <pre><code>// UserRepository.java with connection optimization
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    
+    // Use @Query for complex queries to avoid N+1 problems
+    @Query("SELECT u FROM User u WHERE u.email = :email")
+    Optional<User> findByEmail(@Param("email") String email);
+    
+    // Use projections for read-only operations
+    @Query("SELECT u.id as id, u.email as email, u.firstName as firstName FROM User u WHERE u.status = 'ACTIVE'")
+    List<UserProjection> findActiveUsers();
+    
+    // Batch operations for better performance
+    @Modifying
+    @Query("UPDATE User u SET u.lastLogin = :lastLogin WHERE u.id IN :userIds")
+    void updateLastLoginBatch(@Param("userIds") List<Long> userIds, @Param("lastLogin") LocalDateTime lastLogin);
+}
+
+// Custom repository implementation for bulk operations
+@Repository
+public class UserRepositoryImpl implements UserRepositoryCustom {
+    
+    @PersistenceContext
+    private EntityManager entityManager;
+    
+    @Override
+    @Transactional
+    public void bulkInsert(List<User> users) {
+        for (int i = 0; i < users.size(); i++) {
+            entityManager.persist(users.get(i));
+            
+            // Flush and clear session periodically to avoid memory issues
+            if (i % 50 == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
+        }
+        entityManager.flush();
+        entityManager.clear();
+    }
+}
+
+// Service layer with connection awareness
+@Service
+@Transactional(readOnly = true)
+public class UserService {
+    
+    private final UserRepository userRepository;
+    private final DatabaseMetrics databaseMetrics;
+    
+    public UserService(UserRepository userRepository, DatabaseMetrics databaseMetrics) {
+        this.userRepository = userRepository;
+        this.databaseMetrics = databaseMetrics;
+    }
+    
+    @Transactional
+    public User createUser(User user) {
+        // Read-write transaction
+        return userRepository.save(user);
+    }
+    
+    public Optional<User> getUserByEmail(String email) {
+        // Read-only transaction
+        return userRepository.findByEmail(email);
+    }
+    
+    @Transactional
+    public void batchUpdateLastLogin(List<Long> userIds) {
+        // Batch operation for better performance
+        userRepository.updateLastLoginBatch(userIds, LocalDateTime.now());
+    }
+}</code></pre>
+        </div>
+
+        <!-- Architecture Diagram -->
+        <h2>6. Connection Architecture Diagram</h2>
+        <div class="architecture">
+            <div class="mermaid">
+graph TB
+    subgraph ApplicationLayer["Spring Boot Application Layer"]
+        App1["Application Instance 1<br/>HikariCP Pool: 20 connections"]
+        App2["Application Instance 2<br/>HikariCP Pool: 20 connections"]
+        App3["Application Instance N<br/>HikariCP Pool: 20 connections"]
+    end
+    
+    subgraph RDSProxyLayer["AWS RDS Proxy Layer"]
+        Proxy["RDS Proxy<br/>myapp-proxy<br/>Max: 20,000 connections<br/>Connection Multiplexing"]
+    end
+    
+    subgraph DatabaseLayer["Database Layer"]
+        subgraph PostgreSQL["PostgreSQL RDS"]
+            Primary["Primary Instance<br/>db.t3.large<br/>Max: 500 connections"]
+            Replica1["Read Replica 1<br/>Load balancing"]
+            Replica2["Read Replica 2<br/>Failover"]
+        end
+        
+        subgraph Aurora["Aurora PostgreSQL"]
+            AuroraWriter["Writer Instance<br/>Auto-scaling"]
+            AuroraReader1["Reader Instance 1<br/>Read scaling"]
+            AuroraReader2["Reader Instance 2<br/>Auto-failover"]
+        end
+    end
+    
+    App1 --> Proxy
+    App2 --> Proxy
+    App3 --> Proxy
+    
+    Proxy --> Primary
+    Proxy --> Replica1
+    Proxy --> Replica2
+    Proxy --> AuroraWriter
+    Proxy --> AuroraReader1
+    Proxy --> AuroraReader2
+    
+    %% Connection Flow
+    subgraph ConnectionFlow["Connection Flow Optimization"]
+        ClientApp["Client Application"] --> HikariPool["HikariCP Connection Pool"]
+        HikariPool --> RDSProxy["RDS Proxy Connection"]
+        RDSProxy --> Database["Database Instance"]
+        RDSProxy --> ConnectionReuse["Connection Reuse<br/>Multiplexing"]
+    end
+    
+    classDef appStyle fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef proxyStyle fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef dbStyle fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef flowStyle fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    
+    class ApplicationLayer appStyle
+    class RDSProxyLayer proxyStyle
+    class DatabaseLayer dbStyle
+    class ConnectionFlow flowStyle
+            </div>
+        </div>
+
+        <!-- Performance Optimization Table -->
+        <div class="note">
+            <h3>🚀 Performance Optimization Settings</h3>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Direct Connection</th>
+                    <th>RDS Proxy</th>
+                    <th>Explanation</th>
+                </tr>
+                <tr>
+                    <td><strong>maximumPoolSize</strong></td>
+                    <td>10-20</td>
+                    <td>20-50</td>
+                    <td>RDS Proxy can handle more connections due to multiplexing</td>
+                </tr>
+                <tr>
+                    <td><strong>minimumIdle</strong></td>
+                    <td>5-10</td>
+                    <td>10-20</td>
+                    <td>Keep more idle connections with RDS Proxy</td>
+                </tr>
+                <tr>
+                    <td><strong>connectionTimeout</strong></td>
+                    <td>30000ms</td>
+                    <td>20000ms</td>
+                    <td>RDS Proxy responds faster</td>
+                </tr>
+                <tr>
+                    <td><strong>idleTimeout</strong></td>
+                    <td>600000ms</td>
+                    <td>300000ms</td>
+                    <td>Shorter timeout with RDS Proxy due to connection reuse</td>
+                </tr>
+                <tr>
+                    <td><strong>maxLifetime</strong></td>
+                    <td>1800000ms</td>
+                    <td>1200000ms</td>
+                    <td>Shorter lifetime with RDS Proxy</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Monitoring & Alerting -->
+        <div class="success">
+            <h3>📊 Monitoring & Alerting Configuration</h3>
+            <pre><code># CloudWatch Alarms for Database Connections
+alarms:
+  high-connections:
+    metric: DatabaseConnections
+    threshold: 80% of max_connections
+    action: scale-rds-instance
+    
+  proxy-connections:
+    metric: ProxyDatabaseConnections
+    threshold: 15000
+    action: alert-devops-team
+    
+  connection-wait-time:
+    metric: ProxyConnectionEstablishmentTime
+    threshold: 1000ms
+    action: investigate-latency
+
+# Application monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,prometheus,health
+  metrics:
+    export:
+      cloudwatch:
+        namespace: myapp/database
+    enable:
+      hikari: true
+      jpa: true
+      datasource: true</code></pre>
+        </div>
+
+        <!-- Final Recommendation -->
+        <div class="warning">
+            <h3>🎯 Final Recommendation: Use RDS Proxy for Production</h3>
+            <p><strong>For applications serving millions of users, RDS Proxy provides:</strong></p>
+            <ul>
+                <li>✅ <strong>Connection Multiplexing</strong>: Serve more application connections with fewer database connections</li>
+                <li>✅ <strong>Fast Failover</strong>: ~10 seconds vs 30-60 seconds with direct connections</li>
+                <li>✅ <strong>Enhanced Security</strong>: IAM authentication and secret rotation</li>
+                <li>✅ <strong>Scalability</strong>: Handle up to 20,000+ concurrent connections</li>
+                <li>✅ <strong>Query Routing</strong>: Automatic read/write splitting for Aurora</li>
+                <li>✅ <strong>Connection Pooling</strong>: At both application and proxy levels</li>
+            </ul>
+            <p><strong>Implementation Strategy:</strong> Start with HikariCP connection pooling and add RDS Proxy as your application scales. For new applications expecting high traffic, implement RDS Proxy from the beginning.</p>
+        </div>
+
+    </div>
+    </div>    
+</body>
+</html>
